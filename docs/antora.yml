@@ -1,0 +1,5 @@
+name: quarkus-jnosql
+title: Quarkus Jnosql
+version: dev
+nav:
+  - modules/ROOT/nav.adoc
