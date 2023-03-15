@@ -16,6 +16,11 @@
         </dependency>
         <dependency>
             <groupId>io.quarkiverse.jnosql</groupId>
+            <artifactId>quarkus-jnosql-core-deployment</artifactId>
+            <version>${project.version}</version>
+        </dependency>
+        <dependency>
+            <groupId>io.quarkiverse.jnosql</groupId>
             <artifactId>quarkus-jnosql-document</artifactId>
             <version>${project.version}</version>
         </dependency>

@@ -10,12 +10,36 @@ import jakarta.nosql.Id;
 public class Person {
 
     @Id
-    private long id;
+    private String id;
 
     @Column
     private String name;
 
     @Column
     private List<String> phones;
+
+    public String getId() {
+        return id;
+    }
+
+    public void setId(String id) {
+        this.id = id;
+    }
+
+    public String getName() {
+        return name;
+    }
+
+    public void setName(String name) {
+        this.name = name;
+    }
+
+    public List<String> getPhones() {
+        return phones;
+    }
+
+    public void setPhones(List<String> phones) {
+        this.phones = phones;
+    }
 
 }

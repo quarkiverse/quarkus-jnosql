@@ -13,8 +13,11 @@
 * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
 * See the License for the specific language governing permissions and
 * limitations under the License.
-*/
+ */
 package io.quarkiverse.jnosql.document.it;
+
+import java.util.Arrays;
+import java.util.UUID;
 
 import jakarta.enterprise.context.ApplicationScoped;
 import jakarta.inject.Inject;
@@ -27,14 +30,19 @@ import jakarta.ws.rs.Path;
 public class JNoSQLResource {
 
     @Inject
-    //    @ConfigProperty(name = "document")
     private DocumentTemplate template;
 
     @GET
     public String hello() {
-        System.out.println("LALLERO " + this.template);
         Person person = new Person();
-        template.insert(person);
-        return "Hello jnosql";
+        person.setId(UUID.randomUUID().toString());
+        person.setName(UUID.randomUUID().toString());
+        person.setPhones(
+                Arrays.asList(
+                        UUID.randomUUID().toString(),
+                        UUID.randomUUID().toString(),
+                        UUID.randomUUID().toString()));
+        Person insert = template.insert(person);
+        return insert.getId();
     }
 }

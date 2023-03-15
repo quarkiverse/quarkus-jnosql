@@ -1,7 +1,9 @@
 package io.quarkiverse.jnosql.document.it;
 
 import static io.restassured.RestAssured.given;
+import static org.hamcrest.Matchers.empty;
 import static org.hamcrest.Matchers.is;
+import static org.hamcrest.Matchers.not;
 
 import org.junit.jupiter.api.Test;
 
@@ -16,6 +18,6 @@ public class JNoSQLResourceTest {
                 .when().get("/jnosql")
                 .then()
                 .statusCode(200)
-                .body(is("Hello jnosql"));
+                .body(is(not(empty())));
     }
 }
