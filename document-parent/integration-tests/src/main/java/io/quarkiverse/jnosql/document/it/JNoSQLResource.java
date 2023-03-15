@@ -35,7 +35,6 @@ public class JNoSQLResource {
     @GET
     public String hello() {
         Person person = new Person();
-        person.setId(UUID.randomUUID().toString());
         person.setName(UUID.randomUUID().toString());
         person.setPhones(
                 Arrays.asList(
