@@ -36,6 +36,11 @@
             </dependency>
             <dependency>
                 <groupId>org.eclipse.jnosql.mapping</groupId>
+                <artifactId>jnosql-mapping-core</artifactId>
+                <version>${jnosql.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>org.eclipse.jnosql.mapping</groupId>
                 <artifactId>jnosql-mapping-document</artifactId>
                 <version>${jnosql.version}</version>
             </dependency>
