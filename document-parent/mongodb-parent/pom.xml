@@ -4,19 +4,17 @@
     
     <parent>
         <groupId>io.quarkiverse.jnosql</groupId>
-        <artifactId>quarkus-jnosql-parent</artifactId>
+        <artifactId>quarkus-jnosql-document-parent</artifactId>
         <version>1.0.0-SNAPSHOT</version>
     </parent>
     
     <packaging>pom</packaging>
-    <artifactId>quarkus-jnosql-document-parent</artifactId>
-    <name>Quarkus JNoSQL - Document - Parent</name>
+    <artifactId>quarkus-jnosql-document-mongodb-parent</artifactId>
+    <name>Quarkus JNoSQL - Document - MongoDB - Parent</name>
 
     <modules>
         <module>runtime</module>
         <module>deployment</module>
-        <module>mongodb-parent</module>
-        <module>integration-tests</module>
     </modules>
 
 </project>

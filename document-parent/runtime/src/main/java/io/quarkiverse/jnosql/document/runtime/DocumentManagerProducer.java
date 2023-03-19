@@ -1,7 +1,6 @@
 package io.quarkiverse.jnosql.document.runtime;
 
 import static org.eclipse.jnosql.mapping.config.MappingConfigurations.DOCUMENT_DATABASE;
-import static org.eclipse.jnosql.mapping.config.MappingConfigurations.DOCUMENT_PROVIDER;
 
 import java.util.Optional;
 import java.util.function.Supplier;
@@ -13,13 +12,12 @@ import jakarta.data.exceptions.MappingException;
 import jakarta.enterprise.context.ApplicationScoped;
 import jakarta.enterprise.inject.Alternative;
 import jakarta.enterprise.inject.Produces;
-import jakarta.enterprise.inject.spi.CDI;
+import jakarta.inject.Inject;
 
 import org.eclipse.jnosql.communication.Settings;
 import org.eclipse.jnosql.communication.document.DocumentConfiguration;
 import org.eclipse.jnosql.communication.document.DocumentManager;
 import org.eclipse.jnosql.communication.document.DocumentManagerFactory;
-import org.eclipse.jnosql.mapping.reflection.Reflections;
 
 public class DocumentManagerProducer implements Supplier<DocumentManager> {
 
@@ -27,20 +25,16 @@ public class DocumentManagerProducer implements Supplier<DocumentManager> {
 
     private final Settings settings = new MicroProfileSettings();
 
+    @Inject
+    private DocumentConfiguration documentConfiguration;
+
     @Override
     @Produces
     @Alternative
     @Priority(1)
     @ApplicationScoped
     public DocumentManager get() {
-        DocumentConfiguration configuration = settings.get(DOCUMENT_PROVIDER, Class.class)
-                .filter(DocumentConfiguration.class::isAssignableFrom)
-                .map(c -> {
-                    final Reflections reflections = CDI.current().select(Reflections.class).get();
-                    return (DocumentConfiguration) reflections.newInstance(c);
-                }).orElseGet(DocumentConfiguration::getConfiguration);
-
-        DocumentManagerFactory managerFactory = configuration.apply(settings);
+        DocumentManagerFactory managerFactory = documentConfiguration.apply(settings);
 
         Optional<String> database = settings.get(DOCUMENT_DATABASE, String.class);
         String db = database.orElseThrow(() -> new MappingException("Please, inform the database filling up the property "

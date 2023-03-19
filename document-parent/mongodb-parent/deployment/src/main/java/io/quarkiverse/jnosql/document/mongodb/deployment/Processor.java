@@ -1,6 +1,7 @@
-package io.quarkiverse.jnosql.document.deployment;
+package io.quarkiverse.jnosql.document.mongodb.deployment;
 
-import io.quarkiverse.jnosql.document.runtime.DocumentManagerProducer;
+import org.eclipse.jnosql.communication.mongodb.document.QuarkusMongoDBDocumentConfiguration;
+
 import io.quarkus.arc.deployment.AdditionalBeanBuildItem;
 import io.quarkus.deployment.annotations.BuildProducer;
 import io.quarkus.deployment.annotations.BuildStep;
@@ -8,7 +9,7 @@ import io.quarkus.deployment.builditem.FeatureBuildItem;
 
 class Processor {
 
-    private static final String FEATURE = "jnosql-document";
+    private static final String FEATURE = "jnosql-document-mongodb";
 
     @BuildStep
     FeatureBuildItem feature() {
@@ -17,7 +18,7 @@ class Processor {
 
     @BuildStep
     void build(BuildProducer<AdditionalBeanBuildItem> additionalBeanProducer) {
-        additionalBeanProducer.produce(AdditionalBeanBuildItem.unremovableOf(DocumentManagerProducer.class));
+        additionalBeanProducer.produce(AdditionalBeanBuildItem.unremovableOf(QuarkusMongoDBDocumentConfiguration.class));
     }
 
 }
