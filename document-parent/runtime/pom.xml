@@ -11,10 +11,6 @@
     <name>Quarkus JNoSQL - Document - Runtime</name>
     <dependencies>
         <dependency>
-            <groupId>io.quarkus</groupId>
-            <artifactId>quarkus-arc</artifactId>
-        </dependency>
-        <dependency>
             <groupId>io.quarkiverse.jnosql</groupId>
             <artifactId>quarkus-jnosql-core</artifactId>
             <version>${project.version}</version>

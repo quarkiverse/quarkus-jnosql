@@ -11,10 +11,6 @@
     <name>Quarkus JNoSQL - Document - Deployment</name>
     <dependencies>
         <dependency>
-            <groupId>io.quarkus</groupId>
-            <artifactId>quarkus-arc-deployment</artifactId>
-        </dependency>
-        <dependency>
             <groupId>io.quarkiverse.jnosql</groupId>
             <artifactId>quarkus-jnosql-core-deployment</artifactId>
             <version>${project.version}</version>

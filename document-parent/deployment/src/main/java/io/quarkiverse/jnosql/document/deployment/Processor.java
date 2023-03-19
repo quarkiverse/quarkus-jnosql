@@ -2,6 +2,9 @@ package io.quarkiverse.jnosql.document.deployment;
 
 import org.eclipse.jnosql.communication.document.DocumentConfiguration;
 
+import io.quarkiverse.jnosql.document.runtime.DocumentManagerProducer;
+import io.quarkus.arc.deployment.AdditionalBeanBuildItem;
+import io.quarkus.deployment.annotations.BuildProducer;
 import io.quarkus.deployment.annotations.BuildStep;
 import io.quarkus.deployment.builditem.FeatureBuildItem;
 import io.quarkus.deployment.builditem.nativeimage.ServiceProviderBuildItem;
@@ -18,6 +21,11 @@ class Processor {
     @BuildStep
     ServiceProviderBuildItem serviceProvider() {
         return ServiceProviderBuildItem.allProvidersFromClassPath(DocumentConfiguration.class.getCanonicalName());
+    }
+
+    @BuildStep
+    void build(BuildProducer<AdditionalBeanBuildItem> additionalBeanProducer) {
+        additionalBeanProducer.produce(AdditionalBeanBuildItem.unremovableOf(DocumentManagerProducer.class));
     }
 
 }
