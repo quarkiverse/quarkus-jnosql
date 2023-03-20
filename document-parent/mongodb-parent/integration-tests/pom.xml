@@ -4,11 +4,11 @@
     <modelVersion>4.0.0</modelVersion>
     <parent>
         <groupId>io.quarkiverse.jnosql</groupId>
-        <artifactId>quarkus-jnosql-document-parent</artifactId>
+        <artifactId>quarkus-jnosql-document-mongodb-parent</artifactId>
         <version>1.0.0-SNAPSHOT</version>
     </parent>
-    <artifactId>quarkus-jnosql-document-integration-tests</artifactId>
-    <name>Quarkus JNoSQL - Document - Integration Tests</name>
+    <artifactId>quarkus-jnosql-document-mongodb-integration-tests</artifactId>
+    <name>Quarkus JNoSQL - Document - MongoDB - Integration Tests</name>
     <properties>
         <skipITs>true</skipITs>
     </properties>
