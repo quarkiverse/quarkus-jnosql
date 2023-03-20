@@ -16,6 +16,7 @@
         <module>docs</module>
         <module>core-parent</module>
         <module>document-parent</module>
+        <module>keyvalue-parent</module>
     </modules>
     <properties>
         <compiler-plugin.version>3.10.1</compiler-plugin.version>
@@ -45,8 +46,18 @@
                 <version>${jnosql.version}</version>
             </dependency>
             <dependency>
+                <groupId>org.eclipse.jnosql.mapping</groupId>
+                <artifactId>jnosql-mapping-key-value</artifactId>
+                <version>${jnosql.version}</version>
+            </dependency>
+            <dependency>
                 <groupId>org.eclipse.jnosql.communication</groupId>
                 <artifactId>jnosql-mongodb-driver</artifactId>
+                <version>${jnosql.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>org.eclipse.jnosql.communication</groupId>
+                <artifactId>jnosql-redis-driver</artifactId>
                 <version>${jnosql.version}</version>
             </dependency>
         </dependencies>

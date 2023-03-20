@@ -1,4 +1,4 @@
-package io.quarkiverse.jnosql.document.runtime;
+package io.quarkiverse.jnosql.core.runtime;
 
 import java.util.Collections;
 import java.util.List;

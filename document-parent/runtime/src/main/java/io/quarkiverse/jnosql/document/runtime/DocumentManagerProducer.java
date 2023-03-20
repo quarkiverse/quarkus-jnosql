@@ -19,6 +19,8 @@ import org.eclipse.jnosql.communication.document.DocumentConfiguration;
 import org.eclipse.jnosql.communication.document.DocumentManager;
 import org.eclipse.jnosql.communication.document.DocumentManagerFactory;
 
+import io.quarkiverse.jnosql.core.runtime.MicroProfileSettings;
+
 public class DocumentManagerProducer implements Supplier<DocumentManager> {
 
     private static final Logger LOGGER = Logger.getLogger(DocumentManagerProducer.class.getName());
