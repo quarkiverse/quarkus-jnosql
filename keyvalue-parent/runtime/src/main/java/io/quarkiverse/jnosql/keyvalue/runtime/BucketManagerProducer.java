@@ -1,6 +1,5 @@
 package io.quarkiverse.jnosql.keyvalue.runtime;
 
-import io.quarkiverse.jnosql.core.runtime.MicroProfileSettings;
 import static org.eclipse.jnosql.mapping.config.MappingConfigurations.KEY_VALUE_DATABASE;
 
 import java.util.Optional;
@@ -19,6 +18,8 @@ import org.eclipse.jnosql.communication.Settings;
 import org.eclipse.jnosql.communication.keyvalue.BucketManager;
 import org.eclipse.jnosql.communication.keyvalue.BucketManagerFactory;
 import org.eclipse.jnosql.communication.keyvalue.KeyValueConfiguration;
+
+import io.quarkiverse.jnosql.core.runtime.MicroProfileSettings;
 
 public class BucketManagerProducer implements Supplier<BucketManager> {
 
