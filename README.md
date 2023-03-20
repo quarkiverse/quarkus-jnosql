@@ -1,9 +1,9 @@
-# Quarkus Jnosql
+# Quarkus JNoSQL
 
 [![Version](https://img.shields.io/maven-central/v/io.quarkiverse.jnosql/quarkus-jnosql?logo=apache-maven&style=flat-square)](https://search.maven.org/artifact/io.quarkiverse.jnosql/quarkus-jnosql)
 
 The Quarkus JNoSql Extension adds support for 
-[JNoSql](http://www.jnosql.org/), an implementation of [Jakarta NoSql](https://jakarta.ee/specifications/nosql/).
+[JNoSQL](http://www.jnosql.org/), an implementation of [Jakarta NoSQL](https://jakarta.ee/specifications/nosql/).
 
 :information_source: **Recommended Quarkus version: `3.0.0.Alpha4` or higher**
 
@@ -15,7 +15,7 @@ The JNoSql Document Quarkus extension supports the following configuration:
 
  | Name  | Type  | Default  |
  |---|---|---|
- | `jnosql.document.database`<br>The collection's name. | string  | |
+ | `jnosql.document.database`<br>The database's name. | string  | |
 
 ### Usage
 
