@@ -5,6 +5,8 @@
 The Quarkus JNoSql Extension adds support for 
 [JNoSql](http://www.jnosql.org/), an implementation of [Jakarta NoSql](https://jakarta.ee/specifications/nosql/).
 
+:information_source: **Recommended Quarkus version: `3.0.0.Alpha4` or higher**
+
 ## Document
 
 ### Configuration
