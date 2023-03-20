@@ -17,7 +17,17 @@
         <!-- Make sure the doc is built after the other artifacts -->
         <dependency>
             <groupId>io.quarkiverse.jnosql</groupId>
-            <artifactId>quarkus-jnosql-deployment</artifactId>
+            <artifactId>quarkus-jnosql-core-deployment</artifactId>
+            <version>${project.version}</version>
+        </dependency>
+        <dependency>
+            <groupId>io.quarkiverse.jnosql</groupId>
+            <artifactId>quarkus-jnosql-document-deployment</artifactId>
+            <version>${project.version}</version>
+        </dependency>
+        <dependency>
+            <groupId>io.quarkiverse.jnosql</groupId>
+            <artifactId>quarkus-jnosql-document-mongodb-deployment</artifactId>
             <version>${project.version}</version>
         </dependency>
     </dependencies>
