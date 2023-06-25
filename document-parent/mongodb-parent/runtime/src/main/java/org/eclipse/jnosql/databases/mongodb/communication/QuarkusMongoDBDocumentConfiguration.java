@@ -1,4 +1,4 @@
-package org.eclipse.jnosql.communication.mongodb.document;
+package org.eclipse.jnosql.databases.mongodb.communication;
 
 import jakarta.inject.Inject;
 import jakarta.inject.Singleton;

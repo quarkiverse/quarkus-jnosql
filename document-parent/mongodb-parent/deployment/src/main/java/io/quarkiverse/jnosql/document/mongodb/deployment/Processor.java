@@ -1,6 +1,6 @@
 package io.quarkiverse.jnosql.document.mongodb.deployment;
 
-import org.eclipse.jnosql.communication.mongodb.document.QuarkusMongoDBDocumentConfiguration;
+import org.eclipse.jnosql.databases.mongodb.communication.QuarkusMongoDBDocumentConfiguration;
 
 import io.quarkus.arc.deployment.AdditionalBeanBuildItem;
 import io.quarkus.deployment.annotations.BuildProducer;

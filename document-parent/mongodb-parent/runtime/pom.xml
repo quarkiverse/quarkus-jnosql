@@ -19,8 +19,8 @@
             <artifactId>quarkus-mongodb-client</artifactId>
         </dependency>
         <dependency>
-            <groupId>org.eclipse.jnosql.communication</groupId>
-            <artifactId>jnosql-mongodb-driver</artifactId>
+            <groupId>org.eclipse.jnosql.databases</groupId>
+            <artifactId>jnosql-mongodb</artifactId>
         </dependency>
     </dependencies>
     <build>

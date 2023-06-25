@@ -28,7 +28,7 @@
       <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
       <project.reporting.outputEncoding>UTF-8</project.reporting.outputEncoding>
       <quarkus.version>3.1.2.Final</quarkus.version>
-      <jnosql.version>1.0.0-b6</jnosql.version>
+      <jnosql.version>1.0.0</jnosql.version>
    </properties>
    <dependencyManagement>
       <dependencies>
@@ -55,8 +55,8 @@
             <version>${jnosql.version}</version>
          </dependency>
          <dependency>
-            <groupId>org.eclipse.jnosql.communication</groupId>
-            <artifactId>jnosql-mongodb-driver</artifactId>
+            <groupId>org.eclipse.jnosql.databases</groupId>
+            <artifactId>jnosql-mongodb</artifactId>
             <version>${jnosql.version}</version>
          </dependency>
          <dependency>
