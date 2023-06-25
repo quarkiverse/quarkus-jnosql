@@ -8,7 +8,7 @@
 The Quarkus JNoSql Extension adds support for 
 [JNoSQL](http://www.jnosql.org/), an implementation of [Jakarta NoSQL](https://jakarta.ee/specifications/nosql/).
 
-:information_source: **Recommended Quarkus version: `3.0.0.Alpha4` or higher**
+:information_source: **Recommended Quarkus version: `3.0.0.Final` or higher**
 
 ## Document
 
@@ -47,6 +47,19 @@ public void insert(TestDocumentEntity entity) {
 }
 ```
 
+### Elasticsearch
+
+Add the dependency to the target project:
+
+```xml
+<dependency>
+    <groupId>io.quarkiverse.jnosql</groupId>
+    <artifactId>quarkus-jnosql-document-elasticsearch</artifactId>
+</dependency>
+```
+
+Please refer to the [Elasticsearch Quarkus extension](https://quarkus.io/guides/elasticsearch#using-the-elasticsearch-java-client) for specific configuration.
+
 ### MongoDB
 
 Add the dependency to the target project:
@@ -55,7 +68,6 @@ Add the dependency to the target project:
 <dependency>
     <groupId>io.quarkiverse.jnosql</groupId>
     <artifactId>quarkus-jnosql-document-mongodb</artifactId>
-    <version>1.0.0-SNAPSHOT</version>
 </dependency>
 ```
 

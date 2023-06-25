@@ -12,11 +12,11 @@ import com.mongodb.client.MongoClient;
 public class QuarkusMongoDBDocumentConfiguration implements DocumentConfiguration {
 
     @Inject
-    protected MongoClient mongoClient;
+    protected MongoClient client;
 
     @Override
     public MongoDBDocumentManagerFactory apply(Settings settings) throws NullPointerException {
-        return new MongoDBDocumentManagerFactory(this.mongoClient);
+        return new MongoDBDocumentManagerFactory(this.client);
     }
 
 }
