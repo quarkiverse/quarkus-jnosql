@@ -8,7 +8,7 @@
     </parent>
     <groupId>io.quarkiverse.jnosql</groupId>
     <artifactId>quarkus-jnosql-parent</artifactId>
-    <version>1.0.3</version>
+    <version>1.0.4-SNAPSHOT</version>
     <packaging>pom</packaging>
     <name>Quarkus JNoSQL - Parent</name>
     <modules>
@@ -21,7 +21,7 @@
         <connection>scm:git:git@github.com:quarkiverse/quarkus-jnosql.git</connection>
         <developerConnection>scm:git:git@github.com:quarkiverse/quarkus-jnosql.git</developerConnection>
         <url>https://github.com/quarkiverse/quarkus-jnosql</url>
-        <tag>1.0.3</tag>
+        <tag>HEAD</tag>
     </scm>
     <properties>
         <compiler-plugin.version>3.10.1</compiler-plugin.version>
