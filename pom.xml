@@ -21,8 +21,8 @@
         <connection>scm:git:git@github.com:quarkiverse/quarkus-jnosql.git</connection>
         <developerConnection>scm:git:git@github.com:quarkiverse/quarkus-jnosql.git</developerConnection>
         <url>https://github.com/quarkiverse/quarkus-jnosql</url>
-      <tag>HEAD</tag>
-  </scm>
+        <tag>HEAD</tag>
+    </scm>
     <properties>
         <compiler-plugin.version>3.10.1</compiler-plugin.version>
         <maven.compiler.release>17</maven.compiler.release>
@@ -36,6 +36,13 @@
             <dependency>
                 <groupId>io.quarkus</groupId>
                 <artifactId>quarkus-bom</artifactId>
+                <version>${quarkus.version}</version>
+                <type>pom</type>
+                <scope>import</scope>
+            </dependency>
+            <dependency>
+                <groupId>io.quarkus.platform</groupId>
+                <artifactId>quarkus-amazon-services-bom</artifactId>
                 <version>${quarkus.version}</version>
                 <type>pom</type>
                 <scope>import</scope>
@@ -68,6 +75,11 @@
             <dependency>
                 <groupId>org.eclipse.jnosql.databases</groupId>
                 <artifactId>jnosql-redis</artifactId>
+                <version>${jnosql.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>org.eclipse.jnosql.databases</groupId>
+                <artifactId>jnosql-dynamodb</artifactId>
                 <version>${jnosql.version}</version>
             </dependency>
         </dependencies>

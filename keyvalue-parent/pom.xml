@@ -15,6 +15,7 @@
     <modules>
         <module>runtime</module>
         <module>deployment</module>
+        <module>dynamodb-parent</module>
         <module>redis-parent</module>
     </modules>
 

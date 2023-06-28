@@ -1,4 +1,4 @@
-name: JNoSQL KeyValue Redis
+name: JNoSQL KeyValue DynamoDB
 #description: Do something useful.
 metadata:
 #  keywords:
