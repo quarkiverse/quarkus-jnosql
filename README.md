@@ -8,7 +8,72 @@
 The Quarkus JNoSql Extension adds support for 
 [JNoSQL](http://www.jnosql.org/), an implementation of [Jakarta NoSQL](https://jakarta.ee/specifications/nosql/).
 
-:information_source: **Recommended Quarkus version: `3.0.0.Final` or higher**
+:information_source: **Recommended Quarkus version: `3.1.0.Final` or higher**
+
+### Usage
+
+```java
+import jakarta.nosql.Column;
+import jakarta.nosql.Entity;
+import jakarta.nosql.Id;
+
+@Entity
+public class TestEntity {
+    
+    @Id
+    private String id;
+    
+    @Column
+    private String testField;
+}
+```
+
+## KeyValue
+
+### Configuration
+
+The JNoSql KeyValue Quarkus extension supports the following configuration:
+
+ | Name  | Type  | Default  |
+ |---|---|---|
+ | `jnosql.keyvalue.database`<br>The database's name. | string  | |
+
+### Usage
+
+```java
+@Inject
+private KeyValueTemplate template;
+
+public void insert(TestEntity entity) {
+    template.insert(entity);
+}
+```
+
+### DynamoDB
+
+Add the dependency to the target project:
+
+```xml
+<dependency>
+    <groupId>io.quarkiverse.jnosql</groupId>
+    <artifactId>quarkus-jnosql-keyvalue-dynamodb</artifactId>
+</dependency>
+```
+
+Please refer to the [DynamoDB Quarkiverse extension](https://quarkiverse.github.io/quarkiverse-docs/quarkus-amazon-services/dev/amazon-dynamodb.html) for specific configuration.
+
+### Redis
+
+Add the dependency to the target project:
+
+```xml
+<dependency>
+    <groupId>io.quarkiverse.jnosql</groupId>
+    <artifactId>quarkus-jnosql-keyvalue-redis</artifactId>
+</dependency>
+```
+
+Please refer to the [Redis Quarkus extension](https://quarkus.io/guides/redis-reference) for specific configuration.
 
 ## Document
 
@@ -21,22 +86,6 @@ The JNoSql Document Quarkus extension supports the following configuration:
  | `jnosql.document.database`<br>The database's name. | string  | |
 
 ### Usage
-
-```java
-import jakarta.nosql.Column;
-import jakarta.nosql.Entity;
-import jakarta.nosql.Id;
-
-@Entity
-public class TestDocumentEntity {
-    
-    @Id
-    private String id;
-    
-    @Column
-    private String testField;
-}
-```
 
 ```java
 @Inject
