@@ -76,6 +76,12 @@
                 <groupId>org.eclipse.jnosql.databases</groupId>
                 <artifactId>jnosql-redis</artifactId>
                 <version>${jnosql.version}</version>
+                <exclusions>
+                    <exclusion>
+                        <groupId>redis.clients</groupId>
+                        <artifactId>jedis</artifactId>
+                    </exclusion>
+                </exclusions>
             </dependency>
             <dependency>
                 <groupId>org.eclipse.jnosql.databases</groupId>
