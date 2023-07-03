@@ -1,8 +1,8 @@
 package org.eclipse.jnosql.databases.cassandra.communication;
 
-import com.datastax.oss.driver.api.core.CqlSession;
-
 import java.util.concurrent.Executors;
+
+import com.datastax.oss.driver.api.core.CqlSession;
 
 public class QuarkusCassandraColumnManager extends DefaultCassandraColumnManager {
 
