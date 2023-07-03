@@ -1,0 +1,9 @@
+CREATE KEYSPACE IF NOT EXISTS test
+    WITH replication = {'class':'SimpleStrategy', 'replication_factor':1};
+
+CREATE COLUMNFAMILY IF NOT EXISTS test.person
+(
+    id text PRIMARY KEY,
+    name text,
+    phones list<text>
+);
