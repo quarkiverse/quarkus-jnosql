@@ -10,10 +10,6 @@
     <name>Quarkus JNoSQL - Column - Cassandra - Deployment</name>
     <dependencies>
         <dependency>
-            <groupId>io.quarkus</groupId>
-            <artifactId>quarkus-jsonb-deployment</artifactId>
-        </dependency>
-        <dependency>
             <groupId>com.datastax.oss.quarkus</groupId>
             <artifactId>cassandra-quarkus-client-deployment</artifactId>
         </dependency>
