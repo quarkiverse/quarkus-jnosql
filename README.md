@@ -122,6 +122,29 @@ Add the dependency to the target project:
 
 Please refer to the [MongoDB Quarkus extension](https://quarkus.io/guides/mongodb) for specific configuration.
 
+## Column
+
+### Configuration
+
+The JNoSql Column Quarkus extension supports the following configuration:
+
+| Name                                             | Type  | Default  |
+ |--------------------------------------------------|---|---|
+| `jnosql.column.database`<br>The database's name. | string  | |
+
+### Cassandra
+
+Add the dependency to the target project:
+
+```xml
+<dependency>
+    <groupId>io.quarkiverse.jnosql</groupId>
+    <artifactId>quarkus-jnosql-column-cassandra</artifactId>
+</dependency>
+```
+
+Please refer to the [Cassandra Quarkus extension](https://quarkus.io/guides/cassandra) for specific configuration.
+
 ## Contributors ✨____
 
 Thanks goes to these wonderful people ([emoji key](https://allcontributors.org/docs/en/emoji-key)):
