@@ -15,10 +15,6 @@
             <version>${project.version}</version>
         </dependency>
         <dependency>
-            <groupId>io.quarkus</groupId>
-            <artifactId>quarkus-jsonb</artifactId>
-        </dependency>
-        <dependency>
             <groupId>com.datastax.oss.quarkus</groupId>
             <artifactId>cassandra-quarkus-client</artifactId>
         </dependency>
