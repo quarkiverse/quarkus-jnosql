@@ -82,6 +82,11 @@
                 <artifactId>jnosql-dynamodb</artifactId>
                 <version>${jnosql.version}</version>
             </dependency>
+            <dependency>
+                <groupId>org.eclipse.jnosql.databases</groupId>
+                <artifactId>jnosql-infinispan</artifactId>
+                <version>${jnosql.version}</version>
+            </dependency>
         </dependencies>
     </dependencyManagement>
     <build>
