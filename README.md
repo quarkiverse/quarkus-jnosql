@@ -155,6 +155,7 @@ Thanks goes to these wonderful people ([emoji key](https://allcontributors.org/d
   <tbody>
     <tr>
       <td align="center" valign="top" width="14.28%"><a href="https://github.com/amoscatelli"><img src="https://avatars.githubusercontent.com/u/16684470?v=4?s=100" width="100px;" alt="amoscatelli"/><br /><sub><b>amoscatelli</b></sub></a><br /><a href="https://github.com/quarkiverse/quarkus-jnosql/commits?author=amoscatelli" title="Code">💻</a> <a href="#maintenance-amoscatelli" title="Maintenance">🚧</a></td>
+      <td align="center" valign="top" width="14.28%"><a href="https://github.com/dearrudam"><img src="https://avatars.githubusercontent.com/u/6537623?v=4" width="100px;" alt="dearrudam"/><br /><sub><b>dearrudam</b></sub></a><br /><a href="https://github.com/quarkiverse/quarkus-jnosql/commits?author=dearrudam" title="Code">💻</a> <a href="#maintenance-dearrudam" title="Maintenance">🚧</a></td>
     </tr>
   </tbody>
 </table>
