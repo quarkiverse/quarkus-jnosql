@@ -1,4 +1,4 @@
-package io.quarkiverse.jnosql.document.test;
+package io.quarkiverse.jnosql.column.test;
 
 import org.jboss.shrinkwrap.api.ShrinkWrap;
 import org.jboss.shrinkwrap.api.spec.JavaArchive;

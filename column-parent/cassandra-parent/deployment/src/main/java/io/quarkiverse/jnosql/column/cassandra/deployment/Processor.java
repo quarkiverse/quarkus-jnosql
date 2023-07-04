@@ -19,7 +19,6 @@ class Processor {
     @BuildStep
     void build(BuildProducer<AdditionalBeanBuildItem> additionalBeanProducer) {
         additionalBeanProducer.produce(AdditionalBeanBuildItem.unremovableOf(QuarkusCassandraConfiguration.class));
-
     }
 
 }
