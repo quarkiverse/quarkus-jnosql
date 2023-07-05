@@ -3,44 +3,38 @@
     <modelVersion>4.0.0</modelVersion>
     <parent>
         <groupId>io.quarkiverse.jnosql</groupId>
-        <artifactId>quarkus-jnosql-document-arangodb-parent</artifactId>
+        <artifactId>quarkus-jnosql-keyvalue-arangodb-parent</artifactId>
         <version>1.0.4-SNAPSHOT</version>
     </parent>
-    <artifactId>quarkus-jnosql-document-arangodb</artifactId>
-    <name>Quarkus JNoSQL - Document - ArangoDB - Runtime</name>
+    <artifactId>quarkus-jnosql-keyvalue-arangodb-deployment</artifactId>
+    <name>Quarkus JNoSQL - KeyValue - ArangoDB - Deployment</name>
     <dependencies>
         <dependency>
-            <groupId>io.quarkiverse.jnosql</groupId>
-            <artifactId>quarkus-jnosql-document</artifactId>
-            <version>${project.version}</version>
+            <groupId>io.quarkus</groupId>
+            <artifactId>quarkus-jsonb-deployment</artifactId>
         </dependency>
         <dependency>
             <groupId>org.apache.camel.quarkus</groupId>
-            <artifactId>camel-quarkus-arangodb</artifactId>
+            <artifactId>camel-quarkus-arangodb-deployment</artifactId>
         </dependency>
         <dependency>
-            <groupId>org.eclipse.jnosql.databases</groupId>
-            <artifactId>jnosql-arangodb</artifactId>
+            <groupId>io.quarkiverse.jnosql</groupId>
+            <artifactId>quarkus-jnosql-keyvalue-deployment</artifactId>
+            <version>${project.version}</version>
+        </dependency>
+        <dependency>
+            <groupId>io.quarkiverse.jnosql</groupId>
+            <artifactId>quarkus-jnosql-keyvalue-arangodb</artifactId>
+            <version>${project.version}</version>
+        </dependency>
+        <dependency>
+            <groupId>io.quarkus</groupId>
+            <artifactId>quarkus-junit5-internal</artifactId>
+            <scope>test</scope>
         </dependency>
     </dependencies>
     <build>
         <plugins>
-            <plugin>
-                <groupId>io.quarkus</groupId>
-                <artifactId>quarkus-extension-maven-plugin</artifactId>
-                <version>${quarkus.version}</version>
-                <executions>
-                    <execution>
-                        <phase>compile</phase>
-                        <goals>
-                            <goal>extension-descriptor</goal>
-                        </goals>
-                        <configuration>
-                            <deployment>${project.groupId}:${project.artifactId}-deployment:${project.version}</deployment>
-                        </configuration>
-                    </execution>
-                </executions>
-            </plugin>
             <plugin>
                 <artifactId>maven-compiler-plugin</artifactId>
                 <configuration>
