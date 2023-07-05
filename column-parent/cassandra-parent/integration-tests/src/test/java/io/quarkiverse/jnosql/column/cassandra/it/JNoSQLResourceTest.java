@@ -10,16 +10,18 @@ import org.junit.jupiter.api.Test;
 import com.datastax.oss.quarkus.test.CassandraTestResource;
 
 import io.quarkus.test.common.QuarkusTestResource;
+import io.quarkus.test.common.http.TestHTTPEndpoint;
 import io.quarkus.test.junit.QuarkusTest;
 
 @QuarkusTest
 @QuarkusTestResource(CassandraTestResource.class)
+@TestHTTPEndpoint(JNoSQLResource.class)
 public class JNoSQLResourceTest {
 
     @Test
     public void testHelloEndpoint() {
         given()
-                .when().get("/jnosql")
+                .when().get()
                 .then()
                 .statusCode(200)
                 .body(is(not(empty())));

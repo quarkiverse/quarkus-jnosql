@@ -9,10 +9,10 @@
     <artifactId>quarkus-jnosql-document-arangodb-deployment</artifactId>
     <name>Quarkus JNoSQL - Document - ArangoDB - Deployment</name>
     <dependencies>
-		<dependency>
-			<groupId>org.apache.camel.quarkus</groupId>
-			<artifactId>camel-quarkus-arangodb-deployment</artifactId>
-		</dependency>
+        <dependency>
+            <groupId>org.apache.camel.quarkus</groupId>
+            <artifactId>camel-quarkus-arangodb-deployment</artifactId>
+        </dependency>
         <dependency>
             <groupId>io.quarkiverse.jnosql</groupId>
             <artifactId>quarkus-jnosql-document-deployment</artifactId>
