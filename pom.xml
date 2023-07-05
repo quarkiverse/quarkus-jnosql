@@ -50,6 +50,13 @@
                 <scope>import</scope>
             </dependency>
             <dependency>
+                <groupId>io.quarkus.platform</groupId>
+                <artifactId>quarkus-camel-bom</artifactId>
+                <version>${quarkus.version}</version>
+                <type>pom</type>
+                <scope>import</scope>
+            </dependency>
+            <dependency>
                 <groupId>com.datastax.oss.quarkus</groupId>
                 <artifactId>cassandra-quarkus-bom</artifactId>
                 <version>${cassandra-quarkus-bom.version}</version>
@@ -105,6 +112,11 @@
             <dependency>
                 <groupId>org.eclipse.jnosql.databases</groupId>
                 <artifactId>jnosql-cassandra</artifactId>
+                <version>${jnosql.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>org.eclipse.jnosql.databases</groupId>
+                <artifactId>jnosql-arangodb</artifactId>
                 <version>${jnosql.version}</version>
             </dependency>
         </dependencies>
