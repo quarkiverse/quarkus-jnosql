@@ -4,7 +4,7 @@
     <parent>
         <groupId>io.quarkiverse.jnosql</groupId>
         <artifactId>quarkus-jnosql-document-elasticsearch-parent</artifactId>
-        <version>1.0.4-SNAPSHOT</version>
+        <version>1.0.4</version>
     </parent>
     <artifactId>quarkus-jnosql-document-elasticsearch-integration-tests</artifactId>
     <name>Quarkus JNoSQL - Document - Elasticsearch - Integration Tests</name>

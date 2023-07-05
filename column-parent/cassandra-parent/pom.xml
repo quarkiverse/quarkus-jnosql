@@ -5,7 +5,7 @@
     <parent>
         <groupId>io.quarkiverse.jnosql</groupId>
         <artifactId>quarkus-jnosql-column-parent</artifactId>
-        <version>1.0.4-SNAPSHOT</version>
+        <version>1.0.4</version>
     </parent>
     
     <packaging>pom</packaging>
