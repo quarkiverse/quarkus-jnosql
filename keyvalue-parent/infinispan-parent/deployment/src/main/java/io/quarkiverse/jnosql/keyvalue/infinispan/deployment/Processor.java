@@ -1,6 +1,5 @@
 package io.quarkiverse.jnosql.keyvalue.infinispan.deployment;
 
-
 import org.eclipse.jnosql.databases.infinispan.communication.QuarkusInfinispanKeyValueConfiguration;
 
 import io.quarkus.arc.deployment.AdditionalBeanBuildItem;

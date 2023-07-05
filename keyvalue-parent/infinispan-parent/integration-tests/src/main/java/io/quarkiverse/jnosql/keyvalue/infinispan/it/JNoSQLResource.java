@@ -25,6 +25,9 @@ import jakarta.nosql.keyvalue.KeyValueTemplate;
 import jakarta.ws.rs.GET;
 import jakarta.ws.rs.Path;
 
+import org.infinispan.client.hotrod.RemoteCacheManager;
+import org.infinispan.commons.configuration.ClassAllowList;
+
 @Path("/jnosql")
 @ApplicationScoped
 public class JNoSQLResource {
@@ -32,8 +35,18 @@ public class JNoSQLResource {
     @Inject
     private KeyValueTemplate template;
 
+    @Inject
+    protected RemoteCacheManager client;
+
     @GET
     public String hello() {
+
+        ClassAllowList classAllowList = new ClassAllowList();
+        classAllowList.read(client.getConfiguration().getClassAllowList());
+        classAllowList.addClasses(Person.class);
+        classAllowList.addClasses("java.util.Arrays$ArrayList");
+        client.getMarshaller().initialize(classAllowList);
+
         Person person = new Person();
         person.setId(UUID.randomUUID().toString());
         person.setName(UUID.randomUUID().toString());
