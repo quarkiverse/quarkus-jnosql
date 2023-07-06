@@ -16,35 +16,13 @@
  */
 package io.quarkiverse.jnosql.keyvalue.dynamodb.it;
 
-import java.util.Arrays;
-import java.util.UUID;
-
 import jakarta.enterprise.context.ApplicationScoped;
-import jakarta.inject.Inject;
 import jakarta.nosql.keyvalue.KeyValueTemplate;
-import jakarta.ws.rs.GET;
 import jakarta.ws.rs.Path;
+
+import io.quarkiverse.jnosql.keyvalue.it.AbstractJNoSQLKeyValueResource;
 
 @Path("/jnosql")
 @ApplicationScoped
-public class JNoSQLResource {
-
-    @Inject
-    private KeyValueTemplate template;
-
-    @GET
-    public String hello() {
-        Person person = new Person();
-        person.setId(UUID.randomUUID().toString());
-        person.setName(UUID.randomUUID().toString());
-        person.setPhones(
-                Arrays.asList(
-                        UUID.randomUUID().toString(),
-                        UUID.randomUUID().toString(),
-                        UUID.randomUUID().toString()));
-        Person insert = template.insert(person);
-        template.get(insert.getId(), Person.class);
-        template.delete(insert.getId());
-        return insert.getId();
-    }
+public class JNoSQLResource extends AbstractJNoSQLKeyValueResource<KeyValueTemplate> {
 }
