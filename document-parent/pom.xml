@@ -18,6 +18,7 @@
         <module>arangodb-parent</module>
         <module>elasticsearch-parent</module>
         <module>mongodb-parent</module>
+        <module>integration-tests</module>
     </modules>
 
 </project>
