@@ -49,6 +49,19 @@ public void insert(TestEntity entity) {
 }
 ```
 
+### ArangoDB
+
+Add the dependency to the target project:
+
+```xml
+<dependency>
+    <groupId>io.quarkiverse.jnosql</groupId>
+    <artifactId>quarkus-jnosql-keyvalue-arangodb</artifactId>
+</dependency>
+```
+
+Please refer to the [AranboDB JNoSQL driver](https://github.com/eclipse/jnosql-databases#arangodb) for specific configuration.
+
 ### DynamoDB
 
 Add the dependency to the target project:
@@ -95,6 +108,19 @@ public void insert(TestDocumentEntity entity) {
     template.insert(entity);
 }
 ```
+
+### ArangoDB
+
+Add the dependency to the target project:
+
+```xml
+<dependency>
+    <groupId>io.quarkiverse.jnosql</groupId>
+    <artifactId>quarkus-jnosql-document-arangodb</artifactId>
+</dependency>
+```
+
+Please refer to the [AranboDB JNoSQL driver](https://github.com/eclipse/jnosql-databases#arangodb) for specific configuration.
 
 ### Elasticsearch
 
