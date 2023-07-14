@@ -1,5 +1,6 @@
 package io.quarkiverse.jnosql.it;
 
+import java.io.Serializable;
 import java.util.List;
 
 import jakarta.nosql.Column;
@@ -7,7 +8,7 @@ import jakarta.nosql.Entity;
 import jakarta.nosql.Id;
 
 @Entity
-public class Person {
+public class Person implements Serializable {
 
     @Id
     private String id;
