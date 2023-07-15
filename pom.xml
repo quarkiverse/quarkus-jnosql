@@ -119,6 +119,11 @@
                 <artifactId>jnosql-arangodb</artifactId>
                 <version>${jnosql.version}</version>
             </dependency>
+            <dependency>
+                <groupId>org.eclipse.jnosql.databases</groupId>
+                <artifactId>jnosql-couchbase</artifactId>
+                <version>${jnosql.version}</version>
+            </dependency>
         </dependencies>
     </dependencyManagement>
     <build>

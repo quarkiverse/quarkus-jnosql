@@ -18,6 +18,7 @@
         <module>arangodb-parent</module>
         <module>dynamodb-parent</module>
         <module>redis-parent</module>
+        <module>couchbase-parent</module>
         <module>integration-tests</module>
     </modules>
 
