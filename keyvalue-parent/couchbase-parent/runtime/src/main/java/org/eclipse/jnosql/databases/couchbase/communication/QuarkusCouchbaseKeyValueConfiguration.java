@@ -1,14 +1,11 @@
 package org.eclipse.jnosql.databases.couchbase.communication;
 
-import java.util.List;
-
 import jakarta.data.exceptions.MappingException;
 import jakarta.inject.Singleton;
-
 import org.eclipse.jnosql.communication.Settings;
 import org.eclipse.jnosql.communication.keyvalue.KeyValueConfiguration;
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
+
+import java.util.List;
 
 @Singleton
 public class QuarkusCouchbaseKeyValueConfiguration implements KeyValueConfiguration {
@@ -20,11 +17,11 @@ public class QuarkusCouchbaseKeyValueConfiguration implements KeyValueConfigurat
     }
 
     protected void validateSettings(Settings settings) {
-        List.of(
-                CouchbaseConfigurations.HOST,
+        List.of(CouchbaseConfigurations.HOST,
                 CouchbaseConfigurations.USER,
-                CouchbaseConfigurations.PASSWORD
-        ).forEach(setting -> settings.get(setting, String.class).orElseThrow(
-                () -> new MappingException("Please, inform the database filling up the property " + setting.get())));
+                CouchbaseConfigurations.PASSWORD).forEach(
+                        setting -> settings.get(setting, String.class).orElseThrow(
+                                () -> new MappingException(
+                                        "Please, inform the database filling up the property " + setting.get())));
     }
 }
