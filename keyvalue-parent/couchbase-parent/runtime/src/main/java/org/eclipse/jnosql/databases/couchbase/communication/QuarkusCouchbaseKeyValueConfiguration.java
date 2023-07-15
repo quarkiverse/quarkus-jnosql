@@ -1,11 +1,12 @@
 package org.eclipse.jnosql.databases.couchbase.communication;
 
+import java.util.List;
+
 import jakarta.data.exceptions.MappingException;
 import jakarta.inject.Singleton;
+
 import org.eclipse.jnosql.communication.Settings;
 import org.eclipse.jnosql.communication.keyvalue.KeyValueConfiguration;
-
-import java.util.List;
 
 @Singleton
 public class QuarkusCouchbaseKeyValueConfiguration implements KeyValueConfiguration {

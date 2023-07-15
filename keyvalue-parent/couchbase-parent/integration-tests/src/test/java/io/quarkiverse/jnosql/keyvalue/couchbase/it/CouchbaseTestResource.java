@@ -1,18 +1,11 @@
 package io.quarkiverse.jnosql.keyvalue.couchbase.it;
 
+import static com.couchbase.client.java.manager.query.CreatePrimaryQueryIndexOptions.createPrimaryQueryIndexOptions;
+import static com.couchbase.client.java.manager.query.GetAllQueryIndexesOptions.getAllQueryIndexesOptions;
+
 import java.time.Duration;
 import java.util.*;
 
-import com.couchbase.client.core.error.BucketNotFoundException;
-import com.couchbase.client.java.Bucket;
-import com.couchbase.client.java.Cluster;
-import com.couchbase.client.java.manager.bucket.BucketManager;
-import com.couchbase.client.java.manager.bucket.BucketSettings;
-import com.couchbase.client.java.manager.collection.CollectionManager;
-import com.couchbase.client.java.manager.collection.CollectionSpec;
-import com.couchbase.client.java.manager.collection.ScopeSpec;
-import com.couchbase.client.java.manager.query.QueryIndex;
-import com.couchbase.client.java.manager.query.QueryIndexManager;
 import jakarta.data.exceptions.MappingException;
 
 import org.eclipse.jnosql.communication.Settings;
@@ -25,11 +18,19 @@ import org.testcontainers.couchbase.CouchbaseContainer;
 import org.testcontainers.shaded.org.awaitility.Awaitility;
 import org.testcontainers.utility.TestcontainersConfiguration;
 
+import com.couchbase.client.core.error.BucketNotFoundException;
+import com.couchbase.client.java.Bucket;
+import com.couchbase.client.java.Cluster;
+import com.couchbase.client.java.manager.bucket.BucketManager;
+import com.couchbase.client.java.manager.bucket.BucketSettings;
+import com.couchbase.client.java.manager.collection.CollectionManager;
+import com.couchbase.client.java.manager.collection.CollectionSpec;
+import com.couchbase.client.java.manager.collection.ScopeSpec;
+import com.couchbase.client.java.manager.query.QueryIndex;
+import com.couchbase.client.java.manager.query.QueryIndexManager;
+
 import io.quarkiverse.jnosql.core.runtime.MicroProfileSettings;
 import io.quarkus.test.common.QuarkusTestResourceLifecycleManager;
-
-import static com.couchbase.client.java.manager.query.CreatePrimaryQueryIndexOptions.createPrimaryQueryIndexOptions;
-import static com.couchbase.client.java.manager.query.GetAllQueryIndexesOptions.getAllQueryIndexesOptions;
 
 public class CouchbaseTestResource extends CouchbaseConfiguration implements QuarkusTestResourceLifecycleManager {
 
@@ -92,9 +93,9 @@ public class CouchbaseTestResource extends CouchbaseConfiguration implements Qua
     private void validateCouchbaseSettings(Settings settings) {
         List.of(
                 CouchbaseConfigurations.INDEX).forEach(
-                setting -> settings.get(setting, String.class)
-                        .orElseThrow(() -> new MappingException("Please, inform the database filling up the property "
-                                + setting.get())));
+                        setting -> settings.get(setting, String.class)
+                                .orElseThrow(() -> new MappingException("Please, inform the database filling up the property "
+                                        + setting.get())));
     }
 
     @Override
@@ -171,8 +172,7 @@ public class CouchbaseTestResource extends CouchbaseConfiguration implements Qua
     }
 
     private void await(Runnable runnable) {
-        Awaitility.
-                given()
+        Awaitility.given()
                 .ignoreExceptions()
                 .await().until(() -> {
                     try {
