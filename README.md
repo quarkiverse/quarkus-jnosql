@@ -100,7 +100,6 @@ Please refer to the [Redis Quarkus extension](https://quarkus.io/guides/redis-re
 Add the dependency to the target project:
 
 ```xml
-
 <dependency>
     <groupId>io.quarkiverse.jnosql</groupId>
     <artifactId>quarkus-jnosql-keyvalue-couchbase</artifactId>
@@ -117,6 +116,8 @@ This JNoSql KeyValue Quarkus extension for Couchbase supports the following conf
 | `jnosql.couchbase.user`     | The username [^0]     | string |         |
 | `jnosql.couchbase.password` | The password [^0]     | string |         |
 | `jnosql.couchbase.password` | The password [^0]     | string |         |
+
+[^0]: Pay attention to the way the sensitive variables are stored in order to avoid data leakage and security flaws.
 
 Please, take a look at the [Eclipse JNoSQL Database API for Couchbase documentation](https://github.com/eclipse/jnosql-databases#configuration-2) to learn more about all supported properties.
 
@@ -233,4 +234,3 @@ Thanks goes to these wonderful people ([emoji key](https://allcontributors.org/d
 This project follows the [all-contributors](https://github.com/all-contributors/all-contributors) specification.
 Contributions of any kind welcome!
 
-[^0]: Pay attention to the way the sensitive variables are stored in order to avoid data leakage and security flaws.
