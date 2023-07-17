@@ -17,6 +17,7 @@
         <module>deployment</module>
         <module>arangodb-parent</module>
         <module>dynamodb-parent</module>
+        <module>hazelcast-parent</module>
         <module>redis-parent</module>
         <module>couchbase-parent</module>
         <module>integration-tests</module>
