@@ -110,6 +110,11 @@
                 <artifactId>jnosql-solr</artifactId>
                 <version>${jnosql.version}</version>
             </dependency>
+            <dependency>
+                <groupId>org.eclipse.jnosql.databases</groupId>
+                <artifactId>jnosql-couchdb</artifactId>
+                <version>${jnosql.version}</version>
+            </dependency>
         </dependencies>
     </dependencyManagement>
     <build>

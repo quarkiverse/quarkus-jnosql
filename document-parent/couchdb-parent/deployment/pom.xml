@@ -3,24 +3,28 @@
     <modelVersion>4.0.0</modelVersion>
     <parent>
         <groupId>io.quarkiverse.jnosql</groupId>
-        <artifactId>quarkus-jnosql-document-arangodb-parent</artifactId>
+        <artifactId>quarkus-jnosql-document-couchdb-parent</artifactId>
         <version>1.0.6-SNAPSHOT</version>
     </parent>
-    <artifactId>quarkus-jnosql-document-arangodb-deployment</artifactId>
-    <name>Quarkus JNoSQL - Document - ArangoDB - Deployment</name>
+    <artifactId>quarkus-jnosql-document-couchdb-deployment</artifactId>
+    <name>Quarkus JNoSQL - Document - CouchDB - Deployment</name>
     <dependencies>
-        <dependency>
-            <groupId>io.quarkus</groupId>
-            <artifactId>quarkus-apache-httpclient-deployment</artifactId>
-        </dependency>
         <dependency>
             <groupId>io.quarkiverse.jnosql</groupId>
             <artifactId>quarkus-jnosql-document-deployment</artifactId>
             <version>${project.version}</version>
         </dependency>
         <dependency>
+            <groupId>io.quarkus</groupId>
+            <artifactId>quarkus-jsonb-deployment</artifactId>
+        </dependency>
+        <dependency>
+            <groupId>io.quarkus</groupId>
+            <artifactId>quarkus-apache-httpclient-deployment</artifactId>
+        </dependency>
+        <dependency>
             <groupId>io.quarkiverse.jnosql</groupId>
-            <artifactId>quarkus-jnosql-document-arangodb</artifactId>
+            <artifactId>quarkus-jnosql-document-couchdb</artifactId>
             <version>${project.version}</version>
         </dependency>
         <dependency>
