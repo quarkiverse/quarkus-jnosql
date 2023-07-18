@@ -123,6 +123,7 @@
                 <artifactId>jnosql-couchbase</artifactId>
                 <version>${jnosql.version}</version>
             </dependency>
+        </dependencies>
     </dependencyManagement>
     <build>
         <pluginManagement>
