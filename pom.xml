@@ -33,6 +33,7 @@
         <camel-quarkus-bom.version>3.0.0-M2</camel-quarkus-bom.version>
         <cassandra-quarkus-bom.version>1.2.0</cassandra-quarkus-bom.version>
         <quarkus-hazelcast-client-bom.version>4.0.0</quarkus-hazelcast-client-bom.version>
+        <camel-quarkus-solr-parent.version>3.0.0-M1</camel-quarkus-solr-parent.version>
         <jnosql.version>1.0.0</jnosql.version>
     </properties>
     <dependencyManagement>
@@ -114,10 +115,14 @@
             </dependency>
             <dependency>
                 <groupId>org.eclipse.jnosql.databases</groupId>
+                <artifactId>jnosql-solr</artifactId>
+                <version>${jnosql.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>org.eclipse.jnosql.databases</groupId>
                 <artifactId>jnosql-couchbase</artifactId>
                 <version>${jnosql.version}</version>
             </dependency>
-        </dependencies>
     </dependencyManagement>
     <build>
         <pluginManagement>
