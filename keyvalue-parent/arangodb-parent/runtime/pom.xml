@@ -19,8 +19,8 @@
             <artifactId>quarkus-jsonb</artifactId>
         </dependency>
         <dependency>
-            <groupId>org.apache.camel.quarkus</groupId>
-            <artifactId>camel-quarkus-arangodb</artifactId>
+            <groupId>io.quarkus</groupId>
+            <artifactId>quarkus-apache-httpclient</artifactId>
         </dependency>
         <dependency>
             <groupId>org.eclipse.jnosql.databases</groupId>
