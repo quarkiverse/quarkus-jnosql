@@ -10,8 +10,9 @@
     <name>Quarkus JNoSQL - KeyValue - Couchbase - Deployment</name>
     <dependencies>
         <dependency>
-            <groupId>org.apache.camel.quarkus</groupId>
-            <artifactId>camel-quarkus-core-deployment</artifactId>
+            <groupId>io.quarkiverse.jnosql</groupId>
+            <artifactId>quarkus-jnosql-core-deployment</artifactId>
+            <version>${project.version}</version>
         </dependency>
         <dependency>
             <groupId>io.quarkiverse.jnosql</groupId>
