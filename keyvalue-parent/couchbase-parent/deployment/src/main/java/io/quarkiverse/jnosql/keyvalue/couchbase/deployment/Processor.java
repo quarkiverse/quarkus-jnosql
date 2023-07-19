@@ -1,5 +1,8 @@
 package io.quarkiverse.jnosql.keyvalue.couchbase.deployment;
 
+import org.eclipse.jnosql.databases.couchbase.communication.QuarkusCouchbaseKeyValueConfiguration;
+import org.jboss.logging.Logger;
+
 import io.quarkiverse.jnosql.core.runtime.JvmOnlyRecorder;
 import io.quarkus.arc.deployment.AdditionalBeanBuildItem;
 import io.quarkus.deployment.annotations.BuildProducer;
@@ -8,8 +11,6 @@ import io.quarkus.deployment.annotations.ExecutionTime;
 import io.quarkus.deployment.annotations.Record;
 import io.quarkus.deployment.builditem.FeatureBuildItem;
 import io.quarkus.deployment.pkg.steps.NativeBuild;
-import org.eclipse.jnosql.databases.couchbase.communication.QuarkusCouchbaseKeyValueConfiguration;
-import org.jboss.logging.Logger;
 
 class Processor {
 
