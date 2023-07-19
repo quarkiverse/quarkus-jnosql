@@ -1,4 +1,4 @@
-package io.quarkiverse.jnosql.core.deployment;
+package io.quarkiverse.jnosql.core.runtime;
 
 import org.jboss.logging.Logger;
 
@@ -6,6 +6,7 @@ import io.quarkus.runtime.annotations.Recorder;
 
 @Recorder
 public class JvmOnlyRecorder {
+
     private static final Logger LOG = Logger.getLogger(JvmOnlyRecorder.class);
 
     public JvmOnlyRecorder() {

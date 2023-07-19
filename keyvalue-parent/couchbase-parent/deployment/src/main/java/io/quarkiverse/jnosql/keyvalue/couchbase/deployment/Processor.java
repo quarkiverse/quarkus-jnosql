@@ -1,6 +1,6 @@
 package io.quarkiverse.jnosql.keyvalue.couchbase.deployment;
 
-import io.quarkiverse.jnosql.core.deployment.JvmOnlyRecorder;
+import io.quarkiverse.jnosql.core.runtime.JvmOnlyRecorder;
 import io.quarkus.arc.deployment.AdditionalBeanBuildItem;
 import io.quarkus.deployment.annotations.BuildProducer;
 import io.quarkus.deployment.annotations.BuildStep;
