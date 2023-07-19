@@ -99,6 +99,8 @@ Please refer to the [Redis Quarkus extension](https://quarkus.io/guides/redis-re
 
 Add the dependency to the target project:
 
+:warning: **This extension doesn't support native-compilation**
+
 ```xml
 <dependency>
     <groupId>io.quarkiverse.jnosql</groupId>
