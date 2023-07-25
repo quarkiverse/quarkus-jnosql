@@ -4,7 +4,7 @@
     <parent>
         <groupId>io.quarkiverse.jnosql</groupId>
         <artifactId>quarkus-jnosql-document-couchdb-parent</artifactId>
-        <version>1.0.6-SNAPSHOT</version>
+        <version>3.2.2.0</version>
     </parent>
     <artifactId>quarkus-jnosql-document-couchdb-deployment</artifactId>
     <name>Quarkus JNoSQL - Document - CouchDB - Deployment</name>
