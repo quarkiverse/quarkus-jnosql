@@ -8,7 +8,7 @@
 The Quarkus JNoSql Extension adds support for 
 [JNoSQL](http://www.jnosql.org/), an implementation of [Jakarta NoSQL](https://jakarta.ee/specifications/nosql/).
 
-:information_source: **Recommended Quarkus version: `3.1.0.Final` or higher**
+:information_source: **Recommended Quarkus version: `3.2.2.Final` or higher**
 
 ### Usage
 
@@ -75,6 +75,19 @@ Add the dependency to the target project:
 
 Please refer to the [DynamoDB Quarkiverse extension](https://quarkiverse.github.io/quarkiverse-docs/quarkus-amazon-services/dev/amazon-dynamodb.html) for specific configuration.
 
+### Hazelcast
+
+Add the dependency to the target project:
+
+```xml
+<dependency>
+    <groupId>io.quarkiverse.jnosql</groupId>
+    <artifactId>quarkus-jnosql-keyvalue-hazelcast</artifactId>
+</dependency>
+```
+
+Please refer to the [Quarkus Hazelcast extension](https://github.com/hazelcast/quarkus-hazelcast-client) for specific configuration.
+
 ### Redis
 
 Add the dependency to the target project:
@@ -122,6 +135,19 @@ Add the dependency to the target project:
 
 Please refer to the [AranboDB JNoSQL driver](https://github.com/eclipse/jnosql-databases#arangodb) for specific configuration.
 
+### CouchDB
+
+Add the dependency to the target project:
+
+```xml
+<dependency>
+    <groupId>io.quarkiverse.jnosql</groupId>
+    <artifactId>quarkus-jnosql-document-couchdb</artifactId>
+</dependency>
+```
+
+Please refer to the [CouchDB JNoSQL driver](https://github.com/eclipse/jnosql-databases#couchdb) for specific configuration.
+
 ### Elasticsearch
 
 Add the dependency to the target project:
@@ -147,6 +173,19 @@ Add the dependency to the target project:
 ```
 
 Please refer to the [MongoDB Quarkus extension](https://quarkus.io/guides/mongodb) for specific configuration.
+
+### Solr
+
+Add the dependency to the target project:
+
+```xml
+<dependency>
+    <groupId>io.quarkiverse.jnosql</groupId>
+    <artifactId>quarkus-jnosql-document-solr</artifactId>
+</dependency>
+```
+
+Please refer to the [Solr JNoSQL driver](https://github.com/eclipse/jnosql-databases#solr) for specific configuration.
 
 ## Column
 
