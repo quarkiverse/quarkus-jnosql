@@ -29,13 +29,13 @@
         <maven.compiler.release>17</maven.compiler.release>
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
         <project.reporting.outputEncoding>UTF-8</project.reporting.outputEncoding>
-        <quarkus.version>3.2.2.Final</quarkus.version>
-        <quarkus-amazon-services-bom.version>3.2.2.Final</quarkus-amazon-services-bom.version>
+        <quarkus.version>3.2.4.Final</quarkus.version>
+        <quarkus-amazon-services-bom.version>3.2.4.Final</quarkus-amazon-services-bom.version>
         <camel-quarkus-bom.version>3.0.0-M2</camel-quarkus-bom.version>
         <cassandra-quarkus-bom.version>1.2.0</cassandra-quarkus-bom.version>
         <quarkus-hazelcast-client-bom.version>4.0.0</quarkus-hazelcast-client-bom.version>
         <camel-quarkus-solr-parent.version>3.0.0-M1</camel-quarkus-solr-parent.version>
-        <jnosql.version>1.0.0</jnosql.version>
+        <jnosql.version>1.0.1</jnosql.version>
     </properties>
     <dependencyManagement>
         <dependencies>
