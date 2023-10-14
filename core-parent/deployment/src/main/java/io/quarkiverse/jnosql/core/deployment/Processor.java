@@ -2,8 +2,19 @@ package io.quarkiverse.jnosql.core.deployment;
 
 import static org.jboss.jandex.AnnotationTarget.Kind.CLASS;
 
+import java.io.IOException;
+import java.util.Set;
+import java.util.function.Consumer;
+
 import jakarta.nosql.Entity;
 
+import org.eclipse.jnosql.communication.TypeReferenceReader;
+import org.eclipse.jnosql.communication.ValueReader;
+import org.eclipse.jnosql.communication.ValueWriter;
+import org.eclipse.jnosql.mapping.metadata.ClassConverter;
+import org.eclipse.jnosql.mapping.metadata.ClassScanner;
+import org.eclipse.jnosql.mapping.metadata.CollectionSupplier;
+import org.eclipse.jnosql.mapping.metadata.ConstructorBuilderSupplier;
 import org.jboss.jandex.Type;
 
 import io.quarkiverse.jnosql.core.runtime.QuarkusEntityMetadataExtension;
@@ -13,6 +24,8 @@ import io.quarkus.deployment.annotations.BuildStep;
 import io.quarkus.deployment.builditem.CombinedIndexBuildItem;
 import io.quarkus.deployment.builditem.FeatureBuildItem;
 import io.quarkus.deployment.builditem.nativeimage.ReflectiveHierarchyBuildItem;
+import io.quarkus.deployment.builditem.nativeimage.ServiceProviderBuildItem;
+import io.quarkus.deployment.util.ServiceUtil;
 
 class Processor {
 
@@ -36,6 +49,19 @@ class Processor {
     @BuildStep
     void build(BuildProducer<AdditionalBeanBuildItem> additionalBeanProducer) {
         additionalBeanProducer.produce(AdditionalBeanBuildItem.unremovableOf(QuarkusEntityMetadataExtension.class));
+    }
+
+    @BuildStep
+    void registerNativeImageResources(BuildProducer<ServiceProviderBuildItem> services) throws IOException {
+
+        Set.of(ClassScanner.class,
+                CollectionSupplier.class,
+                ClassConverter.class,
+                ConstructorBuilderSupplier.class,
+                ValueReader.class,
+                ValueWriter.class,
+                TypeReferenceReader.class)
+                .forEach(ServiceProviderRegister.registerInto(services));
     }
 
 }
