@@ -10,8 +10,6 @@ import jakarta.json.bind.spi.JsonbProvider;
 import jakarta.json.spi.JsonProvider;
 import org.eclipse.jnosql.databases.elasticsearch.communication.QuarkusElasticseachDocumentConfiguration;
 
-import java.util.Set;
-
 class Processor {
 
     private static final String FEATURE = "jnosql-document-elasticsearch";
@@ -28,9 +26,8 @@ class Processor {
 
     @BuildStep
     void registerNativeImageResources(BuildProducer<ServiceProviderBuildItem> services) {
-
-        Set.of(JsonProvider.class, JsonbProvider.class)
-                .forEach(ServiceProviderRegister.registerInto(services));
+        ServiceProviderRegister.registerService(services,
+                JsonProvider.class, JsonbProvider.class);
     }
 
 }

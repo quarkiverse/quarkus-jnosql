@@ -2,10 +2,6 @@ package io.quarkiverse.jnosql.core.deployment;
 
 import static org.jboss.jandex.AnnotationTarget.Kind.CLASS;
 
-import java.io.IOException;
-import java.util.Set;
-import java.util.function.Consumer;
-
 import jakarta.nosql.Entity;
 
 import org.eclipse.jnosql.communication.TypeReferenceReader;
@@ -25,7 +21,6 @@ import io.quarkus.deployment.builditem.CombinedIndexBuildItem;
 import io.quarkus.deployment.builditem.FeatureBuildItem;
 import io.quarkus.deployment.builditem.nativeimage.ReflectiveHierarchyBuildItem;
 import io.quarkus.deployment.builditem.nativeimage.ServiceProviderBuildItem;
-import io.quarkus.deployment.util.ServiceUtil;
 
 class Processor {
 
@@ -52,16 +47,16 @@ class Processor {
     }
 
     @BuildStep
-    void registerNativeImageResources(BuildProducer<ServiceProviderBuildItem> services) throws IOException {
+    void registerNativeImageResources(BuildProducer<ServiceProviderBuildItem> services) {
 
-        Set.of(ClassScanner.class,
+        ServiceProviderRegister.registerService(services,
+                ClassScanner.class,
                 CollectionSupplier.class,
                 ClassConverter.class,
                 ConstructorBuilderSupplier.class,
                 ValueReader.class,
                 ValueWriter.class,
-                TypeReferenceReader.class)
-                .forEach(ServiceProviderRegister.registerInto(services));
+                TypeReferenceReader.class);
     }
 
 }
