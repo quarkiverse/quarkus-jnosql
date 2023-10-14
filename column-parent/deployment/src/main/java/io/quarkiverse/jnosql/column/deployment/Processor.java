@@ -1,5 +1,9 @@
 package io.quarkiverse.jnosql.column.deployment;
 
+import java.io.IOException;
+
+import org.eclipse.jnosql.communication.column.ColumnConfiguration;
+
 import io.quarkiverse.jnosql.column.runtime.ColumnManagerProducer;
 import io.quarkiverse.jnosql.core.deployment.ServiceProviderRegister;
 import io.quarkus.arc.deployment.AdditionalBeanBuildItem;
@@ -7,9 +11,6 @@ import io.quarkus.deployment.annotations.BuildProducer;
 import io.quarkus.deployment.annotations.BuildStep;
 import io.quarkus.deployment.builditem.FeatureBuildItem;
 import io.quarkus.deployment.builditem.nativeimage.ServiceProviderBuildItem;
-import org.eclipse.jnosql.communication.column.ColumnConfiguration;
-
-import java.io.IOException;
 
 class Processor {
 
