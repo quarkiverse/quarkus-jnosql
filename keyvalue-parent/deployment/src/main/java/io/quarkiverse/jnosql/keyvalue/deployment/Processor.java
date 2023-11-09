@@ -11,7 +11,6 @@ import io.quarkus.deployment.annotations.BuildProducer;
 import io.quarkus.deployment.annotations.BuildStep;
 import io.quarkus.deployment.builditem.FeatureBuildItem;
 import io.quarkus.deployment.builditem.nativeimage.ServiceProviderBuildItem;
-import io.quarkus.deployment.util.ServiceUtil;
 
 class Processor {
 
@@ -32,19 +31,4 @@ class Processor {
         ServiceProviderRegister.registerService(services, KeyValueConfiguration.class);
     }
 
-    private static void registerService(BuildProducer<ServiceProviderBuildItem> services, String serviceInterface) {
-        try {
-            var service = "META-INF/services/" + serviceInterface;
-            // find out all the implementation classes listed in the service files
-            var implementations = ServiceUtil.classNamesNamedIn(Thread.currentThread().getContextClassLoader(),
-                    service);
-            // register every listed implementation class so they can be instantiated
-            // in native-image at run-time
-            services.produce(
-                    new ServiceProviderBuildItem(serviceInterface,
-                            implementations.toArray(new String[0])));
-        } catch (IOException e) {
-            throw new RuntimeException(e);
-        }
-    }
 }
