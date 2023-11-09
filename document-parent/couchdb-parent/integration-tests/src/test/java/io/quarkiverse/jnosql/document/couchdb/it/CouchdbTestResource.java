@@ -44,7 +44,9 @@ public class CouchdbTestResource implements QuarkusTestResourceLifecycleManager 
             return Map.of(
                     CouchDBConfigurations.PORT.get(),
                     container.getMappedPort(
-                            PORT).toString());
+                            PORT).toString(),
+                    CouchDBConfigurations.HOST.get(),
+                    container.getHost());
         } catch (Exception e) {
             throw new RuntimeException(e);
         }
