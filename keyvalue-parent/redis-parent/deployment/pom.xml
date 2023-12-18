@@ -4,7 +4,7 @@
     <parent>
         <groupId>io.quarkiverse.jnosql</groupId>
         <artifactId>quarkus-jnosql-keyvalue-redis-parent</artifactId>
-        <version>3.2.2.0</version>
+        <version>3.2.2.1-SNAPSHOT</version>
     </parent>
     <artifactId>quarkus-jnosql-keyvalue-redis-deployment</artifactId>
     <name>Quarkus JNoSQL - KeyValue - Redis - Deployment</name>
