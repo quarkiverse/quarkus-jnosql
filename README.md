@@ -1,46 +1,54 @@
-# Quarkus JNoSQL
-<!-- ALL-CONTRIBUTORS-BADGE:START - Do not remove or modify this section -->
-[![All Contributors](https://img.shields.io/badge/all_contributors-1-orange.svg?style=flat-square)](#contributors-)
-<!-- ALL-CONTRIBUTORS-BADGE:END -->
+# Quarkus JNoSQL Integration
 
-[![Version](https://img.shields.io/maven-central/v/io.quarkiverse.jnosql/quarkus-jnosql-core?logo=apache-maven&style=flat-square)](https://search.maven.org/artifact/io.quarkiverse.jnosql/quarkus-jnosql-core)
+This documentation provides instructions on how to integrate JNoSQL, an implementation of [Jakarta NoSQL](https://jakarta.ee/specifications/nosql/), into a Quarkus project using the Quarkus JNoSQL Extension. This extension supports JNoSQL and facilitates using NoSQL databases in your Quarkus applications.
 
-The Quarkus JNoSql Extension adds support for 
-[JNoSQL](http://www.jnosql.org/), an implementation of [Jakarta NoSQL](https://jakarta.ee/specifications/nosql/).
 
 :information_source: **Recommended Quarkus version: `3.2.2.Final` or higher**
 
-### Usage
+## Getting Started
 
-```java
-import jakarta.nosql.Column;
-import jakarta.nosql.Entity;
-import jakarta.nosql.Id;
+To begin using JNoSQL with Quarkus, follow these steps:
 
-@Entity
-public class TestEntity {
-    
-    @Id
-    private String id;
-    
-    @Column
-    private String testField;
-}
-```
+1. Add the Quarkus JNoSQL Extension to your project's dependencies. You can find the latest version on Maven Central:
+
+   [![Version](https://img.shields.io/maven-central/v/io.quarkiverse.jnosql/quarkus-jnosql-core?logo=apache-maven&style=flat-square)](https://search.maven.org/artifact/io.quarkiverse.jnosql/quarkus-jnosql-core)
+
+2. Define your entities using JNoSQL annotations. Here's an example entity class:
+
+   ```java
+   import jakarta.nosql.Column;
+   import jakarta.nosql.Entity;
+   import jakarta.nosql.Id;
+
+   @Entity
+   public class TestEntity {
+       
+       @Id
+       private String id;
+       
+       @Column
+       private String testField;
+   }
+   ```
 
 ## KeyValue
 
 ### Configuration
 
-The JNoSql KeyValue Quarkus extension supports the following configuration:
+Configure the JNoSql KeyValue Quarkus extension by specifying the database's name in your `application.properties`:
 
- | Name  | Type  | Default  |
- |---|---|---|
- | `jnosql.keyvalue.database`<br>The database's name. | string  | |
+```properties
+jnosql.keyvalue.database=my-database-name
+```
 
 ### Usage
 
+Inject the `KeyValueTemplate` into your class and use it to interact with the KeyValue database:
+
 ```java
+import jakarta.inject.Inject;
+import org.jnosql.artemis.key.KeyValueTemplate;
+
 @Inject
 private KeyValueTemplate template;
 
@@ -49,9 +57,11 @@ public void insert(TestEntity entity) {
 }
 ```
 
-### ArangoDB
+### Database Specific Configuration
 
-Add the dependency to the target project:
+#### ArangoDB
+
+Add the ArangoDB dependency to your project's `pom.xml`:
 
 ```xml
 <dependency>
@@ -60,11 +70,11 @@ Add the dependency to the target project:
 </dependency>
 ```
 
-Please refer to the [AranboDB JNoSQL driver](https://github.com/eclipse/jnosql-databases#arangodb) for specific configuration.
+For specific configuration details, please refer to the [AranboDB JNoSQL driver](https://github.com/eclipse/jnosql-databases#arangodb).
 
-### DynamoDB
+#### DynamoDB
 
-Add the dependency to the target project:
+Add the DynamoDB dependency to your project's `pom.xml`:
 
 ```xml
 <dependency>
@@ -73,11 +83,11 @@ Add the dependency to the target project:
 </dependency>
 ```
 
-Please refer to the [DynamoDB Quarkiverse extension](https://quarkiverse.github.io/quarkiverse-docs/quarkus-amazon-services/dev/amazon-dynamodb.html) for specific configuration.
+Please refer to the [DynamoDB Quarkiverse extension](https://quarkiverse.github.io/quarkiverse-docs/quarkus-amazon-services/dev/amazon-dynamodb.html) for specific configuration details.
 
-### Hazelcast
+#### Hazelcast
 
-Add the dependency to the target project:
+Add the Hazelcast dependency to your project's `pom.xml`:
 
 ```xml
 <dependency>
@@ -86,11 +96,11 @@ Add the dependency to the target project:
 </dependency>
 ```
 
-Please refer to the [Quarkus Hazelcast extension](https://github.com/hazelcast/quarkus-hazelcast-client) for specific configuration.
+Please refer to the [Quarkus Hazelcast extension](https://github.com/hazelcast/quarkus-hazelcast-client) for specific configuration details.
 
-### Redis
+#### Redis
 
-Add the dependency to the target project:
+Add the Redis dependency to your project's `pom.xml`:
 
 ```xml
 <dependency>
@@ -99,21 +109,26 @@ Add the dependency to the target project:
 </dependency>
 ```
 
-Please refer to the [Redis Quarkus extension](https://quarkus.io/guides/redis-reference) for specific configuration.
+For specific configuration details, please refer to the [Redis Quarkus extension](https://quarkus.io/guides/redis-reference).
 
 ## Document
 
 ### Configuration
 
-The JNoSql Document Quarkus extension supports the following configuration:
+Configure the JNoSql Document Quarkus extension by specifying the database's name in your `application.properties`:
 
- | Name  | Type  | Default  |
- |---|---|---|
- | `jnosql.document.database`<br>The database's name. | string  | |
+```properties
+jnosql.document.database=my-database-name
+```
 
 ### Usage
 
+Inject the `DocumentTemplate` into your class and use it to interact with the Document database:
+
 ```java
+import jakarta.inject.Inject;
+import org.jnosql.artemis.document.DocumentTemplate;
+
 @Inject
 private DocumentTemplate template;
 
@@ -122,9 +137,11 @@ public void insert(TestDocumentEntity entity) {
 }
 ```
 
-### ArangoDB
+### Database Specific Configuration
 
-Add the dependency to the target project:
+#### ArangoDB
+
+Add the ArangoDB dependency to your project's `pom.xml`:
 
 ```xml
 <dependency>
@@ -133,11 +150,11 @@ Add the dependency to the target project:
 </dependency>
 ```
 
-Please refer to the [AranboDB JNoSQL driver](https://github.com/eclipse/jnosql-databases#arangodb) for specific configuration.
+For specific configuration details, please refer to the [AranboDB JNoSQL driver](https://github.com/eclipse/jnosql-databases#arangodb).
 
-### CouchDB
+#### CouchDB
 
-Add the dependency to the target project:
+Add the CouchDB dependency to your project's `pom.xml`:
 
 ```xml
 <dependency>
@@ -146,11 +163,11 @@ Add the dependency to the target project:
 </dependency>
 ```
 
-Please refer to the [CouchDB JNoSQL driver](https://github.com/eclipse/jnosql-databases#couchdb) for specific configuration.
+For specific configuration details, please refer to the [CouchDB JNoSQL driver](https://github.com/eclipse/jnosql-databases#couchdb).
 
-### Elasticsearch
+#### Elasticsearch
 
-Add the dependency to the target project:
+Add the Elasticsearch dependency to your project's `pom.xml`:
 
 ```xml
 <dependency>
@@ -159,11 +176,11 @@ Add the dependency to the target project:
 </dependency>
 ```
 
-Please refer to the [Elasticsearch Quarkus extension](https://quarkus.io/guides/elasticsearch#using-the-elasticsearch-java-client) for specific configuration.
+Please refer to the [Elasticsearch Quarkus extension](https://quarkus.io/guides/elasticsearch#using-the-elasticsearch-java-client) for specific configuration details.
 
-### MongoDB
+#### MongoDB
 
-Add the dependency to the target project:
+Add the MongoDB dependency to your project's `pom.xml`:
 
 ```xml
 <dependency>
@@ -172,11 +189,11 @@ Add the dependency to the target project:
 </dependency>
 ```
 
-Please refer to the [MongoDB Quarkus extension](https://quarkus.io/guides/mongodb) for specific configuration.
+For specific configuration details, please refer to the [MongoDB Quarkus extension](https://quarkus.io/guides/mongodb).
 
-### Solr
+#### Solr
 
-Add the dependency to the target project:
+Add the Solr dependency to your project's `pom.xml`:
 
 ```xml
 <dependency>
@@ -185,49 +202,56 @@ Add the dependency to the target project:
 </dependency>
 ```
 
-Please refer to the [Solr JNoSQL driver](https://github.com/eclipse/jnosql-databases#solr) for specific configuration.
+For specific configuration details, please refer to the [Solr JNoSQL driver](https://github.com/eclipse/jnosql-databases#solr).
 
 ## Column
 
 ### Configuration
 
-The JNoSql Column Quarkus extension supports the following configuration:
+Configure the JNoSql Column Quarkus extension by specifying the database's name in your `application.properties`:
 
-| Name                                             | Type  | Default  |
- |--------------------------------------------------|---|---|
-| `jnosql.column.database`<br>The database's name. | string  | |
+```properties
+jnosql.column.database=my-database-name
+```
 
-### Cassandra
+### Usage
 
-Add the dependency to the target project:
+Inject the `ColumnTemplate` into your class and use it to interact with the Column database:
+
+```java
+import jakarta.inject.Inject;
+import org.jnosql.artemis.column.ColumnTemplate;
+
+@Inject
+private ColumnTemplate template;
+
+public void insert(TestColumnEntity entity) {
+    template.insert(entity);
+}
+```
+
+### Database Specific Configuration
+
+#### Cassandra
+
+Add the Cassandra dependency to your project's `pom.xml`:
 
 ```xml
 <dependency>
-    <groupId>io.quarkiverse.jnosql</groupId>
+    <groupId>io.quarkiverse.j
+
+nosql</groupId>
     <artifactId>quarkus-jnosql-column-cassandra</artifactId>
 </dependency>
 ```
 
-Please refer to the [Cassandra Quarkus extension](https://quarkus.io/guides/cassandra) for specific configuration.
+Please refer to the [Cassandra Quarkus extension](https://quarkus.io/guides/cassandra) for specific configuration details.
 
-## Contributors ✨____
+## Contributors ✨
 
-Thanks goes to these wonderful people ([emoji key](https://allcontributors.org/docs/en/emoji-key)):
-<!-- ALL-CONTRIBUTORS-LIST:START - Do not remove or modify this section -->
-<!-- prettier-ignore-start -->
-<!-- markdownlint-disable -->
-<table>
-  <tbody>
-    <tr>
-      <td align="center" valign="top" width="14.28%"><a href="https://github.com/amoscatelli"><img src="https://avatars.githubusercontent.com/u/16684470?v=4?s=100" width="100px;" alt="amoscatelli"/><br /><sub><b>amoscatelli</b></sub></a><br /><a href="https://github.com/quarkiverse/quarkus-jnosql/commits?author=amoscatelli" title="Code">💻</a> <a href="#maintenance-amoscatelli" title="Maintenance">🚧</a></td>
-      <td align="center" valign="top" width="14.28%"><a href="https://github.com/dearrudam"><img src="https://avatars.githubusercontent.com/u/6537623?v=4" width="100px;" alt="dearrudam"/><br /><sub><b>dearrudam</b></sub></a><br /><a href="https://github.com/quarkiverse/quarkus-jnosql/commits?author=dearrudam" title="Code">💻</a> <a href="#maintenance-dearrudam" title="Maintenance">🚧</a></td>
-    </tr>
-  </tbody>
-</table>
+Thanks to these wonderful people for their contributions:
 
-<!-- markdownlint-restore -->
-<!-- prettier-ignore-end -->
+- [amoscatelli](https://github.com/amoscatelli) 💻 🚧
+- [dearrudam](https://github.com/dearrudam) 💻 🚧
 
-<!-- ALL-CONTRIBUTORS-LIST:END -->
-
-This project follows the [all-contributors](https://github.com/all-contributors/all-contributors) specification. Contributions of any kind welcome!
+This project follows the [all-contributors](https://github.com/all-contributors/all-contributors) specification. Contributions of any kind are welcome!
