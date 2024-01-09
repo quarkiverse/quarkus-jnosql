@@ -1,4 +1,7 @@
-# Quarkus JNoSQL Integration
+# Quarkus JNoSQL
+<!-- ALL-CONTRIBUTORS-BADGE:START - Do not remove or modify this section -->
+[![All Contributors](https://img.shields.io/badge/all_contributors-1-orange.svg?style=flat-square)](#contributors-)
+<!-- ALL-CONTRIBUTORS-BADGE:END -->
 
 This documentation provides instructions on how to integrate JNoSQL, an implementation of [Jakarta NoSQL](https://jakarta.ee/specifications/nosql/), into a Quarkus project using the Quarkus JNoSQL Extension. This extension supports JNoSQL and facilitates using NoSQL databases in your Quarkus applications.
 
