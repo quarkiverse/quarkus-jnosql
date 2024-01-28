@@ -74,7 +74,7 @@ Add the ArangoDB dependency to your project's `pom.xml`:
 </dependency>
 ```
 
-For specific configuration details, please refer to the [AranboDB JNoSQL driver](https://github.com/eclipse/jnosql-databases#arangodb).
+For specific configuration details, please refer to the [ArangoDB JNoSQL driver](https://github.com/eclipse/jnosql-databases#arangodb).
 
 #### DynamoDB
 
