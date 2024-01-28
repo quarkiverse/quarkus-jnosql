@@ -257,5 +257,6 @@ Thanks to these wonderful people for their contributions:
 
 - [amoscatelli](https://github.com/amoscatelli) 💻 🚧
 - [dearrudam](https://github.com/dearrudam) 💻 🚧
+- [otaviojava](https://github.com/otaviojava) 💻 🚧
 
 This project follows the [all-contributors](https://github.com/all-contributors/all-contributors) specification. Contributions of any kind are welcome!
