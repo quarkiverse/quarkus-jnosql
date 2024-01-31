@@ -1,8 +1,8 @@
 = Quarkus Jnosql
-
+:toc: auto
 include::./includes/attributes.adoc[]
 
-TIP: Describe what the extension does here.
+TIP: The Quarkus NoSQL Extension is a powerful integration between Quarkus and Eclipse JNoSQL, allowing seamless interaction with various NoSQL databases in Quarkus applications.
 
 == Installation
 
@@ -18,6 +18,211 @@ For instance, with Maven, add the following dependency to your POM file:
     <version>{project-version}</version>
 </dependency>
 ----
+
+== Getting Started
+
+Eclipse JNoSQL is a flexible and scalable framework that simplifies working with NoSQL databases in Java applications. It provides a consistent and easy-to-use API for interacting with various NoSQL databases, allowing developers to focus on application logic rather than database intricacies.
+
+With the Quarkus NoSQL Extension, Quarkus developers can seamlessly integrate Eclipse JNoSQL into their Quarkus applications. Here's why you should consider using this extension:
+
+TIP: Eclipse JNoSQL combined with Quarkus brings several benefits to developers:
+
+* **Simplified NoSQL Integration:** The Quarkus NoSQL Extension abstracts the complexity of working with different NoSQL databases. Developers can work with a consistent API regardless of the underlying database technology, making it easier to switch between databases or use multiple databases in a single application.
+
+*  **Type-Safe Queries:** Eclipse JNoSQL provides a type-safe query API, allowing developers to write database queries using Java code rather than raw query strings. This improves code readability, catches errors at compile-time, and enhances developer productivity.
+
+*  **Seamless Quarkus Integration:** Quarkus is known for its fast startup times and efficient resource utilization. By using the Quarkus NoSQL Extension, developers can harness the benefits of Quarkus while working with NoSQL databases, ensuring that their applications remain lightweight and responsive.
+
+*  **Database Agnosticism:** The extension supports a wide range of NoSQL databases, including key-value stores, document databases, and column-family stores. This flexibility allows developers to choose the most suitable database for their specific use case without major code changes.
+
+*  **Rich Documentation and Ecosystem:** Eclipse JNoSQL has a thriving community and rich documentation, making it easy for developers to find support, tutorials, and examples. By integrating it with Quarkus, developers can tap into the vibrant Quarkus ecosystem as well.
+
+By following the steps outlined in this documentation, Quarkus developers can quickly integrate Eclipse JNoSQL into their Quarkus projects, simplify NoSQL database interactions, and build efficient and scalable applications with ease.
+
+1. Add the Quarkus JNoSQL Extension to your project's dependencies. You can find the latest version on Maven Central:
+
+   [![Version](https://img.shields.io/maven-central/v/io.quarkiverse.jnosql/quarkus-jnosql-core?logo=apache-maven&style=flat-square)](https://search.maven.org/artifact/io.quarkiverse.jnosql/quarkus-jnosql-core)
+
+2. Define your entities using JNoSQL annotations. Here's an example entity class:
+
+[source,java]
+----
+import jakarta.nosql.Column;
+import jakarta.nosql.Entity;
+import jakarta.nosql.Id;
+
+@Entity
+public class TestEntity {
+
+   @Id
+   private String id;
+
+   @Column
+   private String testField;
+}
+----
+
+=== KeyValue
+
+==== Configuration
+
+Configure the JNoSql KeyValue Quarkus extension by specifying the database's name in your `application.properties`:
+
+[source,properties]
+----
+jnosql.keyvalue.database=my-database-name
+----
+
+==== Usage
+
+Inject the `KeyValueTemplate` into your class and use it to interact with the KeyValue database:
+
+[source,java]
+----
+import jakarta.inject.Inject;
+import org.jnosql.artemis.key.KeyValueTemplate;
+
+@Inject
+private KeyValueTemplate template;
+
+public void insert(TestEntity entity) {
+    template.insert(entity);
+}
+----
+
+==== Database Specific Configuration
+
+TIP: Add sections for each specific database configuration, similar to the following sections for ArangoDB, DynamoDB, Hazelcast, and Redis.
+
+==== ArangoDB
+
+Add the ArangoDB dependency to your project's `pom.xml`:
+
+[source,xml]
+----
+<dependency>
+    <groupId>io.quarkiverse.jnosql</groupId>
+    <artifactId>quarkus-jnosql-keyvalue-arangodb</artifactId>
+</dependency>
+----
+
+For specific configuration details, please refer to the [ArangoDB JNoSQL driver](https://github.com/eclipse/jnosql-databases#arangodb).
+
+==== DynamoDB
+
+Add the DynamoDB dependency to your project's `pom.xml`:
+
+[source,xml]
+----
+<dependency>
+    <groupId>io.quarkiverse.jnosql</groupId>
+    <artifactId>quarkus-jnosql-keyvalue-dynamodb</artifactId>
+</dependency>
+----
+
+Please refer to the [DynamoDB Quarkiverse extension](https://quarkiverse.github.io/quarkiverse-docs/quarkus-amazon-services/dev/amazon-dynamodb.html) for specific configuration details.
+
+==== Hazelcast
+
+Add the Hazelcast dependency to your project's `pom.xml`:
+
+[source,xml]
+----
+<dependency>
+    <groupId>io.quarkiverse.jnosql</groupId>
+    <artifactId>quarkus-jnosql-keyvalue-hazelcast</artifactId>
+</dependency>
+----
+
+Please refer to the [Quarkus Hazelcast extension](https://github.com/hazelcast/quarkus-hazelcast-client) for specific configuration details.
+
+==== Redis
+
+Add the Redis dependency to your project's `pom.xml`:
+
+[source,xml]
+----
+<dependency>
+    <groupId>io.quarkiverse.jnosql</groupId>
+    <artifactId>quarkus-jnosql-keyvalue-redis</artifactId>
+</dependency>
+----
+
+For specific configuration details, please refer to the [Redis Quarkus extension](https://quarkus.io/guides/redis-reference).
+
+=== Document
+
+==== Configuration
+
+Configure the JNoSql Document Quarkus extension by specifying the database's name in your `application.properties`:
+
+[source,properties]
+----
+jnosql.document.database=my-database-name
+----
+
+==== Usage
+
+Inject the `DocumentTemplate` into your class and use it to interact with the Document database:
+
+[source,java]
+----
+import jakarta.inject.Inject;
+import org.jnosql.artemis.document.DocumentTemplate;
+
+@Inject
+private DocumentTemplate template;
+
+public void insert(TestDocumentEntity entity) {
+    template.insert(entity);
+}
+----
+
+==== Database Specific Configuration
+
+TIP: Add sections for each specific database configuration, similar to the following sections for ArangoDB, CouchDB, Elasticsearch, MongoDB, and Solr.
+
+==== ArangoDB
+
+Add the ArangoDB dependency to your project's `pom.xml`:
+
+[source,xml]
+----
+<dependency>
+    <groupId>io.quarkiverse.jnosql</groupId>
+    <artifactId>quarkus-jnosql-document-arangodb</artifactId>
+</dependency>
+----
+
+For specific configuration details, please refer to the [ArangoDB JNoSQL driver](https://github.com/eclipse/jnosql-databases#arangodb).
+
+==== CouchDB
+
+Add the CouchDB dependency to your project's `pom.xml`:
+
+[source,xml]
+----
+<dependency>
+    <groupId>io.quarkiverse.jnosql</groupId>
+    <artifactId>quarkus-jnosql-document-couchdb</artifactId>
+</dependency>
+----
+
+For specific configuration details, please refer to the [CouchDB JNoSQL driver](https://github.com/eclipse/jnosql-databases#couchdb).
+
+==== Elasticsearch
+
+Add the Elasticsearch dependency to your project's `pom.xml`:
+
+[source,xml]
+----
+<dependency>
+    <groupId>io.quarkiverse.jnosql</groupId>
+    <artifactId>quarkus-jnosql-document-elasticsearch</artifactId>
+</dependency>
+----
+
+For specific configuration details, please refer to the [Eclipse JNoSQL  ElasticSearch driver](https://github.com/eclipse/jnosql-databases?tab=readme-ov-file#elasticsearch).
 
 [[extension-configuration-reference]]
 == Extension Configuration Reference
