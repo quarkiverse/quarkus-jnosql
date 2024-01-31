@@ -5,7 +5,7 @@
 
 [![Version](https://img.shields.io/maven-central/v/io.quarkiverse.jnosql/quarkus-jnosql-core?logo=apache-maven&style=flat-square)](https://search.maven.org/artifact/io.quarkiverse.jnosql/quarkus-jnosql-core)
 
-This documentation provides instructions on how to integrate JNoSQL, an implementation of [Jakarta NoSQL](https://jakarta.ee/specifications/nosql/), into a Quarkus project using the Quarkus JNoSQL Extension. This extension supports JNoSQL and facilitates using NoSQL databases in your Quarkus applications.
+This documentation provides instructions on how to integrate [JNoSQL](https://www.jnosql.org/), an implementation of [Jakarta NoSQL](https://jakarta.ee/specifications/nosql/), into a Quarkus project using the Quarkus JNoSQL Extension. This extension supports JNoSQL and facilitates using NoSQL databases in your Quarkus applications.
 
 :information_source: **Recommended Quarkus version: `3.2.2.Final` or higher**
 
