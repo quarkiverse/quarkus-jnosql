@@ -47,5 +47,8 @@ jobs:
       - name: Build with Maven
         run: mvn -B clean verify -Dno-format
 
+      - name: Ignoring modules that do not support native-compilation
+        run: sed -i -e '/<module>couchbase\-parent<\/module>/d' keyvalue-parent/pom.xml
+
       - name: Build with Maven (Native)
         run: mvn -B verify -Dnative -Dquarkus.native.container-build -Dnative.surefire.skip

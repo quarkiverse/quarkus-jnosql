@@ -19,6 +19,7 @@
         <module>dynamodb-parent</module>
         <module>hazelcast-parent</module>
         <module>redis-parent</module>
+        <module>couchbase-parent</module>
         <module>integration-tests</module>
     </modules>
 

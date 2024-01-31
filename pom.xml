@@ -31,6 +31,7 @@
         <project.reporting.outputEncoding>UTF-8</project.reporting.outputEncoding>
         <quarkus.version>3.3.0</quarkus.version>
         <quarkus-amazon-services-bom.version>3.2.4.Final</quarkus-amazon-services-bom.version>
+        <camel-quarkus-bom.version>3.0.0-M2</camel-quarkus-bom.version>
         <cassandra-quarkus-bom.version>1.2.0</cassandra-quarkus-bom.version>
         <quarkus-hazelcast-client-bom.version>4.0.0</quarkus-hazelcast-client-bom.version>
         <camel-quarkus-solr-parent.version>3.0.0-M1</camel-quarkus-solr-parent.version>
@@ -42,6 +43,13 @@
                 <groupId>io.quarkus</groupId>
                 <artifactId>quarkus-bom</artifactId>
                 <version>${quarkus.version}</version>
+                <type>pom</type>
+                <scope>import</scope>
+            </dependency>
+            <dependency>
+                <groupId>org.apache.camel.quarkus</groupId>
+                <artifactId>camel-quarkus-bom</artifactId>
+                <version>${camel-quarkus-bom.version}</version>
                 <type>pom</type>
                 <scope>import</scope>
             </dependency>
@@ -135,6 +143,11 @@
             <dependency>
                 <groupId>org.eclipse.jnosql.databases</groupId>
                 <artifactId>jnosql-couchdb</artifactId>
+                <version>${jnosql.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>org.eclipse.jnosql.databases</groupId>
+                <artifactId>jnosql-couchbase</artifactId>
                 <version>${jnosql.version}</version>
             </dependency>
         </dependencies>
