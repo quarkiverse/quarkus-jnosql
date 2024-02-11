@@ -231,4 +231,19 @@ Add the Elasticsearch dependency to your project's `pom.xml`:
 For specific configuration details, please refer to the https://github.com/eclipse/jnosql-databases?tab=readme-ov-file#elasticsearch[ElasticSearch driver].
 
 
+==== MongoDB
+
+Add the MongoDB dependency to your project's `pom.xml`:
+
+[source,xml]
+----
+<dependency>
+    <groupId>io.quarkiverse.jnosql</groupId>
+    <artifactId>quarkus-jnosql-document-mongodb</artifactId>
+</dependency>
+----
+
+For specific configuration details, please refer to the https://quarkus.io/guides/mongodb#quarkus-mongodb-config-group-dev-services-build-time-config_configuration[MongoDB configuration].
+
+
 include::includes/quarkus-jnosql.adoc[leveloffset=+1, opts=optional]
