@@ -10,7 +10,7 @@ import jakarta.enterprise.inject.Produces;
 import org.eclipse.jnosql.communication.keyvalue.BucketManager;
 import org.eclipse.jnosql.communication.keyvalue.BucketManagerFactory;
 import org.eclipse.jnosql.communication.keyvalue.KeyValueConfiguration;
-import org.eclipse.jnosql.mapping.config.MappingConfigurations;
+import org.eclipse.jnosql.mapping.core.config.MappingConfigurations;
 
 import io.quarkiverse.jnosql.core.runtime.AbstractManagerProducer;
 

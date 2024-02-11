@@ -10,7 +10,7 @@ import jakarta.enterprise.inject.Produces;
 import org.eclipse.jnosql.communication.document.DocumentConfiguration;
 import org.eclipse.jnosql.communication.document.DocumentManager;
 import org.eclipse.jnosql.communication.document.DocumentManagerFactory;
-import org.eclipse.jnosql.mapping.config.MappingConfigurations;
+import org.eclipse.jnosql.mapping.core.config.MappingConfigurations;
 
 import io.quarkiverse.jnosql.core.runtime.AbstractManagerProducer;
 
