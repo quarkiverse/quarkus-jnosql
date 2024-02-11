@@ -12,13 +12,13 @@ TIP: Eclipse JNoSQL combined with Quarkus brings several benefits to developers:
 
 * **Simplified NoSQL Integration:** The Quarkus NoSQL Extension abstracts the complexity of working with different NoSQL databases. Developers can work with a consistent API regardless of the underlying database technology, making it easier to switch between databases or use multiple databases in a single application.
 
-*  **Type-Safe Queries:** Eclipse JNoSQL provides a type-safe query API, allowing developers to write database queries using Java code rather than raw query strings. This improves code readability, catches errors at compile-time, and enhances developer productivity.
+* **Type-Safe Queries:** Eclipse JNoSQL provides a type-safe query API, allowing developers to write database queries using Java code rather than raw query strings. This improves code readability, catches errors at compile-time, and enhances developer productivity.
 
-*  **Seamless Quarkus Integration:** Quarkus is known for its fast startup times and efficient resource utilization. By using the Quarkus NoSQL Extension, developers can harness the benefits of Quarkus while working with NoSQL databases, ensuring that their applications remain lightweight and responsive.
+* **Seamless Quarkus Integration:** Quarkus is known for its fast startup times and efficient resource utilization. By using the Quarkus NoSQL Extension, developers can harness the benefits of Quarkus while working with NoSQL databases, ensuring that their applications remain lightweight and responsive.
 
-*  **Database Agnosticism:** The extension supports a wide range of NoSQL databases, including key-value stores, document databases, and column-family stores. This flexibility allows developers to choose the most suitable database for their specific use case without major code changes.
+* **Database Agnosticism:** The extension supports a wide range of NoSQL databases, including key-value stores, document databases, and column-family stores. This flexibility allows developers to choose the most suitable database for their specific use case without major code changes.
 
-*  **Rich Documentation and Ecosystem:** Eclipse JNoSQL has a thriving community and rich documentation, making it easy for developers to find support, tutorials, and examples. By integrating it with Quarkus, developers can tap into the vibrant Quarkus ecosystem as well.
+* **Rich Documentation and Ecosystem:** Eclipse JNoSQL has a thriving community and rich documentation, making it easy for developers to find support, tutorials, and examples. By integrating it with Quarkus, developers can tap into the vibrant Quarkus ecosystem as well.
 
 == Installation
 
@@ -41,7 +41,7 @@ By following the steps outlined in this documentation, Quarkus developers can qu
 
 1. Add the Quarkus JNoSQL Extension to your project's dependencies. You can find the latest version on Maven Central:
 
-   [![Version](https://img.shields.io/maven-central/v/io.quarkiverse.jnosql/quarkus-jnosql-core?logo=apache-maven&style=flat-square)](https://search.maven.org/artifact/io.quarkiverse.jnosql/quarkus-jnosql-core)
+   link:https://img.shields.io/maven-central/v/io.quarkiverse.jnosql/quarkus-jnosql-core?logo=apache-maven&style=flat-square[![Version]]
 
 2. Define your entities using JNoSQL annotations. Here's an example entity class:
 
@@ -106,7 +106,7 @@ Add the ArangoDB dependency to your project's `pom.xml`:
 </dependency>
 ----
 
-For specific configuration details, please refer to the [ArangoDB JNoSQL driver](https://github.com/eclipse/jnosql-databases#arangodb).
+For specific configuration details, please refer to the link:https://github.com/eclipse/jnosql-databases#arangodb[ArangoDB JNoSQL driver].
 
 ==== DynamoDB
 
@@ -120,7 +120,7 @@ Add the DynamoDB dependency to your project's `pom.xml`:
 </dependency>
 ----
 
-Please refer to the [DynamoDB Quarkiverse extension](https://quarkiverse.github.io/quarkiverse-docs/quarkus-amazon-services/dev/amazon-dynamodb.html) for specific configuration details.
+Please refer to the link:https://quarkiverse.github.io/quarkiverse-docs/quarkus-amazon-services/dev/amazon-dynamodb.html[DynamoDB Quarkiverse extension] for specific configuration details.
 
 ==== Hazelcast
 
@@ -134,7 +134,7 @@ Add the Hazelcast dependency to your project's `pom.xml`:
 </dependency>
 ----
 
-Please refer to the [Quarkus Hazelcast extension](https://github.com/hazelcast/quarkus-hazelcast-client) for specific configuration details.
+Please refer to the link:https://github.com/hazelcast/quarkus-hazelcast-client[Quarkus Hazelcast extension] for specific configuration details.
 
 ==== Redis
 
@@ -148,7 +148,7 @@ Add the Redis dependency to your project's `pom.xml`:
 </dependency>
 ----
 
-For specific configuration details, please refer to the [Redis Quarkus extension](https://quarkus.io/guides/redis-reference).
+For specific configuration details, please refer to the link:https://quarkus.io/guides/redis-reference[Redis Quarkus extension].
 
 === Document
 
@@ -194,39 +194,4 @@ Add the ArangoDB dependency to your project's `pom.xml`:
 </dependency>
 ----
 
-For specific configuration details, please refer to the [ArangoDB JNoSQL driver](https://github.com/eclipse/jnosql-databases#arangodb).
-
-==== CouchDB
-
-Add the CouchDB dependency to your project's `pom.xml`:
-
-[source,xml]
-----
-<dependency>
-    <groupId>io.quarkiverse.jnosql</groupId>
-    <artifactId>quarkus-jnosql-document-couchdb</artifactId>
-</dependency>
-----
-
-For specific configuration details, please refer to the [CouchDB JNoSQL driver](https://github.com/eclipse/jnosql-databases#couchdb).
-
-==== Elasticsearch
-
-Add the Elasticsearch dependency to your project's `pom.xml`:
-
-[source,xml]
-----
-<dependency>
-    <groupId>io.quarkiverse.jnosql</groupId>
-    <artifactId>quarkus-jnosql-document-elasticsearch</artifactId>
-</dependency>
-----
-
-For specific configuration details, please refer to the [Eclipse JNoSQL  ElasticSearch driver](https://github.com/eclipse/jnosql-databases?tab=readme-ov-file#elasticsearch).
-
-[[extension-configuration-reference]]
-== Extension Configuration Reference
-
-TIP: Remove this section if you don't have Quarkus configuration properties in your extension.
-
-include::includes/quarkus-jnosql.adoc[leveloffset=+1, opts=optional]
+For specific configuration details, please refer to the link:https://
