@@ -298,4 +298,7 @@ Add the Cassandra dependency to your project's `pom.xml`:
 </dependency>
 ----
 
+
+Please refer to the link:https://quarkus.io/guides/cassandra[Cassandra Quarkus extension] for specific configuration details.
+
 include::includes/quarkus-jnosql.adoc[leveloffset=+1, opts=optional]
