@@ -246,4 +246,61 @@ Add the MongoDB dependency to your project's `pom.xml`:
 For specific configuration details, please refer to the https://quarkus.io/guides/mongodb#quarkus-mongodb-config-group-dev-services-build-time-config_configuration[MongoDB configuration].
 
 
+==== Solr
+
+Add the Solr dependency to your project's `pom.xml`:
+
+[source,xml]
+----
+<dependency>
+    <groupId>io.quarkiverse.jnosql</groupId>
+    <artifactId>quarkus-jnosql-document-solr</artifactId>
+</dependency>
+----
+
+For specific configuration details, please refer to the link:https://github.com/eclipse/jnosql-databases#solr[Solr JNoSQL driver].
+
+== Column
+
+=== Configuration
+
+Configure the JNoSql Column Quarkus extension by specifying the database's name in your `application.properties`:
+
+[source,properties]
+----
+jnosql.column.database=my-database-name
+----
+
+=== Usage
+
+Inject the `ColumnTemplate` into your class and use it to interact with the Column database:
+
+[source,java]
+----
+import jakarta.inject.Inject;
+import org.jnosql.artemis.column.ColumnTemplate;
+
+@Inject
+private ColumnTemplate template;
+
+public void insert(TestColumnEntity entity) {
+    template.insert(entity);
+}
+----
+
+=== Column Database Specific Configuration
+
+==== Cassandra
+
+Add the Cassandra dependency to your project's `pom.xml`:
+
+[source,xml]
+----
+<dependency>
+    <groupId>io.quarkiverse.jnosql</groupId>
+    <artifactId>quarkus-jnosql-column-cassandra</artifactId>
+</dependency>
+----
+
+
 include::includes/quarkus-jnosql.adoc[leveloffset=+1, opts=optional]
