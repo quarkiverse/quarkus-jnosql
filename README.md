@@ -242,9 +242,7 @@ Add the Cassandra dependency to your project's `pom.xml`:
 
 ```xml
 <dependency>
-    <groupId>io.quarkiverse.j
-
-nosql</groupId>
+    <groupId>io.quarkiverse.jnosql</groupId>
     <artifactId>quarkus-jnosql-column-cassandra</artifactId>
 </dependency>
 ```
