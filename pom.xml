@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 https://maven.apache.org/xsd/maven-4.0.0.xsd">
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+         xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 https://maven.apache.org/xsd/maven-4.0.0.xsd">
     <modelVersion>4.0.0</modelVersion>
     <parent>
         <groupId>io.quarkiverse</groupId>
@@ -32,7 +33,7 @@
         <cassandra-quarkus-bom.version>1.2.0</cassandra-quarkus-bom.version>
         <quarkus-hazelcast-client-bom.version>4.0.0</quarkus-hazelcast-client-bom.version>
         <camel-quarkus-solr-parent.version>3.0.0-M1</camel-quarkus-solr-parent.version>
-        <jnosql.version>1.0.4</jnosql.version>
+        <jnosql.version>1.1.0</jnosql.version>
     </properties>
     <dependencyManagement>
         <dependencies>

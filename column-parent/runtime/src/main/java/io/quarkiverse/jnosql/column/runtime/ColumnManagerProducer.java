@@ -10,7 +10,7 @@ import jakarta.enterprise.inject.Produces;
 import org.eclipse.jnosql.communication.column.ColumnConfiguration;
 import org.eclipse.jnosql.communication.column.ColumnManager;
 import org.eclipse.jnosql.communication.column.ColumnManagerFactory;
-import org.eclipse.jnosql.mapping.config.MappingConfigurations;
+import org.eclipse.jnosql.mapping.core.config.MappingConfigurations;
 
 import io.quarkiverse.jnosql.core.runtime.AbstractManagerProducer;
 

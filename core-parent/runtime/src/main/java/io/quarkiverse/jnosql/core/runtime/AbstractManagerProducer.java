@@ -9,7 +9,7 @@ import jakarta.data.exceptions.MappingException;
 import jakarta.inject.Inject;
 
 import org.eclipse.jnosql.communication.Settings;
-import org.eclipse.jnosql.mapping.config.MappingConfigurations;
+import org.eclipse.jnosql.mapping.core.config.MappingConfigurations;
 
 public abstract class AbstractManagerProducer<M extends AutoCloseable, F extends Function<String, M>, C extends Function<Settings, F>>
         implements Function<MappingConfigurations, M> {
