@@ -41,7 +41,6 @@ Getting started with Quarkus JNoSQL is straightforward:
 
 1. Add the Quarkus JNoSQL Extension to your project's dependencies. You can find the latest version on Maven Central.
 
-   image::https://img.shields.io/maven-central/v/io.quarkiverse.jnosql/quarkus-jnosql-core?logo=apache-maven&style=flat-square[Version, link=https://search.maven.org/artifact/io.quarkiverse.jnosql/quarkus-jnosql-core]
 
 2. Define your entities using JNoSQL annotations. For example:
 
@@ -94,7 +93,7 @@ public void insert(TestEntity entity) {
 
 When configuring databases for use with Quarkus and Eclipse JNoSQL, it's important to note that instead of using the traditional Eclipse JNoSQL properties and configuration, Quarkus provides its properties and configuration for seamless integration. Below are sections detailing the configuration specifics for different NoSQL databases within the Quarkus environment.
 
-TIP: Add sections for each specific database configuration, similar to those for ArangoDB, DynamoDB, Hazelcast, and Redis.
+TIP: The forthcoming sections will delve into the configuration details for ArangoDB, DynamoDB, Hazelcast, and Redis databases, providing comprehensive guidance for each.
 
 === ArangoDB
 
@@ -184,7 +183,7 @@ public void insert(TestDocumentEntity entity) {
 
 When configuring databases for use with Quarkus and Eclipse JNoSQL, it's important to note that instead of using the traditional Eclipse JNoSQL properties and configuration, Quarkus provides its properties and configuration for seamless integration. Below are sections detailing the configuration specifics for different NoSQL databases within the Quarkus environment.
 
-TIP: Add sections for each specific database configuration, similar to those for ArangoDB, CouchDB, Elasticsearch, MongoDB, and Solr.
+TIP: The forthcoming sections will delve into the configuration details for ArangoDB, CouchDB, Elasticsearch, MongoDB, and Solr databases, providing comprehensive guidance for each.
 
 === ArangoDB
 
