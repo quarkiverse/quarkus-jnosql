@@ -12,9 +12,12 @@
     <version>3.2.2.2-SNAPSHOT</version>
     <packaging>pom</packaging>
     <name>Quarkus JNoSQL - Parent</name>
-    <description>Parent project for Quarkus JNoSQL extensions, providing a unified framework for integrating JNoSQL with Quarkus applications.
-        Manages dependencies and configurations for KeyValue, Document, and Column databases, offering seamless integration and enhanced productivity
-        for developers.</description>
+    <description>Parent project for Quarkus JNoSQL extensions, providing a unified framework for integrating JNoSQL with
+        Quarkus applications.
+        Manages dependencies and configurations for KeyValue, Document, and Column databases, offering seamless
+        integration and enhanced productivity
+        for developers.
+    </description>
 
     <modules>
         <module>docs</module>
