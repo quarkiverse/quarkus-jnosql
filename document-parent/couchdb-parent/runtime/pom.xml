@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 https://maven.apache.org/xsd/maven-4.0.0.xsd">
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+         xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 https://maven.apache.org/xsd/maven-4.0.0.xsd">
     <modelVersion>4.0.0</modelVersion>
     <parent>
         <groupId>io.quarkiverse.jnosql</groupId>
@@ -8,6 +9,12 @@
     </parent>
     <artifactId>quarkus-jnosql-document-couchdb</artifactId>
     <name>Quarkus JNoSQL - Document - CouchDB - Runtime</name>
+    <description>Quarkus JNoSQL Document CouchDB Runtime provides runtime support for integrating CouchDB
+        document-oriented databases with Quarkus applications. This extension facilitates seamless integration, enabling
+        efficient storage, retrieval, and management of document-oriented data within Quarkus projects, enhancing
+        developer productivity.
+    </description>
+
     <dependencies>
         <dependency>
             <groupId>io.quarkiverse.jnosql</groupId>
@@ -40,7 +47,8 @@
                             <goal>extension-descriptor</goal>
                         </goals>
                         <configuration>
-                            <deployment>${project.groupId}:${project.artifactId}-deployment:${project.version}</deployment>
+                            <deployment>${project.groupId}:${project.artifactId}-deployment:${project.version}
+                            </deployment>
                         </configuration>
                     </execution>
                 </executions>
