@@ -11,6 +11,11 @@
     <packaging>pom</packaging>
     <artifactId>quarkus-jnosql-column-parent</artifactId>
     <name>Quarkus JNoSQL - Column - Parent</name>
+    <description>Parent project for Quarkus JNoSQL Column extensions, providing essential dependencies and
+        configurations for integrating Column-oriented databases with Quarkus applications. Simplifies data
+        modeling and interaction with columnar databases, enhancing developer efficiency and productivity.
+    </description>
+
 
     <modules>
         <module>runtime</module>
