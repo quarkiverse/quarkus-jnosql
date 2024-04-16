@@ -7,6 +7,7 @@ import org.eclipse.jnosql.communication.keyvalue.KeyValueConfiguration;
 import io.quarkiverse.jnosql.core.deployment.ServiceProviderRegister;
 import io.quarkiverse.jnosql.keyvalue.runtime.BucketManagerProducer;
 import io.quarkus.arc.deployment.AdditionalBeanBuildItem;
+import io.quarkus.arc.deployment.ExcludedTypeBuildItem;
 import io.quarkus.deployment.annotations.BuildProducer;
 import io.quarkus.deployment.annotations.BuildStep;
 import io.quarkus.deployment.builditem.FeatureBuildItem;
@@ -24,6 +25,12 @@ class Processor {
     @BuildStep
     void build(BuildProducer<AdditionalBeanBuildItem> additionalBeanProducer) {
         additionalBeanProducer.produce(AdditionalBeanBuildItem.unremovableOf(BucketManagerProducer.class));
+    }
+
+    @BuildStep
+    void buildExcludedType(BuildProducer<ExcludedTypeBuildItem> excludedTypeProducer) {
+        excludedTypeProducer.produce(
+                new ExcludedTypeBuildItem("org.eclipse.jnosql.mapping.keyvalue.configuration.BucketManagerSupplier"));
     }
 
     @BuildStep

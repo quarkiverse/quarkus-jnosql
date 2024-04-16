@@ -3,7 +3,7 @@ CREATE KEYSPACE IF NOT EXISTS test
 
 CREATE COLUMNFAMILY IF NOT EXISTS test.person
 (
-    id text PRIMARY KEY,
+    "_id" text PRIMARY KEY,
     name text,
     phones list<text>
 );
