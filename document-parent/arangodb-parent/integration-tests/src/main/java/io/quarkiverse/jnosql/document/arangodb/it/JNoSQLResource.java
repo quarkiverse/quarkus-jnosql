@@ -17,13 +17,12 @@
 package io.quarkiverse.jnosql.document.arangodb.it;
 
 import jakarta.enterprise.context.ApplicationScoped;
+import jakarta.nosql.document.DocumentTemplate;
 import jakarta.ws.rs.Path;
-
-import org.eclipse.jnosql.databases.arangodb.mapping.ArangoDBTemplate;
 
 import io.quarkiverse.jnosql.document.it.AbstractJNoSQLDocumentResource;
 
 @Path("/jnosql")
 @ApplicationScoped
-public class JNoSQLResource extends AbstractJNoSQLDocumentResource<ArangoDBTemplate> {
+public class JNoSQLResource extends AbstractJNoSQLDocumentResource<DocumentTemplate> {
 }

@@ -16,34 +16,13 @@
  */
 package io.quarkiverse.jnosql.column.cassandra.it;
 
-import java.util.Arrays;
-import java.util.UUID;
-
 import jakarta.enterprise.context.ApplicationScoped;
-import jakarta.inject.Inject;
 import jakarta.nosql.column.ColumnTemplate;
-import jakarta.ws.rs.GET;
 import jakarta.ws.rs.Path;
+
+import io.quarkiverse.jnosql.column.it.AbstractJNoSQLColumnResource;
 
 @Path("/jnosql")
 @ApplicationScoped
-public class JNoSQLResource {
-
-    @Inject
-    private ColumnTemplate template;
-
-    @GET
-    public String hello() {
-        Person person = new Person();
-        person.setId(UUID.randomUUID().toString());
-        person.setName(UUID.randomUUID().toString());
-        person.setPhones(
-                Arrays.asList(
-                        UUID.randomUUID().toString(),
-                        UUID.randomUUID().toString(),
-                        UUID.randomUUID().toString()));
-        Person insert = template.insert(person);
-
-        return insert.getId();
-    }
+public class JNoSQLResource extends AbstractJNoSQLColumnResource<ColumnTemplate> {
 }

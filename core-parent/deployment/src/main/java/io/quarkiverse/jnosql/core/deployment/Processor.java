@@ -13,8 +13,6 @@ import org.eclipse.jnosql.mapping.metadata.CollectionSupplier;
 import org.eclipse.jnosql.mapping.metadata.ConstructorBuilderSupplier;
 import org.jboss.jandex.Type;
 
-import io.quarkiverse.jnosql.core.runtime.QuarkusEntityMetadataExtension;
-import io.quarkus.arc.deployment.AdditionalBeanBuildItem;
 import io.quarkus.deployment.annotations.BuildProducer;
 import io.quarkus.deployment.annotations.BuildStep;
 import io.quarkus.deployment.builditem.CombinedIndexBuildItem;
@@ -32,7 +30,8 @@ class Processor {
     }
 
     @BuildStep
-    void build(CombinedIndexBuildItem index, BuildProducer<ReflectiveHierarchyBuildItem> reflectiveHierarchyBuildItemProducer) {
+    void buildReflectiveHierarchy(CombinedIndexBuildItem index,
+            BuildProducer<ReflectiveHierarchyBuildItem> reflectiveHierarchyBuildItemProducer) {
         index.getIndex().getAnnotations(Entity.class).stream().filter(
                 annotationIntance -> CLASS.equals(annotationIntance.target().kind())).forEach(
                         annotationIntance -> reflectiveHierarchyBuildItemProducer.produce(
@@ -42,13 +41,7 @@ class Processor {
     }
 
     @BuildStep
-    void build(BuildProducer<AdditionalBeanBuildItem> additionalBeanProducer) {
-        additionalBeanProducer.produce(AdditionalBeanBuildItem.unremovableOf(QuarkusEntityMetadataExtension.class));
-    }
-
-    @BuildStep
     void registerNativeImageResources(BuildProducer<ServiceProviderBuildItem> services) {
-
         ServiceProviderRegister.registerService(services,
                 ClassScanner.class,
                 CollectionSupplier.class,
