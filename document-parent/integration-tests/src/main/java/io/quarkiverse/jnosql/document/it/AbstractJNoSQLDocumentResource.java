@@ -16,7 +16,7 @@
  */
 package io.quarkiverse.jnosql.document.it;
 
-import jakarta.nosql.document.DocumentTemplate;
+import org.eclipse.jnosql.mapping.document.DocumentTemplate;
 
 import io.quarkiverse.jnosql.it.AbstractJNoSQLResource;
 

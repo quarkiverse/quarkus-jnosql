@@ -2,7 +2,7 @@ package io.quarkiverse.jnosql.column.deployment;
 
 import java.io.IOException;
 
-import org.eclipse.jnosql.communication.column.ColumnConfiguration;
+import org.eclipse.jnosql.communication.semistructured.DatabaseConfiguration;
 
 import io.quarkiverse.jnosql.column.runtime.ColumnManagerProducer;
 import io.quarkiverse.jnosql.core.deployment.ServiceProviderRegister;
@@ -35,7 +35,7 @@ class Processor {
 
     @BuildStep
     void registerNativeImageResources(BuildProducer<ServiceProviderBuildItem> services) throws IOException {
-        ServiceProviderRegister.registerService(services, ColumnConfiguration.class);
+        ServiceProviderRegister.registerService(services, DatabaseConfiguration.class);
     }
 
 }

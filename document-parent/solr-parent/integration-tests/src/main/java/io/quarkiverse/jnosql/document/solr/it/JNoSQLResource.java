@@ -17,8 +17,9 @@
 package io.quarkiverse.jnosql.document.solr.it;
 
 import jakarta.enterprise.context.ApplicationScoped;
-import jakarta.nosql.document.DocumentTemplate;
 import jakarta.ws.rs.Path;
+
+import org.eclipse.jnosql.mapping.document.DocumentTemplate;
 
 import io.quarkiverse.jnosql.document.it.AbstractJNoSQLDocumentResource;
 

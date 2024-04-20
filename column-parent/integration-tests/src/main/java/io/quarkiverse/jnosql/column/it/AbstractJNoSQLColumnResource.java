@@ -16,7 +16,7 @@
  */
 package io.quarkiverse.jnosql.column.it;
 
-import jakarta.nosql.column.ColumnTemplate;
+import org.eclipse.jnosql.mapping.column.ColumnTemplate;
 
 import io.quarkiverse.jnosql.it.AbstractJNoSQLResource;
 
