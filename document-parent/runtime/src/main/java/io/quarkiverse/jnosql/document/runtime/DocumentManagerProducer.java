@@ -10,6 +10,8 @@ import jakarta.enterprise.inject.Produces;
 import org.eclipse.jnosql.communication.semistructured.DatabaseConfiguration;
 import org.eclipse.jnosql.communication.semistructured.DatabaseManager;
 import org.eclipse.jnosql.communication.semistructured.DatabaseManagerFactory;
+import org.eclipse.jnosql.mapping.Database;
+import org.eclipse.jnosql.mapping.DatabaseType;
 import org.eclipse.jnosql.mapping.core.config.MappingConfigurations;
 
 import io.quarkiverse.jnosql.core.runtime.AbstractManagerProducer;
@@ -23,6 +25,7 @@ public class DocumentManagerProducer
     @Alternative
     @Priority(1)
     @ApplicationScoped
+    @Database(DatabaseType.DOCUMENT)
     public DatabaseManager get() {
         return apply(MappingConfigurations.DOCUMENT_DATABASE);
     }

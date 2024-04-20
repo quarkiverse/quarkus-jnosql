@@ -1,10 +1,10 @@
 package org.eclipse.jnosql.databases.cassandra.communication;
 
-import org.eclipse.jnosql.communication.column.ColumnManagerFactory;
+import org.eclipse.jnosql.communication.semistructured.DatabaseManagerFactory;
 
 import com.datastax.oss.driver.api.core.CqlSession;
 
-public class QuarkusCassandraColumnManagerFactory implements ColumnManagerFactory {
+public class QuarkusCassandraColumnManagerFactory implements DatabaseManagerFactory {
 
     private final CqlSession cqlSession;
 

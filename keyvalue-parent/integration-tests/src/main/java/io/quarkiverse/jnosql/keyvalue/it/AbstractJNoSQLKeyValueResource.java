@@ -16,7 +16,7 @@
  */
 package io.quarkiverse.jnosql.keyvalue.it;
 
-import jakarta.nosql.keyvalue.KeyValueTemplate;
+import org.eclipse.jnosql.mapping.keyvalue.KeyValueTemplate;
 
 import io.quarkiverse.jnosql.it.AbstractJNoSQLResource;
 

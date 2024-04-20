@@ -17,8 +17,9 @@
 package io.quarkiverse.jnosql.keyvalue.arangodb.it;
 
 import jakarta.enterprise.context.ApplicationScoped;
-import jakarta.nosql.keyvalue.KeyValueTemplate;
 import jakarta.ws.rs.Path;
+
+import org.eclipse.jnosql.mapping.keyvalue.KeyValueTemplate;
 
 import io.quarkiverse.jnosql.keyvalue.it.AbstractJNoSQLKeyValueResource;
 

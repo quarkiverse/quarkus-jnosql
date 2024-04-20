@@ -2,6 +2,7 @@ package io.quarkiverse.jnosql.document.deployment;
 
 import java.io.IOException;
 
+import org.eclipse.jnosql.communication.semistructured.DatabaseConfiguration;
 
 import io.quarkiverse.jnosql.core.deployment.ServiceProviderRegister;
 import io.quarkiverse.jnosql.document.runtime.DocumentManagerProducer;
@@ -11,7 +12,6 @@ import io.quarkus.deployment.annotations.BuildProducer;
 import io.quarkus.deployment.annotations.BuildStep;
 import io.quarkus.deployment.builditem.FeatureBuildItem;
 import io.quarkus.deployment.builditem.nativeimage.ServiceProviderBuildItem;
-import org.eclipse.jnosql.communication.semistructured.DatabaseConfiguration;
 
 class Processor {
 

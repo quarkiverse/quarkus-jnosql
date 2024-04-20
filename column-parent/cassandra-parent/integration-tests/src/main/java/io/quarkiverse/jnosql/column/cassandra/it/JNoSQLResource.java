@@ -17,8 +17,9 @@
 package io.quarkiverse.jnosql.column.cassandra.it;
 
 import jakarta.enterprise.context.ApplicationScoped;
-import jakarta.nosql.column.ColumnTemplate;
 import jakarta.ws.rs.Path;
+
+import org.eclipse.jnosql.mapping.column.ColumnTemplate;
 
 import io.quarkiverse.jnosql.column.it.AbstractJNoSQLColumnResource;
 
