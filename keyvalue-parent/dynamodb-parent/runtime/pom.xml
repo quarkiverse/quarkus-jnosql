@@ -5,7 +5,7 @@
     <parent>
         <groupId>io.quarkiverse.jnosql</groupId>
         <artifactId>quarkus-jnosql-keyvalue-dynamodb-parent</artifactId>
-        <version>3.2.2.2-SNAPSHOT</version>
+        <version>3.3.0-SNAPSHOT</version>
     </parent>
     <artifactId>quarkus-jnosql-keyvalue-dynamodb</artifactId>
     <name>Quarkus JNoSQL - KeyValue - DynamoDB - Runtime</name>
