@@ -4,7 +4,7 @@
     <parent>
         <groupId>io.quarkiverse.jnosql</groupId>
         <artifactId>quarkus-jnosql-column-parent</artifactId>
-        <version>3.3.1</version>
+        <version>3.3.2-SNAPSHOT</version>
     </parent>
     <artifactId>quarkus-jnosql-column-integration-tests</artifactId>
     <name>Quarkus JNoSQL - Column - Integration Tests</name>
