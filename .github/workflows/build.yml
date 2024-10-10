@@ -48,4 +48,4 @@ jobs:
         run: mvn -B clean verify -Dno-format
 
       - name: Build with Maven (Native)
-        run: mvn -B verify -Dnative -Dquarkus.native.container-build -Dnative.surefire.skip -pl '!quarkus-jnosql-keyvalue-hazelcast-integration-tests'
+        run: mvn -B verify -Dnative -Dquarkus.native.container-build -Dnative.surefire.skip
