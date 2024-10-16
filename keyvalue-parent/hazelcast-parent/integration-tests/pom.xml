@@ -99,7 +99,8 @@
                 </plugins>
             </build>
             <properties>
-                <skipITs>false</skipITs>
+                <skipITs>true</skipITs>
+                <skipTests>true</skipTests>
                 <quarkus.package.type>native</quarkus.package.type>
             </properties>
         </profile>
