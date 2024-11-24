@@ -39,7 +39,7 @@
         <cassandra-quarkus-bom.version>1.2.0</cassandra-quarkus-bom.version>
         <quarkus-hazelcast-client-bom.version>4.0.0</quarkus-hazelcast-client-bom.version>
         <camel-quarkus-solr-parent.version>3.0.0-M1</camel-quarkus-solr-parent.version>
-        <jnosql.version>1.1.2</jnosql.version>
+        <jnosql.version>1.1.3</jnosql.version>
     </properties>
     <dependencyManagement>
         <dependencies>
