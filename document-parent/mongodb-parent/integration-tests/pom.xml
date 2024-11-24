@@ -14,7 +14,7 @@
     <dependencies>
         <dependency>
             <groupId>io.quarkus</groupId>
-            <artifactId>quarkus-resteasy</artifactId>
+            <artifactId>quarkus-rest-jsonb</artifactId>
         </dependency>
         <dependency>
             <groupId>io.quarkiverse.jnosql</groupId>
