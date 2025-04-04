@@ -9,11 +9,8 @@ import java.util.UUID;
 
 @Entity
 public record PersonRecord(@Id String id,
-
-                           @Column
-                           String name,
-                           @Column
-                           List<String> phones) {
+        @Column String name,
+        @Column List<String> phones) {
 
     public static PersonRecord randomPerson() {
         var person = new PersonRecord(

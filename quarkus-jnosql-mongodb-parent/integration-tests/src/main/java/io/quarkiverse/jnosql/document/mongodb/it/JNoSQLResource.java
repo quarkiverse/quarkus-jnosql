@@ -26,7 +26,6 @@ public class JNoSQLResource {
     @Database(DatabaseType.DOCUMENT)
     protected PeopleRecord peopleRecord;
 
-
     @GET
     @Path("/using-jakarta-data")
     public Person fromRepositoryWithPOJO() {
@@ -34,7 +33,6 @@ public class JNoSQLResource {
         Person insert = people.insert(person);
         return people.findById(insert.getId()).orElseThrow(() -> new NotFoundException());
     }
-
 
     @GET
     @Path("/using-jakarta-nosql")
