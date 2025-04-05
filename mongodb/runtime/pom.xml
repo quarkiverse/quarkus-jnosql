@@ -24,6 +24,12 @@
             <groupId>io.quarkiverse.jnosql</groupId>
             <artifactId>quarkus-jnosql-core</artifactId>
             <version>${project.version}</version>
+            <exclusions>
+                <exclusion>
+                    <groupId>org.eclipse.jnosql.mapping</groupId>
+                    <artifactId>jnosql-mapping-key-value</artifactId>
+                </exclusion>
+            </exclusions>
         </dependency>
         <dependency>
             <groupId>org.eclipse.jnosql.databases</groupId>
