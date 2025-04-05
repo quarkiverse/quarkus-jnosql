@@ -2,6 +2,7 @@ package io.quarkiverse.jnosql.core.deployment;
 
 import static org.jboss.jandex.AnnotationTarget.Kind.CLASS;
 
+import jakarta.nosql.Embeddable;
 import jakarta.nosql.Entity;
 
 import org.eclipse.jnosql.communication.TypeReferenceReader;
@@ -33,10 +34,16 @@ class Processor {
     void buildReflectiveHierarchy(CombinedIndexBuildItem index,
             BuildProducer<ReflectiveHierarchyBuildItem> reflectiveHierarchyBuildItemProducer) {
         index.getIndex().getAnnotations(Entity.class).stream().filter(
-                annotationIntance -> CLASS.equals(annotationIntance.target().kind())).forEach(
-                        annotationIntance -> reflectiveHierarchyBuildItemProducer.produce(
-                                new ReflectiveHierarchyBuildItem.Builder().type(Type.create(
-                                        annotationIntance.target().asClass().name(),
+                annotationInstance -> CLASS.equals(annotationInstance.target().kind())).forEach(
+                        annotationInstance -> reflectiveHierarchyBuildItemProducer.produce(
+                                ReflectiveHierarchyBuildItem.builder(Type.create(
+                                        annotationInstance.target().asClass().name(),
+                                        Type.Kind.CLASS)).build()));
+        index.getIndex().getAnnotations(Embeddable.class).stream().filter(
+                annotationInstance -> CLASS.equals(annotationInstance.target().kind())).forEach(
+                        annotationInstance -> reflectiveHierarchyBuildItemProducer.produce(
+                                ReflectiveHierarchyBuildItem.builder(Type.create(
+                                        annotationInstance.target().asClass().name(),
                                         Type.Kind.CLASS)).build()));
     }
 

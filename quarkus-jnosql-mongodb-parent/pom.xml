@@ -9,12 +9,27 @@
     </parent>
     
     <packaging>pom</packaging>
-    <artifactId>quarkus-jnosql-core-parent</artifactId>
-    <name>Quarkus JNoSQL - Core - Parent</name>
+    <artifactId>quarkus-jnosql-mongodb-parent</artifactId>
+    <name>Quarkus JNoSQL - MongoDB - Parent</name>
 
     <modules>
         <module>runtime</module>
         <module>deployment</module>
     </modules>
+
+    <profiles>
+        <profile>
+            <id>it</id>
+            <activation>
+                <property>
+                    <name>performRelease</name>
+                    <value>!true</value>
+                </property>
+            </activation>
+            <modules>
+                <module>integration-tests</module>
+            </modules>
+        </profile>
+    </profiles>
 
 </project>

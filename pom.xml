@@ -19,9 +19,11 @@
 
     <modules>
         <module>core-parent</module>
-        <module>document-parent</module>
-        <module>keyvalue-parent</module>
-        <module>column-parent</module>
+<!--        <module>document-parent</module>-->
+<!--        <module>keyvalue-parent</module>-->
+<!--        <module>column-parent</module>-->
+
+        <module>quarkus-jnosql-mongodb-parent</module>
     </modules>
     <scm>
         <connection>scm:git:git@github.com:quarkiverse/quarkus-jnosql.git</connection>
@@ -67,6 +69,11 @@
                 </exclusions>
             </dependency>
             <dependency>
+                <groupId>org.eclipse.jnosql.mapping</groupId>
+                <artifactId>jnosql-mapping-reflection</artifactId>
+                <version>${jnosql.version}</version>
+            </dependency>
+            <dependency>
                 <groupId>org.eclipse.jnosql.lite</groupId>
                 <artifactId>mapping-lite-processor</artifactId>
                 <version>${jnosql.version}</version>
@@ -74,6 +81,11 @@
             <dependency>
                 <groupId>org.eclipse.jnosql.mapping</groupId>
                 <artifactId>jnosql-mapping-document</artifactId>
+                <version>${jnosql.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>org.eclipse.jnosql.mapping</groupId>
+                <artifactId>jnosql-mapping-semistructured</artifactId>
                 <version>${jnosql.version}</version>
             </dependency>
             <dependency>

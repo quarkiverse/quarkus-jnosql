@@ -1,21 +1,37 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 https://maven.apache.org/xsd/maven-4.0.0.xsd">
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+         xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 https://maven.apache.org/xsd/maven-4.0.0.xsd">
     <modelVersion>4.0.0</modelVersion>
     <parent>
         <groupId>io.quarkiverse.jnosql</groupId>
-        <artifactId>quarkus-jnosql-core-parent</artifactId>
+        <artifactId>quarkus-jnosql-mongodb-parent</artifactId>
         <version>3.3.5-SNAPSHOT</version>
     </parent>
-    <artifactId>quarkus-jnosql-core</artifactId>
-    <name>Quarkus JNoSQL - Core - Runtime</name>
+    <artifactId>quarkus-jnosql-mongodb</artifactId>
+    <name>Quarkus JNoSQL - MongoDB - Runtime</name>
+    <description>Quarkus JNoSQL MongoDB Runtime provides runtime support for integrating MongoDB
+        document-oriented databases with Quarkus applications. This extension facilitates seamless integration, enabling
+        efficient storage, retrieval, and management of document-oriented data within Quarkus projects, enhancing
+        developer productivity.
+    </description>
+
     <dependencies>
         <dependency>
             <groupId>io.quarkus</groupId>
-            <artifactId>quarkus-arc</artifactId>
+            <artifactId>quarkus-mongodb-client</artifactId>
         </dependency>
         <dependency>
-            <groupId>org.eclipse.jnosql.mapping</groupId>
-            <artifactId>jnosql-mapping-semistructured</artifactId>
+            <groupId>io.quarkiverse.jnosql</groupId>
+            <artifactId>quarkus-jnosql-core</artifactId>
+            <version>${project.version}</version>
+        </dependency>
+        <dependency>
+            <groupId>org.eclipse.jnosql.databases</groupId>
+            <artifactId>jnosql-mongodb</artifactId>
+        </dependency>
+        <dependency>
+            <groupId>org.eclipse.jnosql.lite</groupId>
+            <artifactId>mapping-lite-processor</artifactId>
         </dependency>
     </dependencies>
     <build>
@@ -31,7 +47,8 @@
                             <goal>extension-descriptor</goal>
                         </goals>
                         <configuration>
-                            <deployment>${project.groupId}:${project.artifactId}-deployment:${project.version}</deployment>
+                            <deployment>${project.groupId}:${project.artifactId}-deployment:${project.version}
+                            </deployment>
                         </configuration>
                     </execution>
                 </executions>
