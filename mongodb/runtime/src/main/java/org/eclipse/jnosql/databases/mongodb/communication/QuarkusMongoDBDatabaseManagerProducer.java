@@ -13,13 +13,13 @@ import org.eclipse.jnosql.mapping.Database;
 import org.eclipse.jnosql.mapping.DatabaseType;
 import org.eclipse.jnosql.mapping.core.config.MappingConfigurations;
 
-import io.quarkiverse.jnosql.core.runtime.AbstractDocumentManagerProducer;
+import io.quarkiverse.jnosql.core.runtime.AbstractDatabaseManagerProducer;
 
 @Singleton
-public class QuarkusMongoDBDocumentManagerProducer extends
-        AbstractDocumentManagerProducer<MongoDBDocumentManager, MongoDBDocumentManagerFactory, QuarkusMongoDBDocumentConfiguration> {
+public class QuarkusMongoDBDatabaseManagerProducer extends
+        AbstractDatabaseManagerProducer<MongoDBDocumentManager, MongoDBDocumentManagerFactory, QuarkusMongoDBDocumentConfiguration> {
 
-    private static final Logger LOGGER = Logger.getLogger(QuarkusMongoDBDocumentManagerProducer.class.getName());
+    private static final Logger LOGGER = Logger.getLogger(QuarkusMongoDBDatabaseManagerProducer.class.getName());
 
     @Produces
     @Priority(1)

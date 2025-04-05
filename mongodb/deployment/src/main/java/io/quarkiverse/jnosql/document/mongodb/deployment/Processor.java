@@ -1,7 +1,7 @@
 package io.quarkiverse.jnosql.document.mongodb.deployment;
 
+import org.eclipse.jnosql.databases.mongodb.communication.QuarkusMongoDBDatabaseManagerProducer;
 import org.eclipse.jnosql.databases.mongodb.communication.QuarkusMongoDBDocumentConfiguration;
-import org.eclipse.jnosql.databases.mongodb.communication.QuarkusMongoDBDocumentManagerProducer;
 
 import io.quarkus.arc.deployment.AdditionalBeanBuildItem;
 import io.quarkus.arc.deployment.ExcludedTypeBuildItem;
@@ -21,7 +21,7 @@ class Processor {
     @BuildStep
     void build(BuildProducer<AdditionalBeanBuildItem> additionalBeanProducer) {
         additionalBeanProducer.produce(AdditionalBeanBuildItem.unremovableOf(QuarkusMongoDBDocumentConfiguration.class));
-        additionalBeanProducer.produce(AdditionalBeanBuildItem.unremovableOf(QuarkusMongoDBDocumentManagerProducer.class));
+        additionalBeanProducer.produce(AdditionalBeanBuildItem.unremovableOf(QuarkusMongoDBDatabaseManagerProducer.class));
     }
 
     @BuildStep

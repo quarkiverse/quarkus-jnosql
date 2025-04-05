@@ -13,7 +13,7 @@ import org.eclipse.jnosql.communication.semistructured.DatabaseManager;
 import org.eclipse.jnosql.communication.semistructured.DatabaseManagerFactory;
 import org.eclipse.jnosql.mapping.core.config.MappingConfigurations;
 
-public abstract class AbstractDocumentManagerProducer<M extends DatabaseManager, F extends DatabaseManagerFactory, C extends DatabaseConfiguration>
+public abstract class AbstractDatabaseManagerProducer<M extends DatabaseManager, F extends DatabaseManagerFactory, C extends DatabaseConfiguration>
         implements Supplier<M> {
 
     protected final Settings settings = new MicroProfileSettings();
@@ -37,6 +37,7 @@ public abstract class AbstractDocumentManagerProducer<M extends DatabaseManager,
                         "Starting a %s instance using Eclipse MicroProfile Config, database name: %s",
                         manager.getClass().getName(),
                         database));
+
         return (M) manager;
     }
 
