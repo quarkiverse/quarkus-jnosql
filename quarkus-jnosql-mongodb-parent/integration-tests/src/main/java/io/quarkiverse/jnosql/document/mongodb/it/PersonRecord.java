@@ -1,11 +1,11 @@
 package io.quarkiverse.jnosql.document.mongodb.it;
 
+import java.util.List;
+import java.util.UUID;
+
 import jakarta.nosql.Column;
 import jakarta.nosql.Entity;
 import jakarta.nosql.Id;
-
-import java.util.List;
-import java.util.UUID;
 
 @Entity
 public record PersonRecord(@Id String id,
