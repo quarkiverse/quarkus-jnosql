@@ -17,6 +17,10 @@
             <groupId>org.eclipse.jnosql.mapping</groupId>
             <artifactId>jnosql-mapping-semistructured</artifactId>
         </dependency>
+        <dependency>
+            <groupId>org.eclipse.jnosql.mapping</groupId>
+            <artifactId>jnosql-mapping-key-value</artifactId>
+        </dependency>
     </dependencies>
     <build>
         <plugins>

@@ -1,7 +1,9 @@
 package io.quarkiverse.jnosql.arangodb.deployment;
 
-import org.eclipse.jnosql.databases.arangodb.communication.QuarkusArangoDBDatabaseManagerProducer;
+import org.eclipse.jnosql.databases.arangodb.communication.QuarkusArangoDBBucketManagerProducer;
 import org.eclipse.jnosql.databases.arangodb.communication.QuarkusArangoDBDocumentConfiguration;
+import org.eclipse.jnosql.databases.arangodb.communication.QuarkusArangoDBDocumentManagerProducer;
+import org.eclipse.jnosql.databases.arangodb.communication.QuarkusArangoDBKeyValueConfiguration;
 
 import io.quarkus.arc.deployment.AdditionalBeanBuildItem;
 import io.quarkus.arc.deployment.ExcludedTypeBuildItem;
@@ -21,7 +23,9 @@ class Processor {
     @BuildStep
     void build(BuildProducer<AdditionalBeanBuildItem> additionalBeanProducer) {
         additionalBeanProducer.produce(AdditionalBeanBuildItem.unremovableOf(QuarkusArangoDBDocumentConfiguration.class));
-        additionalBeanProducer.produce(AdditionalBeanBuildItem.unremovableOf(QuarkusArangoDBDatabaseManagerProducer.class));
+        additionalBeanProducer.produce(AdditionalBeanBuildItem.unremovableOf(QuarkusArangoDBKeyValueConfiguration.class));
+        additionalBeanProducer.produce(AdditionalBeanBuildItem.unremovableOf(QuarkusArangoDBDocumentManagerProducer.class));
+        additionalBeanProducer.produce(AdditionalBeanBuildItem.unremovableOf(QuarkusArangoDBBucketManagerProducer.class));
     }
 
     @BuildStep

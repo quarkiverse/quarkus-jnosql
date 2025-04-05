@@ -19,10 +19,12 @@ public class JNoSQLResourceTest {
 
     @ParameterizedTest
     @CsvSource({
-            "/using-jakarta-nosql",
-            "/using-jakarta-nosql-record",
-            "/using-jakarta-data",
-            "/using-jakarta-data-record",
+            "/document/using-jakarta-nosql",
+            "/document/using-jakarta-nosql-record",
+            "/document/using-jakarta-data",
+            "/document/using-jakarta-data-record",
+            "/keyvalue/using-pojo",
+            "/keyvalue/using-record",
     })
     public void test(String path) {
         given()

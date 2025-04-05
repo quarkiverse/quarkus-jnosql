@@ -7,6 +7,7 @@ import jakarta.ws.rs.GET;
 import jakarta.ws.rs.NotFoundException;
 import jakarta.ws.rs.Path;
 
+import org.eclipse.jnosql.communication.keyvalue.BucketManager;
 import org.eclipse.jnosql.mapping.Database;
 import org.eclipse.jnosql.mapping.DatabaseType;
 
@@ -26,8 +27,11 @@ public class JNoSQLResource {
     @Database(DatabaseType.DOCUMENT)
     protected PeopleRecord peopleRecord;
 
+    @Inject
+    protected BucketManager bucketManager;
+
     @GET
-    @Path("/using-jakarta-data")
+    @Path("/document/using-jakarta-data")
     public Person fromRepositoryWithPOJO() {
         Person person = Person.randomPerson();
         Person insert = people.insert(person);
@@ -35,7 +39,7 @@ public class JNoSQLResource {
     }
 
     @GET
-    @Path("/using-jakarta-nosql")
+    @Path("/document/using-jakarta-nosql")
     public Person fromTemplateWithPOJO() {
         Person person = Person.randomPerson();
         Person insert = template.insert(person);
@@ -43,7 +47,7 @@ public class JNoSQLResource {
     }
 
     @GET
-    @Path("/using-jakarta-data-record")
+    @Path("/document/using-jakarta-data-record")
     public PersonRecord fromRepositoryWithRecord() {
         PersonRecord person = PersonRecord.randomPerson();
         PersonRecord insert = peopleRecord.save(person);
@@ -52,10 +56,32 @@ public class JNoSQLResource {
     }
 
     @GET
-    @Path("/using-jakarta-nosql-record")
+    @Path("/document/using-jakarta-nosql-record")
     public PersonRecord fromTemplateWithRecord() {
         PersonRecord person = PersonRecord.randomPerson();
         PersonRecord insert = peopleRecord.save(person);
         return template.find(PersonRecord.class, insert.id()).orElseThrow(() -> new NotFoundException());
+    }
+
+    @GET
+    @Path("/keyvalue/using-pojo")
+    public Person fromBucketWithPojo() {
+        Person person = Person.randomPerson();
+        bucketManager.put(person.getId(), person);
+        return bucketManager
+                .get(person.getId())
+                .map(v -> v.get(Person.class))
+                .orElseThrow(() -> new NotFoundException());
+    }
+
+    @GET
+    @Path("/keyvalue/using-record")
+    public PersonRecord fromBucketWithRecord() {
+        PersonRecord person = PersonRecord.randomPerson();
+        bucketManager.put(person.id(), person);
+        return bucketManager
+                .get(person.id())
+                .map(v -> v.get(PersonRecord.class))
+                .orElseThrow(() -> new NotFoundException());
     }
 }
