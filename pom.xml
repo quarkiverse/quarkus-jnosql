@@ -25,6 +25,7 @@
         <module>mongodb</module>
         <module>arangodb</module>
         <module>cassandra</module>
+        <module>couchdb</module>
     </modules>
     <scm>
         <connection>scm:git:git@github.com:quarkiverse/quarkus-jnosql.git</connection>
