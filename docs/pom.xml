@@ -11,20 +11,6 @@
     <artifactId>quarkus-jnosql-docs</artifactId>
     <name>Quarkus JNoSQL - Documentation</name>
 
-    <dependencies>
-<!--        &lt;!&ndash; Make sure the doc is built after the other artifacts &ndash;&gt;-->
-<!--        <dependency>-->
-<!--            <groupId>io.quarkiverse.jnosql</groupId>-->
-<!--            <artifactId>quarkus-jnosql-core-deployment</artifactId>-->
-<!--            <version>${project.version}</version>-->
-<!--        </dependency>-->
-<!--        <dependency>-->
-<!--            <groupId>io.quarkiverse.jnosql</groupId>-->
-<!--            <artifactId>quarkus-jnosql-mongodb-deployment</artifactId>-->
-<!--            <version>${project.version}</version>-->
-<!--        </dependency>-->
-    </dependencies>
-
     <build>
         <sourceDirectory>modules/ROOT/examples</sourceDirectory>
         <plugins>
