@@ -18,12 +18,12 @@
         for developers.</description>
 
     <modules>
-        <module>core-parent</module>
+        <module>core</module>
 <!--        <module>document-parent</module>-->
 <!--        <module>keyvalue-parent</module>-->
 <!--        <module>column-parent</module>-->
-
-        <module>quarkus-jnosql-mongodb-parent</module>
+        <module>arangodb</module>
+        <module>mongodb</module>
     </modules>
     <scm>
         <connection>scm:git:git@github.com:quarkiverse/quarkus-jnosql.git</connection>
