@@ -27,7 +27,7 @@
         <module>cassandra</module>
         <module>couchdb</module>
         <module>solr</module>
-<!--        <module>elasticsearch</module>-->
+        <module>elasticsearch</module>
         <module>hazelcast</module>
     </modules>
     <scm>
