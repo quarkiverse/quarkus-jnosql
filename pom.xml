@@ -29,6 +29,7 @@
         <module>solr</module>
         <module>elasticsearch</module>
         <module>hazelcast</module>
+        <module>dynamodb</module>
     </modules>
     <scm>
         <connection>scm:git:git@github.com:quarkiverse/quarkus-jnosql.git</connection>
