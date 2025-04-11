@@ -60,7 +60,7 @@ public class JNoSQLResource {
     @Path("/using-jakarta-nosql-record")
     public PersonRecord fromTemplateWithRecord() throws InterruptedException {
         PersonRecord person = PersonRecord.randomPerson();
-        PersonRecord insert = peopleRecord.save(person);
+        PersonRecord insert = template.insert(person);
         TimeUnit.SECONDS.sleep(1);
         return template.find(PersonRecord.class, insert.id()).orElseThrow(() -> new NotFoundException());
     }

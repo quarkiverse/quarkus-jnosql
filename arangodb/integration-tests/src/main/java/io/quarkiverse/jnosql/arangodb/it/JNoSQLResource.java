@@ -59,7 +59,7 @@ public class JNoSQLResource {
     @Path("/document/using-jakarta-nosql-record")
     public PersonRecord fromTemplateWithRecord() {
         PersonRecord person = PersonRecord.randomPerson();
-        PersonRecord insert = peopleRecord.save(person);
+        PersonRecord insert = template.insert(person);
         return template.find(PersonRecord.class, insert.id()).orElseThrow(() -> new NotFoundException());
     }
 
