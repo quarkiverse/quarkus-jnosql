@@ -18,10 +18,18 @@
         for developers.</description>
 
     <modules>
-        <module>core-parent</module>
-        <module>document-parent</module>
-        <module>keyvalue-parent</module>
-        <module>column-parent</module>
+        <module>core</module>
+<!--        <module>document-parent</module>-->
+<!--        <module>keyvalue-parent</module>-->
+<!--        <module>column-parent</module>-->
+        <module>mongodb</module>
+        <module>arangodb</module>
+        <module>cassandra</module>
+        <module>couchdb</module>
+        <module>solr</module>
+        <module>elasticsearch</module>
+        <module>hazelcast</module>
+        <module>dynamodb</module>
     </modules>
     <scm>
         <connection>scm:git:git@github.com:quarkiverse/quarkus-jnosql.git</connection>
@@ -67,6 +75,11 @@
                 </exclusions>
             </dependency>
             <dependency>
+                <groupId>org.eclipse.jnosql.mapping</groupId>
+                <artifactId>jnosql-mapping-reflection</artifactId>
+                <version>${jnosql.version}</version>
+            </dependency>
+            <dependency>
                 <groupId>org.eclipse.jnosql.lite</groupId>
                 <artifactId>mapping-lite-processor</artifactId>
                 <version>${jnosql.version}</version>
@@ -74,6 +87,11 @@
             <dependency>
                 <groupId>org.eclipse.jnosql.mapping</groupId>
                 <artifactId>jnosql-mapping-document</artifactId>
+                <version>${jnosql.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>org.eclipse.jnosql.mapping</groupId>
+                <artifactId>jnosql-mapping-semistructured</artifactId>
                 <version>${jnosql.version}</version>
             </dependency>
             <dependency>
@@ -151,6 +169,7 @@
                     <artifactId>maven-compiler-plugin</artifactId>
                     <version>${compiler-plugin.version}</version>
                     <configuration>
+                        <proc>full</proc>
                         <compilerArgs>
                             <arg>-parameters</arg>
                         </compilerArgs>
