@@ -33,7 +33,9 @@ To begin using JNoSQL with Quarkus, follow these steps:
    | [Neo4j](#neo4j)                 | Graph                | ❌                          | ✅                          | 1.1.7-SNAPSHOT |
 
 
-2. If you're using **Java 17** you can be skip this step, otherwise you should activate explicitly the annotation processor by setting `<proc>full</proc>` on the maven-compiler plugin. This is necessary for the **JNoSQL Lite Extension** to work properly. An `pom.xml` configuration example below:
+2. If you're using **Java 21** or above you should activate explicitly the annotation processor execution by setting `<proc>full</proc>` on the maven-compiler plugin. If you're using any previous Java version, e.g. **Java 17**, you can skip this step.
+   
+   This is necessary for the **JNoSQL Lite Extension** to work properly. An `pom.xml` configuration example below:
 
    ```xml
    <plugin>
@@ -63,6 +65,8 @@ To begin using JNoSQL with Quarkus, follow these steps:
 
        @Column
        private String testField;
+   
+       // omitted getters and setters
    }
    ```
 
@@ -86,6 +90,11 @@ To begin using JNoSQL with Quarkus, follow these steps:
    @Repository
    public interface TestEntityRepository extends NoSQLRepository<TestEntity, String> {
    }
+   ```
+
+   * With that, you can inject and use the `TestEntityRepository` in your service classes as the example below: 
+
+   ```java
    
    @ApplicationScope
    class TestEntityService {
@@ -315,7 +324,7 @@ specific configuration details.
 
 ## Solr
 
-<img src="https://jnosql.github.io/img/logos/solr.svg" alt="Apache Solr Project" align="center" width="25%" height="25%"/>
+<img src="https://jnosql.github.io/img/logos/solr.svg" alt="Apache Solr Project" align="center" width="20%" height="20%"/>
 
 [Solr](https://solr.apache.org/) is an open-source enterprise-search platform, written in Java, from the Apache Lucene project.
 Its major features include full-text search, hit highlighting, faceted search, real-time indexing, dynamic clustering, database integration, NoSQL features and rich document (e.g., Word, PDF) handling.
@@ -342,7 +351,7 @@ the [Solr JNoSQL driver](https://github.com/eclipse/jnosql-databases#solr).
 
 ## Neo4j
 
-<img src="https://jnosql.github.io/img/logos/neo4j.png" alt="Neo4J Project" align="center" width="40%" height="40%"/>
+<img src="https://jnosql.github.io/img/logos/neo4j.png" alt="Neo4J Project" align="center" width="25%" height="25%"/>
 
 [Neo4J](https://neo4j.com/) is a highly scalable, native graph database designed to manage complex relationships in data. It enables developers to build applications that leverage the power of graph traversal, pattern matching, and high-performance querying using the **Cypher** query language.
 
