@@ -198,7 +198,7 @@ the [ArangoDB JNoSQL driver](https://github.com/eclipse/jnosql-databases#arangod
 
 ## DynamoDB
 
-<img src="https://user-images.githubusercontent.com/6509926/70553550-f033b980-1b40-11ea-9192-759b3b1053b3.png" align="center" width="50%" height="50%"/>
+<img src="https://user-images.githubusercontent.com/6509926/70553550-f033b980-1b40-11ea-9192-759b3b1053b3.png" align="center" width="25%" height="25%"/>
 
 [Amazon DynamoDB](https://aws.amazon.com/dynamodb/) is a fully managed, serverless, key-value and document NoSQL database designed to run high-performance applications at any scale. DynamoDB offers built-in security, continuous backups, automated multi-Region replication, in-memory caching, and data import and export tools.
 
