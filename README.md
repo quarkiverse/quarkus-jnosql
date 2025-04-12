@@ -21,15 +21,16 @@ To begin using JNoSQL with Quarkus, follow these steps:
 1. Add the Quarkus JNoSQL Extension to your project's dependencies that fits with your necessities. Here are the supported
    databases by now and their respective NoSQL types:
 
-   | Database Vendor                | Supported NoSQL Type | Supports Jakarta Data      | Supports Native Compilation |
-   |--------------------------------| -------------------- |----------------------------| -------------------------- |
-   | [MongoDB](#mongodb)            | Document             | ✅                          | ✅                          |
-   | [Cassandra](#cassandra)        | Column               | ✅                          | ✅                          |
-   | [CouchDB](#couchdb)            | Document             | ✅                          | ✅                          |
-   | [DynamoDB](#dynamodb)          | Key-Value            | ❌                          | ✅                          |
-   | [Elasticsearch](#elasticsearch) | Document             | ✅                          | ❌                          |
-   | [Hazelcast](#hazelcast)        | Key-Value            | ❌                          | ✅                          |
-   | [Solr](#solr)                  | Document             | ✅                          | ✅                          |
+   | Database Vendor                 | Supported NoSQL Type | Supports Jakarta Data     | Supports Native Compilation | JNoSQL version |
+   |---------------------------------|----------------------|---------------------------| -------------------------- |----------------|
+   | [MongoDB](#mongodb)             | Document             | ✅                         | ✅                          | 1.1.6          |
+   | [Cassandra](#cassandra)         | Column               | ✅                         | ✅                          | 1.1.6          |
+   | [CouchDB](#couchdb)             | Document             | ✅                         | ✅                          | 1.1.6          |
+   | [DynamoDB](#dynamodb)           | Key-Value            | ❌                         | ✅                          | 1.1.6          |
+   | [Elasticsearch](#elasticsearch) | Document             | ✅                         | ❌                          | 1.1.6          |
+   | [Hazelcast](#hazelcast)         | Key-Value            | ❌                         | ✅                          | 1.1.6          |
+   | [Solr](#solr)                   | Document             | ✅                         | ✅                          | 1.1.6          |
+   | [Neo4j](#neo4j)                 | Graph                | ❌                          | ✅                          | 1.1.7-SNAPSHOT |
 
 
 2. If you're using **Java 17** you can be skip this step, otherwise you should activate explicitly the annotation processor by setting `<proc>full</proc>` on the maven-compiler plugin. This is necessary for the **JNoSQL Lite Extension** to work properly. An `pom.xml` configuration example below:
@@ -339,6 +340,53 @@ For specific configuration details, please refer to
 the [Solr JNoSQL driver](https://github.com/eclipse/jnosql-databases#solr).
 
 
+## Neo4j
+
+<img src="https://jnosql.github.io/img/logos/neo4j.png" alt="Neo4J Project" align="center" width="40%" height="40%"/>
+
+[Neo4J](https://neo4j.com/) is a highly scalable, native graph database designed to manage complex relationships in data. It enables developers to build applications that leverage the power of graph traversal, pattern matching, and high-performance querying using the **Cypher** query language.
+
+This API provides support for **Graph** database operations, including entity persistence, query execution via Cypher, and relationship traversal.
+
+:information_source: This extension is using the **org.eclipse.jnosql.databases:jnosql-neo4j:1.1.7-SNAPSHOT**
+
+```xml
+
+<dependency>
+    <groupId>io.quarkiverse.jnosql</groupId>
+    <artifactId>quarkus-jnosql-neo4j</artifactId>
+</dependency>
+```
+
+To use the **org.eclipse.jnosql.databases:jnosql-neo4j:1.1.7-SNAPSHOT** API, you need to add the following repositories to your `pom.xml` or to your `$HOME/.m2/settings.xml`:
+
+```xml
+    <repositories>
+        <repository>
+            <id>jakarta.sonatype.org-snapshot</id>
+            <url>https://jakarta.oss.sonatype.org/content/repositories/snapshots/</url>
+            <releases>
+                <enabled>false</enabled>
+            </releases>
+            <snapshots>
+                <enabled>true</enabled>
+            </snapshots>
+        </repository>
+        <repository>
+            <id>oss.sonatype.org-snapshot</id>
+            <url>https://oss.sonatype.org/content/repositories/snapshots</url>
+            <releases>
+                <enabled>false</enabled>
+            </releases>
+            <snapshots>
+                <enabled>true</enabled>
+            </snapshots>
+        </repository>
+    </repositories>
+```
+
+
+For specific configuration details, please refer to the [Quarkus Neo4j extension](https://docs.quarkiverse.io/quarkus-neo4j/dev/index.html).
 
 ## Contributors ✨
 
