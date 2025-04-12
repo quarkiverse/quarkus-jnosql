@@ -358,6 +358,20 @@ This API provides support for **Graph** database operations, including entity pe
 </dependency>
 ```
 
+Now, you can use the `org.eclipse.jnosql.mapping.graph.GraphTemplate`, a `jakarta.nosql.Template` specialized interface, to perform CRUD operations on your entities.
+
+* Here's an example of how to use the `jakarta.nosql.Template`:
+
+  ```java
+  @Inject
+  @Database(DatabaseType.GRAPH)
+  protected GraphTemplate template;
+
+  public void insert(TestEntity entity) {
+   template.insert(entity);
+  }
+  ```
+
 To use the **org.eclipse.jnosql.databases:jnosql-neo4j:1.1.7-SNAPSHOT** API, you need to add the following repositories to your `pom.xml` or to your `$HOME/.m2/settings.xml`:
 
 ```xml
