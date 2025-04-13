@@ -21,16 +21,18 @@ To begin using JNoSQL with Quarkus, follow these steps:
 1. Add the Quarkus JNoSQL Extension to your project's dependencies that fits with your necessities. Here are the supported
    databases by now and their respective NoSQL types:
 
-   | Database Vendor                 | Supported NoSQL Type | Supports Jakarta Data     | Supports Native Compilation | JNoSQL version |
-   |---------------------------------|----------------------|---------------------------| -------------------------- |----------------|
-   | [MongoDB](#mongodb)             | Document             | ✅                         | ✅                          | 1.1.6          |
-   | [Cassandra](#cassandra)         | Column               | ✅                         | ✅                          | 1.1.6          |
-   | [CouchDB](#couchdb)             | Document             | ✅                         | ✅                          | 1.1.6          |
-   | [DynamoDB](#dynamodb)           | Key-Value            | ❌                         | ✅                          | 1.1.6          |
-   | [Elasticsearch](#elasticsearch) | Document             | ✅                         | ❌                          | 1.1.6          |
-   | [Hazelcast](#hazelcast)         | Key-Value            | ❌                         | ✅                          | 1.1.6          |
-   | [Solr](#solr)                   | Document             | ✅                         | ✅                          | 1.1.6          |
-   | [Neo4j](#neo4j)                 | Graph                | ❌                          | ✅                          | 1.1.7-SNAPSHOT |
+   | Database Vendor                 | Supported NoSQL Type   | Supports Jakarta Data     | Supports Native Compilation | JNoSQL version |
+   |---------------------------------|------------------------|---------------------------| -------------------------- |----------------|
+   | [MongoDB](#mongodb)             | Document               | ✅                         | ✅                          | 1.1.6          |
+   | [Cassandra](#cassandra)         | Column                 | ✅                         | ✅                          | 1.1.6          |
+   | [CouchDB](#couchdb)             | Document               | ✅                         | ✅                          | 1.1.6          |
+   | [ArangoDB](#arangodb)           | Document and Key-Value | ✅                         | ✅                          | 1.1.6          |
+   | [DynamoDB](#dynamodb)           | Key-Value              | ❌                         | ✅                          | 1.1.6          |
+   | [Elasticsearch](#elasticsearch) | Document               | ✅                         | ❌                          | 1.1.6          |
+   | [Hazelcast](#hazelcast)         | Key-Value              | ❌                         | ✅                          | 1.1.6          |
+   | [Solr](#solr)                   | Document               | ✅                         | ✅                          | 1.1.6          |
+   | [Neo4j](#neo4j)                 | Graph                  | ❌                          | ✅                          | 1.1.7-SNAPSHOT |
+   | [Oracle NoSQL](#oracle-nosql)   | Document and Key-Value | ✅                          | ✅                          | 1.1.6          |
 
 
 2. If you're using **Java 21** or above you should activate explicitly the annotation processor execution by setting `<proc>full</proc>` on the maven-compiler plugin. If you're using any previous Java version, e.g. **Java 17**, you can skip this step.
@@ -335,7 +337,7 @@ This driver provides support for the *Document* NoSQL API.
 
 It supports **Jakarta Data**.
 
-Add the Solr dependency to your project's `pom.xml`:
+Add the Quarkus JNoSQL Solr dependency to your project's `pom.xml`:
 
 ```xml
 
@@ -358,6 +360,8 @@ the [Solr JNoSQL driver](https://github.com/eclipse/jnosql-databases#solr).
 This API provides support for **Graph** database operations, including entity persistence, query execution via Cypher, and relationship traversal.
 
 :information_source: This extension is using the **org.eclipse.jnosql.databases:jnosql-neo4j:1.1.7-SNAPSHOT**
+
+Add the Quarkus JNoSQL Neo4j dependency to your project's `pom.xml`:
 
 ```xml
 
@@ -410,6 +414,30 @@ To use the **org.eclipse.jnosql.databases:jnosql-neo4j:1.1.7-SNAPSHOT** API, you
 
 
 For specific configuration details, please refer to the [Quarkus Neo4j extension](https://docs.quarkiverse.io/quarkus-neo4j/dev/index.html).
+
+## Oracle NoSQL
+
+<img src="https://jnosql.github.io/img/logos/oracle.png" alt="Oracle NoSQL Project" align="center" width="25%" height="25%"/>
+
+[Oracle NoSQL Database](https://www.oracle.com/database/nosql/technologies/nosql/) is a versatile multi-model database offering flexible data models for documents, graphs, and key-value pairs. It empowers developers to build high-performance applications using a user-friendly SQL-like query language or JavaScript extensions.
+
+This API provides support for *Document* and *Key-Value* data types.
+
+It supports **Jakarta Data**.
+
+Add the Quarkus JNoSQL Oracle NoSQL dependency to your project's `pom.xml`:
+
+```xml
+
+<dependency>
+    <groupId>io.quarkiverse.jnosql</groupId>
+    <artifactId>quarkus-jnosql-oracle-nosql</artifactId>
+</dependency>
+```
+
+For specific configuration details, please refer to
+the [Oracle NoSQL JNoSQL driver](https://github.com/eclipse/jnosql-databases#oracle-nosql).
+
 
 ## Contributors ✨
 

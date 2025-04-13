@@ -31,6 +31,7 @@
         <module>hazelcast</module>
         <module>dynamodb</module>
         <module>neo4j</module>
+        <module>oracle-nosql</module>
     </modules>
     <scm>
         <connection>scm:git:git@github.com:quarkiverse/quarkus-jnosql.git</connection>
@@ -170,6 +171,11 @@
             <dependency>
                 <groupId>org.eclipse.jnosql.databases</groupId>
                 <artifactId>jnosql-neo4j</artifactId>
+                <version>${jnosql.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>org.eclipse.jnosql.databases</groupId>
+                <artifactId>jnosql-oracle-nosql</artifactId>
                 <version>${jnosql.version}</version>
             </dependency>
         </dependencies>
