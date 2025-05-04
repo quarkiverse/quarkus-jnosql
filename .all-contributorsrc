@@ -15,6 +15,15 @@
         "code",
         "maintenance"
       ]
+    },
+    {
+      "login": "otaviojava",
+      "name": "Otávio Santana",
+      "avatar_url": "https://avatars.githubusercontent.com/u/863011?v=4",
+      "profile": "https://otaviojava.com/",
+      "contributions": [
+        "maintenance"
+      ]
     }
   ],
   "contributorsPerLine": 7,
@@ -22,5 +31,6 @@
   "repoType": "github",
   "repoHost": "https://github.com",
   "projectName": "quarkus-jnosql",
-  "projectOwner": "quarkiverse"
+  "projectOwner": "soujava",
+  "commitType": "docs"
 }
