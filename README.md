@@ -1,7 +1,7 @@
 # Quarkus JNoSQL
 
 <!-- ALL-CONTRIBUTORS-BADGE:START - Do not remove or modify this section -->
-[![All Contributors](https://img.shields.io/badge/all_contributors-2-orange.svg?style=flat-square)](#contributors-)
+[![All Contributors](https://img.shields.io/badge/all_contributors-3-orange.svg?style=flat-square)](#contributors-)
 <!-- ALL-CONTRIBUTORS-BADGE:END -->
 
 [![Version](https://img.shields.io/maven-central/v/io.quarkiverse.jnosql/quarkus-jnosql-core?logo=apache-maven&style=flat-square)](https://search.maven.org/artifact/io.quarkiverse.jnosql/quarkus-jnosql-core)
@@ -448,7 +448,8 @@ Thanks to these wonderful people ([emoji key](https://allcontributors.org/docs/e
   <tbody>
     <tr>
       <td align="center" valign="top" width="14.28%"><a href="https://github.com/amoscatelli"><img src="https://avatars.githubusercontent.com/u/16684470?v=4?s=100" width="100px;" alt="amoscatelli"/><br /><sub><b>amoscatelli</b></sub></a><br /><a href="https://github.com/soujava/quarkus-jnosql/commits?author=amoscatelli" title="Code">💻</a> <a href="#maintenance-amoscatelli" title="Maintenance">🚧</a></td>
-      <td align="center" valign="top" width="14.28%"><a href="https://otaviojava.com/"><img src="https://avatars.githubusercontent.com/u/863011?v=4?s=100" width="100px;" alt="Otávio Santana"/><br /><sub><b>Otávio Santana</b></sub></a><br /><a href="#maintenance-otaviojava" title="Maintenance">🚧</a> <a href="https://github.com/soujava/quarkus-jnosql/commits?author=otaviojava" title="Code">💻</a></td>
+      <td align="center" valign="top" width="14.28%"><a href="https://otaviojava.com/"><img src="https://avatars.githubusercontent.com/u/863011?v=4?s=100" width="100px;" alt="Otávio Santana"/><br /><sub><b>Otávio Santana</b></sub></a><br /><a href="https://github.com/soujava/quarkus-jnosql/commits?author=otaviojava" title="Code">💻</a> <a href="#maintenance-otaviojava" title="Maintenance">🚧</a></td>
+      <td align="center" valign="top" width="14.28%"><a href="https://link.maxdearruda.com/me"><img src="https://avatars.githubusercontent.com/u/6537623?v=4?s=100" width="100px;" alt="Maximillian Arruda"/><br /><sub><b>Maximillian Arruda</b></sub></a><br /><a href="https://github.com/soujava/quarkus-jnosql/commits?author=dearrudam" title="Code">💻</a> <a href="#maintenance-dearrudam" title="Maintenance">🚧</a></td>
     </tr>
   </tbody>
 </table>

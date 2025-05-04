@@ -22,8 +22,18 @@
       "avatar_url": "https://avatars.githubusercontent.com/u/863011?v=4",
       "profile": "https://otaviojava.com/",
       "contributions": [
-        "maintenance",
-        "code"
+        "code",
+        "maintenance"
+      ]
+    },
+    {
+      "login": "dearrudam",
+      "name": "Maximillian Arruda",
+      "avatar_url": "https://avatars.githubusercontent.com/u/6537623?v=4",
+      "profile": "https://link.maxdearruda.com/me",
+      "contributions": [
+        "code",
+        "maintenance"
       ]
     }
   ],
