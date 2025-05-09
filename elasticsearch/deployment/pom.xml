@@ -4,7 +4,7 @@
     <parent>
         <groupId>io.quarkiverse.jnosql</groupId>
         <artifactId>quarkus-jnosql-elasticsearch-parent</artifactId>
-        <version>3.3.5-SNAPSHOT</version>
+        <version>3.4.0</version>
     </parent>
     <artifactId>quarkus-jnosql-elasticsearch-deployment</artifactId>
     <name>Quarkus JNoSQL - Elasticsearch - Deployment</name>
