@@ -19,18 +19,18 @@ To begin using JNoSQL with Quarkus, follow these steps:
 1. Add the Quarkus JNoSQL Extension to your project's dependencies that fits with your necessities. Here are the supported
    databases by now and their respective NoSQL types:
 
-   | Database Vendor                 | Supported NoSQL Type   | Supports Jakarta Data     | Supports Native Compilation | JNoSQL version |
-   |---------------------------------|------------------------|---------------------------| -------------------------- |----------------|
-   | [MongoDB](#mongodb)             | Document               | ✅                         | ✅                          | 1.1.6          |
-   | [Cassandra](#cassandra)         | Column                 | ✅                         | ✅                          | 1.1.6          |
-   | [CouchDB](#couchdb)             | Document               | ✅                         | ✅                          | 1.1.6          |
-   | [ArangoDB](#arangodb)           | Document and Key-Value | ✅                         | ✅                          | 1.1.6          |
-   | [DynamoDB](#dynamodb)           | Key-Value              | ❌                         | ✅                          | 1.1.6          |
-   | [Elasticsearch](#elasticsearch) | Document               | ✅                         | ❌                          | 1.1.6          |
-   | [Hazelcast](#hazelcast)         | Key-Value              | ❌                         | ✅                          | 1.1.6          |
-   | [Solr](#solr)                   | Document               | ✅                         | ✅                          | 1.1.6          |
-   | [Neo4j](#neo4j)                 | Graph                  | ❌                          | ✅                          | 1.1.7-SNAPSHOT |
-   | [Oracle NoSQL](#oracle-nosql)   | Document and Key-Value | ✅                          | ✅                          | 1.1.6          |
+   | Database Vendor                 | Supported NoSQL Type   | Supports Jakarta Data     | Supports Native Compilation | 
+   |---------------------------------|------------------------|---------------------------| -------------------------- |
+   | [MongoDB](#mongodb)             | Document               | ✅                         | ✅                          |
+   | [Cassandra](#cassandra)         | Column                 | ✅                         | ✅                          |
+   | [CouchDB](#couchdb)             | Document               | ✅                         | ✅                          |
+   | [ArangoDB](#arangodb)           | Document and Key-Value | ✅                         | ✅                          |
+   | [DynamoDB](#dynamodb)           | Key-Value              | ❌                         | ✅                          |
+   | [Elasticsearch](#elasticsearch) | Document               | ✅                         | ❌                          | 
+   | [Hazelcast](#hazelcast)         | Key-Value              | ❌                         | ✅                          |
+   | [Solr](#solr)                   | Document               | ✅                         | ✅                          |
+   | [Neo4j](#neo4j)                 | Graph                  | ❌                          | ✅                          |
+   | [Oracle NoSQL](#oracle-nosql)   | Document and Key-Value | ✅                          | ✅                          |
 
 
 2. If you're using **Java 21** or above you should activate explicitly the annotation processor execution by setting `<proc>full</proc>` on the maven-compiler plugin. If you're using any previous Java version, e.g. **Java 17**, you can skip this step.
