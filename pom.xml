@@ -19,9 +19,6 @@
 
     <modules>
         <module>core</module>
-<!--        <module>document-parent</module>-->
-<!--        <module>keyvalue-parent</module>-->
-<!--        <module>column-parent</module>-->
         <module>mongodb</module>
         <module>arangodb</module>
         <module>cassandra</module>
