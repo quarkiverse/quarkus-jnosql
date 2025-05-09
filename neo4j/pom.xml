@@ -8,10 +8,6 @@
         <version>3.3.5-SNAPSHOT</version>
     </parent>
 
-    <properties>
-        <jnosql.version>1.1.7-SNAPSHOT</jnosql.version>
-    </properties>
-
     <packaging>pom</packaging>
     <artifactId>quarkus-jnosql-neo4j-parent</artifactId>
     <name>Quarkus JNoSQL - Neo4J - Parent</name>
