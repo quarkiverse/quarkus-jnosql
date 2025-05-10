@@ -9,8 +9,8 @@
     <artifactId>quarkus-jnosql-arangodb</artifactId>
     <name>Quarkus JNoSQL - ArangoDB - Runtime</name>
     <description>Quarkus JNoSQL ArangoDB Runtime provides runtime support for integrating ArangoDB
-        document-oriented databases with Quarkus applications. This extension facilitates seamless integration, enabling
-        efficient storage, retrieval, and management of document-oriented data within Quarkus projects, enhancing
+        document-oriented and key-value databases with Quarkus applications. This extension facilitates seamless integration, enabling
+        efficient storage, retrieval, and management of document-oriented or key-value data within Quarkus projects, enhancing
         developer productivity.
     </description>
 
