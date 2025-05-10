@@ -10,7 +10,7 @@
     <name>Quarkus JNoSQL - Oracle NoSQL - Runtime</name>
     <description>Quarkus JNoSQL Oracle NoSQL Runtime provides runtime support for integrating Oracle NoSQL
         document-oriented and key-value databases with Quarkus applications. This extension facilitates seamless integration, enabling
-        efficient storage, retrieval, and management of document-oriented data within Quarkus projects, enhancing
+        efficient storage, retrieval, and management of document-oriented and key-value data within Quarkus projects, enhancing
         developer productivity.
     </description>
 

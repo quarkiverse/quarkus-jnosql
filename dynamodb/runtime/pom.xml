@@ -9,8 +9,8 @@
     <artifactId>quarkus-jnosql-dynamodb</artifactId>
     <name>Quarkus JNoSQL - DynamoDB - Runtime</name>
     <description>Quarkus JNoSQL DynamoDB Runtime provides runtime support for integrating Amazon DynamoDB
-        key-value databases with Quarkus applications. This extension facilitates seamless integration, enabling
-        efficient storage, retrieval, and management of key-value data within Quarkus projects, enhancing developer
+        key-value and document-oriented databases with Quarkus applications. This extension facilitates seamless integration, enabling
+        efficient storage, retrieval, and management of key-value data or document-oriented within Quarkus projects, enhancing developer
         productivity.
     </description>
 
