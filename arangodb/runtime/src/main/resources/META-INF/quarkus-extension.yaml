@@ -1,9 +1,17 @@
-name: JNoSQL Document ArangoDB
+name: JNoSQL ArangoDB
 #description: Do something useful.
 metadata:
-#  keywords:
-#    - jnosql
-#  guide: https://quarkiverse.github.io/quarkiverse-docs/jnosql/dev/
-#  categories:
-#    - "miscellaneous"
+  keywords:
+    - "jnosql"
+    - "nosql"
+    - "datastore"
+    - "arangodb"
+    - "document"
+    - "key-value"
+  categories:
+    - "data"
+  guide: https://docs.quarkiverse.io/quarkus-jnosql/dev/
+  config:
+    - "jnosql."
+    - "jnosql.keyvalue."
 #  status: "preview"

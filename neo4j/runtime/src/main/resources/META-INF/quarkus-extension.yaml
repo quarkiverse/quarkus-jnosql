@@ -1,9 +1,15 @@
 name: JNoSQL Neo4j
 #description: Do something useful.
 metadata:
-#  keywords:
-#    - jnosql
-#  guide: https://quarkiverse.github.io/quarkiverse-docs/jnosql/dev/
-#  categories:
-#    - "miscellaneous"
+  keywords:
+    - "jnosql"
+    - "nosql"
+    - "datastore"
+    - "neo4j"
+    - "graph"
+  categories:
+    - "data"
+  guide: https://docs.quarkiverse.io/quarkus-jnosql/dev/
+  config:
+    - "jnosql."
 #  status: "preview"

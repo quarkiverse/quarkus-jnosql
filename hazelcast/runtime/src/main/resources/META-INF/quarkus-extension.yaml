@@ -1,9 +1,16 @@
-name: JNoSQL KeyValue Hazelcast
+name: JNoSQL Hazelcast
 #description: Do something useful.
 metadata:
-#  keywords:
-#    - jnosql
-#  guide: https://quarkiverse.github.io/quarkiverse-docs/jnosql/dev/
-#  categories:
-#    - "miscellaneous"
+  keywords:
+    - "jnosql"
+    - "nosql"
+    - "datastore"
+    - "hazelcast"
+    - "key-value"
+  categories:
+    - "data"
+  guide: https://docs.quarkiverse.io/quarkus-jnosql/dev/
+  config:
+    - "jnosql."
+    - "jnosql.keyvalue."
 #  status: "preview"

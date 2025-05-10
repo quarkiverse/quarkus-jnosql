@@ -1,9 +1,17 @@
-name: JNoSQL Column Cassandra
+name: JNoSQL Cassandra
 #description: Do something useful.
 metadata:
-#  keywords:
-#    - jnosql
-#  guide: https://quarkiverse.github.io/quarkiverse-docs/jnosql/dev/
-#  categories:
-#    - "miscellaneous"
+  keywords:
+    - "jnosql"
+    - "nosql"
+    - "datastore"
+    - "cassandra"
+    - "column-family"
+    - "wide-column"
+  categories:
+    - "data"
+  guide: https://docs.quarkiverse.io/quarkus-jnosql/dev/
+  config:
+    - "jnosql."
+    - "jnosql.column."
 #  status: "preview"
