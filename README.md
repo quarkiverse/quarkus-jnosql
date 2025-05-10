@@ -382,35 +382,7 @@ Now, you can use the `org.eclipse.jnosql.mapping.graph.GraphTemplate`, a `jakart
    template.insert(entity);
   }
   ```
-
-To use the **org.eclipse.jnosql.databases:jnosql-neo4j:1.1.7-SNAPSHOT** API, you need to add the following repositories to your `pom.xml` or to your `$HOME/.m2/settings.xml`:
-
-```xml
-    <repositories>
-        <repository>
-            <id>jakarta.sonatype.org-snapshot</id>
-            <url>https://jakarta.oss.sonatype.org/content/repositories/snapshots/</url>
-            <releases>
-                <enabled>false</enabled>
-            </releases>
-            <snapshots>
-                <enabled>true</enabled>
-            </snapshots>
-        </repository>
-        <repository>
-            <id>oss.sonatype.org-snapshot</id>
-            <url>https://oss.sonatype.org/content/repositories/snapshots</url>
-            <releases>
-                <enabled>false</enabled>
-            </releases>
-            <snapshots>
-                <enabled>true</enabled>
-            </snapshots>
-        </repository>
-    </repositories>
-```
-
-
+  
 For specific configuration details, please refer to the [Quarkus Neo4j extension](https://docs.quarkiverse.io/quarkus-neo4j/dev/index.html).
 
 ## Oracle NoSQL
