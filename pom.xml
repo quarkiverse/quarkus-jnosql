@@ -1,6 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
-         xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 https://maven.apache.org/xsd/maven-4.0.0.xsd">
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 https://maven.apache.org/xsd/maven-4.0.0.xsd">
     <modelVersion>4.0.0</modelVersion>
     <parent>
         <groupId>io.quarkiverse</groupId>
@@ -9,7 +8,7 @@
     </parent>
     <groupId>io.quarkiverse.jnosql</groupId>
     <artifactId>quarkus-jnosql-parent</artifactId>
-    <version>3.4.1-SNAPSHOT</version>
+    <version>3.4.1</version>
     <packaging>pom</packaging>
     <name>Quarkus JNoSQL - Parent</name>
     <description>Parent project for Quarkus JNoSQL extensions, providing a unified framework for integrating JNoSQL with
@@ -36,7 +35,7 @@
         <connection>scm:git:git@github.com:quarkiverse/quarkus-jnosql.git</connection>
         <developerConnection>scm:git:git@github.com:quarkiverse/quarkus-jnosql.git</developerConnection>
         <url>https://github.com/quarkiverse/quarkus-jnosql</url>
-        <tag>HEAD</tag>
+        <tag>3.4.1</tag>
     </scm>
     <properties>
         <compiler-plugin.version>3.10.1</compiler-plugin.version>
@@ -235,18 +234,14 @@
                         </dependencies>
                         <configuration>
                             <target>
-                                <taskdef resource="net/sf/antcontrib/antcontrib.properties"
-                                         classpathref="maven.plugin.classpath"/>
+                                <taskdef resource="net/sf/antcontrib/antcontrib.properties" classpathref="maven.plugin.classpath" />
                                 <!-- Ensure the file exists -->
-                                <echo message="Checking if the file exists: ${project.basedir}/src/main/resources/META-INF/quarkus-extension.yaml"/>
-                                <available
-                                        file="${project.basedir}/src/main/resources/META-INF/quarkus-extension.yaml"
-                                        property="file.exists"/>
+                                <echo message="Checking if the file exists: ${project.basedir}/src/main/resources/META-INF/quarkus-extension.yaml" />
+                                <available file="${project.basedir}/src/main/resources/META-INF/quarkus-extension.yaml" property="file.exists" />
                                 <if>
-                                    <isset property="file.exists"/>
+                                    <isset property="file.exists" />
                                     <then>
-                                        <echo file="${project.build.directory}/${project.artifactId}.yaml"
-                                              append="false">
+                                        <echo file="${project.build.directory}/${project.artifactId}.yaml" append="false">
 ---
 group-id: ${project.groupId}
 artifact-id: ${project.artifactId}
@@ -255,17 +250,13 @@ versions:
 exclude-versions: []
                                         </echo>
                                         <!-- Rename the file -->
-                                        <propertyregex property="renamed.file"
-                                                       input="${project.artifactId}.yaml"
-                                                       regexp="quarkus"
-                                                       replace="quarkiverse"/>
-                                        <move file="${project.build.directory}/${project.artifactId}.yaml"
-                                              tofile="${project.build.directory}/${renamed.file}"/>
-                                        <echo message="Don't forget to update the versions tags in the generated ${renamed.file} file. And..."/>
-                                        <echo message="Don't forget to add/update the ${renamed.file} via PR to https://github.com/quarkusio/quarkus-extension-catalog repo"/>
+                                        <propertyregex property="renamed.file" input="${project.artifactId}.yaml" regexp="quarkus" replace="quarkiverse" />
+                                        <move file="${project.build.directory}/${project.artifactId}.yaml" tofile="${project.build.directory}/${renamed.file}" />
+                                        <echo message="Don't forget to update the versions tags in the generated ${renamed.file} file. And..." />
+                                        <echo message="Don't forget to add/update the ${renamed.file} via PR to https://github.com/quarkusio/quarkus-extension-catalog repo" />
                                     </then>
                                     <else>
-                                        <echo message="File does not exist: ${project.basedir}/src/main/resources/META-INF/quarkus-extension.yaml"/>
+                                        <echo message="File does not exist: ${project.basedir}/src/main/resources/META-INF/quarkus-extension.yaml" />
                                     </else>
                                 </if>
                             </target>

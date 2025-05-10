@@ -4,7 +4,7 @@
     <parent>
         <groupId>io.quarkiverse.jnosql</groupId>
         <artifactId>quarkus-jnosql-dynamodb-parent</artifactId>
-        <version>3.4.1-SNAPSHOT</version>
+        <version>3.4.1</version>
     </parent>
     <artifactId>quarkus-jnosql-dynamodb-deployment</artifactId>
     <name>Quarkus JNoSQL - DynamoDB - Deployment</name>
