@@ -4,7 +4,7 @@
     <parent>
         <groupId>io.quarkiverse.jnosql</groupId>
         <artifactId>quarkus-jnosql-solr-parent</artifactId>
-        <version>3.4.1</version>
+        <version>3.4.2-SNAPSHOT</version>
     </parent>
     <artifactId>quarkus-jnosql-solr-deployment</artifactId>
     <name>Quarkus JNoSQL - Solr - Deployment</name>
