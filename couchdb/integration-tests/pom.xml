@@ -4,7 +4,7 @@
     <parent>
         <groupId>io.quarkiverse.jnosql</groupId>
         <artifactId>quarkus-jnosql-couchdb-parent</artifactId>
-        <version>3.4.5</version>
+        <version>3.4.6-SNAPSHOT</version>
     </parent>
     <artifactId>quarkus-jnosql-couchdb-integration-tests</artifactId>
     <name>Quarkus JNoSQL - CouchDB - Integration Tests</name>
