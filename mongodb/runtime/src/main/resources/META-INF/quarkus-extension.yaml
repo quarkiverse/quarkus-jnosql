@@ -13,4 +13,9 @@ metadata:
   config:
     - "jnosql."
     - "jnosql.document."
+  codestart:
+    name: "quarkus-jnosql-mongodb-maven-codestart"
+    languages:
+      - "java"
+    artifact: "io.quarkiverse.jnosql:quarkus-jnosql-mongodb:codestarts:jar:${project.version}"
 #  status: "preview"
