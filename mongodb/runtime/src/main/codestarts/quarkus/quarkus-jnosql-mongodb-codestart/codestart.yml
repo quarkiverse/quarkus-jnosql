@@ -12,7 +12,7 @@ language:
   base:
     data:
       # hotel is the default database name
-      database-name: "hotels"
+      database-name: "hotel"
     test-dependencies:
         - groupId: io.quarkus
           artifactId: quarkus-junit5
