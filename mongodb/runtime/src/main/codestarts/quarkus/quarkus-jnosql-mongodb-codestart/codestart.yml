@@ -1,0 +1,24 @@
+name: quarkus-jnosql-mongodb-maven-codestart
+ref: quarkus-jnosql-mongodb
+type: code
+tags:
+  - extension-codestart
+  - maven-only
+metadata:
+  title: Quarkus JNoSQL MongoDB Codestart
+  description: Create your first Document NoSQL entity with Quarkus and JNoSQL MongoDB.
+  related-guide-section: https://docs.quarkiverse.io/quarkus-jnosql/dev/
+language:
+  base:
+    data:
+      # hotel is the default database name
+      database-name: "hotel"
+    test-dependencies:
+        - groupId: io.quarkus
+          artifactId: quarkus-junit5
+        - groupId: net.datafaker
+          artifactId: datafaker
+          version: 2.4.3
+        - groupId: org.assertj
+          artifactId: assertj-core
+          version: 3.27.3

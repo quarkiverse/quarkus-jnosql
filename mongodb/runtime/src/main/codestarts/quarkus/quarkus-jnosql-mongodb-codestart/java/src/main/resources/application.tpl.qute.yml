@@ -1,0 +1,3 @@
+jnosql:
+  document:
+    database: "{database-name}"
