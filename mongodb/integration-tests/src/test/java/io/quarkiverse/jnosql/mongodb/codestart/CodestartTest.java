@@ -1,4 +1,4 @@
-package io.quarkiverse.jnosql.mongodb;
+package io.quarkiverse.jnosql.mongodb.codestart;
 
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.RegisterExtension;
