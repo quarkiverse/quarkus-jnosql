@@ -5,8 +5,6 @@ import jakarta.data.page.PageRequest;
 import jakarta.inject.Inject;
 import net.datafaker.Faker;
 import org.assertj.core.api.Assertions;
-import org.eclipse.jnosql.mapping.Database;
-import org.eclipse.jnosql.mapping.DatabaseType;
 import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
@@ -19,7 +17,6 @@ import static org.assertj.core.api.Assertions.assertThat;
 class HotelTest {
 
     @Inject
-    @Database(DatabaseType.DOCUMENT)
     Hotel hotel;
 
     Faker faker = new Faker();
