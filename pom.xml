@@ -48,6 +48,8 @@
         <quarkus-hazelcast-client-bom.version>4.0.0</quarkus-hazelcast-client-bom.version>
         <camel-quarkus-solr-parent.version>3.0.0-M1</camel-quarkus-solr-parent.version>
         <quarkus-neo4j.version>5.4.0</quarkus-neo4j.version>
+        <datafaker.version>2.4.3</datafaker.version>
+        <assertj.version>3.24.2</assertj.version>
         <jnosql.version>1.1.8</jnosql.version>
     </properties>
     <dependencyManagement>

@@ -14,11 +14,13 @@ language:
       # hotel is the default database name
       database-name: "hotel"
     test-dependencies:
-        - groupId: io.quarkus
-          artifactId: quarkus-junit5
+
         - groupId: net.datafaker
           artifactId: datafaker
-          version: 2.4.3
+          version: ${datafaker.version}
+          scope: test
+
         - groupId: org.assertj
           artifactId: assertj-core
-          version: 3.27.3
+          version: ${assertj.version}
+          scope: test
