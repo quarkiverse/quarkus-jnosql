@@ -3,6 +3,11 @@ package org.acme;
 import jakarta.nosql.Column;
 import jakarta.nosql.Embeddable;
 
+import jakarta.nosql.Column;
+import jakarta.nosql.Embeddable;
+
+import static jakarta.nosql.Embeddable.EmbeddableType.GROUPING;
+
 /**
  * Represents a guest with a document and name.
  * This class is used as an embeddable object in the Room entity.
@@ -14,9 +19,8 @@ import jakarta.nosql.Embeddable;
  * <p>Note: The @Column annotation is used to specify that the fields
  * should be mapped to columns in the NoSQL database.</p>
  */
-@Embeddable
+@Embeddable(GROUPING)
 public record Guest(
         @Column String document,
         @Column String name) {
 }
-
