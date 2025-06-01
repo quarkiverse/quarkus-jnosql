@@ -1,10 +1,8 @@
 package ilove.quark.us;
 
+import jakarta.data.Sort;
 import jakarta.data.page.PageRequest;
-import jakarta.data.repository.Delete;
-import jakarta.data.repository.Find;
-import jakarta.data.repository.Repository;
-import jakarta.data.repository.Save;
+import jakarta.data.repository.*;
 import org.eclipse.jnosql.mapping.NoSQLRepository;
 
 import java.util.List;
@@ -42,12 +40,40 @@ import java.util.List;
 @Repository
 public interface Hotel extends NoSQLRepository<Room, String> {
 
+    /**
+     * Checks in a room by saving it to the repository.
+     *
+     * @param room the room to be checked in
+     * @return the saved room
+     */
     @Save
     Room checkIn(Room room);
 
+    /**
+     * Checks out a room by removing it from the repository.
+     *
+     * @param room the room to be checked out
+     */
     @Delete
     void checkOut(Room room);
 
+    /**
+     * Retrieves a paginated list of rooms ordered by their number.
+     *
+     * @param pageRequest the pagination request containing page and size information
+     * @return a list of rooms for the specified page
+     */
     @Find
-    List<Room> getRooms(PageRequest pageRequest);
+    @OrderBy("number")
+    List<Room> getCheckedInRooms(PageRequest pageRequest);
+
+    /**
+     * Retrieves a paginated list of rooms ordered by their number and sorted by the specified sort criteria.
+     *
+     * @param pageRequest the pagination request containing page and size information
+     * @param sorts       the sorting criteria to apply
+     * @return a list of rooms for the specified page, sorted according to the provided criteria
+     */
+    @Find
+    List<Room> getCheckedInRoomsByGuestDocument(@By("guest.document") String guestDocument, PageRequest pageRequest, Sort... sorts);
 }
