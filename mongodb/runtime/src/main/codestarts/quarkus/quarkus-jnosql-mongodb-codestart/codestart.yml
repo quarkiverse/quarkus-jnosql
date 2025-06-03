@@ -1,4 +1,4 @@
-name: quarkus-jnosql-mongodb-maven-codestart
+name: quarkus-jnosql-mongodb-codestart
 ref: quarkus-jnosql-mongodb
 type: code
 tags:
@@ -11,8 +11,7 @@ metadata:
 language:
   base:
     data:
-      # hotel is the default database name
-      database-name: "hotel"
+      database-name: "garage"
     test-dependencies:
 
         - groupId: net.datafaker

@@ -17,9 +17,9 @@ public class CodestartTest {
 
     @Test
     void testContent() throws Throwable {
-        codestartTest.checkGeneratedSource("org.acme.Hotel");
-        codestartTest.checkGeneratedSource("org.acme.Room");
-        codestartTest.checkGeneratedSource("org.acme.Guest");
+        codestartTest.checkGeneratedSource("org.acme.Car");
+        codestartTest.checkGeneratedSource("org.acme.Garage");
+        codestartTest.checkGeneratedTestSource("org.acme.GarageTest");
     }
 
     @Test

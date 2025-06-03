@@ -14,7 +14,7 @@ metadata:
     - "jnosql."
     - "jnosql.document."
   codestart:
-    name: "quarkus-jnosql-mongodb-maven-codestart"
+    name: "quarkus-jnosql-mongodb-codestart"
     languages:
       - "java"
     artifact: "io.quarkiverse.jnosql:quarkus-jnosql-mongodb:codestarts:jar:${project.version}"
