@@ -1,4 +1,4 @@
-package org.acme;
+package ilove.quark.us;
 
 import jakarta.nosql.Column;
 import jakarta.nosql.Embeddable;

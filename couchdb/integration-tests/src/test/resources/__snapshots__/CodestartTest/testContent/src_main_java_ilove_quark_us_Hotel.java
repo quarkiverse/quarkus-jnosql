@@ -1,4 +1,4 @@
-package org.acme;
+package ilove.quark.us;
 
 import jakarta.data.Sort;
 import jakarta.data.page.PageRequest;
