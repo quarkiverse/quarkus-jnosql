@@ -1,13 +1,9 @@
-package io.quarkiverse.jnosql.document.couchdb.it;
+package org.acme;
 
-import java.net.http.HttpClient;
-import java.util.Base64;
-import java.util.Map;
-import java.util.Set;
 
+import io.quarkus.test.common.QuarkusTestResourceLifecycleManager;
 import jakarta.json.Json;
 import jakarta.json.JsonArrayBuilder;
-
 import org.eclipse.jnosql.databases.couchdb.communication.CouchDBConfigurations;
 import org.eclipse.jnosql.mapping.core.config.MappingConfigurations;
 import org.eclipse.microprofile.config.Config;
@@ -17,7 +13,10 @@ import org.slf4j.LoggerFactory;
 import org.testcontainers.containers.GenericContainer;
 import org.testcontainers.utility.TestcontainersConfiguration;
 
-import io.quarkus.test.common.QuarkusTestResourceLifecycleManager;
+import java.net.http.HttpClient;
+import java.util.Base64;
+import java.util.Map;
+import java.util.Set;
 
 public class CouchdbTestResource implements QuarkusTestResourceLifecycleManager {
 
@@ -73,15 +72,13 @@ public class CouchdbTestResource implements QuarkusTestResourceLifecycleManager 
 
         try {
             client.sendAsync(
-                    java.net.http.HttpRequest.newBuilder()
-                            .uri(java.net.URI.create(url))
-                            .header("Content-Type", "application/json")
-                            .header("Authorization",
-                                    "Basic " + Base64.getEncoder()
-                                            .encodeToString("%s:%s".formatted(username, password).getBytes()))
-                            .PUT(java.net.http.HttpRequest.BodyPublishers.noBody())
-                            .build(),
-                    java.net.http.HttpResponse.BodyHandlers.ofString())
+                            java.net.http.HttpRequest.newBuilder()
+                                    .uri(java.net.URI.create(url))
+                                    .header("Content-Type", "application/json")
+                                    .header("Authorization", "Basic " + Base64.getEncoder().encodeToString("%s:%s".formatted(username, password).getBytes()))
+                                    .PUT(java.net.http.HttpRequest.BodyPublishers.noBody())
+                                    .build(),
+                            java.net.http.HttpResponse.BodyHandlers.ofString())
                     .thenAccept(response -> LOGGER.info("Database Creation Result: {}", response.body()))
                     .join();
         } catch (Exception e) {
@@ -94,9 +91,7 @@ public class CouchdbTestResource implements QuarkusTestResourceLifecycleManager 
         String username = config.getValue(CouchDBConfigurations.USER.get(), String.class);
         String password = config.getValue(CouchDBConfigurations.PASSWORD.get(), String.class);
         String databaseName = config.getValue(MappingConfigurations.DOCUMENT_DATABASE.get(), String.class);
-
-        createIndex(databaseName, username, password, Set.of("number"), "number_index");
-        createIndex(databaseName, username, password, Set.of("guest.document"), "guest_document_index");
+        createIndex(databaseName, username, password, Set.of("transmission"), "transmission_index");
     }
 
     private void createIndex(String databaseName, String username, String password, Set<String> fields, String indexName) {
@@ -116,15 +111,13 @@ public class CouchdbTestResource implements QuarkusTestResourceLifecycleManager 
                 .toString();
         try {
             client.sendAsync(
-                    java.net.http.HttpRequest.newBuilder()
-                            .uri(java.net.URI.create(url))
-                            .header("Content-Type", "application/json")
-                            .header("Authorization",
-                                    "Basic " + Base64.getEncoder()
-                                            .encodeToString("%s:%s".formatted(username, password).getBytes()))
-                            .POST(java.net.http.HttpRequest.BodyPublishers.ofString(indexCreationPayload))
-                            .build(),
-                    java.net.http.HttpResponse.BodyHandlers.ofString())
+                            java.net.http.HttpRequest.newBuilder()
+                                    .uri(java.net.URI.create(url))
+                                    .header("Content-Type", "application/json")
+                                    .header("Authorization", "Basic " + Base64.getEncoder().encodeToString("%s:%s".formatted(username, password).getBytes()))
+                                    .POST(java.net.http.HttpRequest.BodyPublishers.ofString(indexCreationPayload))
+                                    .build(),
+                            java.net.http.HttpResponse.BodyHandlers.ofString())
                     .thenAccept(response -> LOGGER.info("Index Creation Result: {}", response.body()))
                     .join();
         } catch (Exception e) {
