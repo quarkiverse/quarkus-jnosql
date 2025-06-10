@@ -13,4 +13,9 @@ metadata:
   config:
     - "jnosql."
     - "jnosql.document."
+  codestart:
+    name: "quarkus-jnosql-solr-codestart"
+    languages:
+      - "java"
+    artifact: "io.quarkiverse.jnosql:quarkus-jnosql-solr:codestarts:jar:${project.version}"
 #  status: "preview"
