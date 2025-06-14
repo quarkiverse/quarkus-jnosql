@@ -1,0 +1,25 @@
+name: quarkus-jnosql-solr-codestart
+ref: quarkus-jnosql-solr
+type: code
+tags:
+  - extension-codestart
+  - maven-only
+metadata:
+  title: Quarkus JNoSQL Solr Codestart
+  description: Create your first Document NoSQL entity with Quarkus and JNoSQL Solr.
+  related-guide-section: https://docs.quarkiverse.io/quarkus-jnosql/dev/
+language:
+  base:
+    data:
+      database-name: "garage"
+      additional-quarkus-test-annotations: "@io.quarkus.test.common.QuarkusTestResource(SolrTestResource.class)"
+    test-dependencies:
+      - groupId: net.datafaker
+        artifactId: datafaker
+        version: ${datafaker.version}
+        scope: test
+
+      - groupId: org.assertj
+        artifactId: assertj-core
+        version: ${assertj.version}
+        scope: test

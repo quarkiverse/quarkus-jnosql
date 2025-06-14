@@ -1,17 +1,7 @@
-package io.quarkiverse.jnosql.document.couchdb.it;
+package org.acme;
 
-import static java.util.Objects.requireNonNull;
-
-import java.net.http.HttpClient;
-import java.net.http.HttpRequest;
-import java.net.http.HttpResponse;
-import java.util.*;
-import java.util.function.Consumer;
-import java.util.function.Function;
-import java.util.function.Predicate;
-
+import io.quarkus.test.common.QuarkusTestResourceLifecycleManager;
 import jakarta.json.Json;
-
 import org.eclipse.jnosql.databases.couchdb.communication.CouchDBConfigurations;
 import org.eclipse.jnosql.mapping.core.config.MappingConfigurations;
 import org.eclipse.microprofile.config.Config;
@@ -21,7 +11,15 @@ import org.slf4j.LoggerFactory;
 import org.testcontainers.containers.GenericContainer;
 import org.testcontainers.utility.TestcontainersConfiguration;
 
-import io.quarkus.test.common.QuarkusTestResourceLifecycleManager;
+import java.net.http.HttpClient;
+import java.net.http.HttpRequest;
+import java.net.http.HttpResponse;
+import java.util.*;
+import java.util.function.Consumer;
+import java.util.function.Function;
+import java.util.function.Predicate;
+
+import static java.util.Objects.requireNonNull;
 
 public class CouchdbTestResource implements QuarkusTestResourceLifecycleManager {
 
@@ -114,8 +112,7 @@ public class CouchdbTestResource implements QuarkusTestResourceLifecycleManager 
                 .filter(Predicate.not(String::isBlank))
                 .reduce(Json.createArrayBuilder(),
                         (arrayFields, field) -> arrayFields.add(field),
-                        (a, b) -> a.addAll(b))
-                .build();
+                        (a, b) -> a.addAll(b)).build();
 
         var indexCreationPayload = Json.createObjectBuilder()
                 .add("index", Json.createObjectBuilder()
@@ -130,10 +127,12 @@ public class CouchdbTestResource implements QuarkusTestResourceLifecycleManager 
                 throwable -> LOGGER.error("Failed to create index", throwable));
     }
 
+
     private void execute(Settings settings,
-            Function<HttpRequest.Builder, HttpRequest.Builder> httpRequestBuilderFunction,
-            Consumer<HttpResponse<String>> httpResponseConsumer,
-            Consumer<Throwable> throwableConsumer) {
+                         Function<HttpRequest.Builder, HttpRequest.Builder> httpRequestBuilderFunction,
+                         Consumer<HttpResponse<String>> httpResponseConsumer,
+                         Consumer<Throwable> throwableConsumer
+    ) {
 
         HttpClient client = HttpClient.newHttpClient();
         String url = String.format("http://%s:%d/%s", container.getHost(),
@@ -141,15 +140,14 @@ public class CouchdbTestResource implements QuarkusTestResourceLifecycleManager 
 
         try {
             client.sendAsync(
-                    Objects.requireNonNull(httpRequestBuilderFunction, "httpRequestBuilderFunction must not be null")
-                            .apply(java.net.http.HttpRequest.newBuilder()
-                                    .uri(java.net.URI.create(url))
-                                    .header("Content-Type", "application/json")
-                                    .header("Authorization", "Basic " + Base64.getEncoder()
-                                            .encodeToString(
-                                                    "%s:%s".formatted(settings.user(), settings.password()).getBytes())))
-                            .build(),
-                    java.net.http.HttpResponse.BodyHandlers.ofString())
+                            Objects.requireNonNull(httpRequestBuilderFunction, "httpRequestBuilderFunction must not be null")
+                                    .apply(java.net.http.HttpRequest.newBuilder()
+                                            .uri(java.net.URI.create(url))
+                                            .header("Content-Type", "application/json")
+                                            .header("Authorization", "Basic " + Base64.getEncoder()
+                                                    .encodeToString("%s:%s".formatted(settings.user(), settings.password()).getBytes())))
+                                    .build(),
+                            java.net.http.HttpResponse.BodyHandlers.ofString())
                     .thenAccept(Objects.requireNonNull(httpResponseConsumer, "httpResponseConsumer must not be null"))
                     .join();
         } catch (Exception e) {
