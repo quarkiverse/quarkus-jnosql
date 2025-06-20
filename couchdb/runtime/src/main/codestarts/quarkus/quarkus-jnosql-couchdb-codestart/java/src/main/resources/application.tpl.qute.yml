@@ -1,0 +1,6 @@
+jnosql:
+  document:
+    database: "{database-name}"
+  couchdb:
+    username: admin
+    password: password

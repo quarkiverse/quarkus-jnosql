@@ -1,4 +1,4 @@
-package io.quarkiverse.jnosql.mongodb.codestart;
+package io.quarkiverse.jnosql.document.couchdb.codestart;
 
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.RegisterExtension;
@@ -8,7 +8,7 @@ import io.quarkus.devtools.testing.codestarts.QuarkusCodestartTest;
 
 public class CodestartTest {
 
-    public static final String CODESTART_ARTIFACT = "io.quarkiverse.jnosql:quarkus-jnosql-mongodb";
+    public static final String CODESTART_ARTIFACT = "io.quarkiverse.jnosql:quarkus-jnosql-couchdb";
     @RegisterExtension
     public static QuarkusCodestartTest codestartTest = QuarkusCodestartTest.builder()
             .languages(Language.JAVA)
