@@ -55,7 +55,7 @@
                             <outputDirectory>${basedir}/target/filtered-resources/codestarts/quarkus/${project.artifactId}-codestart/</outputDirectory>
                             <resources>
                                 <resource>
-                                    <directory>${project.basedir}/../../codestarts/document/</directory>
+                                    <directory>${project.basedir}/../../codestarts/semistructured/</directory>
                                     <filtering>true</filtering>
                                 </resource>
                             </resources>

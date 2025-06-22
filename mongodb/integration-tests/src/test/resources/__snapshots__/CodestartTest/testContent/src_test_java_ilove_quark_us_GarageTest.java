@@ -36,7 +36,7 @@ public class GarageTest {
     @AfterEach
     void resetDatabase() {
         // Clear the garage database before each test
-        garage.deleteAll();
+        garage.findAll().forEach(garage::delete);
     }
 
     // Factory method to create a Car instance

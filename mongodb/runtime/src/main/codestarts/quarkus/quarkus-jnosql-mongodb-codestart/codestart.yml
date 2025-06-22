@@ -11,6 +11,7 @@ metadata:
 language:
   base:
     data:
+      database-type: "document"
       database-name: "garage"
     test-dependencies:
 

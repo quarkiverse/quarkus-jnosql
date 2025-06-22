@@ -1,5 +1,5 @@
 jnosql:
-  document:
+  {database-type}:
     database: "{database-name}"
   couchdb:
     username: admin
