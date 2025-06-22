@@ -1,0 +1,30 @@
+name: quarkus-jnosql-arangodb-codestart
+ref: quarkus-jnosql-arangodb
+type: code
+tags:
+  - extension-codestart
+  - maven-only
+metadata:
+  title: Quarkus JNoSQL ArangoDB Codestart
+  description: Create your first Document or Key-Value NoSQL entity with Quarkus and JNoSQL ArangoDB.
+  related-guide-section: https://docs.quarkiverse.io/quarkus-jnosql/dev/
+language:
+  base:
+    test-dependencies:
+        - groupId: org.testcontainers
+          artifactId: testcontainers
+          scope: test
+
+        - groupId: io.quarkus
+          artifactId: quarkus-junit4-mock
+          scope: test
+
+        - groupId: net.datafaker
+          artifactId: datafaker
+          version: ${datafaker.version}
+          scope: test
+
+        - groupId: org.assertj
+          artifactId: assertj-core
+          version: ${assertj.version}
+          scope: test
