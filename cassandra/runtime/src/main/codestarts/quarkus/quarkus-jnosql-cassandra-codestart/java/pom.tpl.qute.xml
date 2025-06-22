@@ -1,0 +1,16 @@
+<project>
+    <properties>
+        <maven.compiler.proc>full</maven.compiler.proc>
+    </properties>
+    <dependencyManagement>
+        <dependencies>
+            <dependency>
+                <groupId>com.datastax.oss.quarkus</groupId>
+                <artifactId>cassandra-quarkus-bom</artifactId>
+                <version>${cassandra-quarkus-bom.version}</version>
+                <type>pom</type>
+                <scope>import</scope>
+            </dependency>
+        </dependencies>
+    </dependencyManagement>
+</project>
