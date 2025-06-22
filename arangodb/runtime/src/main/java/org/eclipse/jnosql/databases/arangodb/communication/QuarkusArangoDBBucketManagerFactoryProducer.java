@@ -9,7 +9,6 @@ import jakarta.enterprise.inject.Produces;
 import jakarta.inject.Inject;
 import jakarta.inject.Singleton;
 
-import org.eclipse.jnosql.communication.Settings;
 import org.eclipse.jnosql.communication.keyvalue.BucketManagerFactory;
 
 import io.quarkiverse.jnosql.core.runtime.MicroProfileSettings;
@@ -18,7 +17,7 @@ import io.quarkiverse.jnosql.core.runtime.MicroProfileSettings;
 public class QuarkusArangoDBBucketManagerFactoryProducer implements Supplier<BucketManagerFactory> {
 
     @Inject
-    QuarkusArangoDBKeyValueConfiguration configuration;
+    protected QuarkusArangoDBKeyValueConfiguration configuration;
 
     @Override
     @Produces
