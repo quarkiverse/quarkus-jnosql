@@ -2,11 +2,3 @@ jnosql:
   column:
     database: "{database-name}"
 
-quarkus:
-  http:
-    port: 8083
-"%test":
-  quarkus:
-    http:
-      port: 8888
-
