@@ -21,7 +21,9 @@ public class JNoSQLResourceTest {
 
     @ParameterizedTest
     @CsvSource({
+            "/template/using-pojo",
             "/keyvalue/using-pojo",
+            "/template/using-record",
             "/keyvalue/using-record",
     })
     public void test(String path) {

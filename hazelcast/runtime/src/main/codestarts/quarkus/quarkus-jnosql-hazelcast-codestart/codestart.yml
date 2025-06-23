@@ -1,0 +1,31 @@
+name: quarkus-jnosql-hazelcast-codestart
+ref: quarkus-jnosql-hazelcast
+type: code
+tags:
+  - extension-codestart
+  - maven-only
+metadata:
+  title: Quarkus JNoSQL ArangoDB Codestart
+  description: Create your first Key-Value NoSQL entity with Quarkus and JNoSQL Hazelcast.
+  related-guide-section: https://docs.quarkiverse.io/quarkus-jnosql/dev/
+language:
+  base:
+    test-dependencies:
+        - groupId: com.hazelcast
+          artifactId: quarkus-test-hazelcast
+          version: ${quarkus-hazelcast-client.version}
+          scope: test
+
+        - groupId: io.quarkus
+          artifactId: quarkus-junit4-mock
+          scope: test
+
+        - groupId: net.datafaker
+          artifactId: datafaker
+          version: ${datafaker.version}
+          scope: test
+
+        - groupId: org.assertj
+          artifactId: assertj-core
+          version: ${assertj.version}
+          scope: test

@@ -3,9 +3,15 @@ package io.quarkiverse.jnosql.hazelcast.it;
 import java.util.List;
 import java.util.UUID;
 
-public record PersonRecord(String id,
-        String name,
-        List<String> phones) {
+import jakarta.nosql.Column;
+import jakarta.nosql.Entity;
+import jakarta.nosql.Id;
+
+@Entity
+public record PersonRecord(
+        @Id String id,
+        @Column String name,
+        @Column List<String> phones) {
 
     public static PersonRecord randomPerson() {
         var person = new PersonRecord(

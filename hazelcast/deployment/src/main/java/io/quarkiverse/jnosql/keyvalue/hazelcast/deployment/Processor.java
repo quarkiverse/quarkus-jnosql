@@ -2,6 +2,7 @@ package io.quarkiverse.jnosql.keyvalue.hazelcast.deployment;
 
 import java.util.stream.Stream;
 
+import org.eclipse.jnosql.databases.hazelcast.communication.QuarkusHazelcastBucketManagerFactoryProducer;
 import org.eclipse.jnosql.databases.hazelcast.communication.QuarkusHazelcastBucketManagerProducer;
 import org.eclipse.jnosql.databases.hazelcast.communication.QuarkusHazelcastKeyValueConfiguration;
 
@@ -16,6 +17,7 @@ import com.hazelcast.internal.util.counters.SwCounter;
 import com.hazelcast.query.impl.predicates.MultiPartitionPredicateImpl;
 
 import io.quarkus.arc.deployment.AdditionalBeanBuildItem;
+import io.quarkus.arc.deployment.ExcludedTypeBuildItem;
 import io.quarkus.deployment.annotations.BuildProducer;
 import io.quarkus.deployment.annotations.BuildStep;
 import io.quarkus.deployment.builditem.FeatureBuildItem;
@@ -34,6 +36,19 @@ class Processor {
     void build(BuildProducer<AdditionalBeanBuildItem> additionalBeanProducer) {
         additionalBeanProducer.produce(AdditionalBeanBuildItem.unremovableOf(QuarkusHazelcastKeyValueConfiguration.class));
         additionalBeanProducer.produce(AdditionalBeanBuildItem.unremovableOf(QuarkusHazelcastBucketManagerProducer.class));
+        additionalBeanProducer
+                .produce(AdditionalBeanBuildItem.unremovableOf(QuarkusHazelcastBucketManagerFactoryProducer.class));
+    }
+
+    @BuildStep
+    void buildExcludedType(BuildProducer<ExcludedTypeBuildItem> excludedTypeProducer) {
+
+        excludedTypeProducer.produce(
+                new ExcludedTypeBuildItem("org.eclipse.jnosql.mapping.keyvalue.configuration.BucketManagerSupplier"));
+        excludedTypeProducer.produce(
+                new ExcludedTypeBuildItem("org.eclipse.jnosql.mapping.keyvalue.configuration.BucketManagerFactorySupplier"));
+        excludedTypeProducer.produce(
+                new ExcludedTypeBuildItem("org.eclipse.jnosql.databases.hazelcast.mapping.BucketManagerSupplier"));
     }
 
     @BuildStep

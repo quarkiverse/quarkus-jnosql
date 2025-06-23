@@ -1,0 +1,6 @@
+<project>
+    <properties>
+        <maven.compiler.proc>full</maven.compiler.proc>
+        <quarkus-hazelcast-client.version>${quarkus-hazelcast-client-bom.version}</quarkus-hazelcast-client.version>
+    </properties>
+</project>
