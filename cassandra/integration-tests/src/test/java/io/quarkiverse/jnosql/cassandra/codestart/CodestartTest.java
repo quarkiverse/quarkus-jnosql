@@ -22,4 +22,8 @@ public class CodestartTest {
         codestartTest.checkGeneratedTestSource("org.acme.GarageTest");
     }
 
+    @Test
+    void buildAllProjects() throws Throwable {
+        codestartTest.buildAllProjects();
+    }
 }
