@@ -1,0 +1,6 @@
+jnosql:
+  keyvalue:
+    database: "people"
+  document:
+    database: "garage"
+

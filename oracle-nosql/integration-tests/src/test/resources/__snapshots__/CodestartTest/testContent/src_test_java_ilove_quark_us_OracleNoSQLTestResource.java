@@ -1,4 +1,4 @@
-package io.quarkiverse.jnosql.oracle.it;
+package ilove.quark.us;
 
 import java.util.Map;
 
@@ -29,13 +29,12 @@ public class OracleNoSQLTestResource implements QuarkusTestResourceLifecycleMana
                     .withExposedPorts(PORT_DEFAULT);
             container.start();
 
-            Map<String, String> oracleNoSQLParams = Map.of(
+            return Map.of(
                     OracleNoSQLConfigurations.HOST.get(),
                     String.format(
                             "http://%s:%s",
                             container.getHost(),
                             container.getMappedPort(PORT_DEFAULT).toString()));
-            return oracleNoSQLParams;
 
         } catch (Exception e) {
             throw new RuntimeException(e);
