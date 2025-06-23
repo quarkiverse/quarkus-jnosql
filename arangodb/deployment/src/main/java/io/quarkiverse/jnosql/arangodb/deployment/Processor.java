@@ -23,8 +23,7 @@ class Processor {
         additionalBeanProducer.produce(AdditionalBeanBuildItem.unremovableOf(QuarkusArangoDBKeyValueConfiguration.class));
         additionalBeanProducer.produce(AdditionalBeanBuildItem.unremovableOf(QuarkusArangoDBDocumentManagerProducer.class));
         additionalBeanProducer.produce(AdditionalBeanBuildItem.unremovableOf(QuarkusArangoDBBucketManagerProducer.class));
-        additionalBeanProducer
-                .produce(AdditionalBeanBuildItem.unremovableOf(QuarkusArangoDBBucketManagerFactoryProducer.class));
+        additionalBeanProducer.produce(AdditionalBeanBuildItem.unremovableOf(QuarkusArangoDBBucketManagerFactoryProducer.class));
     }
 
     @BuildStep
