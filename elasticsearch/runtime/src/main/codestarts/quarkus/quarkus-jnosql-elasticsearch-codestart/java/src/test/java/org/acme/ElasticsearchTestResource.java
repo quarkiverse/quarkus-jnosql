@@ -1,26 +1,13 @@
 package org.acme;
 
-import java.util.Map;
-
-import jakarta.nosql.MappingException;
-
-import org.apache.http.Header;
-import org.apache.http.HttpHost;
-import org.apache.http.message.BasicHeader;
+import io.quarkus.test.common.QuarkusTestResourceLifecycleManager;
 import org.eclipse.jnosql.databases.elasticsearch.communication.ElasticsearchConfigurations;
-import org.eclipse.jnosql.mapping.core.config.MappingConfigurations;
-import org.elasticsearch.client.RestClient;
 import org.slf4j.Logger;
 import org.testcontainers.containers.GenericContainer;
 import org.testcontainers.containers.wait.strategy.Wait;
 import org.testcontainers.utility.DockerImageName;
 
-import co.elastic.clients.elasticsearch.ElasticsearchClient;
-import co.elastic.clients.elasticsearch.indices.CreateIndexRequest;
-import co.elastic.clients.json.jsonb.JsonbJsonpMapper;
-import co.elastic.clients.transport.rest_client.RestClientTransport;
-import io.quarkiverse.jnosql.core.runtime.MicroProfileSettings;
-import io.quarkus.test.common.QuarkusTestResourceLifecycleManager;
+import java.util.Map;
 
 public class ElasticsearchTestResource implements QuarkusTestResourceLifecycleManager {
 
@@ -31,11 +18,6 @@ public class ElasticsearchTestResource implements QuarkusTestResourceLifecycleMa
 
     @Override
     public Map<String, String> start() {
-
-        var database = new MicroProfileSettings()
-                .get(MappingConfigurations.DOCUMENT_DATABASE.get(), String.class)
-                .orElseThrow(() -> new MappingException("Please, inform the database filling up the property "
-                        + MappingConfigurations.DOCUMENT_DATABASE.get()));
 
         container = new GenericContainer(IMAGE)
                 .withExposedPorts(9200, 9300)
@@ -50,19 +32,6 @@ public class ElasticsearchTestResource implements QuarkusTestResourceLifecycleMa
         String httpHost = String.format(
                 "%s:%s",
                 container.getHost(), container.getFirstMappedPort());
-
-        var httpClient = RestClient
-                .builder(HttpHost.create(httpHost))
-                .setDefaultHeaders(new Header[] {
-                        new BasicHeader("Accept", "application/json")
-                }).build();
-
-        try (var elasticsearchClient = new ElasticsearchClient(new RestClientTransport(httpClient, new JsonbJsonpMapper()))) {
-            elasticsearchClient.indices().create(CreateIndexRequest.of(b -> b.index(database)));
-            logger.info("Created index: {}", database);
-        } catch (Exception e) {
-            throw new RuntimeException("Failed to create index: " + database, e);
-        }
 
         return Map.of(
                 ElasticsearchConfigurations.HOST.get(),
