@@ -4,10 +4,13 @@ import java.util.Map;
 
 import jakarta.nosql.MappingException;
 
+import org.apache.http.Header;
 import org.apache.http.HttpHost;
+import org.apache.http.message.BasicHeader;
 import org.eclipse.jnosql.databases.elasticsearch.communication.ElasticsearchConfigurations;
 import org.eclipse.jnosql.mapping.core.config.MappingConfigurations;
 import org.elasticsearch.client.RestClient;
+import org.slf4j.Logger;
 import org.testcontainers.containers.GenericContainer;
 import org.testcontainers.containers.wait.strategy.Wait;
 import org.testcontainers.utility.DockerImageName;
@@ -21,6 +24,7 @@ import io.quarkus.test.common.QuarkusTestResourceLifecycleManager;
 
 public class ElasticsearchTestResource implements QuarkusTestResourceLifecycleManager {
 
+    private static final Logger logger = org.slf4j.LoggerFactory.getLogger(ElasticsearchTestResource.class);
     private static final DockerImageName IMAGE = DockerImageName.parse("docker.io/elastic/elasticsearch:8.15.0");
 
     private GenericContainer container;
@@ -49,10 +53,13 @@ public class ElasticsearchTestResource implements QuarkusTestResourceLifecycleMa
 
         var httpClient = RestClient
                 .builder(HttpHost.create(httpHost))
-                .build();
+                .setDefaultHeaders(new Header[] {
+                        new BasicHeader("Accept", "application/json")
+                }).build();
 
         try (var elasticsearchClient = new ElasticsearchClient(new RestClientTransport(httpClient, new JsonbJsonpMapper()))) {
             elasticsearchClient.indices().create(CreateIndexRequest.of(b -> b.index(database)));
+            logger.info("Created index: {}", database);
         } catch (Exception e) {
             throw new RuntimeException("Failed to create index: " + database, e);
         }
