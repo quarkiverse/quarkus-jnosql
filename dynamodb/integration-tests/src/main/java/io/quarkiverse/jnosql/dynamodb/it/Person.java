@@ -3,12 +3,20 @@ package io.quarkiverse.jnosql.dynamodb.it;
 import java.util.List;
 import java.util.UUID;
 
+import jakarta.nosql.Column;
+import jakarta.nosql.Entity;
+import jakarta.nosql.Id;
+
+@Entity
 public class Person {
 
+    @Id
     private String id;
 
+    @Column
     private String name;
 
+    @Column
     private List<String> phones;
 
     public static Person randomPerson() {
