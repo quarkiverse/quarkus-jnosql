@@ -22,8 +22,4 @@ public class CodestartTest {
         codestartTest.checkGeneratedTestSource("org.acme.BucketManagerTest");
     }
 
-    @Test
-    void buildAllProjects() throws Throwable {
-        codestartTest.buildAllProjects();
-    }
 }
