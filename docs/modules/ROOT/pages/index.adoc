@@ -1,4 +1,4 @@
-= Quarkus JNoSQL
+= Quarkus JNoSQL Extension
 :toc: auto
 include::./includes/attributes.adoc[]
 
