@@ -1,0 +1,5 @@
+<project>
+    <properties>
+        <maven.compiler.proc>full</maven.compiler.proc>
+    </properties>
+</project>

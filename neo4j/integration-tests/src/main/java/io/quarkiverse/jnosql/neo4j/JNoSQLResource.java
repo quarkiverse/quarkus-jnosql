@@ -1,4 +1,4 @@
-package io.quarkiverse.jnosql.neo4j.it;
+package io.quarkiverse.jnosql.neo4j;
 
 import jakarta.enterprise.context.ApplicationScoped;
 import jakarta.inject.Inject;

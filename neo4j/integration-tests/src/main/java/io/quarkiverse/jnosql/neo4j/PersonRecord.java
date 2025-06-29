@@ -1,4 +1,4 @@
-package io.quarkiverse.jnosql.neo4j.it;
+package io.quarkiverse.jnosql.neo4j;
 
 import java.util.List;
 import java.util.UUID;

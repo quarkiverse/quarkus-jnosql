@@ -1,0 +1,3 @@
+jnosql:
+  graph:
+    database: "{database-name}"

@@ -1,4 +1,4 @@
-package io.quarkiverse.jnosql.document.mongodb.it;
+package io.quarkiverse.jnosql.neo4j.it;
 
 import io.quarkus.test.junit.QuarkusIntegrationTest;
 
