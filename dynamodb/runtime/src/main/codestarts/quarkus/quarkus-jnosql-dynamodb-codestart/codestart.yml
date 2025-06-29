@@ -1,0 +1,23 @@
+name: quarkus-jnosql-dynamodb-codestart
+ref: quarkus-jnosql-dynamodb
+type: code
+tags:
+  - extension-codestart
+  - maven-only
+metadata:
+  title: Quarkus JNoSQL DynamoDB Codestart
+  description: Create your first Key-Value NoSQL entity with Quarkus and JNoSQL DynamoDB.
+  related-guide-section: https://docs.quarkiverse.io/quarkus-jnosql/dev/
+language:
+  base:
+    data:
+    test-dependencies:
+      - groupId: net.datafaker
+        artifactId: datafaker
+        version: ${datafaker.version}
+        scope: test
+
+      - groupId: org.assertj
+        artifactId: assertj-core
+        version: ${assertj.version}
+        scope: test

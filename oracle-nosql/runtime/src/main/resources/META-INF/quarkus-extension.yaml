@@ -16,3 +16,8 @@ metadata:
     - "jnosql.keyvalue."
     - "jnosql.document."
 #  status: "preview"
+  codestart:
+    name: "quarkus-jnosql-oracle-nosql-codestart"
+    languages:
+      - "java"
+    artifact: "io.quarkiverse.jnosql:quarkus-jnosql-oracle-nosql:codestarts:jar:${project.version}"

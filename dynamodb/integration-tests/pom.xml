@@ -10,6 +10,7 @@
     <name>Quarkus JNoSQL - DynamoDB - Integration Tests</name>
     <properties>
         <skipITs>true</skipITs>
+        <maven.compiler.proc>full</maven.compiler.proc>
     </properties>
     <dependencies>
         <dependency>
@@ -33,6 +34,11 @@
         <dependency>
             <groupId>io.rest-assured</groupId>
             <artifactId>rest-assured</artifactId>
+            <scope>test</scope>
+        </dependency>
+        <dependency>
+            <groupId>io.quarkus</groupId>
+            <artifactId>quarkus-devtools-testing</artifactId>
             <scope>test</scope>
         </dependency>
     </dependencies>

@@ -14,3 +14,8 @@ metadata:
     - "jnosql."
     - "jnosql.document."
 #  status: "preview"
+  codestart:
+    name: "quarkus-jnosql-elasticsearch-codestart"
+    languages:
+      - "java"
+    artifact: "io.quarkiverse.jnosql:quarkus-jnosql-elasticsearch:codestarts:jar:${project.version}"

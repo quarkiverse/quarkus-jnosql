@@ -1,0 +1,19 @@
+name: quarkus-jnosql-neo4j-codestart
+ref: quarkus-jnosql-neo4j
+type: code
+tags:
+  - extension-codestart
+  - maven-only
+metadata:
+  title: Quarkus JNoSQL Neo4j Codestart
+  description: Create your first Graph NoSQL entity with Quarkus and JNoSQL Neo4j.
+  related-guide-section: https://docs.quarkiverse.io/quarkus-jnosql/dev/
+language:
+  base:
+    data:
+      database-name: "neo4j"
+    test-dependencies:
+      - groupId: org.assertj
+        artifactId: assertj-core
+        version: ${assertj.version}
+        scope: test

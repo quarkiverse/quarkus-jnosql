@@ -29,12 +29,13 @@ public class OracleNoSQLTestResource implements QuarkusTestResourceLifecycleMana
                     .withExposedPorts(PORT_DEFAULT);
             container.start();
 
-            return Map.of(
+            Map<String, String> oracleNoSQLParams = Map.of(
                     OracleNoSQLConfigurations.HOST.get(),
                     String.format(
                             "http://%s:%s",
                             container.getHost(),
                             container.getMappedPort(PORT_DEFAULT).toString()));
+            return oracleNoSQLParams;
 
         } catch (Exception e) {
             throw new RuntimeException(e);

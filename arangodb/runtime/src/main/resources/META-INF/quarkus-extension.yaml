@@ -15,3 +15,8 @@ metadata:
     - "jnosql."
     - "jnosql.keyvalue."
 #  status: "preview"
+  codestart:
+    name: "quarkus-jnosql-arangodb-codestart"
+    languages:
+      - "java"
+    artifact: "io.quarkiverse.jnosql:quarkus-jnosql-arangodb:codestarts:jar:${project.version}"

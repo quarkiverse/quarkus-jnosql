@@ -1,0 +1,4 @@
+jnosql:
+  keyvalue:
+    database: "people"
+

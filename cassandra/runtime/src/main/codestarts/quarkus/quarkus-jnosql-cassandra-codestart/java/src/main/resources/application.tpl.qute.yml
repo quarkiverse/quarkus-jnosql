@@ -1,0 +1,4 @@
+jnosql:
+  column:
+    database: "{database-name}"
+

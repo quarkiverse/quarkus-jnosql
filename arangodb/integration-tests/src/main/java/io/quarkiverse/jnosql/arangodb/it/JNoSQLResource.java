@@ -7,7 +7,6 @@ import jakarta.ws.rs.GET;
 import jakarta.ws.rs.NotFoundException;
 import jakarta.ws.rs.Path;
 
-import org.eclipse.jnosql.communication.keyvalue.BucketManager;
 import org.eclipse.jnosql.mapping.Database;
 import org.eclipse.jnosql.mapping.DatabaseType;
 
@@ -28,7 +27,8 @@ public class JNoSQLResource {
     protected PeopleRecord peopleRecord;
 
     @Inject
-    protected BucketManager bucketManager;
+    @Database(DatabaseType.KEY_VALUE)
+    protected Template keyValueTemplate;
 
     @GET
     @Path("/document/using-jakarta-data")
@@ -67,10 +67,9 @@ public class JNoSQLResource {
     @Path("/keyvalue/using-pojo")
     public Person fromBucketWithPojo() {
         Person person = Person.randomPerson();
-        bucketManager.put(person.getId(), person);
-        return bucketManager
-                .get(person.getId())
-                .map(v -> v.get(Person.class))
+        keyValueTemplate.insert(person);
+        return keyValueTemplate
+                .find(Person.class, person.getId())
                 .orElseThrow(() -> new NotFoundException());
     }
 
@@ -78,10 +77,9 @@ public class JNoSQLResource {
     @Path("/keyvalue/using-record")
     public PersonRecord fromBucketWithRecord() {
         PersonRecord person = PersonRecord.randomPerson();
-        bucketManager.put(person.id(), person);
-        return bucketManager
-                .get(person.id())
-                .map(v -> v.get(PersonRecord.class))
+        keyValueTemplate.insert(person);
+        return keyValueTemplate
+                .find(PersonRecord.class, person.id())
                 .orElseThrow(() -> new NotFoundException());
     }
 }

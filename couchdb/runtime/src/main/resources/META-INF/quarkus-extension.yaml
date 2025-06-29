@@ -13,4 +13,9 @@ metadata:
   config:
     - "jnosql."
     - "jnosql.document."
+  codestart:
+    name: "quarkus-jnosql-couchdb-codestart"
+    languages:
+      - "java"
+    artifact: "io.quarkiverse.jnosql:quarkus-jnosql-couchdb:codestarts:jar:${project.version}"
 #  status: "preview"

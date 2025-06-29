@@ -1,0 +1,34 @@
+name: quarkus-jnosql-cassandra-codestart
+ref: quarkus-jnosql-cassandra
+type: code
+tags:
+  - extension-codestart
+  - maven-only
+metadata:
+  title: Quarkus JNoSQL Cassandra Codestart
+  description: Create your first Wide-Column NoSQL entity with Quarkus and JNoSQL Cassandra.
+  related-guide-section: https://docs.quarkiverse.io/quarkus-jnosql/dev/
+language:
+  base:
+    data:
+      database-type: "column"
+      database-name: "garage"
+      additional-quarkus-test-annotations: "@io.quarkus.test.common.QuarkusTestResource(com.datastax.oss.quarkus.test.CassandraTestResource.class)"
+    dependencies:
+        - groupId: com.datastax.oss.quarkus
+          artifactId: cassandra-quarkus-client
+
+    test-dependencies:
+        - groupId: com.datastax.oss.quarkus
+          artifactId: cassandra-quarkus-test-framework
+          scope: test
+
+        - groupId: net.datafaker
+          artifactId: datafaker
+          version: ${datafaker.version}
+          scope: test
+
+        - groupId: org.assertj
+          artifactId: assertj-core
+          version: ${assertj.version}
+          scope: test

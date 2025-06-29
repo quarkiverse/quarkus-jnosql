@@ -14,3 +14,8 @@ metadata:
     - "jnosql."
     - "jnosql.keyvalue."
 #  status: "preview"
+  codestart:
+    name: "quarkus-jnosql-hazelcast-codestart"
+    languages:
+      - "java"
+    artifact: "io.quarkiverse.jnosql:quarkus-jnosql-hazelcast:codestarts:jar:${project.version}"

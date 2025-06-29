@@ -2,10 +2,7 @@ package io.quarkiverse.jnosql.oracle.deployment;
 
 import java.util.stream.Stream;
 
-import org.eclipse.jnosql.databases.oracle.communication.QuarkusOracleNoSQLBucketManagerProducer;
-import org.eclipse.jnosql.databases.oracle.communication.QuarkusOracleNoSQLDocumentConfiguration;
-import org.eclipse.jnosql.databases.oracle.communication.QuarkusOracleNoSQLDocumentManagerProducer;
-import org.eclipse.jnosql.databases.oracle.communication.QuarkusOracleNoSQLKeyValueConfiguration;
+import org.eclipse.jnosql.databases.oracle.communication.*;
 
 import io.quarkus.arc.deployment.AdditionalBeanBuildItem;
 import io.quarkus.arc.deployment.ExcludedTypeBuildItem;
@@ -29,12 +26,18 @@ class Processor {
         additionalBeanProducer.produce(AdditionalBeanBuildItem.unremovableOf(QuarkusOracleNoSQLKeyValueConfiguration.class));
         additionalBeanProducer.produce(AdditionalBeanBuildItem.unremovableOf(QuarkusOracleNoSQLDocumentManagerProducer.class));
         additionalBeanProducer.produce(AdditionalBeanBuildItem.unremovableOf(QuarkusOracleNoSQLBucketManagerProducer.class));
+        additionalBeanProducer
+                .produce(AdditionalBeanBuildItem.unremovableOf(QuarkusOracleNoSQLBucketManagerFactoryProducer.class));
     }
 
     @BuildStep
     void buildExcludedType(BuildProducer<ExcludedTypeBuildItem> excludedTypeProducer) {
         excludedTypeProducer.produce(
                 new ExcludedTypeBuildItem("org.eclipse.jnosql.mapping.document.configuration.DocumentManagerSupplier"));
+        excludedTypeProducer.produce(
+                new ExcludedTypeBuildItem("org.eclipse.jnosql.mapping.keyvalue.configuration.BucketManagerSupplier"));
+        excludedTypeProducer.produce(
+                new ExcludedTypeBuildItem("org.eclipse.jnosql.mapping.keyvalue.configuration.BucketManagerFactorySupplier"));
         excludedTypeProducer.produce(
                 new ExcludedTypeBuildItem("org.eclipse.jnosql.databases.oracle.mapping.DocumentManagerSupplier"));
     }

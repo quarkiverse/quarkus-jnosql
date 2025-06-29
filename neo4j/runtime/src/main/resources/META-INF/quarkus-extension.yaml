@@ -13,3 +13,8 @@ metadata:
   config:
     - "jnosql."
 #  status: "preview"
+  codestart:
+    name: "quarkus-jnosql-neo4j-codestart"
+    languages:
+      - "java"
+    artifact: "io.quarkiverse.jnosql:quarkus-jnosql-neo4j:codestarts:jar:${project.version}"

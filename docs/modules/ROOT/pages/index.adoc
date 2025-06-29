@@ -1,6 +1,8 @@
-= Quarkus Jnosql
+= Quarkus JNoSQL
 :toc: auto
 include::./includes/attributes.adoc[]
+
+This documentation provides instructions on how to integrate Eclipse JNoSQL, an implementation of the Jakarta NoSQL and Jakarta Data specifications, into a Quarkus project using the Quarkus JNoSQL Extension. This extension supports JNoSQL and facilitates using NoSQL databases in your Quarkus applications.
 
 == Introduction
 
@@ -22,27 +24,243 @@ The Quarkus NoSQL Extension offers several advantages for developers:
 * Database Agnosticism: Supports a wide range of NoSQL databases, including key-value stores, document databases, and column-family stores. Offers flexibility to choose the most suitable database for specific use cases without major code changes.
 * Rich Documentation and Ecosystem: Eclipse JNoSQL boasts a thriving community and comprehensive documentation, making it easy for developers to find support, tutorials, and examples. Integration with Quarkus allows tapping into the vibrant Quarkus ecosystem as well.
 
-== Installation
+== Getting Started
 
-To use this extension, add the `io.quarkiverse.jnosql:quarkus-jnosql` extension to your build file. For instance, with Maven, include the following dependency in your POM file:
+To use this extension, add the Quarkus JNoSQL Database extension that you need to your build file.For instance, with Maven, include the following dependency in your POM file:
 
 [source,xml,subs=attributes+]
 ----
 <dependency>
     <groupId>io.quarkiverse.jnosql</groupId>
-    <artifactId>quarkus-jnosql</artifactId>
+    <artifactId>quarkus-jnosql-[DATABASE]</artifactId>
     <version>{project-version}</version>
 </dependency>
 ----
 
-== Getting Started
+Replace `[DATABASE]` with the specific database you want to use. Let see the supported NoSQL databases in the next section.
 
-Getting started with Quarkus JNoSQL is straightforward:
+[NOTE]
+====
+*Recommended Quarkus JNoSQL Extension version:* `{project-version}` or higher
+====
 
-1. Add the Quarkus JNoSQL Extension to your project's dependencies. You can find the latest version on Maven Central.
+=== Supported NoSQL Databases
+
+The Quarkus JNoSQL extension supports a variety of NoSQL databases, each with its own unique features and capabilities. Below is a table summarizing the supported NoSQL types, whether they support _Jakarta Data_, and if they support _Native Compilation_:
+
+[cols="20,20,20,20,20", options="header"]
+|===
+| Database Vendor
+| Supported NoSQL Type
+| Supports Jakarta Data
+| Provides Codestart
+| Supports Native Compilation
+
+| <<_mongodb, MongoDB>>
+| Document
+| ✅
+| ✅
+| ✅
+
+| <<_cassandra, Cassandra>>
+| Column
+| ✅
+| ✅
+| ✅
+
+| <<_couchdb, CouchDB>>
+| Document
+| ✅
+| ✅
+| ✅
+
+| <<_arangodb, ArangoDB>>
+| Document and Key-Value
+| ✅
+| ✅
+| ✅
+
+| <<_dynamodb, DynamoDB>>
+| Key-Value
+| ❌
+| ✅
+| ✅
+
+| <<_elasticsearch, Elasticsearch>>
+| Document
+| ✅
+| ✅
+| ❌
+
+| <<_hazelcast, Hazelcast>>
+| Key-Value
+| ❌
+| ✅
+| ✅
+
+| <<_solr, Solr>>
+| Document
+| ✅
+| ✅
+| ✅
+
+| <<_neo4j, Neo4j>>
+| Graph
+| ✅
+| ✅
+| ✅
+
+| <<_oracle_nosql, Oracle NoSQL>>
+| Document and Key-Value
+| ✅
+| ✅
+| ✅
+
+|===
 
 
-2. Define your entities using JNoSQL annotations. For example:
+== Create your Quarkus JNoSQL Project using Extension Codestarts
+
+The easiest way to get started with Quarkus JNoSQL Extension is by using the codestart provided by the extension. This codestart will generate a Quarkus project with the necessary dependencies and configurations for using JNoSQL with your chosen NoSQL database.
+
+You can use the Quarkus CLI to create a new project passing the Quarkus JNoSQL Extension that you want. It'll create the project with all required dependencies and configurations automatically. For example, to create a project using Quarkus JNoSQL MongoDB Extension, you can run:
+
+[source,console]
+----
+quarkus create app --extensions=jnosql-mongodb
+----
+
+Here is a table with the available Quarkus JNoSQL Extensions that you can use with the `quarkus create app` command:
+
+[cols="20,80", options="header"]
+|===
+| Database Vendor
+| Command
+
+| <<_mongodb, MongoDB>>
+|`quarkus create app --extensions=jnosql-mongodb`
+
+| <<_cassandra, Cassandra>>
+|`quarkus create app --extensions=jnosql-cassandra`
+
+| <<_couchdb, CouchDB>>
+|`quarkus create app --extensions=jnosql-couchdb`
+
+| <<_arangodb, ArangoDB>>
+|`quarkus create app --extensions=jnosql-arangodb`
+
+| <<_dynamodb, DynamoDB>>
+|`quarkus create app --extensions=jnosql-dynamodb`
+
+| <<_elasticsearch, Elasticsearch>>
+|`quarkus create app --extensions=jnosql-elasticsearch`
+
+| <<_hazelcast, Hazelcast>>
+|`quarkus create app --extensions=jnosql-hazelcast`
+
+| <<_solr, Solr>>
+|`quarkus create app --extensions=jnosql-solr`
+
+| <<_neo4j, Neo4j>>
+|`quarkus create app --extensions=jnosql-neo4j`
+
+| <<_oracle_nosql, Oracle NoSQL>>
+|`quarkus create app --extensions=jnosql-oracle-nosql`
+
+|===
+
+Or you could create it on by downloading the scaffolding project from the https://code.quarkus.io/?extension-search=jnosql[code.quarkus.io] and selecting the JNoSQL extension for your desired NoSQL database.
+
+== Manually adding Quarkus JNoSQL Extension to your project
+
+There are a variety of NoSQL databases, each with its own unique features and capabilities. See the section <<#_supported_nosql_databases,Supported NoSQL Databases>>, select the one that fits your needs, and then follow the instructions below to manually add the Quarkus JNoSQL Extension to your project.
+
+[IMPORTANT]
+====
+If you are using **Java 21** or above, make sure to <<#_enabling_the_jnosql_mapping_lite_annotation_processor,enable the annotation processor execution>>. If you are using **Java 17** or below, you can skip this step and go ahead to implement your entities and repositories.
+====
+
+== Enabling the JNoSQL Mapping Lite Annotation Processor
+
+The Quarkus JNoSQL Extensions are using the annotation processor provided by the `org.eclipse.jnosql.lite:mapping-lite-processor:1.1.8` dependency. This dependency is automatically included when you add any Quarkus JNoSQL extension to your project.
+
+This annotation processor is responsible to generate all the required implementation classes that will be used by the CDI during AOT compilation.
+
+To ensure that the annotation processor is executed during the build process, you need to configure your build tool (<<_maven, Maven>> or <<_gradle>> Gradle) accordingly.
+
+=== Maven
+
+If you're using **Java 21** or above, you should explicitly make sure to activate the annotation processor execution by setting `<proc>full</proc>` on the maven-compiler plugin or via the `maven.compiler.proc>full</maven.compiler.proc>` property.For previous Java versions, e.g. **Java 17**, you can skip this step.For example:
+
+Setting it in the `pom.xml` properties:
+
+[source,xml]
+----
+<project>
+    <!-- skipping other elements -->
+    <properties>
+        <!-- skipping other properties -->
+        <maven.compiler.proc>full</maven.compiler.proc>
+        <!-- skipping other properties -->
+    </properties>
+    <!-- skipping other elements -->
+</project>
+----
+
+Or setting it directly in the `maven-compiler-plugin` configuration:
+
+[source,xml]
+----
+<project>
+<!-- skipping other elements -->
+<build>
+    <plugins>
+        <!-- skipping other plugins -->
+        <plugin>
+            <artifactId>maven-compiler-plugin</artifactId>
+            <version>${compiler-plugin.version}</version>
+            <configuration>
+                <proc>full</proc>
+                <compilerArgs>
+                    <arg>-parameters</arg>
+                </compilerArgs>
+            </configuration>
+        </plugin>
+        <!-- skipping other plugins -->
+    </plugins>
+</build>
+<!-- skipping other elements -->
+</project>
+----
+
+=== Gradle
+
+The target build tool for the Quarkus JNoSQL Extension is Maven. However, if you are using Gradle, you may need to ensure that the annotation processor is executed during the build process.
+
+To enable the annotation processors execution is necessary to pass the `-proc:full` to the compiler used by Gradle. For example like below:
+
+==== Groovy DSL (build.gradle):
+[source,groovy]
+----
+tasks.withType(JavaCompile).configureEach {
+    options.compilerArgs += ['-proc:full']
+}
+----
+
+==== Kotlin DSL (build.gradle.kts):
+[source,kotlin]
+----
+tasks.withType<JavaCompile>().configureEach {
+    options.compilerArgs.add("-proc:full")
+}
+----
+
+
+== Using Jakarta NoSQL and Jakarta Data with Quarkus JNoSQL
+
+Once you have added the Quarkus JNoSQL Extension to your project, you can start using it to interact with your NoSQL database. The following steps outline how to create entities and repositories in your Quarkus application:
+
+=== Creating entities using JNoSQL annotations
 
 [source,java]
 ----
@@ -53,251 +271,637 @@ import jakarta.nosql.Id;
 @Entity
 public class TestEntity {
 
-   @Id
-   private String id;
+    @Id
+    private String id;
 
-   @Column
-   private String testField;
+    @Column
+    private String testField;
+
+    // omitted getters and setters
 }
 ----
 
-== Key-Value Database Configuration
+=== Using Jakarta NoSQL Template
 
-=== Configuration
-
-Configure the JNoSql KeyValue Quarkus extension by specifying the name of the database that will be utilized within the Eclipse JNoSQL framework in your `application.properties`:
-
-[source,properties]
-----
-jnosql.keyvalue.database=my-database-name
-----
-
-=== Usage
-
-Inject the `KeyValueTemplate` into your class and use it to interact with the KeyValue database:
+Example using `jakarta.nosql.Template`:
 
 [source,java]
 ----
-import jakarta.inject.Inject;
-import org.jnosql.artemis.key.KeyValueTemplate;
-
 @Inject
-private KeyValueTemplate template;
+// If your NoSQL database supports multiple types,
+// you can specify the type using the @Database annotation.
+
+// @Database(DatabaseType.DOCUMENT) for Document databases
+// @Database(DatabaseType.COLUMN) for Column databases
+// @Database(DatabaseType.GRAPH) for Graph databases
+// @Database(DatabaseType.KEY_VALUE) for Key-Value databases
+protected Template template;
 
 public void insert(TestEntity entity) {
     template.insert(entity);
 }
 ----
 
-== Key-Value Database Specific Configuration
+=== Using Jakarta Data Repository
 
-When configuring databases for use with Quarkus and Eclipse JNoSQL, it's important to note that instead of using the traditional Eclipse JNoSQL properties and configuration, Quarkus provides its properties and configuration for seamless integration. Below are sections detailing the configuration specifics for different NoSQL databases within the Quarkus environment.
+For implementations that offer Jakarta Data support, you may create and inject a Jakarta Data Repository:
 
-TIP: The forthcoming sections will delve into the configuration details for ArangoDB, DynamoDB, Hazelcast, and Redis databases, providing comprehensive guidance for each.
+[source,java]
+----
+@Repository
+public interface TestEntityRepository extends NoSQLRepository<TestEntity, String> {
+}
+----
 
-=== ArangoDB
+Jakarta Data repositories provide a powerful way to interact with your NoSQL database using a repository pattern.
 
-Add the ArangoDB dependency to your project's `pom.xml`:
+The interface `org.eclipse.jnosql.mapping.NoSQLRepository` used above extends the `jakarta.data.repository.BasicRepository`, which is a Jakarta Data Repository interface that brings a specialization for NoSQL useful operations, allowing developers to use pre-defined methods. Also,you can define custom queries using method names or annotations, and the framework will handle the implementation for you. More information about Jakarta Data can be found in the https://jakarta.ee/specifications/data/1.0/[Jakarta Data Specification].
 
-[source,xml]
+
+=== Using the Jakarta Data Repositories or Jakarta NoSQL Templates in your service
+
+[source,java]
+----
+@ApplicationScope
+class TestEntityService {
+
+    @Inject
+    // If your NoSQL database supports multiple types,
+    // you can specify the type using the @Database annotation.
+
+    // @Database(DatabaseType.DOCUMENT) for Document databases
+    // @Database(DatabaseType.COLUMN) for Column databases
+    // @Database(DatabaseType.GRAPH) for Graph databases
+    // @Database(DatabaseType.KEY_VALUE) for Key-Value databases
+    Template template;
+
+    @Inject
+    // If your NoSQL database supports multiple types,
+    // you can specify the type using the @Database annotation.
+
+    // @Database(DatabaseType.DOCUMENT) for Document databases
+    // @Database(DatabaseType.COLUMN) for Column databases
+    // @Database(DatabaseType.GRAPH) for Graph databases
+    // @Database(DatabaseType.KEY_VALUE) for Key-Value databases
+    TestEntityRepository repository;
+
+    public void insertViaRepository(TestEntity entity) {
+        repository.save(entity);
+    }
+
+    public void insertViaTemplate(TestEntity entity) {
+        template.insert(entity);
+    }
+
+}
+----
+
+
+Now, you can use the `TestEntityService` to perform CRUD operations on your `TestEntity` objects using the repository.
+
+That's it! You have successfully set up a Quarkus application with the Quarkus JNoSQL Extension, allowing you to interact with your NoSQL database using Jakarta NoSQL and Jakarta Data.
+
+Next, we provide more instructions for each supported database.
+
+[#_mongodb]
+== MongoDB
+
+image::https://jnosql.github.io/img/logos/mongodb.png[MongoDB Project,align="left",width=25%,height=25%]
+
+https://www.mongodb.com/[MongoDB] is a free and open-source cross-platform document-oriented database program.
+
+This driver provides support for the *Document* NoSQL API and **Jakarta Data**.
+
+To create a Quarkus project with this extension, you can use the Quarkus CLI:
+
+[source,console]
+----
+quarkus create app --extensions=jnosql-mongodb
+----
+
+To add this extension with the Quarkus CLI to an existing project:
+[source,console]
+----
+quarkus create app --extensions=jnosql-mongodb
+----
+
+Or add it manually to your `pom.xml`:
+
+[source,xml,subs=attributes+]
 ----
 <dependency>
     <groupId>io.quarkiverse.jnosql</groupId>
-    <artifactId>quarkus-jnosql-keyvalue-arangodb</artifactId>
+    <artifactId>quarkus-jnosql-mongodb</artifactId>
+    <version>{project-version}</version>
 </dependency>
 ----
 
-For specific configuration details, please refer to the link:https://github.com/eclipse/jnosql-databases#arangodb[ArangoDB JNoSQL driver].
-
-=== DynamoDB
-
-Add the DynamoDB dependency to your project's `pom.xml`:
-
-[source,xml]
-----
-<dependency>
-    <groupId>io.quarkiverse.jnosql</groupId>
-    <artifactId>quarkus-jnosql-keyvalue-dynamodb</artifactId>
-</dependency>
-----
-
-Please refer to the link:https://quarkiverse.github.io/quarkiverse-docs/quarkus-amazon-services/dev/amazon-dynamodb.html[DynamoDB Quarkiverse extension] for specific configuration details.
-
-=== Hazelcast
-
-Add the Hazelcast dependency to your project's `pom.xml`:
-
-[source,xml]
-----
-<dependency>
-    <groupId>io.quarkiverse.jnosql</groupId>
-    <artifactId>quarkus-jnosql-keyvalue-hazelcast</artifactId>
-</dependency>
-----
-
-Please refer to the link:https://github.com/hazelcast/quarkus-hazelcast-client[Quarkus Hazelcast extension] for specific configuration details.
-
-=== Redis
-
-Add the Redis dependency to your project's `pom.xml`:
-
-[source,xml]
-----
-<dependency>
-    <groupId>io.quarkiverse.jnosql</groupId>
-    <artifactId>quarkus-jnosql-keyvalue-redis</artifactId>
-</dependency>
-----
-
-For specific configuration details, please refer to the link:https://quarkus.io/guides/redis-reference[Redis Quarkus extension].
-
-== Document Database Configuration
-
-=== Configuration
-
-Configure the JNoSql Document Quarkus extension by specifying the database's name in your `application.properties`:
+Set the database name in `application.properties`:
 
 [source,properties]
 ----
 jnosql.document.database=my-database-name
 ----
 
-=== Usage
+[IMPORTANT]
+====
+If you are using **Java 21** or above, make sure to <<#_enabling_the_jnosql_mapping_lite_annotation_processor,enable the annotation processor execution>>. If you are using **Java 17** or below, you can skip this step and go ahead to implement your entities and repositories.
+====
 
-Inject the `DocumentTemplate` into your class and use it to interact with the Document database:
+Do you want to get started to create your entities and repositories? See the section <<#_using_jakarta_nosql_and_jakarta_data_with_quarkus_jnosql,Using Jakarta NoSQL and Jakarta Data with Quarkus JNoSQL>>.
 
-[source,java]
+More details: https://github.com/eclipse-jnosql/jnosql-databases/?tab=readme-ov-file#mongodb[JNoSQL MongoDB Database Driver].
+
+[#_cassandra]
+== Cassandra
+
+image::https://jnosql.github.io/img/logos/cassandra.png[Apache Cassandra Project,align="left",width=25%,height=25%]
+
+https://cassandra.apache.org/[Apache Cassandra] is a distributed database management system.
+
+Supports the *Column* NoSQL API and **Jakarta Data**.
+
+To create a Quarkus project with this extension, you can use the Quarkus CLI:
+
+[source,console]
 ----
-import jakarta.inject.Inject;
-import org.jnosql.artemis.document.DocumentTemplate;
-
-@Inject
-private DocumentTemplate template;
-
-public void insert(TestDocumentEntity entity) {
-    template.insert(entity);
-}
-----
-
-== Document Database Specific Configuration
-
-When configuring databases for use with Quarkus and Eclipse JNoSQL, it's important to note that instead of using the traditional Eclipse JNoSQL properties and configuration, Quarkus provides its properties and configuration for seamless integration. Below are sections detailing the configuration specifics for different NoSQL databases within the Quarkus environment.
-
-TIP: The forthcoming sections will delve into the configuration details for ArangoDB, CouchDB, Elasticsearch, MongoDB, and Solr databases, providing comprehensive guidance for each.
-
-=== ArangoDB
-
-Add the ArangoDB dependency to your project's `pom.xml`:
-
-[source,xml]
-----
-<dependency>
-    <groupId>io.quarkiverse.jnosql</groupId>
-    <artifactId>quarkus-jnosql-document-arangodb</artifactId>
-</dependency>
+quarkus create app --extensions=jnosql-cassandra
 ----
 
-For specific configuration details, please refer to the link:https://github.com/eclipse/jnosql-databases#arangodb[ArangoDB JNoSQL driver].
+To add this extension with the Quarkus CLI to an existing project:
+[source,console]
+----
+quarkus create app --extensions=jnosql-cassandra
+----
 
-=== CouchDB
+Or add it manually to your `pom.xml`:
 
-Add the CouchDB dependency to your project's `pom.xml`:
-
-[source,xml]
+[source,xml,subs=attributes+]
 ----
 <dependency>
     <groupId>io.quarkiverse.jnosql</groupId>
-    <artifactId>quarkus-jnosql-document-couchdb</artifactId>
+    <artifactId>quarkus-jnosql-cassandra</artifactId>
+    <version>{project-version}</version>
 </dependency>
 ----
 
-For specific configuration details, please refer to the link:https://github.com/eclipse/jnosql-databases#couchdb[CouchDB JNoSQL driver].
 
-=== Elasticsearch
-
-Add the Elasticsearch dependency to your project's `pom.xml`:
-
-[source,xml]
-----
-<dependency>
-    <groupId>io.quarkiverse.jnosql</groupId>
-    <artifactId>quarkus-jnosql-document-elasticsearch</artifactId>
-</dependency>
-----
-
-For specific configuration details, please refer to the link:https://github.com/eclipse/jnosql-databases?tab=readme-ov-file#elasticsearch[ElasticSearch driver].
-
-=== MongoDB
-
-Add the MongoDB dependency to your project's `pom.xml`:
-
-[source,xml]
-----
-<dependency>
-    <groupId>io.quarkiverse.jnosql</groupId>
-    <artifactId>quarkus-jnosql-document-mongodb</artifactId>
-</dependency>
-----
-
-For specific configuration details, please refer to the link:https://quarkus.io/guides/mongodb#quarkus-mongodb-config-group-dev-services-build-time-config_configuration[MongoDB configuration].
-
-=== Solr
-
-Add the Solr dependency to your project's `pom.xml`:
-
-[source,xml]
-----
-<dependency>
-    <groupId>io.quarkiverse.jnosql</groupId>
-    <artifactId>quarkus-jnosql-document-solr</artifactId>
-</dependency>
-----
-
-For specific configuration details, please refer to the link:https://github.com/eclipse/jnosql-databases#solr[Solr JNoSQL driver].
-
-== Column Database Configuration
-
-=== Configuration
-
-Configure the JNoSql Column Quarkus extension by specifying the database's name in your `application.properties`:
+Set the database name in `application.properties`:
 
 [source,properties]
 ----
 jnosql.column.database=my-database-name
 ----
 
-=== Usage
+[IMPORTANT]
+====
+If you are using **Java 21** or above, make sure to <<#_enabling_the_jnosql_mapping_lite_annotation_processor,enable the annotation processor execution>>. If you are using **Java 17** or below, you can skip this step and go ahead to implement your entities and repositories.
+====
 
-Inject the `ColumnTemplate` into your class and use it to interact with the Column database:
+Do you want to get started to create your entities and repositories? See the section <<#_using_jakarta_nosql_and_jakarta_data_with_quarkus_jnosql,Using Jakarta NoSQL and Jakarta Data with Quarkus JNoSQL>>.
 
-[source,java]
+More details: https://github.com/eclipse-jnosql/jnosql-databases/?tab=readme-ov-file#cassandra[JNoSQL Cassandra Database Driver].
+
+[#_arangodb]
+== ArangoDB
+
+image::https://jnosql.github.io/img/logos/ArangoDB.png[ArangoDB Project,align="left",width=25%,height=25%]
+
+https://www.arangodb.com/[ArangoDB] is a native multi-model database.
+
+Supports **Document** and **Key-Value** types, and **Jakarta Data** for Document entities.
+
+To create a Quarkus project with this extension, you can use the Quarkus CLI:
+
+[source,console]
 ----
-import jakarta.inject.Inject;
-import org.jnosql.artemis.column.ColumnTemplate;
-
-@Inject
-private ColumnTemplate template;
-
-public void insert(TestColumnEntity entity) {
-    template.insert(entity);
-}
+quarkus create app --extensions=jnosql-arangodb
 ----
 
-== Column Database Specific Configuration
+To add this extension with the Quarkus CLI to an existing project:
+[source,console]
+----
+quarkus create app --extensions=jnosql-arangodb
+----
 
-=== Cassandra
+Or add it manually to your `pom.xml`:
 
-Add the Cassandra dependency to your project's `pom.xml`:
-
-[source,xml]
+[source,xml,subs=attributes+]
 ----
 <dependency>
     <groupId>io.quarkiverse.jnosql</groupId>
-    <artifactId>quarkus-jnosql-column-cassandra</artifactId>
+    <artifactId>quarkus-jnosql-arangodb</artifactId>
+    <artifactId>{project-version}</artifactId>
+</dependency>
+----
+
+Set the database name in `application.properties`:
+
+For the Key-Value database:
+
+[source,properties]
+----
+jnosql.keyvalue.database=my-database-name
+----
+
+For the Document database name:
+
+[source,properties]
+----
+jnosql.document.database=my-database-name
+----
+
+[IMPORTANT]
+====
+If you are using **Java 21** or above, make sure to <<#_enabling_the_jnosql_mapping_lite_annotation_processor,enable the annotation processor execution>>. If you are using **Java 17** or below, you can skip this step and go ahead to implement your entities and repositories.
+====
+
+Do you want to get started to create your entities and repositories? See the section <<#_using_jakarta_nosql_and_jakarta_data_with_quarkus_jnosql,Using Jakarta NoSQL and Jakarta Data with Quarkus JNoSQL>>.
+
+More details: https://github.com/eclipse/jnosql-databases#arangodb[Using ArangoDB JNoSQL driver].
+
+[#_dynamodb]
+== DynamoDB
+
+image::https://user-images.githubusercontent.com/6509926/70553550-f033b980-1b40-11ea-9192-759b3b1053b3.png[align="left",width=25%,height=25%]
+
+https://aws.amazon.com/dynamodb/[Amazon DynamoDB] is a fully managed, serverless, key-value and document NoSQL database.
+
+Supports *Key-Value*.
+
+To create a Quarkus project with this extension, you can use the Quarkus CLI:
+
+[source,console]
+----
+quarkus create app --extensions=jnosql-dynamodb
+----
+
+To add this extension with the Quarkus CLI to an existing project:
+[source,console]
+----
+quarkus create app --extensions=jnosql-dynamodb
+----
+
+Or add it manually to your `pom.xml`:
+
+[source,xml,subs=attributes+]
+----
+<dependency>
+    <groupId>io.quarkiverse.jnosql</groupId>
+    <artifactId>quarkus-jnosql-dynamodb</artifactId>
+    <version>{project-version}</version>
 </dependency>
 ----
 
 
-Please refer to the link:https://quarkus.io/guides/cassandra[Cassandra Quarkus extension] for specific configuration details.
+Set the database name in `application.properties`:
+
+[source,properties]
+----
+jnosql.keyvalue.database=my-database-name
+----
+
+[IMPORTANT]
+====
+If you are using **Java 21** or above, make sure to <<#_enabling_the_jnosql_mapping_lite_annotation_processor,enable the annotation processor execution>>. If you are using **Java 17** or below, you can skip this step and go ahead to implement your entities and repositories.
+====
+
+Do you want to get started to create your entities and repositories? See the section <<#_using_jakarta_nosql_and_jakarta_data_with_quarkus_jnosql,Using Jakarta NoSQL and Jakarta Data with Quarkus JNoSQL>>.
+
+https://quarkiverse.github.io/quarkiverse-docs/quarkus-amazon-services/dev/amazon-dynamodb.html[See more details about DynamoDB Quarkiverse extension].
+
+https://github.com/eclipse-jnosql/jnosql-databases/?tab=readme-ov-file#dynamodb[More details about JNoSQL DynamoDB Database driver].
+
+
+[#_hazelcast]
+== Hazelcast
+
+image::https://jnosql.github.io/img/logos/hazelcast.svg[Hazelcast Project,align="left",width=25%,height=25%]
+
+https://hazelcast.com/[Hazelcast] is an open source in-memory data grid.
+
+Supports *Key-Value*.
+
+To create a Quarkus project with this extension, you can use the Quarkus CLI:
+
+[source,console]
+----
+quarkus create app --extensions=jnosql-hazelcast
+----
+
+To add this extension with the Quarkus CLI to an existing project:
+[source,console]
+----
+quarkus create app --extensions=jnosql-hazelcast
+----
+
+Or add it manually to your `pom.xml`:
+
+[source,xml,subs=attributes+]
+----
+<dependency>
+    <groupId>io.quarkiverse.jnosql</groupId>
+    <artifactId>quarkus-jnosql-hazelcast</artifactId>
+    <version>{project-version}</version>
+</dependency>
+----
+
+
+Set the database name in `application.properties`:
+
+[source,properties]
+----
+jnosql.keyvalue.database=my-database-name
+----
+
+[IMPORTANT]
+====
+If you are using **Java 21** or above, make sure to <<#_enabling_the_jnosql_mapping_lite_annotation_processor,enable the annotation processor execution>>. If you are using **Java 17** or below, you can skip this step and go ahead to implement your entities and repositories.
+====
+
+Do you want to get started to create your entities and repositories? See the section <<#_using_jakarta_nosql_and_jakarta_data_with_quarkus_jnosql,Using Jakarta NoSQL and Jakarta Data with Quarkus JNoSQL>>.
+
+https://github.com/hazelcast/quarkus-hazelcast-client[More details about Quarkus Hazelcast extension].
+
+https://github.com/eclipse-jnosql/jnosql-databases/?tab=readme-ov-file#hazelcast[More details about JNoSQL Hazelcast Database driver].
+
+[#_couchdb]
+== CouchDB
+
+image::https://www.jnosql.org/img/logos/couchdb.png[CouchDB,align="left",width=25%,height=25%]
+
+https://couchdb.apache.org/[CouchDB] provides an API integration between Java and the database.
+
+Supports the *Document* NoSQL API and **Jakarta Data**.
+
+To create a Quarkus project with this extension, you can use the Quarkus CLI:
+
+[source,console]
+----
+quarkus create app --extensions=jnosql-couchdb
+----
+
+To add this extension with the Quarkus CLI to an existing project:
+[source,console]
+----
+quarkus create app --extensions=jnosql-couchdb
+----
+
+Or add it manually to your `pom.xml`:
+
+[source,xml,subs=attributes+]
+----
+<dependency>
+    <groupId>io.quarkiverse.jnosql</groupId>
+    <artifactId>quarkus-jnosql-couchdb</artifactId>
+    <version>{project-version}</version>
+</dependency>
+----
+
+Set the database name in `application.properties`:
+
+[source,properties]
+----
+jnosql.document.database=my-database-name
+----
+
+[IMPORTANT]
+====
+If you are using **Java 21** or above, make sure to <<#_enabling_the_jnosql_mapping_lite_annotation_processor,enable the annotation processor execution>>. If you are using **Java 17** or below, you can skip this step and go ahead to implement your entities and repositories.
+====
+
+Do you want to get started to create your entities and repositories? See the section <<#_using_jakarta_nosql_and_jakarta_data_with_quarkus_jnosql,Using Jakarta NoSQL and Jakarta Data with Quarkus JNoSQL>>.
+
+https://github.com/eclipse-jnosql/jnosql-databases/?tab=readme-ov-file#couchdb[More details about JNoSQL CouchDB Database driver].
+
+[#_elasticsearch]
+== Elasticsearch
+
+image::https://jnosql.github.io/img/logos/elastic.svg[Elasticsearch Project,align="left",width=25%,height=25%]
+
+https://www.elastic.co/[Elasticsearch] is a search engine based on Lucene.
+
+Supports the *Document* NoSQL API and **Jakarta Data**.
+
+[NOTE]
+====
+Does not support native compilation.
+====
+
+To create a Quarkus project with this extension, you can use the Quarkus CLI:
+
+[source,console]
+----
+quarkus create app --extensions=jnosql-elasticsearch
+----
+
+To add this extension with the Quarkus CLI to an existing project:
+[source,console]
+----
+quarkus create app --extensions=jnosql-elasticsearch
+----
+
+Or add it manually to your `pom.xml`:
+
+[source,xml,subs=attributes+]
+----
+<dependency>
+    <groupId>io.quarkiverse.jnosql</groupId>
+    <artifactId>quarkus-jnosql-elasticsearch</artifactId>
+    <version>{project-version}</version>
+</dependency>
+----
+
+
+Set the database name in `application.properties`:
+
+[source,properties]
+----
+jnosql.document.database=my-database-name
+----
+
+[IMPORTANT]
+====
+If you are using **Java 21** or above, make sure to <<#_enabling_the_jnosql_mapping_lite_annotation_processor,enable the annotation processor execution>>. If you are using **Java 17** or below, you can skip this step and go ahead to implement your entities and repositories.
+====
+
+Do you want to get started to create your entities and repositories? See the section <<#_using_jakarta_nosql_and_jakarta_data_with_quarkus_jnosql,Using Jakarta NoSQL and Jakarta Data with Quarkus JNoSQL>>.
+
+https://quarkus.io/guides/elasticsearch#using-the-elasticsearch-java-client[More details about the Elasticsearch Client Quarkus extension].
+
+https://github.com/eclipse-jnosql/jnosql-databases/?tab=readme-ov-file#elasticsearch[More details about JNoSQL Elasticsearch Database driver].
+
+[#_solr]
+== Solr
+
+image::https://jnosql.github.io/img/logos/solr.svg[Apache Solr Project,align="left",width=20%,height=20%]
+
+https://solr.apache.org/[Solr] is an open-source enterprise-search platform.
+
+Supports the *Document* NoSQL API and **Jakarta Data**.
+
+To create a Quarkus project with this extension, you can use the Quarkus CLI:
+
+[source,console]
+----
+quarkus create app --extensions=jnosql-solr
+----
+
+To add this extension with the Quarkus CLI to an existing project:
+[source,console]
+----
+quarkus create app --extensions=jnosql-solr
+----
+
+Or add it manually to your `pom.xml`:
+
+[source,xml,subs=attributes+]
+----
+<dependency>
+    <groupId>io.quarkiverse.jnosql</groupId>
+    <artifactId>quarkus-jnosql-solr</artifactId>
+    <version>{project-version}</version>
+</dependency>
+----
+
+Set the database name in `application.properties`:
+
+[source,properties]
+----
+jnosql.document.database=my-database-name
+----
+
+[IMPORTANT]
+====
+If you are using **Java 21** or above, make sure to <<#_enabling_the_jnosql_mapping_lite_annotation_processor,enable the annotation processor execution>>. If you are using **Java 17** or below, you can skip this step and go ahead to implement your entities and repositories.
+====
+
+Do you want to get started to create your entities and repositories? See the section <<#_using_jakarta_nosql_and_jakarta_data_with_quarkus_jnosql,Using Jakarta NoSQL and Jakarta Data with Quarkus JNoSQL>>.
+
+https://github.com/eclipse-jnosql/jnosql-databases/?tab=readme-ov-file#solr[More details about JNoSQL Solr Database driver].
+
+[#_neo4j]
+== Neo4j
+
+image::https://jnosql.github.io/img/logos/neo4j.png[Neo4J Project,align="left",width=25%,height=25%]
+
+https://neo4j.com/[Neo4J] is a highly scalable, native graph database.
+
+Supports **Graph** operations and **Jakarta Data**.
+
+To create a Quarkus project with this extension, you can use the Quarkus CLI:
+
+[source,console]
+----
+quarkus create app --extensions=jnosql-neo4j
+----
+
+To add this extension with the Quarkus CLI to an existing project:
+[source,console]
+----
+quarkus create app --extensions=jnosql-neo4j
+----
+
+Or add it manually to your `pom.xml`:
+
+[source,xml,subs=attributes+]
+----
+<dependency>
+    <groupId>io.quarkiverse.jnosql</groupId>
+    <artifactId>quarkus-jnosql-neo4j</artifactId>
+    <version>{project-version}</version>
+</dependency>
+----
+
+Set the database name in `application.properties`:
+
+[source,properties]
+----
+jnosql.graph.database=my-database-name
+----
+
+[IMPORTANT]
+====
+If you are using **Java 21** or above, make sure to <<#_enabling_the_jnosql_mapping_lite_annotation_processor,enable the annotation processor execution>>. If you are using **Java 17** or below, you can skip this step and go ahead to implement your entities and repositories.
+====
+
+Example using `GraphTemplate`:
+
+[source,java]
+----
+@Inject
+@Database(DatabaseType.GRAPH)
+protected GraphTemplate template;
+
+public void insert(TestEntity entity) {
+    template.insert(entity);
+}
+----
+
+Do you want to get started to create your entities and repositories? See the section <<#_using_jakarta_nosql_and_jakarta_data_with_quarkus_jnosql,Using Jakarta NoSQL and Jakarta Data with Quarkus JNoSQL>>.
+
+
+https://docs.quarkiverse.io/quarkus-neo4j/dev/index.html[More details about the Quarkus Neo4j extension].
+
+https://github.com/eclipse-jnosql/jnosql-databases/?tab=readme-ov-file#neo4j[More details about JNoSQL Neo4j Database driver].
+
+[#_oracle_nosql]
+== Oracle NoSQL
+
+image::https://jnosql.github.io/img/logos/oracle.png[Oracle NoSQL Project,align="left",width=25%,height=25%]
+
+https://www.oracle.com/database/nosql/technologies/nosql/[Oracle NoSQL Database] is a multi-model database.
+
+Supports *Document* and *Key-Value* types and **Jakarta Data**.
+
+To create a Quarkus project with this extension, you can use the Quarkus CLI:
+
+[source,console]
+----
+quarkus create app --extensions=jnosql-oracle-nosql
+----
+
+To add this extension with the Quarkus CLI to an existing project:
+[source,console]
+----
+quarkus create app --extensions=jnosql-oracle-nosql
+----
+
+Or add it manually to your `pom.xml`:
+
+[source,xml,subs=attributes+]
+----
+<dependency>
+    <groupId>io.quarkiverse.jnosql</groupId>
+    <artifactId>quarkus-jnosql-oracle-nosql</artifactId>
+    <version>{project-version}</version>
+</dependency>
+----
+
+Set the database name in `application.properties`:
+
+- For Document database:
++
+[source,properties]
+----
+jnosql.document.database=my-database-name
+----
+
+- For Key-Value database:
++
+[source,properties]
+----
+jnosql.keyvalue.database=my-database-name
+----
+
+[IMPORTANT]
+====
+If you are using **Java 21** or above, make sure to <<#_enabling_the_jnosql_mapping_lite_annotation_processor,enable the annotation processor execution>>. If you are using **Java 17** or below, you can skip this step and go ahead to implement your entities and repositories.
+====
+
+Do you want to get started to create your entities and repositories? See the section <<#_using_jakarta_nosql_and_jakarta_data_with_quarkus_jnosql,Using Jakarta NoSQL and Jakarta Data with Quarkus JNoSQL>>.
+
+https://github.com/eclipse-jnosql/jnosql-databases/?tab=readme-ov-file#oracle-nosql[More details about JNoSQL Oracle NoSQL Database driver].
+
 
 include::includes/quarkus-jnosql.adoc[leveloffset=+1, opts=optional]

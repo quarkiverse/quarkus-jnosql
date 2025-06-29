@@ -9,11 +9,13 @@ import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.CsvSource;
 
 import io.quarkiverse.jnosql.elasticsearch.it.JNoSQLResource;
+import io.quarkus.test.common.QuarkusTestResource;
 import io.quarkus.test.common.http.TestHTTPEndpoint;
 import io.quarkus.test.junit.QuarkusTest;
 
 @QuarkusTest
 @TestHTTPEndpoint(JNoSQLResource.class)
+@QuarkusTestResource(ElasticsearchTestResource.class)
 public class JNoSQLResourceTest {
 
     @ParameterizedTest
