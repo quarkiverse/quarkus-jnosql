@@ -1,6 +1,8 @@
-= Quarkus Jnosql
+= Quarkus JNoSQL
 :toc: auto
 include::./includes/attributes.adoc[]
+
+This documentation provides instructions on how to integrate Eclipse JNoSQL, an implementation of the Jakarta NoSQL and Jakarta Data specifications, into a Quarkus project using the Quarkus JNoSQL Extension. This extension supports JNoSQL and facilitates using NoSQL databases in your Quarkus applications.
 
 == Introduction
 
@@ -87,8 +89,8 @@ The Quarkus JNoSQL extension supports a variety of NoSQL databases, each with it
 | <<_elasticsearch, Elasticsearch>>
 | Document
 | ✅
-| ❌
 | ✅
+| ❌
 
 | <<_hazelcast, Hazelcast>>
 | Key-Value
