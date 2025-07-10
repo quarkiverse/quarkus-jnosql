@@ -50,7 +50,7 @@
         <dependency>
             <groupId>net.openhft</groupId>
             <artifactId>affinity</artifactId>
-            <version>3.27ea0</version>
+            <version>3.27ea1</version>
         </dependency>
     </dependencies>
     <build>
