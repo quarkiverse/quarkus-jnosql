@@ -4,7 +4,7 @@
     <parent>
         <groupId>io.quarkiverse.jnosql</groupId>
         <artifactId>quarkus-jnosql-arangodb-parent</artifactId>
-        <version>3.4.8-SNAPSHOT</version>
+        <version>3.4.8</version>
     </parent>
     <artifactId>quarkus-jnosql-arangodb-deployment</artifactId>
     <name>Quarkus JNoSQL - ArangoDB - Deployment</name>
