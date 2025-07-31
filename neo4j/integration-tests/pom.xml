@@ -4,7 +4,7 @@
     <parent>
         <groupId>io.quarkiverse.jnosql</groupId>
         <artifactId>quarkus-jnosql-neo4j-parent</artifactId>
-        <version>3.4.8</version>
+        <version>3.4.9-SNAPSHOT</version>
     </parent>
     <artifactId>quarkus-jnosql-neo4j-integration-tests</artifactId>
     <name>Quarkus JNoSQL - Neo4j - Integration Tests</name>
