@@ -4,7 +4,7 @@
     <parent>
         <groupId>io.quarkiverse.jnosql</groupId>
         <artifactId>quarkus-jnosql-hazelcast-parent</artifactId>
-        <version>3.4.9</version>
+        <version>3.4.10-SNAPSHOT</version>
     </parent>
     <artifactId>quarkus-jnosql-hazelcast-integration-tests</artifactId>
     <name>Quarkus JNoSQL - Hazelcast - Integration Tests</name>
