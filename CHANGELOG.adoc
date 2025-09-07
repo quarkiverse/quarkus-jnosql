@@ -12,9 +12,9 @@ and this project adheres to https://semver.org/spec/v2.0.0.html[Semantic Version
 
 === Changed
 
-- Remove the Quarkus prefix from the ToC
 - Bump quarkus.version from 3.25.3 to 3.26.2
 - Bump io.quarkus.platform:quarkus-amazon-services-bom from 3.25.3 to 3.26.2
+- Remove the Quarkus prefix from the ToC
 
 == [3.4.9] - 2025-08-20
 
