@@ -1,5 +1,5 @@
 name: quarkus-jnosql
-title: Quarkus JNoSQL Extension
+title: JNoSQL
 version: dev
 nav:
   - modules/ROOT/nav.adoc
