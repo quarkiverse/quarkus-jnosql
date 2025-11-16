@@ -51,7 +51,7 @@
         <datafaker.version>2.4.3</datafaker.version>
         <assertj.version>3.24.2</assertj.version>
         <testcontainers.version>2.0.2</testcontainers.version>
-        <jnosql.version>1.1.10</jnosql.version>
+        <jnosql.version>1.1.11</jnosql.version>
     </properties>
     <dependencyManagement>
         <dependencies>
