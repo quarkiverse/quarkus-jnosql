@@ -4,7 +4,7 @@
     <parent>
         <groupId>io.quarkiverse.jnosql</groupId>
         <artifactId>quarkus-jnosql-mongodb-parent</artifactId>
-        <version>3.4.11-SNAPSHOT</version>
+        <version>3.4.11</version>
     </parent>
     <artifactId>quarkus-jnosql-mongodb</artifactId>
     <name>Quarkus JNoSQL - MongoDB - Runtime</name>
