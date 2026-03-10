@@ -5,7 +5,8 @@
     <dependencies>
         <dependency>
             <groupId>org.testcontainers</groupId>
-            <artifactId>solr</artifactId>
+            <artifactId>testcontainers-solr</artifactId>
+            <version>${testcontainers.version}</version>
             <scope>test</scope>
             <exclusions>
                 <exclusion>
@@ -16,7 +17,7 @@
         </dependency>
         <dependency>
             <groupId>io.quarkus</groupId>
-            <artifactId>quarkus-junit4-mock</artifactId>
+            <artifactId>quarkus-junit-mockito</artifactId>
             <scope>test</scope>
         </dependency>
     </dependencies>
