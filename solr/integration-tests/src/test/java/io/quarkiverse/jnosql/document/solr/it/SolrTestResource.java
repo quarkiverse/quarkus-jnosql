@@ -3,7 +3,7 @@ package io.quarkiverse.jnosql.document.solr.it;
 import java.util.Map;
 
 import org.eclipse.jnosql.databases.solr.communication.SolrDocumentConfigurations;
-import org.testcontainers.containers.SolrContainer;
+import org.testcontainers.solr.SolrContainer;
 import org.testcontainers.utility.DockerImageName;
 
 import io.quarkus.test.common.QuarkusTestResourceLifecycleManager;

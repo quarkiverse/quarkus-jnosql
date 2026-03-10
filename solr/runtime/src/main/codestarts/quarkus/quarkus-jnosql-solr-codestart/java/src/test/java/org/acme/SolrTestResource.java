@@ -9,7 +9,7 @@ import org.eclipse.jnosql.mapping.core.config.MappingConfigurations;
 import org.eclipse.microprofile.config.Config;
 import org.eclipse.microprofile.config.ConfigProvider;
 import org.slf4j.Logger;
-import org.testcontainers.containers.SolrContainer;
+import org.testcontainers.solr.SolrContainer;
 import org.testcontainers.utility.DockerImageName;
 
 import java.io.IOException;
