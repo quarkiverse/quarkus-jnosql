@@ -17,7 +17,7 @@ language:
           scope: test
 
         - groupId: io.quarkus
-          artifactId: quarkus-junit4-mock
+          artifactId: quarkus-junit-mockito
           scope: test
 
         - groupId: net.datafaker
