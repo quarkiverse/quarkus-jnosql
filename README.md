@@ -198,7 +198,7 @@ Example using `jakarta.nosql.Template`:
 // @Database(DatabaseType.COLUMN) for Column databases
 // @Database(DatabaseType.GRAPH) for Graph databases
 // @Database(DatabaseType.KEY_VALUE) for Key-Value databases
-protected Template template;
+private Template template;
 
 public void insert(TestEntity entity) {
     template.insert(entity);
