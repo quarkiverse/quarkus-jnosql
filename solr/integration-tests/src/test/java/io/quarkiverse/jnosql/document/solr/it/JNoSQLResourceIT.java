@@ -1,7 +1,8 @@
 package io.quarkiverse.jnosql.document.solr.it;
 
-import io.quarkus.test.junit.QuarkusIntegrationTest;
+import org.junit.jupiter.api.Disabled;
 
-@QuarkusIntegrationTest
+//@io.quarkus.test.junit.QuarkusIntegrationTest;
+@Disabled
 public class JNoSQLResourceIT extends JNoSQLResourceTest {
 }

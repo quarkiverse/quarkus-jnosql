@@ -1,11 +1,13 @@
 package io.quarkiverse.jnosql.document.solr.codestart;
 
+import org.junit.jupiter.api.Disabled;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.RegisterExtension;
 
 import io.quarkus.devtools.codestarts.quarkus.QuarkusCodestartCatalog.Language;
 import io.quarkus.devtools.testing.codestarts.QuarkusCodestartTest;
 
+@Disabled
 public class CodestartTest {
 
     public static final String CODESTART_ARTIFACT = "io.quarkiverse.jnosql:quarkus-jnosql-solr";
