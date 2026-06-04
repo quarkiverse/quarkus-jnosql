@@ -12,7 +12,7 @@ and [Jakarta Data](https://jakarta.ee/specifications/data/), into a Quarkus proj
 
 This extension supports JNoSQL and facilitates using NoSQL databases in your Quarkus applications.
 
-:information_source: **Recommended Quarkus version: `3.2.2.Final` or higher**
+:information_source: **Recommended Quarkus version: `3.2.2.Final` or higher**.
 
 ## Getting Started
 
