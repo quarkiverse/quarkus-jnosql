@@ -217,7 +217,9 @@ public interface TestEntityRepository extends NoSQLRepository<TestEntity, String
 
 Jakarta Data repositories provide a powerful way to interact with your NoSQL database using a repository pattern.
 
-The interface `org.eclipse.jnosql.mapping.NoSQLRepository` used above extends the `jakarta.data.repository.BasicRepository`, which is a Jakarta Data Repository interface that brings a specialization for NoSQL useful operations, allowing developers to use pre-defined methods. Also,you can define custom queries using method names or annotations, and the framework will handle the implementation for you. More information about Jakarta Data can be found in the [Jakarta Data Specification](https://jakarta.ee/specifications/data/1.0/).
+The interface `org.eclipse.jnosql.mapping.NoSQLRepository` used above extends the `jakarta.data.repository.BasicRepository`, which is a Jakarta Data Repository interface that brings a specialization for NoSQL useful operations, allowing developers to use pre-defined methods. 
+
+Also,you can define custom queries using method names or annotations, and the framework will handle the implementation for you. More information about Jakarta Data can be found in the [Jakarta Data Specification](https://jakarta.ee/specifications/data/1.0/).
 
 ### Using the Jakarta Data Repositories or Jakarta NoSQL Templates in your service
 
