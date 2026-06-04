@@ -54,8 +54,8 @@ Compilation_:
 
 ## Create your Quarkus JNoSQL Project using Extension Codestarts
 
-The easiest way to get started with Quarkus JNoSQL Extension is by using the codestart provided by the extension. This
-codestart will generate a Quarkus project with the necessary dependencies and configurations for using JNoSQL with your
+The easiest way to get started with Quarkus JNoSQL Extension is by using the code start provided by the extension. This
+code start will generate a Quarkus project with the necessary dependencies and configurations for using JNoSQL with your
 chosen NoSQL database.
 
 You can use the Quarkus CLI to create a new project passing the Quarkus JNoSQL Extension that you want. It'll create the
