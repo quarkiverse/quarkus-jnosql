@@ -190,7 +190,7 @@ To ensure that the annotation processor is executed during the build process, yo
 
 === Maven
 
-If you're using **Java 21** or above, you should explicitly make sure to activate the annotation processor execution by setting `<proc>full</proc>` on the maven-compiler plugin or via the `maven.compiler.proc>full</maven.compiler.proc>` property.For previous Java versions, e.g. **Java 17**, you can skip this step.For example:
+If you're using **Java 21** or above, you should explicitly make sure to activate the annotation processor execution by setting `<proc>full</proc>` on the maven-compiler plugin or via the `<maven.compiler.proc>full</maven.compiler.proc>` property.For previous Java versions, e.g. **Java 17**, you can skip this step.For example:
 
 Setting it in the `pom.xml` properties:
 
