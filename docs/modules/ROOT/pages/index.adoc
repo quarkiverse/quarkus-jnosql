@@ -190,7 +190,7 @@ To ensure that the annotation processor is executed during the build process, yo
 
 === Maven
 
-If you're using **Java 21** or above, you should explicitly make sure to activate the annotation processor execution by setting `<proc>full</proc>` on the maven-compiler plugin or via the `maven.compiler.proc>full</maven.compiler.proc>` property.For previous Java versions, e.g. **Java 17**, you can skip this step.For example:
+If you're using **Java 21** or above, you should explicitly make sure to activate the annotation processor execution by setting `<proc>full</proc>` on the maven-compiler plugin or via the `<maven.compiler.proc>full</maven.compiler.proc>` property.For previous Java versions, e.g. **Java 17**, you can skip this step.For example:
 
 Setting it in the `pom.xml` properties:
 
@@ -262,6 +262,8 @@ Once you have added the Quarkus JNoSQL Extension to your project, you can start 
 
 === Creating entities using JNoSQL annotations
 
+You can use a POJO (Plain Old Java Object) class annotated with JNoSQL annotations to represent your entities. For example:
+
 [source,java]
 ----
 import jakarta.nosql.Column;
@@ -278,6 +280,23 @@ public class TestEntity {
     private String testField;
 
     // omitted getters and setters
+}
+----
+
+Or Java Record class as well. For example:
+
+[source,java]
+----
+import jakarta.nosql.Column;
+import jakarta.nosql.Entity;
+import jakarta.nosql.Id;
+
+@Entity
+public record TestEntity (
+        @Id String id,
+        @Column String testField) {
+
+    // omitted factory methods, or any additional methods
 }
 ----
 
