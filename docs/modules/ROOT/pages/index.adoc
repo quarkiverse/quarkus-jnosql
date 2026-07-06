@@ -180,6 +180,76 @@ There are a variety of NoSQL databases, each with its own unique features and ca
 If you are using **Java 21** or above, make sure to <<#_enabling_the_jnosql_mapping_lite_annotation_processor,enable the annotation processor execution>>. If you are using **Java 17** or below, you can skip this step and go ahead to implement your entities and repositories.
 ====
 
+== Enabling the JNoSQL Mapping Lite Annotation Processor
+
+The Quarkus JNoSQL Extensions use the annotation processor provided by the `org.eclipse.jnosql.lite:mapping-lite-processor` dependency.
+
+This annotation processor generates the required implementation classes used by CDI during build-time processing and AOT compilation.
+
+Although the processor dependency may be included transitively by a Quarkus JNoSQL extension, declaring it explicitly in the compiler configuration makes the build more predictable. This is especially useful when the project uses explicit annotation processor configuration.
+
+Before setting the processor version, check the latest available version on Maven Central:
+
+https://central.sonatype.com/artifact/org.eclipse.jnosql.lite/mapping-lite-processor[`org.eclipse.jnosql.lite:mapping-lite-processor` on Maven Central]
+
+To ensure that the annotation processor is executed during the build process, configure your build tool, either <<_maven, Maven>> accordingly.
+
+=== Maven
+
+When using Maven, configure the `maven-compiler-plugin` with the JNoSQL Lite annotation processors explicitly.
+
+The following example enables parameter metadata, sets the Java release version, and registers both the entity and repository processors:
+
+[source,xml]
+----
+<project>
+<!-- skipping other elements -->
+
+<properties>
+    <!-- skipping other properties -->
+
+    <compiler-plugin.version>3.14.0</compiler-plugin.version>
+    <maven.compiler.release>21</maven.compiler.release>
+    <jnosql-lite-processor.version>1.1.15</jnosql-lite-processor.version>
+
+    <!-- skipping other properties -->
+</properties>
+
+<build>
+    <plugins>
+        <!-- skipping other plugins -->
+
+        <plugin>
+            <artifactId>maven-compiler-plugin</artifactId>
+            <version>${compiler-plugin.version}</version>
+            <configuration>
+                <release>${maven.compiler.release}</release>
+                <parameters>true</parameters>
+                <annotationProcessors>
+                    <annotationProcessor>org.eclipse.jnosql.lite.mapping.EntityProcessor</annotationProcessor>
+                    <annotationProcessor>org.eclipse.jnosql.lite.mapping.repository.RepositoryProcessor</annotationProcessor>
+                </annotationProcessors>
+                <annotationProcessorPaths>
+                    <path>
+                        <groupId>org.eclipse.jnosql.lite</groupId>
+                        <artifactId>mapping-lite-processor</artifactId>
+                        <version>${jnosql-lite-processor.version}</version>
+                    </path>
+                </annotationProcessorPaths>
+            </configuration>
+        </plugin>
+
+        <!-- skipping other plugins -->
+    </plugins>
+</build>
+
+<!-- skipping other elements -->
+```
+
+</project>
+----
+
+Replace `1.1.15` with the latest available version from Maven Central when configuring your project.
 
 
 
