@@ -660,7 +660,6 @@ Or add it manually to your `pom.xml`:
 </dependency>
 ----
 
-
 Set the database name in `application.properties`:
 
 [source,properties]
