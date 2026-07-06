@@ -255,18 +255,18 @@ https://central.sonatype.com/artifact/org.eclipse.jnosql.lite/mapping-lite-proce
 ==== Groovy DSL (`build.gradle`)
 
 [source,groovy]
----
+----
 dependencies {
-annotationProcessor "org.eclipse.jnosql.lite:mapping-lite-processor:${jnosqlLiteProcessorVersion}"
+    annotationProcessor "org.eclipse.jnosql.lite:mapping-lite-processor:${jnosqlLiteProcessorVersion}"
 }
 
 tasks.withType(JavaCompile).configureEach {
-options.compilerArgs += [
-"-processor",
-"org.eclipse.jnosql.lite.mapping.EntityProcessor,org.eclipse.jnosql.lite.mapping.repository.RepositoryProcessor"
-]
+    options.compilerArgs += [
+        "-processor",
+        "org.eclipse.jnosql.lite.mapping.EntityProcessor,org.eclipse.jnosql.lite.mapping.repository.RepositoryProcessor"
+    ]
 }
----
+----
 
 ==== Kotlin DSL (`build.gradle.kts`)
 
