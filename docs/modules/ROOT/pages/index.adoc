@@ -180,58 +180,8 @@ There are a variety of NoSQL databases, each with its own unique features and ca
 If you are using **Java 21** or above, make sure to <<#_enabling_the_jnosql_mapping_lite_annotation_processor,enable the annotation processor execution>>. If you are using **Java 17** or below, you can skip this step and go ahead to implement your entities and repositories.
 ====
 
-== Enabling the JNoSQL Mapping Lite Annotation Processor
 
-The Quarkus JNoSQL Extensions are using the annotation processor provided by the `org.eclipse.jnosql.lite:mapping-lite-processor` dependency. This dependency is automatically included when you add any Quarkus JNoSQL extension to your project.
 
-This annotation processor is responsible to generate all the required implementation classes that will be used by the CDI during AOT compilation.
-
-To ensure that the annotation processor is executed during the build process, you need to configure your build tool (<<_maven, Maven>> or <<_gradle>> Gradle) accordingly.
-
-=== Maven
-
-If you're using **Java 21** or above, you should explicitly make sure to activate the annotation processor execution by setting `<proc>full</proc>` on the maven-compiler plugin or via the `<maven.compiler.proc>full</maven.compiler.proc>` property.For previous Java versions, e.g. **Java 17**, you can skip this step.For example:
-
-Setting it in the `pom.xml` properties:
-
-[source,xml]
-----
-<project>
-    <!-- skipping other elements -->
-    <properties>
-        <!-- skipping other properties -->
-        <maven.compiler.proc>full</maven.compiler.proc>
-        <!-- skipping other properties -->
-    </properties>
-    <!-- skipping other elements -->
-</project>
-----
-
-Or setting it directly in the `maven-compiler-plugin` configuration:
-
-[source,xml]
-----
-<project>
-<!-- skipping other elements -->
-<build>
-    <plugins>
-        <!-- skipping other plugins -->
-        <plugin>
-            <artifactId>maven-compiler-plugin</artifactId>
-            <version>${compiler-plugin.version}</version>
-            <configuration>
-                <proc>full</proc>
-                <compilerArgs>
-                    <arg>-parameters</arg>
-                </compilerArgs>
-            </configuration>
-        </plugin>
-        <!-- skipping other plugins -->
-    </plugins>
-</build>
-<!-- skipping other elements -->
-</project>
-----
 
 === Gradle
 
