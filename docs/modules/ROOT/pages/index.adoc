@@ -957,5 +957,4 @@ Do you want to get started to create your entities and repositories? See the sec
 
 https://github.com/eclipse-jnosql/jnosql-databases/?tab=readme-ov-file#oracle-nosql[More details about JNoSQL Oracle NoSQL Database driver].
 
-
 include::includes/quarkus-jnosql.adoc[leveloffset=+1, opts=optional]
