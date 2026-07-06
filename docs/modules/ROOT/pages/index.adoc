@@ -244,8 +244,6 @@ The following example enables parameter metadata, sets the Java release version,
 </build>
 
 <!-- skipping other elements -->
-```
-
 </project>
 ----
 
