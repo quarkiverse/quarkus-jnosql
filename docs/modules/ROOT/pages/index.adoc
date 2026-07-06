@@ -271,20 +271,20 @@ options.compilerArgs += [
 ==== Kotlin DSL (`build.gradle.kts`)
 
 [source,kotlin]
----
+----
 dependencies {
-annotationProcessor("org.eclipse.jnosql.lite:mapping-lite-processor:${jnosqlLiteProcessorVersion}")
+    annotationProcessor("org.eclipse.jnosql.lite:mapping-lite-processor:${jnosqlLiteProcessorVersion}")
 }
 
-tasks.withType<JavaCompile>().configureEach {
-options.compilerArgs.addAll(
-listOf(
-"-processor",
-"org.eclipse.jnosql.lite.mapping.EntityProcessor,org.eclipse.jnosql.lite.mapping.repository.RepositoryProcessor"
-)
-)
+tasks.withType < JavaCompile > ().configureEach {
+    options.compilerArgs.addAll(
+        listOf(
+            "-processor",
+            "org.eclipse.jnosql.lite.mapping.EntityProcessor,org.eclipse.jnosql.lite.mapping.repository.RepositoryProcessor"
+        )
+    )
 }
----
+----
 
 The `jnosqlLiteProcessorVersion` variable should be defined according to your project setup.
 
