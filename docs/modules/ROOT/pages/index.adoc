@@ -329,9 +329,7 @@ import jakarta.nosql.Entity;
 import jakarta.nosql.Id;
 
 @Entity
-public record TestEntity (
-        @Id String id,
-        @Column String testField) {
+public record TestEntity (@Id String id, @Column String testField) {
 
     // omitted factory methods, or any additional methods
 }
