@@ -238,7 +238,9 @@ The following example enables parameter metadata, sets the Java release version,
 </project>
 ----
 
-Replace `1.1.15` with the latest available version from Maven Central when configuring your project.
+The properties used in this example, such as `${compiler-plugin.version}`, `${maven.compiler.release}`, and `${jnosql-lite-processor.version}`, should be defined according to your project setup.
+
+Replace `${jnosql-lite-processor.version}` with the latest available version from Maven Central when configuring your project.
 
 
 
