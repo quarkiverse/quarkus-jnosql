@@ -204,17 +204,8 @@ The following example enables parameter metadata, sets the Java release version,
 ----
 <project>
 <!-- skipping other elements -->
-
-<properties>
-    <!-- skipping other properties -->
-
-    <compiler-plugin.version>3.14.0</compiler-plugin.version>
-    <maven.compiler.release>21</maven.compiler.release>
-    <jnosql-lite-processor.version>1.1.15</jnosql-lite-processor.version>
-
-    <!-- skipping other properties -->
-</properties>
-
+<project>
+    <!-- skipping other elements -->
 <build>
     <plugins>
         <!-- skipping other plugins -->
