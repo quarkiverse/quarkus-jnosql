@@ -182,7 +182,7 @@ If you are using **Java 21** or above, make sure to <<#_enabling_the_jnosql_mapp
 
 == Enabling the JNoSQL Mapping Lite Annotation Processor
 
-The Quarkus JNoSQL Extensions are using the annotation processor provided by the `org.eclipse.jnosql.lite:mapping-lite-processor:1.1.8` dependency. This dependency is automatically included when you add any Quarkus JNoSQL extension to your project.
+The Quarkus JNoSQL Extensions are using the annotation processor provided by the `org.eclipse.jnosql.lite:mapping-lite-processor` dependency. This dependency is automatically included when you add any Quarkus JNoSQL extension to your project.
 
 This annotation processor is responsible to generate all the required implementation classes that will be used by the CDI during AOT compilation.
 
