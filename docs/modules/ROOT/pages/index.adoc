@@ -660,7 +660,6 @@ Or add it manually to your `pom.xml`:
 </dependency>
 ----
 
-
 Set the database name in `application.properties`:
 
 [source,properties]
@@ -956,6 +955,5 @@ If you are using **Java 21** or above, make sure to <<#_enabling_the_jnosql_mapp
 Do you want to get started to create your entities and repositories? See the section <<#_using_jakarta_nosql_and_jakarta_data_with_quarkus_jnosql,Using Jakarta NoSQL and Jakarta Data with Quarkus JNoSQL>>.
 
 https://github.com/eclipse-jnosql/jnosql-databases/?tab=readme-ov-file#oracle-nosql[More details about JNoSQL Oracle NoSQL Database driver].
-
 
 include::includes/quarkus-jnosql.adoc[leveloffset=+1, opts=optional]
