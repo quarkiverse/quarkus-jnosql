@@ -242,54 +242,6 @@ The properties used in this example, such as `${compiler-plugin.version}`, `${ma
 
 Replace `${jnosql-lite-processor.version}` with the latest available version from Maven Central when configuring your project.
 
-=== Gradle
-
-The target build tool for the Quarkus JNoSQL Extension is Maven. However, if you are using Gradle, you should also make sure that the JNoSQL Lite annotation processor is available during compilation.
-
-The processor is provided by the `org.eclipse.jnosql.lite:mapping-lite-processor` dependency.
-
-Before setting the processor version, check the latest available version on Maven Central:
-
-https://central.sonatype.com/artifact/org.eclipse.jnosql.lite/mapping-lite-processor[`org.eclipse.jnosql.lite:mapping-lite-processor` on Maven Central]
-
-==== Groovy DSL (`build.gradle`)
-
-[source,groovy]
----
-dependencies {
-annotationProcessor "org.eclipse.jnosql.lite:mapping-lite-processor:${jnosqlLiteProcessorVersion}"
-}
-
-tasks.withType(JavaCompile).configureEach {
-options.compilerArgs += [
-"-processor",
-"org.eclipse.jnosql.lite.mapping.EntityProcessor,org.eclipse.jnosql.lite.mapping.repository.RepositoryProcessor"
-]
-}
----
-
-==== Kotlin DSL (`build.gradle.kts`)
-
-[source,kotlin]
----
-dependencies {
-annotationProcessor("org.eclipse.jnosql.lite:mapping-lite-processor:${jnosqlLiteProcessorVersion}")
-}
-
-tasks.withType<JavaCompile>().configureEach {
-options.compilerArgs.addAll(
-listOf(
-"-processor",
-"org.eclipse.jnosql.lite.mapping.EntityProcessor,org.eclipse.jnosql.lite.mapping.repository.RepositoryProcessor"
-)
-)
-}
----
-
-The `jnosqlLiteProcessorVersion` variable should be defined according to your project setup.
-
-Replace it with the latest available version from Maven Central when configuring your project.
-
 
 
 == Using Jakarta NoSQL and Jakarta Data with Quarkus JNoSQL
