@@ -52,6 +52,7 @@
         <assertj.version>3.24.2</assertj.version>
         <testcontainers.version>2.0.5</testcontainers.version>
         <jnosql.version>1.1.15</jnosql.version>
+        <jnosql-lite-processor.version>${jnosql.version}</jnosql-lite-processor.version>
     </properties>
     <dependencyManagement>
         <dependencies>
@@ -96,7 +97,7 @@
             <dependency>
                 <groupId>org.eclipse.jnosql.lite</groupId>
                 <artifactId>mapping-lite-processor</artifactId>
-                <version>${jnosql.version}</version>
+                <version>${jnosql-lite-processor.version}</version>
             </dependency>
             <dependency>
                 <groupId>org.eclipse.jnosql.mapping</groupId>
