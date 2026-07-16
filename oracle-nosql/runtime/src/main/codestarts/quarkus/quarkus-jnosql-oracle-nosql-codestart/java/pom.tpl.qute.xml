@@ -1,5 +1,28 @@
 <project>
-    <properties>
-        <maven.compiler.proc>full</maven.compiler.proc>
-    </properties>
+<properties>
+    <jnosql.version>${jnosql.version}</jnosql.version>
+    <jnosql-lite-processor.version>${jnosql-lite-processor.version}</jnosql-lite-processor.version>
+</properties>
+<build>
+    <plugins>
+        <plugin>
+            <artifactId>maven-compiler-plugin</artifactId>
+            <version>$\{compiler-plugin.version}</version>
+            <configuration>
+                <parameters>true</parameters>
+                <annotationProcessors>
+                    <annotationProcessor>org.eclipse.jnosql.lite.mapping.EntityProcessor</annotationProcessor>
+                    <annotationProcessor>org.eclipse.jnosql.lite.mapping.repository.RepositoryProcessor</annotationProcessor>
+                </annotationProcessors>
+                <annotationProcessorPaths>
+                    <path>
+                        <groupId>org.eclipse.jnosql.lite</groupId>
+                        <artifactId>mapping-lite-processor</artifactId>
+                        <version>$\{jnosql-lite-processor.version}</version>
+                    </path>
+                </annotationProcessorPaths>
+            </configuration>
+        </plugin>
+    </plugins>
+</build>
 </project>
