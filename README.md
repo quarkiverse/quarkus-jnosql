@@ -92,35 +92,27 @@ There are a variety of NoSQL databases, each with its own unique features and ca
 
 ## Enabling the JNoSQL Mapping Lite Annotation Processor
 
-The Quarkus JNoSQL Extensions are using the annotation processor provided by the `org.eclipse.jnosql.lite:mapping-lite-processor:1.1.8` dependency. This dependency is automatically included when you add any Quarkus JNoSQL extension to your project.
+The Quarkus JNoSQL Extensions use the annotation processor provided by the `org.eclipse.jnosql.lite:mapping-lite-processor` dependency.
 
-This annotation processor is responsible to generate all the required implementation classes that will be used by the CDI during AOT compilation.
+This annotation processor generates the required implementation classes used by CDI during build-time processing and AOT compilation.
+
+Although the processor dependency may be included transitively by a Quarkus JNoSQL extension, declaring it explicitly in the compiler configuration makes the build more predictable. This is especially useful when the project uses explicit annotation processor configuration.
+
+Before setting the processor version, check the latest [org.eclipse.jnosql.lite:mapping-lite-processor` version on Maven Central](https://search.maven.org/artifact/org.eclipse.jnosql.lite/mapping-lite-processor).
 
 To ensure that the annotation processor is executed during the build process, you need to configure your build tool ([Maven](#maven) or [Gradle](#gradle)) accordingly.
 
 ### Maven
 
-If you're using **Java 21** or above, you should explicitly make sure to activate the annotation processor execution by setting `<proc>full</proc>` on the maven-compiler plugin or via the `maven.compiler.proc>full</maven.compiler.proc>` property.For previous Java versions, e.g. **Java 17**, you can skip this step.For example:
+When using Maven, configure the `maven-compiler-plugin` with the JNoSQL Lite annotation processors explicitly.
 
-Setting it in the `pom.xml` properties:
-
-````xml
-<project>
-    <!-- skipping other elements -->
-    <properties>
-        <!-- skipping other properties -->
-        <maven.compiler.proc>full</maven.compiler.proc>
-        <!-- skipping other properties -->
-    </properties>
-    <!-- skipping other elements -->
-</project>
-````
-
-Or setting it directly in the `maven-compiler-plugin` configuration:
+The following example enables parameter metadata, sets the Java release version, and registers both the entity and repository processors:
 
 ```xml
 <project>
 <!-- skipping other elements -->
+<project>
+    <!-- skipping other elements -->
 <build>
     <plugins>
         <!-- skipping other plugins -->
@@ -128,38 +120,74 @@ Or setting it directly in the `maven-compiler-plugin` configuration:
             <artifactId>maven-compiler-plugin</artifactId>
             <version>${compiler-plugin.version}</version>
             <configuration>
-                <proc>full</proc>
-                <compilerArgs>
-                    <arg>-parameters</arg>
-                </compilerArgs>
+                <release>${maven.compiler.release}</release>
+                <parameters>true</parameters>
+                <annotationProcessors>
+                    <annotationProcessor>org.eclipse.jnosql.lite.mapping.EntityProcessor</annotationProcessor>
+                    <annotationProcessor>org.eclipse.jnosql.lite.mapping.repository.RepositoryProcessor</annotationProcessor>
+                </annotationProcessors>
+                <annotationProcessorPaths>
+                    <path>
+                        <groupId>org.eclipse.jnosql.lite</groupId>
+                        <artifactId>mapping-lite-processor</artifactId>
+                        <version>${jnosql-lite-processor.version}</version>
+                    </path>
+                </annotationProcessorPaths>
             </configuration>
         </plugin>
         <!-- skipping other plugins -->
     </plugins>
 </build>
+
 <!-- skipping other elements -->
 </project>
 ```
 
+The properties used in this example, such as `${compiler-plugin.version}`, `${maven.compiler.release}`, and `${jnosql-lite-processor.version}`, should be defined according to your project setup.
+
+Replace `${jnosql-lite-processor.version}` with the latest available version from Maven Central when configuring your project.
+
 ### Gradle
 
-The target build tool for the Quarkus JNoSQL Extension is Maven. However, if you are using Gradle, you may need to ensure that the annotation processor is executed during the build process.
+The target build tool for the Quarkus JNoSQL Extension is Maven. However, if you are using Gradle, you should also make sure that the JNoSQL Lite annotation processor is available during compilation.
 
-To enable the annotation processors execution is necessary to pass the `-proc:full` to the compiler used by Gradle. For example like below:
+The processor is provided by the `org.eclipse.jnosql.lite:mapping-lite-processor` dependency.
+
+Before setting the processor version, check the latest available [`org.eclipse.jnosql.lite:mapping-lite-processor` on Maven Central](https://central.sonatype.com/artifact/org.eclipse.jnosql.lite/mapping-lite-processor).
 
 #### Groovy DSL (build.gradle):
 ```groovy
+dependencies {
+  annotationProcessor "org.eclipse.jnosql.lite:mapping-lite-processor:${jnosqlLiteProcessorVersion}"
+}
+
 tasks.withType(JavaCompile).configureEach {
-options.compilerArgs += ['-proc:full']
+  options.compilerArgs += [
+          "-processor",
+          "org.eclipse.jnosql.lite.mapping.EntityProcessor,org.eclipse.jnosql.lite.mapping.repository.RepositoryProcessor"
+  ]
 }
 ```
 
 #### Kotlin DSL (build.gradle.kts):
 ```kotlin
-tasks.withType<JavaCompile>().configureEach {
-options.compilerArgs.add("-proc:full")
+dependencies {
+  annotationProcessor("org.eclipse.jnosql.lite:mapping-lite-processor:${jnosqlLiteProcessorVersion}")
+}
+
+tasks.withType < JavaCompile > ().configureEach {
+  options.compilerArgs.addAll(
+    listOf(
+      "-processor",
+      "org.eclipse.jnosql.lite.mapping.EntityProcessor,org.eclipse.jnosql.lite.mapping.repository.RepositoryProcessor"
+    )
+  )
 }
 ```
+
+The `jnosqlLiteProcessorVersion` variable should be defined according to your project setup.
+
+Replace it with the latest available version from Maven Central when configuring your project.
 
 ## Using Jakarta NoSQL and Jakarta Data with Quarkus JNoSQL
 
