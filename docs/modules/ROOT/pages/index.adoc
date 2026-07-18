@@ -290,16 +290,13 @@ The `jnosqlLiteProcessorVersion` variable should be defined according to your pr
 
 Replace it with the latest available version from Maven Central when configuring your project.
 
-
-
-
 == Using Jakarta NoSQL and Jakarta Data with Quarkus JNoSQL
 
 Once you have added the Quarkus JNoSQL Extension to your project, you can start using it to interact with your NoSQL database. The following steps outline how to create entities and repositories in your Quarkus application:
 
-=== Creating entities using JNoSQL annotations
+=== Creating entities using Jakarta NoSQL annotations
 
-You can use a POJO (Plain Old Java Object) class annotated with JNoSQL annotations to represent your entities. For example:
+You can use a POJO (Plain Old Java Object) class annotated with https://jakarta.ee/specifications/nosql/1.0/jakarta-nosql-1.0#_annotations[Jakarta NoSQL annotations] to represent your entities. For example:
 
 [source,java]
 ----
@@ -335,6 +332,101 @@ public record TestEntity (@Id String id, @Column String testField) {
 }
 ----
 
+More information about *Jakarta NoSQL Annotations* can be found in the https://jakarta.ee/specifications/nosql/1.0/jakarta-nosql-1.0#_annotations[Jakarta NoSQL Specification].
+
+==== Embeddable Fields and Embeddable classes
+
+Jakarta NoSQL supports *Embeddable Fields* as well. An embeddable field is a field whose type is an *embeddable class*. Embeddable classes must be annotated with `@jakarta.nosql.Embeddable` annotation.
+
+An embeddable class does not have its own database structure. Instead, the state of an instance is stored in the structure mapped by the owning entity.
+
+Persistent fields and properties of an embeddable class are mapped using the same mapping annotations used for entity classes and may hold instances of other embeddable types.
+
+An embeddable class can have two types of strategies:
+- `@Embeddable(FLAT)` or `@Embeddable`: where the embeddable class is treated as a parent entity type.
+- `@Embeddable(GROUPING)`: where the embeddable class is stored in a structured type.
+
+In the example below, the `Address` class is an embeddable class that will be flattening their state into the data structure representing the parent entity:
+
+[source,java]
+----
+import jakarta.nosql.Column;
+import jakarta.nosql.Embeddable;
+
+@Embeddable
+public class Address {
+    @Column
+    private String street;
+    @Column
+    private String city;
+    @Column
+    private String postalCode;
+}
+----
+
+[source,java]
+----
+import jakarta.nosql.Column;
+import jakarta.nosql.Entity;
+import jakarta.nosql.Id;
+
+@Entity
+public class Person {
+    @Id
+    private Long id;
+    @Column
+    private String name;
+    @Column
+    private Address address;  // flat embedded field
+}
+----
+
+In a document, wide-column, or graph database, the JSON representation of a Person entity instance where the Address class is *flat* might be:
+
+[source,json]
+----
+{
+  "id": 1,
+  "name": "John Doe",
+  "street": "123 Main St",
+  "city": "Sampleville",
+  "postalCode": "12345"
+}
+----
+
+In a structured representation, when the embeddable field is *grouping* it will be together in the data schema.
+
+[source,java]
+----
+@Embeddable(GROUPING)
+public class Address {
+    @Column
+    private String street;
+    @Column
+    private String city;
+    @Column
+    private String postalCode;
+}
+----
+
+In a document, wide-column, or graph database, the JSON representation of a Person entity instance where the Address class is *grouping* might be:
+
+[source,json]
+----
+{
+  "id": 1,
+  "name": "John Doe",
+  "address":
+  {
+    "street": "123 Main St",
+    "city": "Sampleville",
+    "postalCode": "12345"
+  }
+}
+----
+
+For more information about *embeddable fields and classes*, take a look at the https://jakarta.ee/specifications/nosql/1.0/jakarta-nosql-1.0#_embeddable[Jakarta NoSQL Specification].
+
 === Using Jakarta NoSQL Template
 
 Example using `jakarta.nosql.Template`:
@@ -355,6 +447,8 @@ public void insert(TestEntity entity) {
     template.insert(entity);
 }
 ----
+
+More information about the `jakarta.nosql.Template` usage can be found in the https://jakarta.ee/specifications/nosql/1.0/jakarta-nosql-1.0#_template_classes[Jakarta NoSQL Specification].
 
 === Using Jakarta Data Repository
 
