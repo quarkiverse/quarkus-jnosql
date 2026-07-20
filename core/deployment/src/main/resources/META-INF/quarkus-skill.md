@@ -31,5 +31,6 @@
 ### Common Pitfalls
 
 - If tests log `Eclipse JNoSQL Lite does not support reflection, including the use of constructors`, do not assume the entity mapping is broken first. JNoSQL Lite relies on generated classes under `target/generated-sources/annotations`, and Quarkus dev mode can run with stale or missing generated classes after interrupted reloads or target cleanup. Stop all running Quarkus instances, clean and recompile the project, then run the tests again.
+- If an error log shows `Unsatisfied dependency for type org.eclipse.jnosql.mapping.metadata.EntitiesMetadata and qualifiers`, create at least one Jakarta NoSQL entity class. The `org.eclipse.jnosql.lite:mapping-lite-processor` needs an annotated entity to generate the metadata classes required by CDI.
 - Do not create repositories, templates, managers, or manager factories manually with `new`; inject them as CDI beans.
 - Do not use a repository for a backend model that does not support Jakarta Data. Use `Template`, `GraphTemplate`, or the backend manager API instead.
