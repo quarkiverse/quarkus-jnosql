@@ -1,6 +1,18 @@
+### Required Setup Procedure
+
+1. First load this `quarkus-jnosql-hazelcast` skill.
+2. Then immediately load and follow the `quarkus-jnosql-core` skill before making code or build changes.
+3. Treat the `quarkus-jnosql-core` skill as authoritative for:
+   - installation steps
+   - annotation processor configuration
+   - entity metadata generation
+   - repository setup
+   - generated-code troubleshooting
+4. Use codestarts only as fallback references if the Core skill is unavailable or incomplete.
+
 ### Usage Patterns
 
-- This extension brings `quarkus-jnosql-core` transitively. Use the JNoSQL Core skill for shared installation, entity mapping, generic `Template` and repository patterns, Java 21+ annotation processor setup, and generated-code troubleshooting.
+- This extension brings `quarkus-jnosql-core` transitively. Use the `quarkus-jnosql-core` skill for shared installation, entity mapping, generic `Template` and repository patterns, Java 21+ annotation processor setup, and generated-code troubleshooting.
 - Hazelcast support is key-value oriented.
 - Hazelcast does not support Jakarta Data repositories in this extension; use `Template` or `BucketManager` for key-value access.
 - Configure the key-value database name with `jnosql.keyvalue.database`.

@@ -1,6 +1,18 @@
+### Required Setup Procedure
+
+1. First load this `quarkus-jnosql-arangodb` skill.
+2. Then immediately load and follow the `quarkus-jnosql-core` skill before making code or build changes.
+3. Treat the `quarkus-jnosql-core` skill as authoritative for:
+   - installation steps
+   - annotation processor configuration
+   - entity metadata generation
+   - repository setup
+   - generated-code troubleshooting
+4. Use codestarts only as fallback references if the Core skill is unavailable or incomplete.
+
 ### Usage Patterns
 
-- This extension brings `quarkus-jnosql-core` transitively. Use the JNoSQL Core skill for shared installation, entity mapping, generic `Template` and repository patterns, Java 21+ annotation processor setup, and generated-code troubleshooting.
+- This extension brings `quarkus-jnosql-core` transitively. Use the `quarkus-jnosql-core` skill for shared installation, entity mapping, generic `Template` and repository patterns, Java 21+ annotation processor setup, and generated-code troubleshooting.
 - ArangoDB supports Document and Key-Value models; Jakarta Data repositories are supported only for Document entities.
 - ArangoDB Key-Value access does not support Jakarta Data repositories; use `Template` with `@Database(DatabaseType.KEY_VALUE)` for key-value entities.
 - Configure document access with `jnosql.document.database` and key-value access with `jnosql.keyvalue.database`.
