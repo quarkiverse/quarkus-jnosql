@@ -110,36 +110,33 @@ The following example enables parameter metadata, sets the Java release version,
 
 ```xml
 <project>
-<!-- skipping other elements -->
-<project>
-    <!-- skipping other elements -->
-<build>
-    <plugins>
-        <!-- skipping other plugins -->
-        <plugin>
-            <artifactId>maven-compiler-plugin</artifactId>
-            <version>${compiler-plugin.version}</version>
-            <configuration>
-                <release>${maven.compiler.release}</release>
-                <parameters>true</parameters>
-                <annotationProcessors>
-                    <annotationProcessor>org.eclipse.jnosql.lite.mapping.EntityProcessor</annotationProcessor>
-                    <annotationProcessor>org.eclipse.jnosql.lite.mapping.repository.RepositoryProcessor</annotationProcessor>
-                </annotationProcessors>
-                <annotationProcessorPaths>
-                    <path>
-                        <groupId>org.eclipse.jnosql.lite</groupId>
-                        <artifactId>mapping-lite-processor</artifactId>
-                        <version>${jnosql-lite-processor.version}</version>
-                    </path>
-                </annotationProcessorPaths>
-            </configuration>
-        </plugin>
-        <!-- skipping other plugins -->
-    </plugins>
-</build>
-
-<!-- skipping other elements -->
+  <!-- skipping other elements -->
+  <build>
+      <plugins>
+          <!-- skipping other plugins -->
+          <plugin>
+              <artifactId>maven-compiler-plugin</artifactId>
+              <version>${compiler-plugin.version}</version>
+              <configuration>
+                  <release>${maven.compiler.release}</release>
+                  <parameters>true</parameters>
+                  <annotationProcessors>
+                      <annotationProcessor>org.eclipse.jnosql.lite.mapping.EntityProcessor</annotationProcessor>
+                      <annotationProcessor>org.eclipse.jnosql.lite.mapping.repository.RepositoryProcessor</annotationProcessor>
+                  </annotationProcessors>
+                  <annotationProcessorPaths>
+                      <path>
+                          <groupId>org.eclipse.jnosql.lite</groupId>
+                          <artifactId>mapping-lite-processor</artifactId>
+                          <version>${jnosql-lite-processor.version}</version>
+                      </path>
+                  </annotationProcessorPaths>
+              </configuration>
+          </plugin>
+          <!-- skipping other plugins -->
+      </plugins>
+  </build>
+  <!-- skipping other elements -->
 </project>
 ```
 
