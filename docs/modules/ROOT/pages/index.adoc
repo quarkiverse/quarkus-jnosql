@@ -203,38 +203,35 @@ The following example enables parameter metadata, sets the Java release version,
 [source,xml]
 ----
 <project>
-<!-- skipping other elements -->
-<project>
     <!-- skipping other elements -->
-<build>
-    <plugins>
-        <!-- skipping other plugins -->
+    <build>
+        <plugins>
+            <!-- skipping other plugins -->
 
-        <plugin>
-            <artifactId>maven-compiler-plugin</artifactId>
-            <version>${compiler-plugin.version}</version>
-            <configuration>
-                <release>${maven.compiler.release}</release>
-                <parameters>true</parameters>
-                <annotationProcessors>
-                    <annotationProcessor>org.eclipse.jnosql.lite.mapping.EntityProcessor</annotationProcessor>
-                    <annotationProcessor>org.eclipse.jnosql.lite.mapping.repository.RepositoryProcessor</annotationProcessor>
-                </annotationProcessors>
-                <annotationProcessorPaths>
-                    <path>
-                        <groupId>org.eclipse.jnosql.lite</groupId>
-                        <artifactId>mapping-lite-processor</artifactId>
-                        <version>${jnosql-lite-processor.version}</version>
-                    </path>
-                </annotationProcessorPaths>
-            </configuration>
-        </plugin>
+            <plugin>
+                <artifactId>maven-compiler-plugin</artifactId>
+                <version>${compiler-plugin.version}</version>
+                <configuration>
+                    <release>${maven.compiler.release}</release>
+                    <parameters>true</parameters>
+                    <annotationProcessors>
+                        <annotationProcessor>org.eclipse.jnosql.lite.mapping.EntityProcessor</annotationProcessor>
+                        <annotationProcessor>org.eclipse.jnosql.lite.mapping.repository.RepositoryProcessor</annotationProcessor>
+                    </annotationProcessors>
+                    <annotationProcessorPaths>
+                        <path>
+                            <groupId>org.eclipse.jnosql.lite</groupId>
+                            <artifactId>mapping-lite-processor</artifactId>
+                            <version>${jnosql-lite-processor.version}</version>
+                        </path>
+                    </annotationProcessorPaths>
+                </configuration>
+            </plugin>
 
-        <!-- skipping other plugins -->
-    </plugins>
-</build>
-
-<!-- skipping other elements -->
+            <!-- skipping other plugins -->
+        </plugins>
+    </build>
+    <!-- skipping other elements -->
 </project>
 ----
 
@@ -248,9 +245,15 @@ The target build tool for the Quarkus JNoSQL Extension is Maven. However, if you
 
 The processor is provided by the `org.eclipse.jnosql.lite:mapping-lite-processor` dependency.
 
-Before setting the processor version, check the latest available version on Maven Central:
+Before setting the processor version, check the latest available version on Maven Central: https://central.sonatype.com/artifact/org.eclipse.jnosql.lite/mapping-lite-processor[`org.eclipse.jnosql.lite:mapping-lite-processor` on Maven Central]
 
-https://central.sonatype.com/artifact/org.eclipse.jnosql.lite/mapping-lite-processor[`org.eclipse.jnosql.lite:mapping-lite-processor` on Maven Central]
+[IMPORTANT]
+====
+When using the JNoSQL Lite annotation processor with Gradle, exclude the `jnosql-mapping-reflection` module to prevent CDI bean conflicts. In extension versions **3.4.15 and earlier**, this module is pulled in transitively, causing both the reflection-based and Lite `EntitiesMetadata` implementations to be registered as CDI beans. Without this exclusion, the application fails with an `AmbiguousResolutionException`.
+
+For additional details and the current status of this issue, see GitHub issue https://github.com/quarkiverse/quarkus-jnosql/issues/423[#423].
+
+====
 
 ==== Groovy DSL (`build.gradle`)
 
@@ -258,6 +261,13 @@ https://central.sonatype.com/artifact/org.eclipse.jnosql.lite/mapping-lite-proce
 ----
 dependencies {
     annotationProcessor "org.eclipse.jnosql.lite:mapping-lite-processor:${jnosqlLiteProcessorVersion}"
+}
+
+// Exclude the reflection-based metadata implementation when using JNoSQL Lite.
+// Otherwise, both reflection and Lite implementations become CDI beans,
+// resulting in an AmbiguousResolutionException.
+configurations.configureEach {
+ exclude group: 'org.eclipse.jnosql.mapping', module: 'jnosql-mapping-reflection'
 }
 
 tasks.withType(JavaCompile).configureEach {
@@ -269,13 +279,21 @@ tasks.withType(JavaCompile).configureEach {
 ----
 
 ==== Kotlin DSL (`build.gradle.kts`)
-
 [source,kotlin]
 ----
 dependencies {
     annotationProcessor("org.eclipse.jnosql.lite:mapping-lite-processor:${jnosqlLiteProcessorVersion}")
 }
 
+// Exclude the reflection-based metadata implementation when using JNoSQL Lite.
+// Otherwise, both reflection and Lite implementations become CDI beans,
+// resulting in an AmbiguousResolutionException.
+configurations.configureEach {
+    exclude(
+        group = "org.eclipse.jnosql.mapping",
+        module = "jnosql-mapping-reflection"
+    )
+}
 tasks.withType < JavaCompile > ().configureEach {
     options.compilerArgs.addAll(
         listOf(
