@@ -155,10 +155,20 @@ The processor is provided by the `org.eclipse.jnosql.lite:mapping-lite-processor
 
 Before setting the processor version, check the latest available [`org.eclipse.jnosql.lite:mapping-lite-processor` on Maven Central](https://central.sonatype.com/artifact/org.eclipse.jnosql.lite/mapping-lite-processor).
 
+> :memo: **IMPORTANT:** When using the JNoSQL Lite annotation processor with Gradle, exclude the `jnosql-mapping-reflection` module to prevent CDI bean conflicts. In extension versions **3.4.15 and earlier**, this module is pulled in transitively, causing both the reflection-based and Lite `EntitiesMetadata` implementations to be registered as CDI beans. Without this exclusion, the application fails with an `AmbiguousResolutionException`.
+> For additional details and the current status of this issue, see GitHub issue [#423](https://github.com/quarkiverse/quarkus-jnosql/issues/423).
+
 #### Groovy DSL (build.gradle):
 ```groovy
 dependencies {
   annotationProcessor "org.eclipse.jnosql.lite:mapping-lite-processor:${jnosqlLiteProcessorVersion}"
+}
+
+// Exclude the reflection-based metadata implementation when using JNoSQL Lite.
+// Otherwise, both reflection and Lite implementations become CDI beans,
+// resulting in an AmbiguousResolutionException.
+configurations.configureEach {
+  exclude group: 'org.eclipse.jnosql.mapping', module: 'jnosql-mapping-reflection'
 }
 
 tasks.withType(JavaCompile).configureEach {
@@ -173,6 +183,16 @@ tasks.withType(JavaCompile).configureEach {
 ```kotlin
 dependencies {
   annotationProcessor("org.eclipse.jnosql.lite:mapping-lite-processor:${jnosqlLiteProcessorVersion}")
+}
+
+// Exclude the reflection-based metadata implementation when using JNoSQL Lite.
+// Otherwise, both reflection and Lite implementations become CDI beans,
+// resulting in an AmbiguousResolutionException.
+configurations.configureEach {
+  exclude(
+    group = "org.eclipse.jnosql.mapping",
+    module = "jnosql-mapping-reflection"
+  )
 }
 
 tasks.withType < JavaCompile > ().configureEach {
