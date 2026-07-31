@@ -48,6 +48,7 @@ Compilation_:
 | [DynamoDB](#dynamodb)           | Key-Value              | ❌                     | ✅                  | ✅                           |
 | [Elasticsearch](#elasticsearch) | Document               | ✅                     | ✅                  | ❌                           | 
 | [Hazelcast](#hazelcast)         | Key-Value              | ❌                     | ✅                  | ✅                           |
+| [Redis](#redis)                 | Key-Value              | ❌                     | ✅                  | ✅                           |
 | [Solr](#solr)                   | Document               | ✅                     | ✅                  | ✅                           |
 | [Neo4j](#neo4j)                 | Graph                  | ✅                     | ✅                  | ✅                           |
 | [Oracle NoSQL](#oracle-nosql)   | Document and Key-Value | ✅                     | ✅                  | ✅                           |
@@ -77,6 +78,7 @@ Here is a table with the available Quarkus JNoSQL Extensions that you can use wi
 | [DynamoDB](#dynamodb)           | `quarkus create app --extensions=jnosql-dynamodb`      |
 | [Elasticsearch](#elasticsearch) | `quarkus create app --extensions=jnosql-elasticsearch` |
 | [Hazelcast](#hazelcast)         | `quarkus create app --extensions=jnosql-hazelcast`     |
+| [Redis](#redis)                 | `quarkus create app --extensions=jnosql-redis`         |
 | [Solr](#solr)                   | `quarkus create app --extensions=jnosql-solr`          |
 | [Neo4j](#neo4j)                 | `quarkus create app --extensions=jnosql-neo4j`         |
 | [Oracle NoSQL](#oracle-nosql)   | `quarkus create app --extensions=jnosql-oracle-nosql`  |
@@ -462,6 +464,46 @@ jnosql.keyvalue.database=my-database-name
 
 Please refer to the [Quarkus Hazelcast extension](https://github.com/hazelcast/quarkus-hazelcast-client) for specific
 configuration details.
+
+## Redis
+
+<img src="https://www.jnosql.org/img/logos/redis.png" alt="Redis Project" align="center" width="25%" height="25%"/>
+
+[Redis](https://redis.io/) is an open source, in-memory data structure store used as a database, cache, and message
+broker. Since [Valkey](https://valkey.io/) is wire-compatible with Redis, this extension works with Valkey as well.
+
+This driver provides support for the *Key-Value* NoSQL API.
+
+The extension uses the Jedis-based JNoSQL Redis driver directly, sharing a single connection pool across the whole
+application.
+
+Add the Redis dependency to your project's `pom.xml`:
+
+```xml
+
+<dependency>
+    <groupId>io.quarkiverse.jnosql</groupId>
+    <artifactId>quarkus-jnosql-redis</artifactId>
+</dependency>
+```
+
+To define the **Key-Value** database's name, you need to add the following info in your `application.properties`:
+
+```properties
+jnosql.keyvalue.database=my-database-name
+```
+
+The connection and the connection pool can be configured through the `jnosql.redis.*` properties, for example:
+
+```properties
+jnosql.redis.host=localhost
+jnosql.redis.port=6379
+jnosql.redis.max.total=50
+```
+
+Please refer to
+the [JNoSQL Redis driver](https://github.com/eclipse-jnosql/jnosql-databases/?tab=readme-ov-file#redis) for the
+complete list of configuration properties.
 
 ## CouchDB
 

@@ -98,6 +98,12 @@ The Quarkus JNoSQL extension supports a variety of NoSQL databases, each with it
 | ✅
 | ✅
 
+| <<_redis, Redis>>
+| Key-Value
+| ❌
+| ✅
+| ✅
+
 | <<_solr, Solr>>
 | Document
 | ✅
@@ -157,6 +163,9 @@ Here is a table with the available Quarkus JNoSQL Extensions that you can use wi
 
 | <<_hazelcast, Hazelcast>>
 |`quarkus create app --extensions=jnosql-hazelcast`
+
+| <<_redis, Redis>>
+|`quarkus create app --extensions=jnosql-redis`
 
 | <<_solr, Solr>>
 |`quarkus create app --extensions=jnosql-solr`
@@ -790,6 +799,66 @@ Do you want to get started to create your entities and repositories? See the sec
 https://github.com/hazelcast/quarkus-hazelcast-client[More details about Quarkus Hazelcast extension].
 
 https://github.com/eclipse-jnosql/jnosql-databases/?tab=readme-ov-file#hazelcast[More details about JNoSQL Hazelcast Database driver].
+
+[#_redis]
+== Redis
+
+image::https://www.jnosql.org/img/logos/redis.png[Redis Project,align="left",width=25%,height=25%]
+
+https://redis.io/[Redis] is an open source, in-memory data structure store used as a database, cache, and message broker. Since https://valkey.io/[Valkey] is wire-compatible with Redis, this extension works with Valkey as well.
+
+Supports *Key-Value*.
+
+The extension uses the Jedis-based JNoSQL Redis driver directly, sharing a single connection pool across the whole application.
+
+To create a Quarkus project with this extension, you can use the Quarkus CLI:
+
+[source,console]
+----
+quarkus create app --extensions=jnosql-redis
+----
+
+To add this extension with the Quarkus CLI to an existing project:
+[source,console]
+----
+quarkus create app --extensions=jnosql-redis
+----
+
+Or add it manually to your `pom.xml`:
+
+[source,xml,subs=attributes+]
+----
+<dependency>
+    <groupId>io.quarkiverse.jnosql</groupId>
+    <artifactId>quarkus-jnosql-redis</artifactId>
+    <version>{project-version}</version>
+</dependency>
+----
+
+Set the database name in `application.properties`:
+
+[source,properties]
+----
+jnosql.keyvalue.database=my-database-name
+----
+
+The connection and the connection pool can be configured through the `jnosql.redis.*` properties, for example:
+
+[source,properties]
+----
+jnosql.redis.host=localhost
+jnosql.redis.port=6379
+jnosql.redis.max.total=50
+----
+
+[IMPORTANT]
+====
+If you are using **Java 21** or above, make sure to <<#_enabling_the_jnosql_mapping_lite_annotation_processor,enable the annotation processor execution>>. If you are using **Java 17** or below, you can skip this step and go ahead to implement your entities and repositories.
+====
+
+Do you want to get started to create your entities and repositories? See the section <<#_using_jakarta_nosql_and_jakarta_data_with_quarkus_jnosql,Using Jakarta NoSQL and Jakarta Data with Quarkus JNoSQL>>.
+
+https://github.com/eclipse-jnosql/jnosql-databases/?tab=readme-ov-file#redis[More details about JNoSQL Redis Database driver].
 
 [#_couchdb]
 == CouchDB
