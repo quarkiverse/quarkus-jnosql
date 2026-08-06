@@ -27,6 +27,7 @@
         <module>solr</module>
         <module>elasticsearch</module>
         <module>hazelcast</module>
+        <module>redis</module>
         <module>dynamodb</module>
         <module>neo4j</module>
         <module>oracle-nosql</module>
