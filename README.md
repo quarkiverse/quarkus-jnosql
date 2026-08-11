@@ -1,5 +1,27 @@
 # Quarkus JNoSQL
 
+## Table of Contents
+
+- [Getting Started](#getting-started)
+- [Supported NoSQL Databases](#supported-nosql-databases)
+- [Create your Quarkus JNoSQL Project using Extension Codestarts](#create-your-quarkus-jnosql-project-using-extension-codestarts)
+- [Manually adding Quarkus JNoSQL Extension to your project](#manually-adding-quarkus-jnosql-extension-to-your-project)
+- [Enabling the JNoSQL Mapping Lite Annotation Processor](#enabling-the-jnosql-mapping-lite-annotation-processor)
+- [Using Jakarta NoSQL and Jakarta Data with Quarkus JNoSQL](#using-jakarta-nosql-and-jakarta-data-with-quarkus-jnosql)
+- [MongoDB](#mongodb)
+- [Cassandra](#cassandra)
+- [ArangoDB](#arangodb)
+- [DynamoDB](#dynamodb)
+- [Hazelcast](#hazelcast)
+- [Redis](#redis)
+- [Valkey](#valkey)
+- [CouchDB](#couchdb)
+- [Elasticsearch](#elasticsearch)
+- [Solr](#solr)
+- [Neo4j](#neo4j)
+- [Oracle NoSQL](#oracle-nosql)
+- [Contributors](#contributors-)
+
 <!-- ALL-CONTRIBUTORS-BADGE:START - Do not remove or modify this section -->
 [![All Contributors](https://img.shields.io/badge/all_contributors-4-orange.svg?style=flat-square)](#contributors-)
 <!-- ALL-CONTRIBUTORS-BADGE:END -->
