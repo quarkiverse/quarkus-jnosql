@@ -12,6 +12,7 @@ import io.quarkus.deployment.annotations.BuildProducer;
 import io.quarkus.deployment.annotations.BuildStep;
 import io.quarkus.deployment.builditem.FeatureBuildItem;
 import io.quarkus.deployment.builditem.nativeimage.RuntimeInitializedClassBuildItem;
+import io.quarkus.deployment.builditem.nativeimage.RuntimeInitializedPackageBuildItem;
 
 class Processor {
 
@@ -39,10 +40,14 @@ class Processor {
     @BuildStep
     void markRuntimeInitializedClasses(BuildProducer<RuntimeInitializedClassBuildItem> runtimeInitializedClassesProducer) {
 
-        Stream.of(ReferenceCountedOpenSslEngine.class)
-                .map(Class::getName)
+        Stream.of(ReferenceCountedOpenSslEngine.class.getName())
                 .map(RuntimeInitializedClassBuildItem::new)
                 .forEach(runtimeInitializedClassesProducer::produce);
 
+    }
+
+    @BuildStep
+    RuntimeInitializedPackageBuildItem markRuntimeInitializedPackages() {
+        return new RuntimeInitializedPackageBuildItem("io.netty.internal.tcnative");
     }
 }
