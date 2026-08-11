@@ -6,7 +6,6 @@ metadata:
     - "nosql"
     - "datastore"
     - "redis"
-    - "valkey"
     - "key-value"
   categories:
     - "data"
