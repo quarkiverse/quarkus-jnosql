@@ -1,0 +1,30 @@
+name: quarkus-jnosql-valkey-codestart
+ref: quarkus-jnosql-valkey
+type: code
+tags:
+  - extension-codestart
+  - maven-only
+metadata:
+  title: Quarkus JNoSQL Valkey Codestart
+  description: Create your first Key-Value NoSQL entity with Quarkus and JNoSQL Valkey.
+  related-guide-section: https://docs.quarkiverse.io/quarkus-jnosql/dev/
+language:
+  base:
+    test-dependencies:
+        - groupId: org.testcontainers
+          artifactId: testcontainers
+          scope: test
+
+        - groupId: io.quarkus
+          artifactId: quarkus-junit-mockito
+          scope: test
+
+        - groupId: net.datafaker
+          artifactId: datafaker
+          version: ${datafaker.version}
+          scope: test
+
+        - groupId: org.assertj
+          artifactId: assertj-core
+          version: ${assertj.version}
+          scope: test
