@@ -28,6 +28,7 @@
         <module>elasticsearch</module>
         <module>hazelcast</module>
         <module>redis</module>
+        <module>valkey</module>
         <module>dynamodb</module>
         <module>neo4j</module>
         <module>oracle-nosql</module>
@@ -133,6 +134,11 @@
             <dependency>
                 <groupId>org.eclipse.jnosql.databases</groupId>
                 <artifactId>jnosql-redis</artifactId>
+                <version>${jnosql.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>org.eclipse.jnosql.databases</groupId>
+                <artifactId>jnosql-valkey</artifactId>
                 <version>${jnosql.version}</version>
             </dependency>
             <dependency>
