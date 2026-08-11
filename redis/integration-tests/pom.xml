@@ -4,7 +4,7 @@
     <parent>
         <groupId>io.quarkiverse.jnosql</groupId>
         <artifactId>quarkus-jnosql-redis-parent</artifactId>
-        <version>3.4.17-SNAPSHOT</version>
+        <version>3.5.0</version>
     </parent>
     <artifactId>quarkus-jnosql-redis-integration-tests</artifactId>
     <name>Quarkus JNoSQL - Redis - Integration Tests</name>
