@@ -1,0 +1,22 @@
+name: JNoSQL Valkey
+#description: Do something useful.
+metadata:
+  keywords:
+    - "jnosql"
+    - "nosql"
+    - "datastore"
+    - "valkey"
+    - "key-value"
+  categories:
+    - "data"
+  guide: https://docs.quarkiverse.io/quarkus-jnosql/dev/
+  config:
+    - "jnosql."
+    - "jnosql.keyvalue."
+    - "jnosql.valkey."
+#  status: "preview"
+  codestart:
+    name: "quarkus-jnosql-valkey-codestart"
+    languages:
+      - "java"
+    artifact: "io.quarkiverse.jnosql:quarkus-jnosql-valkey:codestarts:jar:${project.version}"
