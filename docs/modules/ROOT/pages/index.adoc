@@ -805,7 +805,7 @@ https://github.com/eclipse-jnosql/jnosql-databases/?tab=readme-ov-file#hazelcast
 
 image::https://www.jnosql.org/img/logos/redis.png[Redis Project,align="left",width=25%,height=25%]
 
-https://redis.io/[Redis] is an open source, in-memory data structure store used as a database, cache, and message broker. Since https://valkey.io/[Valkey] is wire-compatible with Redis, this extension works with Valkey as well.
+https://redis.io/[Redis] is an open source, in-memory data structure store used as a database, cache, and message broker.
 
 Supports *Key-Value*.
 
