@@ -1,11 +1,11 @@
-name: JNoSQL Redis
+name: JNoSQL Valkey
 #description: Do something useful.
 metadata:
   keywords:
     - "jnosql"
     - "nosql"
     - "datastore"
-    - "redis"
+    - "valkey"
     - "key-value"
   categories:
     - "data"
@@ -13,10 +13,10 @@ metadata:
   config:
     - "jnosql."
     - "jnosql.keyvalue."
-    - "jnosql.redis."
+    - "jnosql.valkey."
 #  status: "preview"
   codestart:
-    name: "quarkus-jnosql-redis-codestart"
+    name: "quarkus-jnosql-valkey-codestart"
     languages:
       - "java"
-    artifact: "io.quarkiverse.jnosql:quarkus-jnosql-redis:codestarts:jar:${project.version}"
+    artifact: "io.quarkiverse.jnosql:quarkus-jnosql-valkey:codestarts:jar:${project.version}"
