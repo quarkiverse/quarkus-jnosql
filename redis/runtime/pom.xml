@@ -11,7 +11,7 @@
     <description>Quarkus JNoSQL Redis Runtime provides runtime support for integrating Redis key-value
         databases with Quarkus applications. This extension uses the Jedis-based JNoSQL Redis driver directly,
         with proper connection pooling, enabling efficient storage, retrieval, and management of key-value data
-        within Quarkus projects. It is also compatible with Valkey.
+        within Quarkus projects.
     </description>
 
     <dependencies>
