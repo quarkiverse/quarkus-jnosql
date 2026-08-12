@@ -125,36 +125,78 @@
                 <groupId>org.eclipse.jnosql.databases</groupId>
                 <artifactId>jnosql-mongodb</artifactId>
                 <version>${jnosql.version}</version>
+                <exclusions>
+                    <exclusion>
+                        <groupId>org.eclipse.jnosql.mapping</groupId>
+                        <artifactId>jnosql-mapping-reflection</artifactId>
+                    </exclusion>
+                </exclusions>
             </dependency>
             <dependency>
                 <groupId>org.eclipse.jnosql.databases</groupId>
                 <artifactId>jnosql-elasticsearch</artifactId>
                 <version>${jnosql.version}</version>
+                <exclusions>
+                    <exclusion>
+                        <groupId>org.eclipse.jnosql.mapping</groupId>
+                        <artifactId>jnosql-mapping-reflection</artifactId>
+                    </exclusion>
+                </exclusions>
             </dependency>
             <dependency>
                 <groupId>org.eclipse.jnosql.databases</groupId>
                 <artifactId>jnosql-redis</artifactId>
                 <version>${jnosql.version}</version>
+                <exclusions>
+                    <exclusion>
+                        <groupId>org.eclipse.jnosql.mapping</groupId>
+                        <artifactId>jnosql-mapping-reflection</artifactId>
+                    </exclusion>
+                </exclusions>
             </dependency>
             <dependency>
                 <groupId>org.eclipse.jnosql.databases</groupId>
                 <artifactId>jnosql-valkey</artifactId>
                 <version>${jnosql.version}</version>
+                <exclusions>
+                    <exclusion>
+                        <groupId>org.eclipse.jnosql.mapping</groupId>
+                        <artifactId>jnosql-mapping-reflection</artifactId>
+                    </exclusion>
+                </exclusions>
             </dependency>
             <dependency>
                 <groupId>org.eclipse.jnosql.databases</groupId>
                 <artifactId>jnosql-dynamodb</artifactId>
                 <version>${jnosql.version}</version>
+                <exclusions>
+                    <exclusion>
+                        <groupId>org.eclipse.jnosql.mapping</groupId>
+                        <artifactId>jnosql-mapping-reflection</artifactId>
+                    </exclusion>
+                </exclusions>
             </dependency>
             <dependency>
                 <groupId>org.eclipse.jnosql.databases</groupId>
                 <artifactId>jnosql-cassandra</artifactId>
                 <version>${jnosql.version}</version>
+                <exclusions>
+                    <exclusion>
+                        <groupId>org.eclipse.jnosql.mapping</groupId>
+                        <artifactId>jnosql-mapping-reflection</artifactId>
+                    </exclusion>
+                </exclusions>
             </dependency>
             <dependency>
                 <groupId>org.eclipse.jnosql.databases</groupId>
                 <artifactId>jnosql-arangodb</artifactId>
                 <version>${jnosql.version}</version>
+                <exclusions>
+                    <exclusion>
+                        <groupId>org.eclipse.jnosql.mapping</groupId>
+                        <artifactId>jnosql-mapping-reflection</artifactId>
+                    </exclusion>
+                </exclusions>
             </dependency>
             <dependency>
                 <groupId>org.eclipse.jnosql.databases</groupId>
@@ -165,27 +207,55 @@
                         <groupId>com.hazelcast</groupId>
                         <artifactId>hazelcast</artifactId>
                     </exclusion>
+                    <exclusion>
+                        <groupId>org.eclipse.jnosql.mapping</groupId>
+                        <artifactId>jnosql-mapping-reflection</artifactId>
+                    </exclusion>
                 </exclusions>
             </dependency>
             <dependency>
                 <groupId>org.eclipse.jnosql.databases</groupId>
                 <artifactId>jnosql-solr</artifactId>
                 <version>${jnosql.version}</version>
+                <exclusions>
+                    <exclusion>
+                        <groupId>org.eclipse.jnosql.mapping</groupId>
+                        <artifactId>jnosql-mapping-reflection</artifactId>
+                    </exclusion>
+                </exclusions>
             </dependency>
             <dependency>
                 <groupId>org.eclipse.jnosql.databases</groupId>
                 <artifactId>jnosql-couchdb</artifactId>
                 <version>${jnosql.version}</version>
+                <exclusions>
+                    <exclusion>
+                        <groupId>org.eclipse.jnosql.mapping</groupId>
+                        <artifactId>jnosql-mapping-reflection</artifactId>
+                    </exclusion>
+                </exclusions>
             </dependency>
             <dependency>
                 <groupId>org.eclipse.jnosql.databases</groupId>
                 <artifactId>jnosql-neo4j</artifactId>
                 <version>${jnosql.version}</version>
+                <exclusions>
+                    <exclusion>
+                        <groupId>org.eclipse.jnosql.mapping</groupId>
+                        <artifactId>jnosql-mapping-reflection</artifactId>
+                    </exclusion>
+                </exclusions>
             </dependency>
             <dependency>
                 <groupId>org.eclipse.jnosql.databases</groupId>
                 <artifactId>jnosql-oracle-nosql</artifactId>
                 <version>${jnosql.version}</version>
+                <exclusions>
+                    <exclusion>
+                        <groupId>org.eclipse.jnosql.mapping</groupId>
+                        <artifactId>jnosql-mapping-reflection</artifactId>
+                    </exclusion>
+                </exclusions>
             </dependency>
         </dependencies>
     </dependencyManagement>
