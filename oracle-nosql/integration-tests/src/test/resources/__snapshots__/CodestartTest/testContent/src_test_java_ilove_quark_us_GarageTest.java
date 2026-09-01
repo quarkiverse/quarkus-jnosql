@@ -15,6 +15,7 @@ import org.junit.jupiter.api.Test;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.NoSuchElementException;
 import java.util.UUID;
 
 import static org.assertj.core.api.Assertions.assertThat;
@@ -110,14 +111,12 @@ public class GarageTest {
                 .isNotEmpty()
                 .doesNotContainAnyElementsOf(page1);
 
-        Page<Car> page3 = garage.findByTransmission(car1.transmission(), page2.nextPageRequest(), Sort.ascIgnoreCase("make"));
-        currentPage = page3.pageRequest();
-        assertThat(page3)
-                .as("Given a paginated request for page %d with %d items per page, should return an empty page.",
-                        currentPage.page(),
-                        currentPage.size(),
-                        car1.transmission())
-                .isEmpty();
+        assertThat(page2.hasNext())
+                .as("Page %d should be the last page.", currentPage.page())
+                .isFalse();
+        assertThatCode(page2::nextPageRequest)
+                .as("Requesting a page after the last page should fail.")
+                .isInstanceOf(NoSuchElementException.class);
 
         assertThat(garage.findByTransmission(car2.transmission(), PageRequest.ofPage(1)))
                 .as("should return a page with %s cars", car2.transmission())
