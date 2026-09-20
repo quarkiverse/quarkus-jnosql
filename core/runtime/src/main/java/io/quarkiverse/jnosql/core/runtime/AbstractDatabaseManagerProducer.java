@@ -22,9 +22,14 @@ public abstract class AbstractDatabaseManagerProducer<M extends DatabaseManager,
     protected C configuration;
 
     public M get(MappingConfigurations databaseSetting) {
+        return get(createFactory(), databaseSetting);
+    }
 
-        var factory = configuration.apply(settings);
+    protected F createFactory() {
+        return (F) configuration.apply(settings);
+    }
 
+    protected M get(F factory, MappingConfigurations databaseSetting) {
         var database = settings.get(databaseSetting, String.class)
                 .orElseThrow(() -> new MappingException("Please, inform the database filling up the property "
                         + databaseSetting));

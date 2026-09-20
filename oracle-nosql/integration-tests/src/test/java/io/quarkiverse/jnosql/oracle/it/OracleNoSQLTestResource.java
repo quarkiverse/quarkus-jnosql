@@ -6,6 +6,7 @@ import org.eclipse.jnosql.databases.oracle.communication.OracleNoSQLConfiguratio
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.testcontainers.containers.GenericContainer;
+import org.testcontainers.containers.wait.strategy.Wait;
 import org.testcontainers.utility.TestcontainersConfiguration;
 
 import io.quarkus.test.common.QuarkusTestResourceLifecycleManager;
@@ -15,7 +16,7 @@ public class OracleNoSQLTestResource implements QuarkusTestResourceLifecycleMana
     private static final Logger LOGGER = LoggerFactory.getLogger(OracleNoSQLTestResource.class);
     private GenericContainer<?> container;
     private static final String CONTAINER_NAME = "oracle-nosql";
-    private static final String CONTAINER_IMAGE = "ghcr.io/oracle/nosql:latest-ce";
+    private static final String CONTAINER_IMAGE = "ghcr.io/oracle/nosql:2025-12-ce";
     private static final Integer PORT_DEFAULT = 8080;
 
     @Override
@@ -26,7 +27,7 @@ public class OracleNoSQLTestResource implements QuarkusTestResourceLifecycleMana
             container = new GenericContainer<>(CONTAINER_IMAGE)
                     .withExposedPorts(PORT_DEFAULT)
                     .withNetworkAliases(CONTAINER_NAME)
-                    .withExposedPorts(PORT_DEFAULT);
+                    .waitingFor(Wait.forLogMessage(".*proxyVersion=.*\\n", 1));
             container.start();
 
             Map<String, String> oracleNoSQLParams = Map.of(
