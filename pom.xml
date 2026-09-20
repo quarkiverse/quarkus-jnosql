@@ -13,7 +13,7 @@
     <name>Quarkus JNoSQL - Parent</name>
     <description>Parent project for Quarkus JNoSQL extensions, providing a unified framework for integrating JNoSQL with
         Quarkus applications.
-        Manages dependencies and configurations for KeyValue, Document, and Column databases, offering seamless
+        Manages dependencies and configurations for KeyValue, Document, Column, and Time Series databases, offering seamless
         integration and enhanced productivity
         for developers.
     </description>
@@ -21,6 +21,7 @@
     <modules>
         <module>core</module>
         <module>mongodb</module>
+        <module>influxdb</module>
         <module>arangodb</module>
         <module>cassandra</module>
         <module>couchdb</module>
@@ -122,8 +123,24 @@
                 <version>${jnosql.version}</version>
             </dependency>
             <dependency>
+                <groupId>org.eclipse.jnosql.mapping</groupId>
+                <artifactId>jnosql-mapping-timeseries</artifactId>
+                <version>${jnosql.version}</version>
+            </dependency>
+            <dependency>
                 <groupId>org.eclipse.jnosql.databases</groupId>
                 <artifactId>jnosql-mongodb</artifactId>
+                <version>${jnosql.version}</version>
+                <exclusions>
+                    <exclusion>
+                        <groupId>org.eclipse.jnosql.mapping</groupId>
+                        <artifactId>jnosql-mapping-reflection</artifactId>
+                    </exclusion>
+                </exclusions>
+            </dependency>
+            <dependency>
+                <groupId>org.eclipse.jnosql.databases</groupId>
+                <artifactId>jnosql-influxdb</artifactId>
                 <version>${jnosql.version}</version>
                 <exclusions>
                     <exclusion>
