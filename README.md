@@ -8,18 +8,27 @@
 - [Manually adding Quarkus JNoSQL Extension to your project](#manually-adding-quarkus-jnosql-extension-to-your-project)
 - [Enabling the JNoSQL Mapping Lite Annotation Processor](#enabling-the-jnosql-mapping-lite-annotation-processor)
 - [Using Jakarta NoSQL and Jakarta Data with Quarkus JNoSQL](#using-jakarta-nosql-and-jakarta-data-with-quarkus-jnosql)
-- [MongoDB](#mongodb)
-- [Cassandra](#cassandra)
-- [ArangoDB](#arangodb)
-- [DynamoDB](#dynamodb)
-- [Hazelcast](#hazelcast)
-- [Redis](#redis)
-- [Valkey](#valkey)
-- [CouchDB](#couchdb)
-- [Elasticsearch](#elasticsearch)
-- [Solr](#solr)
-- [Neo4j](#neo4j)
-- [Oracle NoSQL](#oracle-nosql)
+- [Document Databases](#document-databases)
+  - [MongoDB](#mongodb)
+  - [CouchDB](#couchdb)
+  - [Elasticsearch](#elasticsearch)
+  - [Solr](#solr)
+- [Column Databases](#column-databases)
+  - [Cassandra](#cassandra)
+- [Key-Value Databases](#key-value-databases)
+  - [DynamoDB](#dynamodb)
+  - [Hazelcast](#hazelcast)
+  - [Redis](#redis)
+  - [Valkey](#valkey)
+- [Graph Databases](#graph-databases)
+  - [Neo4j](#neo4j)
+- [Time Series Databases](#time-series-databases)
+  - [InfluxDB](#influxdb)
+  - [Apache IoTDB](#apache-iotdb)
+  - [QuestDB](#questdb)
+- [Multi-model Databases](#multi-model-databases)
+  - [ArangoDB](#arangodb)
+  - [Oracle NoSQL](#oracle-nosql)
 - [Contributors](#contributors-)
 
 <!-- ALL-CONTRIBUTORS-BADGE:START - Do not remove or modify this section -->
@@ -57,24 +66,52 @@ And replace `{project-version}` with the latest stable version of the Quarkus JN
 
 ## Supported NoSQL Databases
 
-The Quarkus JNoSQL extension supports a variety of NoSQL databases, each with its own unique features and capabilities.
-Below is a table summarizing the supported NoSQL types, whether they support _Jakarta Data_, and if they support _Native
-Compilation_:
+The Quarkus JNoSQL extension supports a variety of NoSQL databases, grouped by database model to make it easier to find the integration that best fits your application.
 
-| Database Vendor                 | Supported NoSQL Type   | Supports Jakarta Data | Provides Codestart | Supports Native Compilation | 
-|---------------------------------|------------------------|-----------------------|--------------------|-----------------------------|
-| [MongoDB](#mongodb)             | Document               | ✅                     | ✅                  | ✅                           |
-| [Cassandra](#cassandra)         | Column                 | ✅                     | ✅                  | ✅                           |
-| [CouchDB](#couchdb)             | Document               | ✅                     | ✅                  | ✅                           |
-| [ArangoDB](#arangodb)           | Document and Key-Value | ✅                     | ✅                  | ✅                           |
-| [DynamoDB](#dynamodb)           | Key-Value              | ❌                     | ✅                  | ✅                           |
-| [Elasticsearch](#elasticsearch) | Document               | ✅                     | ✅                  | ❌                           | 
-| [Hazelcast](#hazelcast)         | Key-Value              | ❌                     | ✅                  | ✅                           |
-| [Redis](#redis)                 | Key-Value              | ❌                     | ✅                  | ✅                           |
-| [Valkey](#valkey)               | Key-Value              | ❌                     | ✅                  | ✅                           |
-| [Solr](#solr)                   | Document               | ✅                     | ✅                  | ✅                           |
-| [Neo4j](#neo4j)                 | Graph                  | ✅                     | ✅                  | ✅                           |
-| [Oracle NoSQL](#oracle-nosql)   | Document and Key-Value | ✅                     | ✅                  | ✅                           |
+### Document
+
+| Database Vendor                 | Supports Jakarta Data | Provides Codestart | Supports Native Compilation |
+|---------------------------------|-----------------------|--------------------|-----------------------------|
+| [MongoDB](#mongodb)             | ✅                     | ✅                  | ✅                           |
+| [CouchDB](#couchdb)             | ✅                     | ✅                  | ✅                           |
+| [Elasticsearch](#elasticsearch) | ✅                     | ✅                  | ❌                           |
+| [Solr](#solr)                   | ✅                     | ✅                  | ✅                           |
+
+### Column
+
+| Database Vendor             | Supports Jakarta Data | Provides Codestart | Supports Native Compilation |
+|-----------------------------|-----------------------|--------------------|-----------------------------|
+| [Cassandra](#cassandra)     | ✅                     | ✅                  | ✅                           |
+
+### Key-Value
+
+| Database Vendor             | Supports Jakarta Data | Provides Codestart | Supports Native Compilation |
+|-----------------------------|-----------------------|--------------------|-----------------------------|
+| [DynamoDB](#dynamodb)       | ❌                     | ✅                  | ✅                           |
+| [Hazelcast](#hazelcast)     | ❌                     | ✅                  | ✅                           |
+| [Redis](#redis)             | ❌                     | ✅                  | ✅                           |
+| [Valkey](#valkey)           | ❌                     | ✅                  | ✅                           |
+
+### Graph
+
+| Database Vendor         | Supports Jakarta Data | Provides Codestart | Supports Native Compilation |
+|-------------------------|-----------------------|--------------------|-----------------------------|
+| [Neo4j](#neo4j)         | ✅                     | ✅                  | ✅                           |
+
+### Time Series
+
+| Database Vendor             | Supports Jakarta Data | Provides Codestart | Supports Native Compilation |
+|-----------------------------|-----------------------|--------------------|-----------------------------|
+| [InfluxDB](#influxdb)       | ✅                     | ✅                  | ✅                           |
+| [Apache IoTDB](#apache-iotdb) | ✅                   | ✅                  | ❌                           |
+| [QuestDB](#questdb)         | ✅                     | ✅                  | ❌                           |
+
+### Multi-model
+
+| Database Vendor                 | Supported NoSQL Type        | Supports Jakarta Data | Provides Codestart | Supports Native Compilation |
+|---------------------------------|-----------------------------|-----------------------|--------------------|-----------------------------|
+| [ArangoDB](#arangodb)           | Document and Key-Value      | ✅                     | ✅                  | ✅                           |
+| [Oracle NoSQL](#oracle-nosql)   | Document and Key-Value      | ✅                     | ✅                  | ✅                           |
 
 ## Create your Quarkus JNoSQL Project using Extension Codestarts
 
@@ -90,22 +127,52 @@ JNoSQL MongoDB Extension, you can run:
 quarkus create app --extensions=jnosql-mongodb
 ```
 
-Here is a table with the available Quarkus JNoSQL Extensions that you can use with the `quarkus create app` command:
+Here are the available Quarkus JNoSQL Extensions that you can use with the `quarkus create app` command, grouped by database model:
+
+### Document
 
 | Database Vendor                 | Command                                                |
 |---------------------------------|--------------------------------------------------------|
 | [MongoDB](#mongodb)             | `quarkus create app --extensions=jnosql-mongodb`       |
-| [Cassandra](#cassandra)         | `quarkus create app --extensions=jnosql-cassandra`     |
 | [CouchDB](#couchdb)             | `quarkus create app --extensions=jnosql-couchdb`       |
-| [ArangoDB](#arangodb)           | `quarkus create app --extensions=jnosql-arangodb`      |
-| [DynamoDB](#dynamodb)           | `quarkus create app --extensions=jnosql-dynamodb`      |
 | [Elasticsearch](#elasticsearch) | `quarkus create app --extensions=jnosql-elasticsearch` |
-| [Hazelcast](#hazelcast)         | `quarkus create app --extensions=jnosql-hazelcast`     |
-| [Redis](#redis)                 | `quarkus create app --extensions=jnosql-redis`         |
-| [Valkey](#valkey)               | `quarkus create app --extensions=jnosql-valkey`        |
 | [Solr](#solr)                   | `quarkus create app --extensions=jnosql-solr`          |
-| [Neo4j](#neo4j)                 | `quarkus create app --extensions=jnosql-neo4j`         |
-| [Oracle NoSQL](#oracle-nosql)   | `quarkus create app --extensions=jnosql-oracle-nosql`  |
+
+### Column
+
+| Database Vendor             | Command                                                |
+|-----------------------------|--------------------------------------------------------|
+| [Cassandra](#cassandra)     | `quarkus create app --extensions=jnosql-cassandra`     |
+
+### Key-Value
+
+| Database Vendor             | Command                                                |
+|-----------------------------|--------------------------------------------------------|
+| [DynamoDB](#dynamodb)       | `quarkus create app --extensions=jnosql-dynamodb`      |
+| [Hazelcast](#hazelcast)     | `quarkus create app --extensions=jnosql-hazelcast`     |
+| [Redis](#redis)             | `quarkus create app --extensions=jnosql-redis`         |
+| [Valkey](#valkey)           | `quarkus create app --extensions=jnosql-valkey`        |
+
+### Graph
+
+| Database Vendor         | Command                                                |
+|-------------------------|--------------------------------------------------------|
+| [Neo4j](#neo4j)         | `quarkus create app --extensions=jnosql-neo4j`         |
+
+### Time Series
+
+| Database Vendor             | Command                                                |
+|-----------------------------|--------------------------------------------------------|
+| [InfluxDB](#influxdb)       | `quarkus create app --extensions=jnosql-influxdb`      |
+| [Apache IoTDB](#apache-iotdb) | `quarkus create app --extensions=jnosql-iotdb`       |
+| [QuestDB](#questdb)         | `quarkus create app --extensions=jnosql-questdb`       |
+
+### Multi-model
+
+| Database Vendor               | Command                                                 |
+|-------------------------------|---------------------------------------------------------|
+| [ArangoDB](#arangodb)         | `quarkus create app --extensions=jnosql-arangodb`       |
+| [Oracle NoSQL](#oracle-nosql) | `quarkus create app --extensions=jnosql-oracle-nosql`   |
 
 
 Or you could create it on by downloading the scaffolding project from the [code.quarkus.io](https://code.quarkus.io/?extension-search=jnosql) and selecting the JNoSQL extension for your desired NoSQL database.
@@ -256,7 +323,7 @@ public class TestEntity {
 }
 ```
 
-### Using Jakarta NoSQL Template 
+### Using Jakarta NoSQL Template
 
 Example using `jakarta.nosql.Template`:
 
@@ -269,6 +336,7 @@ Example using `jakarta.nosql.Template`:
 // @Database(DatabaseType.COLUMN) for Column databases
 // @Database(DatabaseType.GRAPH) for Graph databases
 // @Database(DatabaseType.KEY_VALUE) for Key-Value databases
+// @Database(DatabaseType.TIMESERIES) for Time Series databases
 private Template template;
 
 public void insert(TestEntity entity) {
@@ -288,7 +356,7 @@ public interface TestEntityRepository extends NoSQLRepository<TestEntity, String
 
 Jakarta Data repositories provide a powerful way to interact with your NoSQL database using a repository pattern.
 
-The interface `org.eclipse.jnosql.mapping.NoSQLRepository` used above extends the `jakarta.data.repository.BasicRepository`, which is a Jakarta Data Repository interface that brings a specialization for NoSQL useful operations, allowing developers to use pre-defined methods. 
+The interface `org.eclipse.jnosql.mapping.NoSQLRepository` used above extends the `jakarta.data.repository.BasicRepository`, which is a Jakarta Data Repository interface that brings a specialization for NoSQL useful operations, allowing developers to use pre-defined methods.
 
 Also,you can define custom queries using method names or annotations, and the framework will handle the implementation for you. More information about Jakarta Data can be found in the [Jakarta Data Specification](https://jakarta.ee/specifications/data/1.0/).
 
@@ -306,6 +374,7 @@ class TestEntityService {
     // @Database(DatabaseType.COLUMN) for Column databases
     // @Database(DatabaseType.GRAPH) for Graph databases
     // @Database(DatabaseType.KEY_VALUE) for Key-Value databases
+    // @Database(DatabaseType.TIMESERIES) for Time Series databases
     Template template;
 
     @Inject
@@ -316,6 +385,7 @@ class TestEntityService {
     // @Database(DatabaseType.COLUMN) for Column databases
     // @Database(DatabaseType.GRAPH) for Graph databases
     // @Database(DatabaseType.KEY_VALUE) for Key-Value databases
+    // @Database(DatabaseType.TIMESERIES) for Time Series databases
     TestEntityRepository repository;
 
     public void insertViaRepository(TestEntity entity) {
@@ -335,7 +405,9 @@ That's it! You have successfully set up a Quarkus application with the Quarkus J
 
 Next, we provide more instructions for each supported database.
 
-## MongoDB
+## Document Databases
+
+### MongoDB
 
 <img src="https://jnosql.github.io/img/logos/mongodb.png" alt="MongoDB Project" align="center" width="25%" height="25%"/>
 
@@ -364,7 +436,104 @@ jnosql.document.database=my-database-name
 
 For specific configuration details, please refer to the [MongoDB Quarkus extension](https://quarkus.io/guides/mongodb).
 
-## Cassandra
+### CouchDB
+
+<img src="https://www.jnosql.org/img/logos/couchdb.png" alt="CouchDB" align="center" width="25%" height="25%"/>
+
+The [CouchDB](https://couchdb.apache.org/) driver provides an API integration between Java and the database through a
+standard communication level.
+
+This driver provides support for the *Document* NoSQL API.
+
+It supports **Jakarta Data**.
+
+Add the CouchDB dependency to your project's `pom.xml`:
+
+```xml
+
+<dependency>
+    <groupId>io.quarkiverse.jnosql</groupId>
+    <artifactId>quarkus-jnosql-couchdb</artifactId>
+</dependency>
+```
+
+To define the **Document** database's name, you need to add the following info in your `application.properties`:
+
+```properties
+jnosql.document.database=my-database-name
+```
+
+For specific configuration details, please refer to
+the [CouchDB JNoSQL driver](https://github.com/eclipse/jnosql-databases#couchdb).
+
+### Elasticsearch
+
+<img src="https://jnosql.github.io/img/logos/elastic.svg" alt="Elasticsearch Project" align="center" width="25%" height="25%"/>
+
+[Elasticsearch](https://www.elastic.co/) is a search engine based on Lucene.  
+It provides a distributed, multitenant-capable full-text search engine with an HTTP web interface and schema-free JSON
+documents.  
+Elasticsearch is developed in Java and is released as open source under the terms of the Apache License. Elasticsearch
+is the most popular enterprise search engine followed by Apache Solr, also based on Lucene.
+
+This driver provides support for the *Document* NoSQL API.
+
+It supports **Jakarta Data**.
+
+:information_source: **It does not support native compilation, unfortunately.**
+
+Add the Elasticsearch dependency to your project's `pom.xml`:
+
+```xml
+
+<dependency>
+    <groupId>io.quarkiverse.jnosql</groupId>
+    <artifactId>quarkus-jnosql-elasticsearch</artifactId>
+</dependency>
+```
+
+To define the **Document** database's name, you need to add the following info in your `application.properties`:
+
+```properties
+jnosql.document.database=my-database-name
+```
+
+Please refer to
+the [Elasticsearch Quarkus extension](https://quarkus.io/guides/elasticsearch#using-the-elasticsearch-java-client) for
+specific configuration details.
+
+### Solr
+
+<img src="https://jnosql.github.io/img/logos/solr.svg" alt="Apache Solr Project" align="center" width="20%" height="20%"/>
+
+[Solr](https://solr.apache.org/) is an open-source enterprise-search platform, written in Java, from the Apache Lucene
+project.
+Its major features include full-text search, hit highlighting, faceted search, real-time indexing, dynamic clustering,
+database integration, NoSQL features and rich document (e.g., Word, PDF) handling.
+Providing distributed search and index replication, Solr is designed for scalability and fault tolerance.
+Solr is widely used for enterprise search and analytics use cases and has an active development community and regular
+releases.
+
+This driver provides support for the *Document* NoSQL API.
+
+It supports **Jakarta Data**.
+
+Add the Quarkus JNoSQL Solr dependency to your project's `pom.xml`:
+
+```xml
+
+<dependency>
+    <groupId>io.quarkiverse.jnosql</groupId>
+    <artifactId>quarkus-jnosql-solr</artifactId>
+</dependency>
+```
+
+For specific configuration details, please refer to
+the [Solr JNoSQL driver](https://github.com/eclipse/jnosql-databases#solr).
+
+## Column Databases
+
+### Cassandra
 
 <img src="https://jnosql.github.io/img/logos/cassandra.png" alt="Apache Cassandra Project" align="center" width="25%" height="25%"/>
 
@@ -395,44 +564,9 @@ jnosql.column.database=my-database-name
 Please refer to the [Cassandra Quarkus extension](https://quarkus.io/guides/cassandra) for specific configuration
 details.
 
-## ArangoDB
+## Key-Value Databases
 
-<img src="https://jnosql.github.io/img/logos/ArangoDB.png" alt="ArangoDB Project" align="center" width="25%" height="25%" />
-
-[ArangoDB](https://www.arangodb.com/) is a native multi-model database with flexible data models for documents, graphs,
-and key-values.
-Build high performance applications using a convenient SQL-like query language or JavaScript extensions.
-
-This extension offers support for **Document** and **Key-Value** types. Also, it provides support for **Jakarta Data**
-for Document NoSQL Entities.
-
-Add the ArangoDB dependency to your project's `pom.xml`:
-
-```xml
-
-<dependency>
-    <groupId>io.quarkiverse.jnosql</groupId>
-    <artifactId>quarkus-jnosql-arangodb</artifactId>
-    <version>${quarkus-jnosql.version}</version>
-</dependency>
-```
-
-To define the **Key-Value** database's name, you need to add the following info in your `application.properties`:
-
-```properties
-jnosql.keyvalue.database=my-database-name
-```
-
-To define the **Document** database's name, you need to add the following info in your `application.properties`:
-
-```properties
-jnosql.document.database=my-database-name
-```
-
-For specific configuration details, please refer to
-the [ArangoDB JNoSQL driver](https://github.com/eclipse/jnosql-databases#arangodb).
-
-## DynamoDB
+### DynamoDB
 
 <img src="https://user-images.githubusercontent.com/6509926/70553550-f033b980-1b40-11ea-9192-759b3b1053b3.png" align="center" width="25%" height="25%"/>
 
@@ -462,7 +596,7 @@ Please refer to
 the [DynamoDB Quarkiverse extension](https://quarkiverse.github.io/quarkiverse-docs/quarkus-amazon-services/dev/amazon-dynamodb.html)
 for specific configuration details.
 
-## Hazelcast
+### Hazelcast
 
 <img src="https://jnosql.github.io/img/logos/hazelcast.svg" alt="Hazelcast Project" align="center" width="25%" height="25%"/>
 
@@ -489,7 +623,7 @@ jnosql.keyvalue.database=my-database-name
 Please refer to the [Quarkus Hazelcast extension](https://github.com/hazelcast/quarkus-hazelcast-client) for specific
 configuration details.
 
-## Redis
+### Redis
 
 <img src="https://www.jnosql.org/img/logos/redis.png" alt="Redis Project" align="center" width="25%" height="25%"/>
 
@@ -529,7 +663,7 @@ Please refer to
 the [JNoSQL Redis driver](https://github.com/eclipse-jnosql/jnosql-databases/?tab=readme-ov-file#redis) for the
 complete list of configuration properties.
 
-## Valkey
+### Valkey
 
 [Valkey](https://valkey.io/) is an open source, in-memory data structure store used as a database, cache, and message
 broker. It is wire-compatible with Redis.
@@ -566,102 +700,9 @@ Please refer to
 the [JNoSQL Valkey driver](https://github.com/eclipse-jnosql/jnosql-databases/?tab=readme-ov-file#valkey) for the
 complete list of configuration properties.
 
-## CouchDB
+## Graph Databases
 
-<img src="https://www.jnosql.org/img/logos/couchdb.png" alt="CouchDB" align="center" width="25%" height="25%"/>
-
-The [CouchDB](https://couchdb.apache.org/) driver provides an API integration between Java and the database through a
-standard communication level.
-
-This driver provides support for the *Document* NoSQL API.
-
-It supports **Jakarta Data**.
-
-Add the CouchDB dependency to your project's `pom.xml`:
-
-```xml
-
-<dependency>
-    <groupId>io.quarkiverse.jnosql</groupId>
-    <artifactId>quarkus-jnosql-couchdb</artifactId>
-</dependency>
-```
-
-To define the **Document** database's name, you need to add the following info in your `application.properties`:
-
-```properties
-jnosql.document.database=my-database-name
-```
-
-For specific configuration details, please refer to
-the [CouchDB JNoSQL driver](https://github.com/eclipse/jnosql-databases#couchdb).
-
-## Elasticsearch
-
-<img src="https://jnosql.github.io/img/logos/elastic.svg" alt="Elasticsearch Project" align="center" width="25%" height="25%"/>
-
-[Elasticsearch](https://www.elastic.co/) is a search engine based on Lucene.  
-It provides a distributed, multitenant-capable full-text search engine with an HTTP web interface and schema-free JSON
-documents.  
-Elasticsearch is developed in Java and is released as open source under the terms of the Apache License. Elasticsearch
-is the most popular enterprise search engine followed by Apache Solr, also based on Lucene.
-
-This driver provides support for the *Document* NoSQL API.
-
-It supports **Jakarta Data**.
-
-:information_source: **It does not support native compilation, unfortunately.**
-
-Add the Elasticsearch dependency to your project's `pom.xml`:
-
-```xml
-
-<dependency>
-    <groupId>io.quarkiverse.jnosql</groupId>
-    <artifactId>quarkus-jnosql-elasticsearch</artifactId>
-</dependency>
-```
-
-To define the **Document** database's name, you need to add the following info in your `application.properties`:
-
-```properties
-jnosql.document.database=my-database-name
-```
-
-Please refer to
-the [Elasticsearch Quarkus extension](https://quarkus.io/guides/elasticsearch#using-the-elasticsearch-java-client) for
-specific configuration details.
-
-## Solr
-
-<img src="https://jnosql.github.io/img/logos/solr.svg" alt="Apache Solr Project" align="center" width="20%" height="20%"/>
-
-[Solr](https://solr.apache.org/) is an open-source enterprise-search platform, written in Java, from the Apache Lucene
-project.
-Its major features include full-text search, hit highlighting, faceted search, real-time indexing, dynamic clustering,
-database integration, NoSQL features and rich document (e.g., Word, PDF) handling.
-Providing distributed search and index replication, Solr is designed for scalability and fault tolerance.
-Solr is widely used for enterprise search and analytics use cases and has an active development community and regular
-releases.
-
-This driver provides support for the *Document* NoSQL API.
-
-It supports **Jakarta Data**.
-
-Add the Quarkus JNoSQL Solr dependency to your project's `pom.xml`:
-
-```xml
-
-<dependency>
-    <groupId>io.quarkiverse.jnosql</groupId>
-    <artifactId>quarkus-jnosql-solr</artifactId>
-</dependency>
-```
-
-For specific configuration details, please refer to
-the [Solr JNoSQL driver](https://github.com/eclipse/jnosql-databases#solr).
-
-## Neo4j
+### Neo4j
 
 <img src="https://jnosql.github.io/img/logos/neo4j.png" alt="Neo4J Project" align="center" width="25%" height="25%"/>
 
@@ -702,7 +743,119 @@ to perform CRUD operations on your entities.
 For specific configuration details, please refer to
 the [Quarkus Neo4j extension](https://docs.quarkiverse.io/quarkus-neo4j/dev/index.html).
 
-## Oracle NoSQL
+## Time Series Databases
+
+### InfluxDB
+
+InfluxDB is a time-series database designed to store and query data that changes over time.
+
+This extension provides support for the Eclipse JNoSQL *Time Series* Mapping API and **Jakarta Data**.
+
+Add the InfluxDB dependency to your project's `pom.xml`:
+
+```xml
+<dependency>
+    <groupId>io.quarkiverse.jnosql</groupId>
+    <artifactId>quarkus-jnosql-influxdb</artifactId>
+</dependency>
+```
+
+Configure the Time Series database and InfluxDB connection in `application.properties`:
+
+```properties
+jnosql.timeseries.database=metrics
+jnosql.influxdb.url=http://localhost:8181
+jnosql.influxdb.token=jnosql-influxdb-test-token
+```
+
+### Apache IoTDB
+
+Apache IoTDB is a time-series database designed for IoT data management and analysis.
+
+This extension provides support for the Eclipse JNoSQL *Time Series* Mapping API and **Jakarta Data**.
+
+Add the Apache IoTDB dependency to your project's `pom.xml`:
+
+```xml
+<dependency>
+    <groupId>io.quarkiverse.jnosql</groupId>
+    <artifactId>quarkus-jnosql-iotdb</artifactId>
+</dependency>
+```
+
+Configure the Time Series database and IoTDB connection in `application.properties`:
+
+```properties
+jnosql.timeseries.database=jnosql
+jnosql.iotdb.host=localhost
+jnosql.iotdb.port=6667
+jnosql.iotdb.username=root
+jnosql.iotdb.password=root
+jnosql.iotdb.enable.redirection=false
+```
+
+### QuestDB
+
+QuestDB is a high-performance time-series database designed for fast ingestion and SQL analytics over time-oriented data.
+
+This extension provides support for the Eclipse JNoSQL *Time Series* Mapping API and **Jakarta Data**.
+
+Add the QuestDB dependency to your project's `pom.xml`:
+
+```xml
+<dependency>
+    <groupId>io.quarkiverse.jnosql</groupId>
+    <artifactId>quarkus-jnosql-questdb</artifactId>
+</dependency>
+```
+
+Configure the Time Series database and QuestDB connection in `application.properties`:
+
+```properties
+jnosql.timeseries.database=qdb
+jnosql.questdb.url=ws::addr=localhost:9000;
+```
+
+## Multi-model Databases
+
+### ArangoDB
+
+<img src="https://jnosql.github.io/img/logos/ArangoDB.png" alt="ArangoDB Project" align="center" width="25%" height="25%" />
+
+[ArangoDB](https://www.arangodb.com/) is a native multi-model database with flexible data models for documents, graphs,
+and key-values.
+Build high performance applications using a convenient SQL-like query language or JavaScript extensions.
+
+This extension offers support for **Document** and **Key-Value** types. Also, it provides support for **Jakarta Data**
+for Document NoSQL Entities.
+
+Add the ArangoDB dependency to your project's `pom.xml`:
+
+```xml
+
+<dependency>
+    <groupId>io.quarkiverse.jnosql</groupId>
+    <artifactId>quarkus-jnosql-arangodb</artifactId>
+    <version>${quarkus-jnosql.version}</version>
+</dependency>
+```
+
+To define the **Key-Value** database's name, you need to add the following info in your `application.properties`:
+
+```properties
+jnosql.keyvalue.database=my-database-name
+```
+
+To define the **Document** database's name, you need to add the following info in your `application.properties`:
+
+```properties
+jnosql.document.database=my-database-name
+```
+
+For specific configuration details, please refer to
+the [ArangoDB JNoSQL driver](https://github.com/eclipse/jnosql-databases#arangodb).
+
+### Oracle NoSQL
 
 <img src="https://jnosql.github.io/img/logos/oracle.png" alt="Oracle NoSQL Project" align="center" width="25%" height="25%"/>
 
@@ -719,8 +872,8 @@ Add the Quarkus JNoSQL Oracle NoSQL dependency to your project's `pom.xml`:
 ```xml
 
 <dependency>
-    <groupId>io.quarkiverse.jnosql</groupId>
-    <artifactId>quarkus-jnosql-oracle-nosql</artifactId>
+  <groupId>io.quarkiverse.jnosql</groupId>
+  <artifactId>quarkus-jnosql-oracle-nosql</artifactId>
 </dependency>
 ```
 
