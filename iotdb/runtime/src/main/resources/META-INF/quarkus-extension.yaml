@@ -1,0 +1,15 @@
+name: JNoSQL IoTDB
+metadata:
+  keywords:
+    - "jnosql"
+    - "nosql"
+    - "datastore"
+    - "iotdb"
+    - "timeseries"
+  categories:
+    - "data"
+  guide: https://docs.quarkiverse.io/quarkus-jnosql/dev/
+  config:
+    - "jnosql."
+    - "jnosql.timeseries."
+    - "jnosql.iotdb."
