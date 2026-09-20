@@ -62,6 +62,12 @@ The Quarkus JNoSQL extension supports a variety of NoSQL databases, each with it
 | ✅
 | ✅
 
+| <<_influxdb, InfluxDB>>
+| Time Series
+| ✅
+| ❌
+| ✅
+
 | <<_cassandra, Cassandra>>
 | Column
 | ✅
@@ -596,6 +602,50 @@ If you are using **Java 21** or above, make sure to <<#_enabling_the_jnosql_mapp
 Do you want to get started to create your entities and repositories? See the section <<#_using_jakarta_nosql_and_jakarta_data_with_quarkus_jnosql,Using Jakarta NoSQL and Jakarta Data with Quarkus JNoSQL>>.
 
 More details: https://github.com/eclipse-jnosql/jnosql-databases/?tab=readme-ov-file#mongodb[JNoSQL MongoDB Database Driver].
+
+[#_influxdb]
+== InfluxDB
+
+https://www.influxdata.com/[InfluxDB] is a database optimized for time-series data.
+
+This driver provides support for the Eclipse JNoSQL *Time Series Mapping API* and **Jakarta Data**.
+
+To create a Quarkus project with this extension, you can use the Quarkus CLI:
+
+[source,console]
+----
+quarkus create app --extensions=jnosql-influxdb
+----
+
+Or add it manually to your `pom.xml`:
+
+[source,xml,subs=attributes+]
+----
+<dependency>
+    <groupId>io.quarkiverse.jnosql</groupId>
+    <artifactId>quarkus-jnosql-influxdb</artifactId>
+    <version>{project-version}</version>
+</dependency>
+----
+
+Configure the database, URL, and token in `application.properties`:
+
+[source,properties]
+----
+jnosql.timeseries.database=metrics
+jnosql.influxdb.url=http://localhost:8181
+jnosql.influxdb.token=jnosql-influxdb-test-token
+----
+
+Inject the time-series template with `@Database(DatabaseType.TIME_SERIES)`, or define a Jakarta Data repository for a
+time-series entity.
+
+[IMPORTANT]
+====
+If you are using **Java 21** or above, make sure to <<#_enabling_the_jnosql_mapping_lite_annotation_processor,enable the annotation processor execution>>. If you are using **Java 17** or below, you can skip this step and go ahead to implement your entities and repositories.
+====
+
+More details: https://github.com/eclipse-jnosql/jnosql-databases/?tab=readme-ov-file#influxdb[JNoSQL InfluxDB Database Driver].
 
 [#_cassandra]
 == Cassandra
