@@ -23,6 +23,7 @@
         <module>mongodb</module>
         <module>influxdb</module>
         <module>iotdb</module>
+        <module>questdb</module>
         <module>arangodb</module>
         <module>cassandra</module>
         <module>couchdb</module>
@@ -153,6 +154,17 @@
             <dependency>
                 <groupId>org.eclipse.jnosql.databases</groupId>
                 <artifactId>jnosql-iotdb</artifactId>
+                <version>${jnosql.version}</version>
+                <exclusions>
+                    <exclusion>
+                        <groupId>org.eclipse.jnosql.mapping</groupId>
+                        <artifactId>jnosql-mapping-reflection</artifactId>
+                    </exclusion>
+                </exclusions>
+            </dependency>
+            <dependency>
+                <groupId>org.eclipse.jnosql.databases</groupId>
+                <artifactId>jnosql-questdb</artifactId>
                 <version>${jnosql.version}</version>
                 <exclusions>
                     <exclusion>
