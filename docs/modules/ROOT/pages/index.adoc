@@ -200,7 +200,7 @@ quarkus create app --extensions=jnosql-mongodb
 
 Here are the Quarkus JNoSQL extensions that currently provide codestarts, grouped by database type:
 
-==== Document
+=== Document
 
 [cols="20,80", options="header"]
 |===
@@ -220,7 +220,7 @@ Here are the Quarkus JNoSQL extensions that currently provide codestarts, groupe
 |`quarkus create app --extensions=jnosql-solr`
 |===
 
-==== Column
+=== Column
 
 [cols="20,80", options="header"]
 |===
@@ -231,7 +231,7 @@ Here are the Quarkus JNoSQL extensions that currently provide codestarts, groupe
 |`quarkus create app --extensions=jnosql-cassandra`
 |===
 
-==== Key-Value
+=== Key-Value
 
 [cols="20,80", options="header"]
 |===
@@ -251,7 +251,7 @@ Here are the Quarkus JNoSQL extensions that currently provide codestarts, groupe
 |`quarkus create app --extensions=jnosql-valkey`
 |===
 
-==== Graph
+=== Graph
 
 [cols="20,80", options="header"]
 |===
@@ -262,7 +262,7 @@ Here are the Quarkus JNoSQL extensions that currently provide codestarts, groupe
 |`quarkus create app --extensions=jnosql-neo4j`
 |===
 
-==== Multi-model
+=== Multi-model
 
 [cols="20,80", options="header"]
 |===
