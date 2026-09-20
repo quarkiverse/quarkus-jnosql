@@ -160,7 +160,7 @@ The Quarkus JNoSQL extension supports several NoSQL database models. The databas
 | <<_questdb, QuestDB>>
 | ✅
 | ❌
-| ❌
+| ✅
 |===
 
 ==== Multi-model
