@@ -570,6 +570,7 @@ Example using `jakarta.nosql.Template`:
 // @Database(DatabaseType.COLUMN) for Column databases
 // @Database(DatabaseType.GRAPH) for Graph databases
 // @Database(DatabaseType.KEY_VALUE) for Key-Value databases
+// @Database(DatabaseType.TIME_SERIES) for Time-Series databases
 protected Template template;
 
 public void insert(TestEntity entity) {
@@ -610,6 +611,7 @@ class TestEntityService {
     // @Database(DatabaseType.COLUMN) for Column databases
     // @Database(DatabaseType.GRAPH) for Graph databases
     // @Database(DatabaseType.KEY_VALUE) for Key-Value databases
+    // @Database(DatabaseType.TIME_SERIES) for Time-Series databases
     Template template;
 
     @Inject
@@ -620,6 +622,7 @@ class TestEntityService {
     // @Database(DatabaseType.COLUMN) for Column databases
     // @Database(DatabaseType.GRAPH) for Graph databases
     // @Database(DatabaseType.KEY_VALUE) for Key-Value databases
+    // @Database(DatabaseType.TIME_SERIES) for Time-Series databases
     TestEntityRepository repository;
 
     public void insertViaRepository(TestEntity entity) {
