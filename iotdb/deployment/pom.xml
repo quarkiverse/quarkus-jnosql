@@ -4,7 +4,7 @@
     <parent>
         <groupId>io.quarkiverse.jnosql</groupId>
         <artifactId>quarkus-jnosql-iotdb-parent</artifactId>
-        <version>3.6.0</version>
+        <version>3.6.1-SNAPSHOT</version>
     </parent>
     <artifactId>quarkus-jnosql-iotdb-deployment</artifactId>
     <name>Quarkus JNoSQL - IoTDB - Deployment</name>
