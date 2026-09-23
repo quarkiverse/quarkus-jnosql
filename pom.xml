@@ -31,6 +31,7 @@
         <module>elasticsearch</module>
         <module>hazelcast</module>
         <module>redis</module>
+        <module>memcached</module>
         <module>valkey</module>
         <module>dynamodb</module>
         <module>neo4j</module>
@@ -187,6 +188,17 @@
             <dependency>
                 <groupId>org.eclipse.jnosql.databases</groupId>
                 <artifactId>jnosql-redis</artifactId>
+                <version>${jnosql.version}</version>
+                <exclusions>
+                    <exclusion>
+                        <groupId>org.eclipse.jnosql.mapping</groupId>
+                        <artifactId>jnosql-mapping-reflection</artifactId>
+                    </exclusion>
+                </exclusions>
+            </dependency>
+            <dependency>
+                <groupId>org.eclipse.jnosql.databases</groupId>
+                <artifactId>jnosql-memcached</artifactId>
                 <version>${jnosql.version}</version>
                 <exclusions>
                     <exclusion>
