@@ -1,0 +1,6 @@
+jnosql:
+  keyvalue:
+    database: "people"
+  memcached:
+    host:
+      "1": "localhost:11211"
