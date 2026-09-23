@@ -1,8 +1,13 @@
 package io.quarkiverse.jnosql.keyvalue.memcached.deployment;
 
+import java.util.ArrayList;
+
+import jakarta.nosql.Entity;
+
 import org.eclipse.jnosql.databases.memcached.communication.QuarkusMemcachedBucketManagerFactoryProducer;
 import org.eclipse.jnosql.databases.memcached.communication.QuarkusMemcachedBucketManagerProducer;
 import org.eclipse.jnosql.databases.memcached.communication.QuarkusMemcachedKeyValueConfiguration;
+import org.jboss.jandex.AnnotationTarget;
 import org.objectweb.asm.ClassVisitor;
 import org.objectweb.asm.MethodVisitor;
 import org.objectweb.asm.Opcodes;
@@ -13,7 +18,11 @@ import io.quarkus.arc.deployment.ExcludedTypeBuildItem;
 import io.quarkus.deployment.annotations.BuildProducer;
 import io.quarkus.deployment.annotations.BuildStep;
 import io.quarkus.deployment.builditem.BytecodeTransformerBuildItem;
+import io.quarkus.deployment.builditem.CombinedIndexBuildItem;
 import io.quarkus.deployment.builditem.FeatureBuildItem;
+import io.quarkus.deployment.builditem.nativeimage.ReflectiveClassBuildItem;
+import io.quarkus.deployment.builditem.nativeimage.ReflectiveHierarchyBuildItem;
+import io.quarkus.deployment.builditem.nativeimage.RuntimeInitializedClassBuildItem;
 
 class Processor {
 
@@ -22,6 +31,29 @@ class Processor {
     @BuildStep
     FeatureBuildItem feature() {
         return new FeatureBuildItem(FEATURE);
+    }
+
+    @BuildStep
+    RuntimeInitializedClassBuildItem initializeMetricsRandomAtRuntime() {
+        // Metrics' counter hashing must not capture a build-time random seed.
+        return new RuntimeInitializedClassBuildItem("com.codahale.metrics.Striped64$HashCode");
+    }
+
+    @BuildStep
+    void registerEntitySerialization(CombinedIndexBuildItem index,
+            BuildProducer<ReflectiveHierarchyBuildItem> hierarchies) {
+        index.getIndex().getAnnotations(Entity.class).stream()
+                .filter(annotation -> annotation.target().kind() == AnnotationTarget.Kind.CLASS)
+                .forEach(annotation -> hierarchies.produce(ReflectiveHierarchyBuildItem
+                        .builder(annotation.target().asClass().name())
+                        .serialization(true)
+                        .build()));
+    }
+
+    @BuildStep
+    ReflectiveClassBuildItem registerSerializedFieldTypes() {
+        // JDK field types are excluded from reflective hierarchy traversal.
+        return ReflectiveClassBuildItem.builder(String.class, ArrayList.class).serialization().build();
     }
 
     @BuildStep
