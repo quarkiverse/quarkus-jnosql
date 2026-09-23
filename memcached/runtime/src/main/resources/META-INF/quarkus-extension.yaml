@@ -1,0 +1,23 @@
+name: Eclipse JNoSQL - Memcached
+description: Cache-oriented Key-Value storage with Eclipse JNoSQL and Memcached.
+metadata:
+  keywords:
+    - "jnosql"
+    - "nosql"
+    - "datastore"
+    - "memcached"
+    - "key-value"
+    - "keyvalue"
+    - "cache"
+  categories:
+    - "data"
+  guide: https://docs.quarkiverse.io/quarkus-jnosql/dev/
+  config:
+    - "jnosql."
+    - "jnosql.keyvalue."
+    - "jnosql.memcached."
+  codestart:
+    name: "quarkus-jnosql-memcached-codestart"
+    languages:
+      - "java"
+    artifact: "io.quarkiverse.jnosql:quarkus-jnosql-memcached:codestarts:jar:${project.version}"

@@ -19,6 +19,7 @@
   - [DynamoDB](#dynamodb)
   - [Hazelcast](#hazelcast)
   - [Redis](#redis)
+  - [Memcached](#memcached)
   - [Valkey](#valkey)
 - [Graph Databases](#graph-databases)
   - [Neo4j](#neo4j)
@@ -90,6 +91,7 @@ The Quarkus JNoSQL extension supports a variety of NoSQL databases, grouped by d
 | [DynamoDB](#dynamodb)       | ❌                     | ✅                  | ✅                           |
 | [Hazelcast](#hazelcast)     | ❌                     | ✅                  | ✅                           |
 | [Redis](#redis)             | ❌                     | ✅                  | ✅                           |
+| [Memcached](#memcached)     | ❌                     | ✅                  | CRUD verified               |
 | [Valkey](#valkey)           | ❌                     | ✅                  | ✅                           |
 
 ### Graph
@@ -151,6 +153,7 @@ Here are the available Quarkus JNoSQL Extensions that you can use with the `quar
 | [DynamoDB](#dynamodb)       | `quarkus create app --extensions=jnosql-dynamodb`      |
 | [Hazelcast](#hazelcast)     | `quarkus create app --extensions=jnosql-hazelcast`     |
 | [Redis](#redis)             | `quarkus create app --extensions=jnosql-redis`         |
+| [Memcached](#memcached)     | `quarkus create app --extensions=jnosql-memcached`     |
 | [Valkey](#valkey)           | `quarkus create app --extensions=jnosql-valkey`        |
 
 ### Graph
@@ -662,6 +665,59 @@ jnosql.redis.max.total=50
 Please refer to
 the [JNoSQL Redis driver](https://github.com/eclipse-jnosql/jnosql-databases/?tab=readme-ov-file#redis) for the
 complete list of configuration properties.
+
+### Memcached
+
+[Memcached](https://memcached.org/) is an in-memory, cache-oriented **Key-Value** store.
+The extension uses `org.eclipse.jnosql.databases:jnosql-memcached` and the existing JNoSQL
+`BucketManager` and Jakarta NoSQL `Template` programming model.
+
+```xml
+<dependency>
+    <groupId>io.quarkiverse.jnosql</groupId>
+    <artifactId>quarkus-jnosql-memcached</artifactId>
+</dependency>
+```
+
+A Java codestart is provided:
+
+```bash
+quarkus create app --extensions=jnosql-memcached
+```
+
+Configure a logical bucket name and the numbered host list in `application.properties`:
+
+```properties
+jnosql.keyvalue.database=people
+jnosql.memcached.host.1=localhost:11211
+```
+
+Additional servers use `jnosql.memcached.host.2`, `.3`, and so on, each with a `host:port` value.
+These are the host-prefix entries read by the JNoSQL driver's `MemcachedConfigurations.HOST`.
+The bucket name namespaces keys; it does not create a durable database.
+The codestart tests use `memcached:latest`, port `11211`, and Testcontainers' default wait strategy,
+overriding the host entry with the container's dynamically mapped address.
+
+The driver's default object serialization requires stored entities to implement `java.io.Serializable`.
+The extension adapts the client's deserialization class lookup to Quarkus's application class loader;
+the driver's serialization format is unchanged.
+Use key-based store, retrieve, and delete operations; do not assume durable persistence,
+queries, ordering, secondary indexes, or transactions. Jakarta Data repositories are not provided
+by this extension.
+
+Native compilation and entity CRUD through `Template` and `BucketManager` have been verified
+with Mandrel 25.0.4.1 in a Linux container. The extension includes spymemcached's optional
+`com.codahale.metrics:metrics-core:3.0.1` dependency for native linking and initializes its
+random-seed holder at runtime.
+
+The extension registers entity hierarchies, `String`, and `ArrayList` for native Java serialization.
+Additional concrete types stored through `BucketManager`, or used in polymorphic fields and
+other collection implementations, may require explicit
+`@RegisterForReflection(serialization = true, targets = {...})` registration.
+
+**Driver limitation:** in JNoSQL 1.1.18, the Memcached factory's `close()` is a no-op.
+The extension shares one factory and delegates shutdown to the driver, but the driver does not
+shut down its client. This can retain client threads across application reloads.
 
 ### Valkey
 
