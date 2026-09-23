@@ -91,7 +91,7 @@ The Quarkus JNoSQL extension supports a variety of NoSQL databases, grouped by d
 | [DynamoDB](#dynamodb)       | ❌                     | ✅                  | ✅                           |
 | [Hazelcast](#hazelcast)     | ❌                     | ✅                  | ✅                           |
 | [Redis](#redis)             | ❌                     | ✅                  | ✅                           |
-| [Memcached](#memcached)     | ❌                     | ✅                  | Not verified                |
+| [Memcached](#memcached)     | ❌                     | ✅                  | CRUD verified               |
 | [Valkey](#valkey)           | ❌                     | ✅                  | ✅                           |
 
 ### Graph
@@ -703,8 +703,17 @@ The extension adapts the client's deserialization class lookup to Quarkus's appl
 the driver's serialization format is unchanged.
 Use key-based store, retrieve, and delete operations; do not assume durable persistence,
 queries, ordering, secondary indexes, or transactions. Jakarta Data repositories are not provided
-by this extension. Native-image support is not verified: native compilation currently fails on the
-client's optional metrics dependency (`com.codahale.metrics.MetricRegistry`).
+by this extension.
+
+Native compilation and entity CRUD through `Template` and `BucketManager` have been verified
+with Mandrel 25.0.4.1 in a Linux container. The extension includes spymemcached's optional
+`com.codahale.metrics:metrics-core:3.0.1` dependency for native linking and initializes its
+random-seed holder at runtime.
+
+The extension registers entity hierarchies, `String`, and `ArrayList` for native Java serialization.
+Additional concrete types stored through `BucketManager`, or used in polymorphic fields and
+other collection implementations, may require explicit
+`@RegisterForReflection(serialization = true, targets = {...})` registration.
 
 **Driver limitation:** in JNoSQL 1.1.18, the Memcached factory's `close()` is a no-op.
 The extension shares one factory and delegates shutdown to the driver, but the driver does not
