@@ -1,5 +1,5 @@
 name: JNoSQL ArangoDB
-#description: Do something useful.
+description: Integrate ArangoDB Document and Key-Value databases with Jakarta NoSQL and Jakarta Data.
 metadata:
   keywords:
     - "jnosql"
@@ -13,6 +13,8 @@ metadata:
   guide: https://docs.quarkiverse.io/quarkus-jnosql/dev/
   config:
     - "jnosql."
+    - "jnosql.arangodb."
+    - "jnosql.document."
     - "jnosql.keyvalue."
 #  status: "preview"
   codestart:
