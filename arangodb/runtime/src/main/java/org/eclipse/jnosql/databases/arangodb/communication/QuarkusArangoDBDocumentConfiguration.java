@@ -8,11 +8,9 @@ import org.eclipse.jnosql.communication.semistructured.DatabaseConfiguration;
 @Singleton
 public class QuarkusArangoDBDocumentConfiguration implements DatabaseConfiguration {
 
-    private final ArangoDBDocumentConfiguration configuration = new ArangoDBDocumentConfiguration();
-
     @Override
-    public ArangoDBDocumentManagerFactory apply(Settings settings) throws NullPointerException {
-        return configuration.apply(settings);
+    public ArangoDBDocumentManagerFactory apply(Settings settings) {
+        return new ArangoDBDocumentConfiguration().apply(settings);
     }
 
 }
