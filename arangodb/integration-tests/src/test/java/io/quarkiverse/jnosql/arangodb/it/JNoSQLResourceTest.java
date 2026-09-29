@@ -1,8 +1,8 @@
 package io.quarkiverse.jnosql.arangodb.it;
 
 import static io.restassured.RestAssured.given;
-import static org.hamcrest.Matchers.empty;
-import static org.hamcrest.Matchers.is;
+import static org.hamcrest.Matchers.emptyOrNullString;
+import static org.hamcrest.Matchers.hasSize;
 import static org.hamcrest.Matchers.not;
 
 import org.junit.jupiter.params.ParameterizedTest;
@@ -33,6 +33,8 @@ public class JNoSQLResourceTest {
                 .then()
                 .log().all()
                 .statusCode(200)
-                .body(is(not(empty())));
+                .body("id", not(emptyOrNullString()))
+                .body("name", not(emptyOrNullString()))
+                .body("phones", hasSize(3));
     }
 }
