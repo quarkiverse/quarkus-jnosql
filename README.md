@@ -882,13 +882,12 @@ jnosql.questdb.url=ws::addr=localhost:9000;
 and key-values.
 Build high performance applications using a convenient SQL-like query language or JavaScript extensions.
 
-This extension offers support for **Document** and **Key-Value** types. Also, it provides support for **Jakarta Data**
-for Document NoSQL Entities.
+This extension provides support for **Document** and **Key-Value** types through Eclipse JNoSQL, and **Jakarta Data**
+for Document entities. Graph operations are not exposed by this extension.
 
 Add the ArangoDB dependency to your project's `pom.xml`:
 
 ```xml
-
 <dependency>
     <groupId>io.quarkiverse.jnosql</groupId>
     <artifactId>quarkus-jnosql-arangodb</artifactId>
@@ -896,20 +895,30 @@ Add the ArangoDB dependency to your project's `pom.xml`:
 </dependency>
 ```
 
-To define the **Key-Value** database's name, you need to add the following info in your `application.properties`:
+Configure the database names and ArangoDB connection in `application.properties`:
 
 ```properties
-jnosql.keyvalue.database=my-database-name
+jnosql.document.database=my-document-database
+jnosql.keyvalue.database=my-keyvalue-database
+jnosql.arangodb.host=localhost:8529
 ```
 
-To define the **Document** database's name, you need to add the following info in your `application.properties`:
+When authentication is enabled, configure the credentials as well:
 
 ```properties
-jnosql.document.database=my-database-name
+jnosql.arangodb.user=${ARANGODB_USER}
+jnosql.arangodb.password=${ARANGODB_PASSWORD}
 ```
+
+When injecting `Template`, select the model with `@Database(DatabaseType.DOCUMENT)` or
+`@Database(DatabaseType.KEY_VALUE)`. Use `@Database(DatabaseType.DOCUMENT)` for Document repositories.
+
+The integration tests and generated codestart use `arangodb/arangodb:latest`, expose port `8529`,
+set `ARANGO_NO_AUTH=1`, and wait for HTTP `200` at `/`. They configure `jnosql.arangodb.host`
+with the container host and dynamically mapped port. Authentication is disabled only for this test setup.
 
 For specific configuration details, please refer to
-the [ArangoDB JNoSQL driver](https://github.com/eclipse/jnosql-databases#arangodb).
+the [ArangoDB JNoSQL driver](https://github.com/eclipse-jnosql/jnosql-databases#arangodb).
 
 ### Oracle NoSQL
 
