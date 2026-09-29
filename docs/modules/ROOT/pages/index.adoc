@@ -1406,7 +1406,8 @@ image::https://jnosql.github.io/img/logos/ArangoDB.png[ArangoDB Project,align="l
 
 https://www.arangodb.com/[ArangoDB] is a native multi-model database.
 
-Supports **Document** and **Key-Value** types, and **Jakarta Data** for Document entities.
+This extension provides support for **Document** and **Key-Value** types through Eclipse JNoSQL, and **Jakarta Data** for Document entities.
+Graph operations are not exposed by this extension.
 
 To create a Quarkus project with this extension, you can use the Quarkus CLI:
 
@@ -1415,10 +1416,11 @@ To create a Quarkus project with this extension, you can use the Quarkus CLI:
 quarkus create app --extensions=jnosql-arangodb
 ----
 
-To add this extension with the Quarkus CLI to an existing project:
+To add this extension to an existing Quarkus project:
+
 [source,console]
 ----
-quarkus create app --extensions=jnosql-arangodb
+quarkus extension add jnosql-arangodb
 ----
 
 Or add it manually to your `pom.xml`:
@@ -1432,21 +1434,34 @@ Or add it manually to your `pom.xml`:
 </dependency>
 ----
 
-Set the database name in `application.properties`:
-
-For the Key-Value database:
+Configure the database names and ArangoDB connection in `application.properties`:
 
 [source,properties]
 ----
-jnosql.keyvalue.database=my-database-name
+jnosql.document.database=my-document-database
+jnosql.keyvalue.database=my-keyvalue-database
+jnosql.arangodb.host=localhost:8529
 ----
 
-For the Document database name:
+When authentication is enabled, configure the credentials as well:
 
 [source,properties]
 ----
-jnosql.document.database=my-database-name
+jnosql.arangodb.user=${ARANGODB_USER}
+jnosql.arangodb.password=${ARANGODB_PASSWORD}
 ----
+
+When injecting `Template`, select the model with `@Database(DatabaseType.DOCUMENT)` or `@Database(DatabaseType.KEY_VALUE)`.
+Use `@Database(DatabaseType.DOCUMENT)` for Document repositories.
+
+The integration tests and generated codestart use `arangodb/arangodb:latest`, expose port `8529`, set `ARANGO_NO_AUTH=1`, and wait for HTTP `200` at `/`.
+They configure `jnosql.arangodb.host` with the container host and dynamically mapped port.
+
+[NOTE]
+====
+Authentication is disabled only for this test setup.
+Configure credentials for an authenticated ArangoDB server.
+====
 
 [IMPORTANT]
 ====
@@ -1455,7 +1470,7 @@ If you are using **Java 21** or above, make sure to <<#_enabling_the_jnosql_mapp
 
 Do you want to get started to create your entities and repositories? See the section <<#_using_jakarta_nosql_and_jakarta_data_with_quarkus_jnosql,Using Jakarta NoSQL and Jakarta Data with Quarkus JNoSQL>>.
 
-More details: https://github.com/eclipse/jnosql-databases#arangodb[Using ArangoDB JNoSQL driver].
+More details: https://github.com/eclipse-jnosql/jnosql-databases#arangodb[JNoSQL ArangoDB Database Driver].
 
 [#_oracle_nosql]
 === Oracle NoSQL
