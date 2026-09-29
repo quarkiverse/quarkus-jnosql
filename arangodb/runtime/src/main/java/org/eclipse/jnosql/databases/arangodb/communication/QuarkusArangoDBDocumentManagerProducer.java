@@ -3,6 +3,7 @@ package org.eclipse.jnosql.databases.arangodb.communication;
 import jakarta.annotation.Priority;
 import jakarta.enterprise.inject.Alternative;
 import jakarta.enterprise.inject.Default;
+import jakarta.enterprise.inject.Disposes;
 import jakarta.enterprise.inject.Produces;
 import jakarta.inject.Singleton;
 
@@ -20,9 +21,14 @@ public class QuarkusArangoDBDocumentManagerProducer extends
     @Priority(1)
     @Alternative
     @Default
+    @Singleton
     @Database(DatabaseType.DOCUMENT)
     public ArangoDBDocumentManager get() {
         return get(MappingConfigurations.DOCUMENT_DATABASE);
     }
 
+    void close(@Disposes @Database(DatabaseType.DOCUMENT) ArangoDBDocumentManager manager) {
+        // The driver factory does not close the client; each manager owns its client.
+        manager.close();
+    }
 }
