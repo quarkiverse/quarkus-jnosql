@@ -43,7 +43,7 @@
             <!-- spymemcached declares this optional, but native-image links its metric collector. -->
             <groupId>com.codahale.metrics</groupId>
             <artifactId>metrics-core</artifactId>
-            <version>3.0.1</version>
+            <version>3.0.2</version>
         </dependency>
         <dependency>
             <groupId>org.eclipse.jnosql.lite</groupId>
