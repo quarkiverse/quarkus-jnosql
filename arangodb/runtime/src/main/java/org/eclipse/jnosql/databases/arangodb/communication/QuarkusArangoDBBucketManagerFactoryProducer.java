@@ -24,7 +24,8 @@ public class QuarkusArangoDBBucketManagerFactoryProducer implements Supplier<Buc
     @Alternative
     @Priority(1)
     @Default
-    public BucketManagerFactory get() {
+    @Singleton
+    public ArangoDBBucketManagerFactory get() {
         return configuration.apply(new MicroProfileSettings());
     }
 
