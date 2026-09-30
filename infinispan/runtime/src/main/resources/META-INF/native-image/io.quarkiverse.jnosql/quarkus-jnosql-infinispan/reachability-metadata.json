@@ -1,0 +1,14 @@
+{
+  "foreign": {
+    "downcalls": [
+      {
+        "returnType": "jlong",
+        "parameterTypes": ["jlong"]
+      },
+      {
+        "returnType": "void",
+        "parameterTypes": ["jlong"]
+      }
+    ]
+  }
+}

@@ -117,6 +117,11 @@ The Quarkus JNoSQL extension supports several NoSQL database models. The databas
 | ✅
 | ✅
 
+| <<_infinispan, Infinispan>>
+| ❌
+| ✅
+| Not verified
+
 | <<_memcached, Memcached>>
 | ❌
 | ✅
@@ -251,6 +256,9 @@ Here are the Quarkus JNoSQL extensions that currently provide codestarts, groupe
 
 | <<_redis, Redis>>
 |`quarkus create app --extensions=jnosql-redis`
+
+| <<_infinispan, Infinispan>>
+|`quarkus create app --extensions=jnosql-infinispan`
 
 | <<_memcached, Memcached>>
 |`quarkus create app --extensions=jnosql-memcached`
@@ -1076,6 +1084,89 @@ If you are using **Java 21** or above, make sure to <<#_enabling_the_jnosql_mapp
 Do you want to get started to create your entities and repositories? See the section <<#_using_jakarta_nosql_and_jakarta_data_with_quarkus_jnosql,Using Jakarta NoSQL and Jakarta Data with Quarkus JNoSQL>>.
 
 https://github.com/eclipse-jnosql/jnosql-databases/?tab=readme-ov-file#redis[More details about JNoSQL Redis Database driver].
+
+[#_infinispan]
+=== Infinispan
+
+https://infinispan.org/[Infinispan] supports the *Key-Value* API through
+`org.eclipse.jnosql.databases:jnosql-infinispan`.
+The extension provides CDI injection of `BucketManager`, `BucketManagerFactory`, and Jakarta NoSQL `Template`,
+including POJO and record mapping. Jakarta Data repositories are not supported by this Key-Value integration.
+
+[source,console]
+----
+quarkus create app --extensions=jnosql-infinispan
+----
+
+Or add the dependency to an existing project:
+
+[source,xml,subs=attributes+]
+----
+<dependency>
+    <groupId>io.quarkiverse.jnosql</groupId>
+    <artifactId>quarkus-jnosql-infinispan</artifactId>
+    <version>{project-version}</version>
+</dependency>
+----
+
+For an embedded, local cache, configure `application.properties`:
+
+[source,properties]
+----
+jnosql.keyvalue.database=people
+jnosql.infinispan.config=infinispan.xml
+----
+
+Create `src/main/resources/infinispan.xml` with a cache matching the database name:
+
+[source,xml]
+----
+<infinispan xmlns="urn:infinispan:config:16.0">
+    <cache-container name="jnosql">
+        <local-cache name="people"/>
+    </cache-container>
+</infinispan>
+----
+
+The codestart includes this configuration and runs without a server or Docker.
+Infinispan searches the classpath first, then the filesystem.
+An absolute path such as `jnosql.infinispan.config=/etc/my-app/infinispan.xml` selects an external file.
+Missing or invalid XML fails rather than falling back to a default cache.
+XML parsing, cache creation, serialization, and mapping remain the responsibility of Infinispan and JNoSQL.
+
+The property corresponds to the driver's configuration API:
+
+[source,java]
+----
+Settings settings = Settings.builder()
+        .put(InfinispanConfigurations.CONFIG, "infinispan.xml")
+        .build();
+----
+
+`Settings` is `org.eclipse.jnosql.communication.Settings`; `InfinispanConfigurations` is
+`org.eclipse.jnosql.databases.infinispan.communication.InfinispanConfigurations`.
+In Quarkus, prefer configuring properties and injecting the manager or template to creating another factory.
+
+[IMPORTANT]
+====
+The driver's `jnosql.infinispan.host.*` or generic `jnosql.host.*` properties select Hot Rod and
+take precedence over XML. Leave them unset for embedded XML mode.
+Without hosts or XML, the driver creates its default embedded container without defining application caches.
+Remote mode is delegated unchanged to JNoSQL but is not covered by the local-cache tests.
+====
+
+Embedded core is aligned with the Quarkus-managed Infinispan libraries (16.0.15).
+The driver's obsolete shaded `infinispan-embedded` 9.x dependency is excluded.
+The extension shares one driver factory and delegates shutdown to its `close()` method.
+
+[WARNING]
+====
+In JNoSQL 1.1.19, `InfinispanBucketManagerFactory.close()` is a no-op.
+Embedded container shutdown and cleanup during dev-mode reloads remain upstream limitations.
+Native-image support is not verified.
+====
+
+https://github.com/eclipse-jnosql/jnosql-databases/tree/1.1.19/jnosql-infinispan[More details about the JNoSQL Infinispan driver].
 
 [#_memcached]
 === Memcached

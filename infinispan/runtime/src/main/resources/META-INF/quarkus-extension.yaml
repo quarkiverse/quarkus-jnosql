@@ -1,0 +1,22 @@
+name: JNoSQL Infinispan
+description: Use the JNoSQL Key-Value API and mapping with Infinispan, including embedded XML configuration.
+metadata:
+  keywords:
+    - "jnosql"
+    - "nosql"
+    - "datastore"
+    - "infinispan"
+    - "key-value"
+  categories:
+    - "data"
+  guide: https://docs.quarkiverse.io/quarkus-jnosql/dev/
+  config:
+    - "jnosql."
+    - "jnosql.keyvalue."
+    - "jnosql.infinispan."
+  status: "preview"
+  codestart:
+    name: "quarkus-jnosql-infinispan-codestart"
+    languages:
+      - "java"
+    artifact: "io.quarkiverse.jnosql:quarkus-jnosql-infinispan:codestarts:jar:${project.version}"

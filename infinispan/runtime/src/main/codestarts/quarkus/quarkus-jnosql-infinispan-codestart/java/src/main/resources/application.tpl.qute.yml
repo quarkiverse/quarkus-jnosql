@@ -1,0 +1,5 @@
+jnosql:
+  keyvalue:
+    database: "people"
+  infinispan:
+    config: "infinispan.xml"
