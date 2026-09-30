@@ -31,6 +31,7 @@
         <module>elasticsearch</module>
         <module>hazelcast</module>
         <module>redis</module>
+        <module>infinispan</module>
         <module>memcached</module>
         <module>valkey</module>
         <module>dynamodb</module>
@@ -193,6 +194,21 @@
                     <exclusion>
                         <groupId>org.eclipse.jnosql.mapping</groupId>
                         <artifactId>jnosql-mapping-reflection</artifactId>
+                    </exclusion>
+                </exclusions>
+            </dependency>
+            <dependency>
+                <groupId>org.eclipse.jnosql.databases</groupId>
+                <artifactId>jnosql-infinispan</artifactId>
+                <version>${jnosql.version}</version>
+                <exclusions>
+                    <exclusion>
+                        <groupId>org.eclipse.jnosql.mapping</groupId>
+                        <artifactId>jnosql-mapping-reflection</artifactId>
+                    </exclusion>
+                    <exclusion>
+                        <groupId>org.infinispan</groupId>
+                        <artifactId>infinispan-embedded</artifactId>
                     </exclusion>
                 </exclusions>
             </dependency>
