@@ -14,7 +14,7 @@
 
     <properties>
         <!-- Align embedded core with the Infinispan libraries managed by the Quarkus BOM. -->
-        <infinispan.version>16.0.15</infinispan.version>
+        <infinispan.version>16.2.3</infinispan.version>
     </properties>
 
     <modules>
