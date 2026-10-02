@@ -1,0 +1,23 @@
+name: JNoSQL ScyllaDB
+description: Use JNoSQL Column mapping and Jakarta Data with the native ScyllaDB Java driver.
+metadata:
+  keywords:
+    - "jnosql"
+    - "nosql"
+    - "datastore"
+    - "scylladb"
+    - "column-family"
+    - "wide-column"
+  categories:
+    - "data"
+  guide: https://docs.quarkiverse.io/quarkus-jnosql/dev/
+  config:
+    - "jnosql."
+    - "jnosql.column."
+    - "jnosql.scylladb."
+  status: "preview"
+  codestart:
+    name: "quarkus-jnosql-scylladb-codestart"
+    languages:
+      - "java"
+    artifact: "io.quarkiverse.jnosql:quarkus-jnosql-scylladb:codestarts:jar:${project.version}"
