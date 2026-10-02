@@ -787,10 +787,34 @@ The driver's `jnosql.infinispan.host.*` (or generic `jnosql.host.*`) settings se
 Without hosts or XML, the driver creates its default embedded container; it does not define the application's named caches.
 Remote mode is delegated unchanged to JNoSQL, but is not covered by this extension's local-cache tests.
 
-Embedded core is aligned with the Quarkus-managed Infinispan libraries (16.0.15), and the driver's obsolete
-shaded `infinispan-embedded` 9.x dependency is excluded. The extension shares one driver factory.
+The embedded stack uses `org.infinispan:infinispan-bom:16.2.3`, aligning core, commons, Hot Rod,
+and counter API at 16.2.3 and ProtoStream at 6.0.9. Updating core alone while retaining
+Quarkus-managed commons 16.0.15 causes `NoClassDefFoundError: MemoryMonitor`.
+
+When adding this extension to an existing application, import the Infinispan BOM **before**
+the Quarkus BOM in your application's `dependencyManagement`:
+
+```xml
+<dependency>
+    <groupId>org.infinispan</groupId>
+    <artifactId>infinispan-bom</artifactId>
+    <version>16.2.3</version>
+    <type>pom</type>
+    <scope>import</scope>
+</dependency>
+```
+
+Dependency management in an application overrides transitive extension dependencies.
+The codestart supplies explicit overrides because Quarkus's POM merger places its BOM first.
+Keep the codestart's ProtoStream version aligned with the Infinispan BOM when upgrading.
+Micrometer core is included because the 16.2 metrics factory references its API during native
+linking; this does not install a Prometheus registry or enable metrics collection.
+
+The driver's obsolete shaded `infinispan-embedded` 9.x dependency is excluded. The extension shares one driver factory.
 It delegates shutdown to `factory.close()`, which is a **no-op in JNoSQL 1.1.19**: embedded container shutdown
-and dev-mode reload cleanup remain upstream limitations. Native-image support is not verified.
+and dev-mode reload cleanup remain upstream limitations. Native local-XML cache read/write,
+POJO/record mapping, and concurrent operations have been exercised with Mandrel 25.0.4.1;
+remote and clustered native configurations remain unverified.
 
 See the [JNoSQL Infinispan driver](https://github.com/eclipse-jnosql/jnosql-databases/tree/1.1.19/jnosql-infinispan)
 for the underlying configuration API.
