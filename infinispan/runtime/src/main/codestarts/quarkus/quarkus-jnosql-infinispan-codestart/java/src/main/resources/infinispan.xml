@@ -1,0 +1,6 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<infinispan xmlns="urn:infinispan:config:16.0">
+    <cache-container name="jnosql">
+        <local-cache name="people"/>
+    </cache-container>
+</infinispan>

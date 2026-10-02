@@ -19,6 +19,7 @@
   - [DynamoDB](#dynamodb)
   - [Hazelcast](#hazelcast)
   - [Redis](#redis)
+  - [Infinispan](#infinispan)
   - [Memcached](#memcached)
   - [Valkey](#valkey)
 - [Graph Databases](#graph-databases)
@@ -91,6 +92,7 @@ The Quarkus JNoSQL extension supports a variety of NoSQL databases, grouped by d
 | [DynamoDB](#dynamodb)       | ❌                     | ✅                  | ✅                           |
 | [Hazelcast](#hazelcast)     | ❌                     | ✅                  | ✅                           |
 | [Redis](#redis)             | ❌                     | ✅                  | ✅                           |
+| [Infinispan](#infinispan)   | ❌                     | ✅                  | Not verified                 |
 | [Memcached](#memcached)     | ❌                     | ✅                  | CRUD verified               |
 | [Valkey](#valkey)           | ❌                     | ✅                  | ✅                           |
 
@@ -153,6 +155,7 @@ Here are the available Quarkus JNoSQL Extensions that you can use with the `quar
 | [DynamoDB](#dynamodb)       | `quarkus create app --extensions=jnosql-dynamodb`      |
 | [Hazelcast](#hazelcast)     | `quarkus create app --extensions=jnosql-hazelcast`     |
 | [Redis](#redis)             | `quarkus create app --extensions=jnosql-redis`         |
+| [Infinispan](#infinispan)   | `quarkus create app --extensions=jnosql-infinispan`    |
 | [Memcached](#memcached)     | `quarkus create app --extensions=jnosql-memcached`     |
 | [Valkey](#valkey)           | `quarkus create app --extensions=jnosql-valkey`        |
 
@@ -665,6 +668,68 @@ jnosql.redis.max.total=50
 Please refer to
 the [JNoSQL Redis driver](https://github.com/eclipse-jnosql/jnosql-databases/?tab=readme-ov-file#redis) for the
 complete list of configuration properties.
+
+### Infinispan
+
+[Infinispan](https://infinispan.org/) supports the JNoSQL **Key-Value** API through
+`org.eclipse.jnosql.databases:jnosql-infinispan`. The extension provides CDI injection of
+`BucketManager`, `BucketManagerFactory`, and Jakarta NoSQL `Template`, including POJO and record mapping.
+Jakarta Data repositories are not supported by this Key-Value integration.
+
+```xml
+<dependency>
+    <groupId>io.quarkiverse.jnosql</groupId>
+    <artifactId>quarkus-jnosql-infinispan</artifactId>
+</dependency>
+```
+
+For an embedded, local cache, add these settings to `application.properties`:
+
+```properties
+jnosql.keyvalue.database=people
+jnosql.infinispan.config=infinispan.xml
+```
+
+Create `src/main/resources/infinispan.xml` with a cache whose name matches the database:
+
+```xml
+<infinispan xmlns="urn:infinispan:config:16.0">
+    <cache-container name="jnosql">
+        <local-cache name="people"/>
+    </cache-container>
+</infinispan>
+```
+
+The codestart includes this configuration and runs without an external server or Docker.
+Infinispan loads the XML from the classpath first, then from the filesystem; an absolute path such as
+`jnosql.infinispan.config=/etc/my-app/infinispan.xml` can be used for external configuration.
+Missing or invalid XML fails instead of silently creating a default cache.
+No Quarkus-specific XML parser or cache implementation is introduced.
+
+The property is passed to the driver's actual configuration API:
+
+```java
+Settings settings = Settings.builder()
+        .put(InfinispanConfigurations.CONFIG, "infinispan.xml")
+        .build();
+```
+
+Here `Settings` is `org.eclipse.jnosql.communication.Settings` and `InfinispanConfigurations` is
+`org.eclipse.jnosql.databases.infinispan.communication.InfinispanConfigurations`.
+For normal Quarkus use, configure properties and inject the manager or template rather than creating another factory.
+
+The driver's `jnosql.infinispan.host.*` (or generic `jnosql.host.*`) settings select Hot Rod and
+**take precedence over XML**. Do not set host properties for local XML mode.
+Without hosts or XML, the driver creates its default embedded container; it does not define the application's named caches.
+Remote mode is delegated unchanged to JNoSQL, but is not covered by this extension's local-cache tests.
+
+Embedded core is aligned with the Quarkus-managed Infinispan libraries (16.0.15), and the driver's obsolete
+shaded `infinispan-embedded` 9.x dependency is excluded. The extension shares one driver factory.
+It delegates shutdown to `factory.close()`, which is a **no-op in JNoSQL 1.1.19**: embedded container shutdown
+and dev-mode reload cleanup remain upstream limitations. Native-image support is not verified.
+
+See the [JNoSQL Infinispan driver](https://github.com/eclipse-jnosql/jnosql-databases/tree/1.1.19/jnosql-infinispan)
+for the underlying configuration API.
 
 ### Memcached
 

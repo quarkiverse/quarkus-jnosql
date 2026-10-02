@@ -4,7 +4,7 @@
     <parent>
         <groupId>io.quarkiverse</groupId>
         <artifactId>quarkiverse-parent</artifactId>
-        <version>23</version>
+        <version>24</version>
     </parent>
     <groupId>io.quarkiverse.jnosql</groupId>
     <artifactId>quarkus-jnosql-parent</artifactId>
@@ -31,6 +31,7 @@
         <module>elasticsearch</module>
         <module>hazelcast</module>
         <module>redis</module>
+        <module>infinispan</module>
         <module>memcached</module>
         <module>valkey</module>
         <module>dynamodb</module>
@@ -57,7 +58,7 @@
         <datafaker.version>2.4.3</datafaker.version>
         <assertj.version>3.24.2</assertj.version>
         <testcontainers.version>2.0.5</testcontainers.version>
-        <jnosql.version>1.1.18</jnosql.version>
+        <jnosql.version>1.1.19</jnosql.version>
         <jnosql-lite-processor.version>${jnosql.version}</jnosql-lite-processor.version>
     </properties>
     <dependencyManagement>
@@ -193,6 +194,21 @@
                     <exclusion>
                         <groupId>org.eclipse.jnosql.mapping</groupId>
                         <artifactId>jnosql-mapping-reflection</artifactId>
+                    </exclusion>
+                </exclusions>
+            </dependency>
+            <dependency>
+                <groupId>org.eclipse.jnosql.databases</groupId>
+                <artifactId>jnosql-infinispan</artifactId>
+                <version>${jnosql.version}</version>
+                <exclusions>
+                    <exclusion>
+                        <groupId>org.eclipse.jnosql.mapping</groupId>
+                        <artifactId>jnosql-mapping-reflection</artifactId>
+                    </exclusion>
+                    <exclusion>
+                        <groupId>org.infinispan</groupId>
+                        <artifactId>infinispan-embedded</artifactId>
                     </exclusion>
                 </exclusions>
             </dependency>
