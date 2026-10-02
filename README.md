@@ -15,6 +15,7 @@
   - [Solr](#solr)
 - [Column Databases](#column-databases)
   - [Cassandra](#cassandra)
+  - [ScyllaDB](#scylladb)
 - [Key-Value Databases](#key-value-databases)
   - [DynamoDB](#dynamodb)
   - [Hazelcast](#hazelcast)
@@ -84,6 +85,7 @@ The Quarkus JNoSQL extension supports a variety of NoSQL databases, grouped by d
 | Database Vendor             | Supports Jakarta Data | Provides Codestart | Supports Native Compilation |
 |-----------------------------|-----------------------|--------------------|-----------------------------|
 | [Cassandra](#cassandra)     | ✅                     | ✅                  | ✅                           |
+| [ScyllaDB](#scylladb)       | ✅                     | ✅                  | ✅                           |
 
 ### Key-Value
 
@@ -147,6 +149,7 @@ Here are the available Quarkus JNoSQL Extensions that you can use with the `quar
 | Database Vendor             | Command                                                |
 |-----------------------------|--------------------------------------------------------|
 | [Cassandra](#cassandra)     | `quarkus create app --extensions=jnosql-cassandra`     |
+| [ScyllaDB](#scylladb)       | `quarkus create app --extensions=jnosql-scylladb`      |
 
 ### Key-Value
 
@@ -569,6 +572,67 @@ jnosql.column.database=my-database-name
 
 Please refer to the [Cassandra Quarkus extension](https://quarkus.io/guides/cassandra) for specific configuration
 details.
+
+### ScyllaDB
+
+[ScyllaDB](https://www.scylladb.com/) provides the **Column** API, Jakarta NoSQL `Template`,
+and generated **Jakarta Data** repositories for POJOs and records.
+
+```xml
+<dependency>
+    <groupId>io.quarkiverse.jnosql</groupId>
+    <artifactId>quarkus-jnosql-scylladb</artifactId>
+</dependency>
+```
+
+The extension uses `org.eclipse.jnosql.databases:jnosql-scylladb` at the project's managed
+JNoSQL version, currently 1.1.19. This driver depends on `com.scylladb:java-driver-core`
+and `com.scylladb:java-driver-query-builder:4.19.2.1`, not the Cassandra Quarkus client.
+The ScyllaDB Java driver retains the `com.datastax.oss.driver` Java package names.
+Do not add the Cassandra extension/client alongside it: the two clients contain overlapping classes.
+
+Configure the keyspace and native driver's connection settings in `application.properties`:
+
+```properties
+jnosql.column.database=developers
+jnosql.scylladb.host.1=localhost
+jnosql.scylladb.port=9042
+jnosql.scylladb.data.center=datacenter1
+```
+
+Additional contact points use `jnosql.scylladb.host.2`, `.3`, and so on; the configured port
+applies to all of them. The port defaults to `9042` and the local data center to `datacenter1`.
+Optional settings are `jnosql.scylladb.name` (application name), `jnosql.scylladb.user`,
+and `jnosql.scylladb.password`. Configure the data center to match your cluster.
+
+Provision keyspaces and tables before accessing them. Alternatively, the JNoSQL driver
+executes `jnosql.scylladb.query.*` startup statements, sorted lexicographically by key:
+
+```properties
+jnosql.scylladb.query.000=CREATE KEYSPACE IF NOT EXISTS developers WITH replication = {'class': 'NetworkTopologyStrategy', 'replication_factor': 1};
+jnosql.scylladb.query.001=CREATE TABLE IF NOT EXISTS developers.developer ("_id" text PRIMARY KEY, name text, language text);
+```
+
+This single-node replication example is for development; choose production replication
+according to your topology. Mapping does not generate the schema. Use the standard JNoSQL
+mapping-lite annotation processor described above for entities and Jakarta Data repositories.
+This does not imply support for the driver's separate portable-CDI-extension repository API.
+
+The extension delegates connection, query, serialization and retry behavior to JNoSQL and
+the ScyllaDB client. CDI shares one configured factory and one Column manager/session;
+shutdown closes the managed session. Inject `ScyllaDBColumnManager` with
+`@Database(DatabaseType.COLUMN)` for low-level operations. Managers created manually through
+`ScyllaDBColumnManagerFactory.apply(keyspace)` must be closed by their caller.
+
+A Java codestart is available with `quarkus create app --extensions=jnosql-scylladb`.
+Its tests and the extension tests use the upstream JNoSQL 1.1.19 image
+`scylladb/scylla:2026.3.1`, one shard, 1 GB of memory, and Testcontainers' dynamically mapped
+host and CQL port. Docker is required; neither test setup substitutes Cassandra for ScyllaDB.
+
+Native compilation and Column, Template and repository CRUD have been verified with
+Mandrel 25.0.4.1 in a Linux container. The extension uses the ScyllaDB client's bundled
+native metadata and defers `MetadataManager` initialization so its default contact point
+is resolved at runtime. It does not copy Cassandra-specific native configuration.
 
 ## Key-Value Databases
 
