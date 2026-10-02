@@ -1237,7 +1237,30 @@ Without hosts or XML, the driver creates its default embedded container without 
 Remote mode is delegated unchanged to JNoSQL but is not covered by the local-cache tests.
 ====
 
-Embedded core is aligned with the Quarkus-managed Infinispan libraries (16.0.15).
+The extension uses `org.infinispan:infinispan-bom:16.2.3`, aligning core, commons, Hot Rod,
+and counter API at 16.2.3 and ProtoStream at 6.0.9. Updating only core while Quarkus still
+manages commons at 16.0.15 causes `NoClassDefFoundError: MemoryMonitor`.
+
+For existing applications, import this BOM *before* the Quarkus BOM inside your application's
+`dependencyManagement`:
+
+[source,xml]
+----
+<dependency>
+    <groupId>org.infinispan</groupId>
+    <artifactId>infinispan-bom</artifactId>
+    <version>16.2.3</version>
+    <type>pom</type>
+    <scope>import</scope>
+</dependency>
+----
+
+Application dependency management overrides transitive extension dependencies.
+The codestart includes explicit overrides because Quarkus's POM merger places its BOM first.
+When upgrading, keep the codestart's ProtoStream version aligned with the Infinispan BOM.
+Micrometer core is included for native linking of the 16.2 metrics factory's API references;
+this does not install a Prometheus registry or enable metrics collection.
+
 The driver's obsolete shaded `infinispan-embedded` 9.x dependency is excluded.
 The extension shares one driver factory and delegates shutdown to its `close()` method.
 
@@ -1245,7 +1268,8 @@ The extension shares one driver factory and delegates shutdown to its `close()` 
 ====
 In JNoSQL 1.1.19, `InfinispanBucketManagerFactory.close()` is a no-op.
 Embedded container shutdown and cleanup during dev-mode reloads remain upstream limitations.
-Native-image support is not verified.
+Native local-XML cache read/write, POJO/record mapping, and concurrent operations have been
+exercised with Mandrel 25.0.4.1. Remote and clustered native configurations remain unverified.
 ====
 
 https://github.com/eclipse-jnosql/jnosql-databases/tree/1.1.19/jnosql-infinispan[More details about the JNoSQL Infinispan driver].

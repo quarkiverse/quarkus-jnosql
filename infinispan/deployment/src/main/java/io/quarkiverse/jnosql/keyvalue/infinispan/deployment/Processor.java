@@ -100,6 +100,7 @@ class Processor {
                 "java.util.Arrays$ArrayList",
                 "java.util.ArrayList$SubList",
                 "java.util.AbstractList$RandomAccessSubList",
+                "java.util.Collections$CopiesList",
                 "java.util.Collections$EmptyList",
                 "java.util.Collections$SingletonList",
                 "java.util.Collections$SynchronizedRandomAccessList",

@@ -1,13 +1,10 @@
 package io.quarkiverse.jnosql.infinispan.runtime.graal;
 
+import java.util.Optional;
 import java.util.function.BooleanSupplier;
 
-import org.infinispan.configuration.global.GlobalConfiguration;
 import org.infinispan.metrics.impl.MetricsRegistry;
-import org.infinispan.metrics.impl.NoMetricRegistry;
-import org.infinispan.util.logging.Log;
 
-import com.oracle.svm.core.annotate.Alias;
 import com.oracle.svm.core.annotate.Substitute;
 import com.oracle.svm.core.annotate.TargetClass;
 
@@ -49,31 +46,15 @@ final class Target_JGroupsTransport {
     }
 }
 
-@TargetClass(NoMetricRegistry.class)
-final class Target_NoMetricRegistry {
-    @Alias
-    static MetricsRegistry NO_OP_INSTANCE;
-}
-
 @TargetClass(className = "org.infinispan.metrics.impl.MetricsComponentFactory", onlyWith = InfinispanSubstitutions.WithoutPrometheus.class)
 final class Target_MetricsComponentFactory {
-    @Alias
-    private static Log log;
-
-    @Alias
-    GlobalConfiguration globalConfig;
-
-    @Alias
-    private MetricsRegistry registry;
+    @Substitute
+    private static Optional<MetricsRegistry> tryLoadPrometheusRegistry(ClassLoader classLoader) {
+        return Optional.empty();
+    }
 
     @Substitute
-    private synchronized MetricsRegistry createMetricRegistry(ClassLoader classLoader) {
-        if (registry == null) {
-            if (globalConfig.metrics().enabled()) {
-                log.warnFallbackToNoOpMetrics(NoMetricRegistry.class.getSimpleName());
-            }
-            registry = Target_NoMetricRegistry.NO_OP_INSTANCE;
-        }
-        return registry;
+    private static Optional<MetricsRegistry> tryLoadDeprecatedPrometheusRegistry(ClassLoader classLoader) {
+        return Optional.empty();
     }
 }
