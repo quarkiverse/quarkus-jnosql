@@ -91,6 +91,11 @@ The Quarkus JNoSQL extension supports several NoSQL database models. The databas
 | ✅
 | ✅
 | ✅
+
+| <<_scylladb, ScyllaDB>>
+| ✅
+| ✅
+| ✅
 |===
 
 ==== Key-Value
@@ -239,6 +244,9 @@ Here are the Quarkus JNoSQL extensions that currently provide codestarts, groupe
 
 | <<_cassandra, Cassandra>>
 |`quarkus create app --extensions=jnosql-cassandra`
+
+| <<_scylladb, ScyllaDB>>
+|`quarkus create app --extensions=jnosql-scylladb`
 |===
 
 === Key-Value
@@ -918,6 +926,80 @@ If you are using **Java 21** or above, make sure to <<#_enabling_the_jnosql_mapp
 Do you want to get started to create your entities and repositories? See the section <<#_using_jakarta_nosql_and_jakarta_data_with_quarkus_jnosql,Using Jakarta NoSQL and Jakarta Data with Quarkus JNoSQL>>.
 
 More details: https://github.com/eclipse-jnosql/jnosql-databases/?tab=readme-ov-file#cassandra[JNoSQL Cassandra Database Driver].
+
+[#_scylladb]
+=== ScyllaDB
+
+https://www.scylladb.com/[ScyllaDB] supports the *Column* API, Jakarta NoSQL `Template`,
+and generated *Jakarta Data* repositories for POJOs and records.
+
+[source,console]
+----
+quarkus create app --extensions=jnosql-scylladb
+----
+
+Or add the extension to `pom.xml`:
+
+[source,xml,subs=attributes+]
+----
+<dependency>
+    <groupId>io.quarkiverse.jnosql</groupId>
+    <artifactId>quarkus-jnosql-scylladb</artifactId>
+    <version>{project-version}</version>
+</dependency>
+----
+
+This extension uses `org.eclipse.jnosql.databases:jnosql-scylladb` at the project's managed
+JNoSQL version, currently 1.1.19, with the native ScyllaDB artifacts
+`com.scylladb:java-driver-core` and `com.scylladb:java-driver-query-builder:4.19.2.1`.
+It does not use the Cassandra Quarkus client. The ScyllaDB client retains
+`com.datastax.oss.driver` package names; do not combine it with the Cassandra extension/client
+because the client classes overlap.
+
+Configure the keyspace and connection in `application.properties`:
+
+[source,properties]
+----
+jnosql.column.database=developers
+jnosql.scylladb.host.1=localhost
+jnosql.scylladb.port=9042
+jnosql.scylladb.data.center=datacenter1
+----
+
+Additional contact points use `jnosql.scylladb.host.2`, `.3`, and so on, with one shared port.
+The port defaults to `9042` and the local data center to `datacenter1`; select the data center
+that matches your cluster. Optional driver properties are `jnosql.scylladb.name`
+(application name), `jnosql.scylladb.user`, and `jnosql.scylladb.password`.
+
+Provision keyspaces and tables before use; mapping does not create them. The driver's
+`jnosql.scylladb.query.*` settings can execute startup CQL, sorted lexicographically by key:
+
+[source,properties]
+----
+jnosql.scylladb.query.000=CREATE KEYSPACE IF NOT EXISTS developers WITH replication = {'class': 'NetworkTopologyStrategy', 'replication_factor': 1};
+jnosql.scylladb.query.001=CREATE TABLE IF NOT EXISTS developers.developer ("_id" text PRIMARY KEY, name text, language text);
+----
+
+This replication example is for single-node development, not production sizing.
+Enable the <<#_enabling_the_jnosql_mapping_lite_annotation_processor,mapping-lite annotation processor>>
+for standard entities and Jakarta Data repositories. See
+<<#_using_jakarta_nosql_and_jakarta_data_with_quarkus_jnosql,Using Jakarta NoSQL and Jakarta Data>>.
+The driver's separate portable-CDI-extension repository API is not part of this support.
+
+CDI shares one configured factory and one Column manager/session. The extension closes the
+managed session on shutdown and delegates connection, serialization, queries and retries
+to the existing driver. Low-level access is available by injecting `ScyllaDBColumnManager`
+with `@Database(DatabaseType.COLUMN)`. Callers creating additional managers through
+`ScyllaDBColumnManagerFactory.apply(keyspace)` must close those managers themselves.
+
+The Java codestart and integration tests use a real `scylladb/scylla:2026.3.1` container,
+matching the upstream JNoSQL 1.1.19 tests. They use one shard, 1 GB of memory, and dynamic
+Testcontainers host/CQL-port mappings. Docker is required.
+
+Native compilation and Column, Template and repository CRUD have been verified with
+Mandrel 25.0.4.1 in a Linux container. The extension relies on the ScyllaDB client's bundled
+native metadata and defers `MetadataManager` initialization to avoid capturing its
+default contact point at build time. No Cassandra-specific native configuration is copied.
 
 [#_key_value_databases]
 == Key-Value Databases
