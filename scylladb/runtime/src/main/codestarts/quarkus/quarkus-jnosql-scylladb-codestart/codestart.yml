@@ -1,0 +1,32 @@
+name: quarkus-jnosql-scylladb-codestart
+ref: quarkus-jnosql-scylladb
+type: code
+tags:
+  - extension-codestart
+  - maven-only
+metadata:
+  title: Quarkus JNoSQL ScyllaDB Codestart
+  description: Create your first Wide-Column NoSQL entity with Quarkus and JNoSQL ScyllaDB.
+  related-guide-section: https://docs.quarkiverse.io/quarkus-jnosql/dev/
+language:
+  base:
+    data:
+      database-type: "column"
+      database-name: "garage"
+      additional-quarkus-test-annotations: "@io.quarkus.test.common.QuarkusTestResource(ScyllaDBTestResource.class)"
+
+    test-dependencies:
+        - groupId: org.testcontainers
+          artifactId: testcontainers-scylladb
+          version: ${testcontainers.version}
+          scope: test
+
+        - groupId: net.datafaker
+          artifactId: datafaker
+          version: ${datafaker.version}
+          scope: test
+
+        - groupId: org.assertj
+          artifactId: assertj-core
+          version: ${assertj.version}
+          scope: test
