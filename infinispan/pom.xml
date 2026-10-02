@@ -13,9 +13,23 @@
     <name>Quarkus JNoSQL - Infinispan - Parent</name>
 
     <properties>
-        <!-- Align embedded core with the Infinispan libraries managed by the Quarkus BOM. -->
+        <!-- Upgrade the complete embedded stack, not core independently of commons and ProtoStream. -->
         <infinispan.version>16.2.3</infinispan.version>
+        <!-- Keep codestart overrides in sync with infinispan-bom. -->
+        <infinispan.protostream.version>6.0.9</infinispan.protostream.version>
     </properties>
+
+    <dependencyManagement>
+        <dependencies>
+            <dependency>
+                <groupId>org.infinispan</groupId>
+                <artifactId>infinispan-bom</artifactId>
+                <version>${infinispan.version}</version>
+                <type>pom</type>
+                <scope>import</scope>
+            </dependency>
+        </dependencies>
+    </dependencyManagement>
 
     <modules>
         <module>runtime</module>
