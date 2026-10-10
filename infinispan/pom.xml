@@ -14,7 +14,7 @@
 
     <properties>
         <!-- Upgrade the complete embedded stack, not core independently of commons and ProtoStream. -->
-        <infinispan.version>16.2.3</infinispan.version>
+        <infinispan.version>16.3.0</infinispan.version>
         <!-- Keep codestart overrides in sync with infinispan-bom. -->
         <infinispan.protostream.version>6.0.9</infinispan.protostream.version>
     </properties>
