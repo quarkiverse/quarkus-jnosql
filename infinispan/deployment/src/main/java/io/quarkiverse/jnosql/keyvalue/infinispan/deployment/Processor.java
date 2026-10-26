@@ -8,13 +8,17 @@ import org.eclipse.microprofile.config.ConfigProvider;
 import org.infinispan.configuration.parsing.ConfigurationParser;
 import org.infinispan.factories.impl.ModuleMetadataBuilder;
 import org.infinispan.protostream.SerializationContextInitializer;
+import org.jboss.jandex.ClassInfo;
+import org.jboss.jandex.DotName;
 
 import io.quarkiverse.jnosql.core.deployment.ServiceProviderRegister;
 import io.quarkus.arc.deployment.AdditionalBeanBuildItem;
 import io.quarkus.arc.deployment.ExcludedTypeBuildItem;
 import io.quarkus.deployment.annotations.BuildProducer;
 import io.quarkus.deployment.annotations.BuildStep;
+import io.quarkus.deployment.builditem.CombinedIndexBuildItem;
 import io.quarkus.deployment.builditem.FeatureBuildItem;
+import io.quarkus.deployment.builditem.IndexDependencyBuildItem;
 import io.quarkus.deployment.builditem.nativeimage.NativeImageResourceBuildItem;
 import io.quarkus.deployment.builditem.nativeimage.NativeImageResourceBundleBuildItem;
 import io.quarkus.deployment.builditem.nativeimage.NativeImageResourcePatternsBuildItem;
@@ -80,6 +84,27 @@ class Processor {
         return ReflectiveClassBuildItem.builder("org.infinispan.distribution.ch.impl.HashFunctionPartitioner")
                 .constructors()
                 .reason("Infinispan copies the default key partitioner while validating cache configuration")
+                .build();
+    }
+
+    @BuildStep
+    void indexInfinispanCore(BuildProducer<IndexDependencyBuildItem> indexDependencies) {
+        indexDependencies.produce(new IndexDependencyBuildItem("org.infinispan", "infinispan-core"));
+    }
+
+    @BuildStep
+    ReflectiveClassBuildItem registerInterceptors(CombinedIndexBuildItem combinedIndex) {
+        // The interceptor chain inspects visit methods and their @Skip annotation reflectively.
+        String[] interceptors = combinedIndex.getIndex()
+                .getAllKnownSubclasses(DotName.createSimple("org.infinispan.interceptors.DDAsyncInterceptor"))
+                .stream()
+                .map(ClassInfo::name)
+                .map(DotName::toString)
+                .toArray(String[]::new);
+        return ReflectiveClassBuildItem.builder(interceptors)
+                .methods()
+                .constructors(false)
+                .reason("Infinispan's interceptor chain looks up visit methods and @Skip annotations reflectively")
                 .build();
     }
 
