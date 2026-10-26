@@ -1237,8 +1237,8 @@ Without hosts or XML, the driver creates its default embedded container without 
 Remote mode is delegated unchanged to JNoSQL but is not covered by the local-cache tests.
 ====
 
-The extension uses `org.infinispan:infinispan-bom:16.2.3`, aligning core, commons, Hot Rod,
-and counter API at 16.2.3 and ProtoStream at 6.0.9. Updating only core while Quarkus still
+The extension uses `org.infinispan:infinispan-bom:16.3.0`, aligning core, commons, Hot Rod,
+and counter API at 16.3.0 and ProtoStream at 6.0.11. Updating only core while Quarkus still
 manages commons at 16.0.15 causes `NoClassDefFoundError: MemoryMonitor`.
 
 For existing applications, import this BOM *before* the Quarkus BOM inside your application's
@@ -1249,7 +1249,7 @@ For existing applications, import this BOM *before* the Quarkus BOM inside your 
 <dependency>
     <groupId>org.infinispan</groupId>
     <artifactId>infinispan-bom</artifactId>
-    <version>16.2.3</version>
+    <version>16.3.0</version>
     <type>pom</type>
     <scope>import</scope>
 </dependency>
