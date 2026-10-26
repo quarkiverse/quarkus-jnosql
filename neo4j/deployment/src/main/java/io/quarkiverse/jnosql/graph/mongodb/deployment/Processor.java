@@ -11,6 +11,7 @@ import io.quarkus.arc.deployment.ExcludedTypeBuildItem;
 import io.quarkus.deployment.annotations.BuildProducer;
 import io.quarkus.deployment.annotations.BuildStep;
 import io.quarkus.deployment.builditem.FeatureBuildItem;
+import io.quarkus.deployment.builditem.nativeimage.ReflectiveClassBuildItem;
 import io.quarkus.deployment.builditem.nativeimage.RuntimeInitializedClassBuildItem;
 import io.quarkus.deployment.builditem.nativeimage.RuntimeInitializedPackageBuildItem;
 
@@ -49,5 +50,15 @@ class Processor {
     @BuildStep
     RuntimeInitializedPackageBuildItem markRuntimeInitializedPackages() {
         return new RuntimeInitializedPackageBuildItem("io.netty.internal.tcnative");
+    }
+
+    @BuildStep
+    ReflectiveClassBuildItem registerBoltCodecClasses() {
+        return ReflectiveClassBuildItem.builder(
+                "org.neo4j.bolt.connection.codec.impl.value_encoding.ValueEncoderFactoryImpl",
+                "org.neo4j.bolt.connection.codec.impl.value_encoding.ValueDecoderFactoryImpl",
+                "org.neo4j.bolt.connection.codec.impl.packstream.PackStreamEncoderFactoryImpl",
+                "org.neo4j.bolt.connection.codec.impl.packstream.PackStreamDecoderFactoryImpl")
+                .constructors().build();
     }
 }
