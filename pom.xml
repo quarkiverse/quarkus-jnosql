@@ -21,6 +21,7 @@
     <modules>
         <module>core</module>
         <module>vector</module>
+        <module>qdrant</module>
         <module>mongodb</module>
         <module>influxdb</module>
         <module>iotdb</module>
@@ -131,6 +132,17 @@
             <dependency>
                 <groupId>org.eclipse.jnosql.mapping</groupId>
                 <artifactId>jnosql-mapping-vector</artifactId>
+                <version>${jnosql.version}</version>
+                <exclusions>
+                    <exclusion>
+                        <groupId>org.eclipse.jnosql.mapping</groupId>
+                        <artifactId>jnosql-mapping-reflection</artifactId>
+                    </exclusion>
+                </exclusions>
+            </dependency>
+            <dependency>
+                <groupId>org.eclipse.jnosql.databases</groupId>
+                <artifactId>jnosql-qdrant</artifactId>
                 <version>${jnosql.version}</version>
                 <exclusions>
                     <exclusion>
