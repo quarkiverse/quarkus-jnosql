@@ -43,8 +43,6 @@ class QdrantVectorTemplateTest {
         template.insert(new Article("a-10", "Hello", "news", DenseVector.of(0.5f, 0.5f, 0f, 0f)));
 
         Article found = template.find(Article.class, "a-10").orElseThrow();
-        System.out.println(
-                "DBG " + found.getId() + "|" + found.getTitle() + "|" + found.getCategory() + "|" + found.getEmbedding());
         assertEquals("Hello", found.getTitle());
         assertEquals("news", found.getCategory());
         assertEquals(4, found.getEmbedding().values().length);
