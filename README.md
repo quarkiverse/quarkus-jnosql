@@ -32,6 +32,7 @@
 - [Vector Databases](#vector-databases)
   - [Qdrant](#qdrant)
   - [Milvus](#milvus)
+  - [Weaviate](#weaviate)
 - [Multi-model Databases](#multi-model-databases)
   - [ArangoDB](#arangodb)
   - [Oracle NoSQL](#oracle-nosql)
@@ -121,6 +122,7 @@ The Quarkus JNoSQL extension supports a variety of NoSQL databases, grouped by d
 |-------------------------|-----------------------|--------------------|-----------------------------|
 | [Qdrant](#qdrant)       | ❌                     | ❌                  | Not verified                |
 | [Milvus](#milvus)       | ❌                     | ❌                  | Not verified                |
+| [Weaviate](#weaviate)   | ❌                     | ❌                  | Not verified                |
 
 ### Multi-model
 
@@ -1133,6 +1135,29 @@ jnosql.milvus.collection.vector.size=4
 
 Supported metrics: `COSINE`, `EUCLIDEAN`, `INNER_PRODUCT`.
 The integration tests use the `milvusdb/milvus:v3.0.4` image, which needs `DEPLOY_MODE=STANDALONE` to run with the embedded etcd.
+
+### Weaviate
+
+[Weaviate](https://weaviate.io/) is an open-source vector database. The client uses both HTTP and gRPC.
+
+```xml
+<dependency>
+    <groupId>io.quarkiverse.jnosql</groupId>
+    <artifactId>quarkus-jnosql-weaviate</artifactId>
+</dependency>
+```
+
+```properties
+jnosql.weaviate.host=localhost
+jnosql.weaviate.http.port=8080
+jnosql.weaviate.grpc.port=50051
+jnosql.weaviate.collection.distance=COSINE
+# optional: jnosql.weaviate.api.key, jnosql.weaviate.secure, jnosql.weaviate.timeout
+```
+
+Supported distances: `COSINE`, `DOT`, `EUCLIDEAN`, `MANHATTAN`, `HAMMING`.
+
+More details: [JNoSQL Database Drivers](https://github.com/eclipse-jnosql/jnosql-databases/).
 
 ## Multi-model Databases
 
