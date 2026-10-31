@@ -178,6 +178,21 @@ The Quarkus JNoSQL extension supports several NoSQL database models. The databas
 | ✅
 |===
 
+==== Vector
+
+[cols="25,25,25,25", options="header"]
+|===
+| Database Vendor
+| Supports Jakarta Data
+| Provides Codestart
+| Supports Native Compilation
+
+| <<_qdrant, Qdrant>>
+| ❌
+| ❌
+| Not verified
+
+
 ==== Multi-model
 
 [cols="20,25,20,20,20", options="header"]
@@ -1592,6 +1607,88 @@ If you are using **Java 21** or above, make sure to <<#_enabling_the_jnosql_mapp
 ====
 
 More details: https://github.com/eclipse-jnosql/jnosql-databases/?tab=readme-ov-file#questdb[JNoSQL QuestDB Database Driver].
+
+[#_vector_databases]
+== Vector Databases
+
+The Vector extensions integrate the Eclipse JNoSQL *Vector Mapping API* (`VectorTemplate`, `VectorManager`) and share the `quarkus-jnosql-vector` module, so each one only adds its own driver and configuration. They can currently be added manually to an existing Quarkus project.
+
+Select the database name, and optionally the provider, in `application.properties`. The provider is only required when more than one JNoSQL provider is on the classpath:
+
+[source,properties]
+----
+jnosql.vector.database=articles
+jnosql.vector.provider=org.eclipse.jnosql.databases.qdrant.communication.QdrantConfiguration
+----
+
+Entities need a `DenseVector` field and, with the Lite annotation processor, a setter for each mapped field:
+
+[source,java]
+----
+@Entity
+public class Article {
+
+    @Id
+    private String id;
+
+    @Column
+    private String title;
+
+    @Column
+    private DenseVector embedding;
+
+    // getters and setters
+}
+----
+
+Inject the template to persist entities and to search by similarity:
+
+[source,java]
+----
+@Inject
+@Database(DatabaseType.VECTOR)
+VectorTemplate template;
+
+template.insert(new Article("1", "Quarkus", DenseVector.of(1f, 0f, 0f, 0f)));
+
+Optional<Article> article = template.find(Article.class, "1");
+
+List<Article> similar = template.search(Article.class)
+        .vector(DenseVector.of(1f, 0f, 0f, 0f))
+        .where("title").eq("Quarkus")
+        .limit(Limit.of(5))
+        .result();
+----
+
+[NOTE]
+====
+Only `DenseVector` is exercised by the integration tests of these extensions (other representations depend on each driver). Jakarta Data repositories are not provided, there is no codestart, and native compilation has not been verified.
+====
+
+[#_qdrant]
+=== Qdrant
+
+https://qdrant.tech/[Qdrant] is an open-source vector database. The extension connects through gRPC.
+
+[source,xml,subs=attributes+]
+----
+<dependency>
+    <groupId>io.quarkiverse.jnosql</groupId>
+    <artifactId>quarkus-jnosql-qdrant</artifactId>
+    <version>{project-version}</version>
+</dependency>
+----
+
+[source,properties]
+----
+jnosql.qdrant.host=localhost
+jnosql.qdrant.port=6334
+jnosql.qdrant.collection.distance=COSINE
+jnosql.qdrant.collection.vector.size=4
+# optional: jnosql.qdrant.api.key, jnosql.qdrant.tls, jnosql.qdrant.timeout (milliseconds)
+----
+
+The collection (named after the entity) is created on the first insert when a distance is configured. Supported distances: `COSINE`, `EUCLID`, `DOT`, `MANHATTAN`. Entities may have a single vector, and TTL on save is not supported.
 
 [#_multi_model_databases]
 == Multi-model Databases
