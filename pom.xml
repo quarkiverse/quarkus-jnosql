@@ -23,6 +23,7 @@
         <module>vector</module>
         <module>qdrant</module>
         <module>milvus</module>
+        <module>weaviate</module>
         <module>mongodb</module>
         <module>influxdb</module>
         <module>iotdb</module>
@@ -155,6 +156,17 @@
             <dependency>
                 <groupId>org.eclipse.jnosql.databases</groupId>
                 <artifactId>jnosql-milvus</artifactId>
+                <version>${jnosql.version}</version>
+                <exclusions>
+                    <exclusion>
+                        <groupId>org.eclipse.jnosql.mapping</groupId>
+                        <artifactId>jnosql-mapping-reflection</artifactId>
+                    </exclusion>
+                </exclusions>
+            </dependency>
+            <dependency>
+                <groupId>org.eclipse.jnosql.databases</groupId>
+                <artifactId>jnosql-weaviate</artifactId>
                 <version>${jnosql.version}</version>
                 <exclusions>
                     <exclusion>
