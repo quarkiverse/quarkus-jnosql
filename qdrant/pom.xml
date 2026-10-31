@@ -12,6 +12,11 @@
     <artifactId>quarkus-jnosql-qdrant-parent</artifactId>
     <name>Quarkus JNoSQL - Qdrant - Parent</name>
 
+    <properties>
+        <!-- Keep in sync with the gRPC version used by the Qdrant client. -->
+        <grpc.version>1.81.0</grpc.version>
+    </properties>
+
     <modules>
         <module>runtime</module>
         <module>deployment</module>
