@@ -1238,7 +1238,7 @@ Remote mode is delegated unchanged to JNoSQL but is not covered by the local-cac
 ====
 
 The extension uses `org.infinispan:infinispan-bom:16.3.0`, aligning core, commons, Hot Rod,
-and counter API at 16.3.0 and ProtoStream at 6.0.11. Updating only core while Quarkus still
+and counter API at 16.3.1 and ProtoStream at 6.0.12. Updating only core while Quarkus still
 manages commons at 16.0.15 causes `NoClassDefFoundError: MemoryMonitor`.
 
 For existing applications, import this BOM *before* the Quarkus BOM inside your application's
