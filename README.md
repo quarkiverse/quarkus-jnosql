@@ -31,6 +31,7 @@
   - [QuestDB](#questdb)
 - [Vector Databases](#vector-databases)
   - [Qdrant](#qdrant)
+  - [Milvus](#milvus)
 - [Multi-model Databases](#multi-model-databases)
   - [ArangoDB](#arangodb)
   - [Oracle NoSQL](#oracle-nosql)
@@ -119,6 +120,7 @@ The Quarkus JNoSQL extension supports a variety of NoSQL databases, grouped by d
 | Database Vendor         | Supports Jakarta Data | Provides Codestart | Supports Native Compilation |
 |-------------------------|-----------------------|--------------------|-----------------------------|
 | [Qdrant](#qdrant)       | ❌                     | ❌                  | Not verified                |
+| [Milvus](#milvus)       | ❌                     | ❌                  | Not verified                |
 
 ### Multi-model
 
@@ -1108,6 +1110,29 @@ jnosql.qdrant.collection.vector.size=4
 
 The collection (named after the entity) is created on the first insert when a distance is configured.
 Supported distances: `COSINE`, `EUCLID`, `DOT`, `MANHATTAN`. Entities may have a single vector and TTL on save is not supported.
+
+### Milvus
+
+[Milvus](https://milvus.io/) is an open-source vector database.
+
+```xml
+<dependency>
+    <groupId>io.quarkiverse.jnosql</groupId>
+    <artifactId>quarkus-jnosql-milvus</artifactId>
+</dependency>
+```
+
+```properties
+jnosql.milvus.host=localhost
+jnosql.milvus.port=19530
+jnosql.milvus.collection.metric=COSINE
+jnosql.milvus.collection.vector.size=4
+# optional: jnosql.milvus.uri, jnosql.milvus.token, jnosql.milvus.tls, jnosql.milvus.timeout,
+# jnosql.milvus.consistency, jnosql.milvus.collection.string.max.length
+```
+
+Supported metrics: `COSINE`, `EUCLIDEAN`, `INNER_PRODUCT`.
+The integration tests use the `milvusdb/milvus:v3.0.4` image, which needs `DEPLOY_MODE=STANDALONE` to run with the embedded etcd.
 
 ## Multi-model Databases
 

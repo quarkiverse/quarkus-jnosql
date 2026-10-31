@@ -192,6 +192,11 @@ The Quarkus JNoSQL extension supports several NoSQL database models. The databas
 | ❌
 | Not verified
 
+| <<_milvus, Milvus>>
+| ❌
+| ❌
+| Not verified
+
 
 ==== Multi-model
 
@@ -1689,6 +1694,32 @@ jnosql.qdrant.collection.vector.size=4
 ----
 
 The collection (named after the entity) is created on the first insert when a distance is configured. Supported distances: `COSINE`, `EUCLID`, `DOT`, `MANHATTAN`. Entities may have a single vector, and TTL on save is not supported.
+
+[#_milvus]
+=== Milvus
+
+https://milvus.io/[Milvus] is an open-source vector database.
+
+[source,xml,subs=attributes+]
+----
+<dependency>
+    <groupId>io.quarkiverse.jnosql</groupId>
+    <artifactId>quarkus-jnosql-milvus</artifactId>
+    <version>{project-version}</version>
+</dependency>
+----
+
+[source,properties]
+----
+jnosql.milvus.host=localhost
+jnosql.milvus.port=19530
+jnosql.milvus.collection.metric=COSINE
+jnosql.milvus.collection.vector.size=4
+# optional: jnosql.milvus.uri, jnosql.milvus.token, jnosql.milvus.tls, jnosql.milvus.timeout,
+# jnosql.milvus.consistency, jnosql.milvus.collection.string.max.length
+----
+
+Supported metrics: `COSINE`, `EUCLIDEAN`, `INNER_PRODUCT`. The integration tests use the `milvusdb/milvus:v3.0.4` image, which needs `DEPLOY_MODE=STANDALONE` to run with the embedded etcd.
 
 [#_multi_model_databases]
 == Multi-model Databases
