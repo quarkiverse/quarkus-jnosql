@@ -1,0 +1,15 @@
+name: JNoSQL Weaviate
+metadata:
+  keywords:
+    - "jnosql"
+    - "nosql"
+    - "datastore"
+    - "weaviate"
+    - "vector"
+  categories:
+    - "data"
+  guide: https://docs.quarkiverse.io/quarkus-jnosql/dev/
+  config:
+    - "jnosql."
+    - "jnosql.vector."
+    - "jnosql.weaviate."

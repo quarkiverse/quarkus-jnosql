@@ -1,0 +1,15 @@
+name: JNoSQL Milvus
+metadata:
+  keywords:
+    - "jnosql"
+    - "nosql"
+    - "datastore"
+    - "milvus"
+    - "vector"
+  categories:
+    - "data"
+  guide: https://docs.quarkiverse.io/quarkus-jnosql/dev/
+  config:
+    - "jnosql."
+    - "jnosql.vector."
+    - "jnosql.milvus."

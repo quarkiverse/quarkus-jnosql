@@ -1,0 +1,15 @@
+name: JNoSQL Qdrant
+metadata:
+  keywords:
+    - "jnosql"
+    - "nosql"
+    - "datastore"
+    - "qdrant"
+    - "vector"
+  categories:
+    - "data"
+  guide: https://docs.quarkiverse.io/quarkus-jnosql/dev/
+  config:
+    - "jnosql."
+    - "jnosql.vector."
+    - "jnosql.qdrant."

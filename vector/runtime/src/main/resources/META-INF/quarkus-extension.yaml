@@ -1,0 +1,13 @@
+name: JNoSQL Vector
+metadata:
+  keywords:
+    - "jnosql"
+    - "nosql"
+    - "datastore"
+    - "vector"
+  categories:
+    - "data"
+  guide: https://docs.quarkiverse.io/quarkus-jnosql/dev/
+  config:
+    - "jnosql."
+    - "jnosql.vector."
