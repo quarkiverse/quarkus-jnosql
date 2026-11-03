@@ -25,6 +25,7 @@
   - [Valkey](#valkey)
 - [Graph Databases](#graph-databases)
   - [Neo4j](#neo4j)
+  - [Apache TinkerPop](#apache-tinkerpop)
 - [Time Series Databases](#time-series-databases)
   - [InfluxDB](#influxdb)
   - [Apache IoTDB](#apache-iotdb)
@@ -107,6 +108,7 @@ The Quarkus JNoSQL extension supports a variety of NoSQL databases, grouped by d
 | Database Vendor         | Supports Jakarta Data | Provides Codestart | Supports Native Compilation |
 |-------------------------|-----------------------|--------------------|-----------------------------|
 | [Neo4j](#neo4j)         | ✅                     | ✅                  | ✅                           |
+| [Apache TinkerPop](#apache-tinkerpop) | ❌                | ❌                  | ❌ (not validated)            |
 
 ### Time Series
 
@@ -179,6 +181,7 @@ Here are the available Quarkus JNoSQL Extensions that you can use with the `quar
 | Database Vendor         | Command                                                |
 |-------------------------|--------------------------------------------------------|
 | [Neo4j](#neo4j)         | `quarkus create app --extensions=jnosql-neo4j`         |
+| [Apache TinkerPop](#apache-tinkerpop) | `quarkus create app --extensions=jnosql-tinkerpop` |
 
 ### Time Series
 
@@ -963,6 +966,108 @@ to perform CRUD operations on your entities.
 
 For specific configuration details, please refer to
 the [Quarkus Neo4j extension](https://docs.quarkiverse.io/quarkus-neo4j/dev/index.html).
+
+### Apache TinkerPop
+
+[Apache TinkerPop](https://tinkerpop.apache.org/) provides a common graph API (`org.apache.tinkerpop.gremlin.structure.Graph`)
+implemented by multiple graph database providers.
+
+> The Quarkus JNoSQL TinkerPop extension integrates Eclipse JNoSQL with Apache TinkerPop through CDI. Applications provide
+> their own `Graph` implementation, allowing the same integration to work with different TinkerPop-compatible databases.
+
+See also [Eclipse JNoSQL](https://www.jnosql.org/) and
+[issue #453](https://github.com/quarkiverse/quarkus-jnosql/issues/453).
+
+Add the extension:
+
+```xml
+<dependency>
+    <groupId>io.quarkiverse.jnosql</groupId>
+    <artifactId>quarkus-jnosql-tinkerpop</artifactId>
+    <version>${quarkus-jnosql.version}</version>
+</dependency>
+```
+
+The extension has no dependency on any graph database. Add the dependency of the TinkerPop provider you chose; for
+example, the ArangoDB provider:
+
+```xml
+<dependency>
+    <groupId>com.arangodb</groupId>
+    <artifactId>arangodb-tinkerpop-provider</artifactId>
+    <version>4.0.0</version>
+</dependency>
+```
+
+#### Providing the Graph
+
+The application owns the `Graph`: it chooses the provider, creates and configures the instance, manages credentials and
+closes it. The extension only consumes a CDI `Graph` bean and never creates, replaces or closes one.
+
+```java
+@ApplicationScoped
+public class GraphProducer {
+
+    @ConfigProperty(name = "app.arangodb.hosts")
+    String hosts;
+
+    @Produces
+    @ApplicationScoped
+    public Graph graph() {
+        Configuration configuration = new BaseConfiguration();
+        configuration.setProperty("gremlin.graph", "ArangoDBGraph");
+        configuration.setProperty("gremlin.arangodb.conf.graph.enableDataDefinition", true);
+        configuration.setProperty("gremlin.arangodb.conf.graph.type", "COMPLEX");
+        configuration.setProperty("gremlin.arangodb.conf.graph.edgeDefinitions", "knows:[Person]->[Person]");
+        configuration.setProperty("gremlin.arangodb.conf.driver.hosts", hosts);
+        return GraphFactory.open(configuration);
+    }
+
+    public void dispose(@Disposes Graph graph) throws Exception {
+        graph.close();
+    }
+}
+```
+
+If no `Graph` bean with the default qualifiers exists, the build fails with a message asking for a CDI producer of
+`org.apache.tinkerpop.gremlin.structure.Graph`. There is no fallback graph.
+
+#### Template and repositories
+
+```java
+@ApplicationScoped
+public class PersonService {
+
+    @Inject
+    TinkerpopTemplate template;
+
+    @Inject
+    PersonRepository repository;
+}
+```
+
+Repositories are the driver's own `TinkerPopRepository` interfaces (no `@Repository` annotation), which the extension
+registers as CDI beans:
+
+```java
+public interface PersonRepository extends TinkerPopRepository<Person, String> {
+    List<Person> findByName(String name);
+}
+```
+
+#### Validation and limitations
+
+- The integration is tested against a single real database, **ArangoDB** (`arangodb:3.12.13` via Testcontainers, with
+  `arangodb-tinkerpop-provider` 4.0.0). The tests cover injection of the application `Graph` and `TinkerpopTemplate`,
+  reading entities, creating edges, traversals, repository queries and the missing-`Graph` failure. Compatibility with other
+  TinkerPop providers follows from the TinkerPop API but has not been tested here.
+- With the ArangoDB provider, `TinkerpopTemplate.insert` and `TinkerPopRepository.save` fail because the JNoSQL driver
+  writes the `_id` property, which that provider reserves. The tests therefore create vertices through the application's
+  `Graph` and read them back through JNoSQL. This is a driver/provider interaction, not a limitation of the extension.
+- Jakarta Data `@Repository` interfaces generated by the JNoSQL lite processor for graph databases are not supported:
+  they require a `SemiStructuredTemplate`, which the driver's `TinkerpopTemplate` bean does not provide.
+- Native compilation has not been validated; the extension registers the repository proxies and reflection it needs, but
+  native support also depends on the chosen provider.
 
 ## Time Series Databases
 
