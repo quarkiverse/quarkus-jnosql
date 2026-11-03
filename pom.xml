@@ -41,6 +41,7 @@
         <module>valkey</module>
         <module>dynamodb</module>
         <module>neo4j</module>
+        <module>tinkerpop</module>
         <module>oracle-nosql</module>
     </modules>
     <scm>
@@ -64,6 +65,8 @@
         <assertj.version>3.24.2</assertj.version>
         <testcontainers.version>2.0.5</testcontainers.version>
         <jnosql.version>1.2.0</jnosql.version>
+        <tinkerpop.version>3.8.2</tinkerpop.version>
+        <arangodb-tinkerpop-provider.version>4.0.0</arangodb-tinkerpop-provider.version>
         <jnosql-lite-processor.version>${jnosql.version}</jnosql-lite-processor.version>
     </properties>
     <dependencyManagement>
@@ -374,6 +377,27 @@
                         <artifactId>jnosql-mapping-reflection</artifactId>
                     </exclusion>
                 </exclusions>
+            </dependency>
+            <dependency>
+                <groupId>org.eclipse.jnosql.databases</groupId>
+                <artifactId>jnosql-tinkerpop</artifactId>
+                <version>${jnosql.version}</version>
+                <exclusions>
+                    <exclusion>
+                        <groupId>org.eclipse.jnosql.mapping</groupId>
+                        <artifactId>jnosql-mapping-reflection</artifactId>
+                    </exclusion>
+                </exclusions>
+            </dependency>
+            <dependency>
+                <groupId>org.apache.tinkerpop</groupId>
+                <artifactId>gremlin-core</artifactId>
+                <version>${tinkerpop.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>com.arangodb</groupId>
+                <artifactId>arangodb-tinkerpop-provider</artifactId>
+                <version>${arangodb-tinkerpop-provider.version}</version>
             </dependency>
             <dependency>
                 <groupId>org.eclipse.jnosql.databases</groupId>

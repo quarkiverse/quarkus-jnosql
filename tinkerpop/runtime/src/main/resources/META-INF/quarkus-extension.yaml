@@ -1,0 +1,15 @@
+name: JNoSQL Apache TinkerPop
+description: Integrates Eclipse JNoSQL with an application-provided Apache TinkerPop Graph
+metadata:
+  keywords:
+    - "jnosql"
+    - "nosql"
+    - "datastore"
+    - "tinkerpop"
+    - "gremlin"
+    - "graph"
+  categories:
+    - "data"
+  guide: https://docs.quarkiverse.io/quarkus-jnosql/dev/
+  config:
+    - "jnosql."
