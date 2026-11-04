@@ -17,6 +17,7 @@
   - [Cassandra](#cassandra)
   - [ScyllaDB](#scylladb)
 - [Key-Value Databases](#key-value-databases)
+  - [Jakarta Data BasicRepository Support](#jakarta-data-basicrepository-support-for-key-value-databases)
   - [DynamoDB](#dynamodb)
   - [Hazelcast](#hazelcast)
   - [Redis](#redis)
@@ -108,7 +109,7 @@ The Quarkus JNoSQL extension supports a variety of NoSQL databases, grouped by d
 | Database Vendor         | Supports Jakarta Data | Provides Codestart | Supports Native Compilation |
 |-------------------------|-----------------------|--------------------|-----------------------------|
 | [Neo4j](#neo4j)         | ✅                     | ✅                  | ✅                           |
-| [Apache TinkerPop](#apache-tinkerpop) | ❌                | ❌                  | ❌ (not validated)            |
+| [Apache TinkerPop](#apache-tinkerpop) | ✅                | ❌                  | Depends on the provider      |
 
 ### Time Series
 
@@ -651,6 +652,59 @@ is resolved at runtime. It does not copy Cassandra-specific native configuration
 
 ## Key-Value Databases
 
+### Jakarta Data BasicRepository Support for Key-Value Databases
+
+Eclipse JNoSQL supports basic [Jakarta Data](https://jakarta.ee/specifications/data/) repository operations for
+key-value databases. A repository interface can simply extend `BasicRepository` without declaring additional methods:
+
+```java
+@Repository
+public interface PersonRepository
+        extends BasicRepository<Person, String> {
+}
+```
+
+```java
+@Inject
+PersonRepository repository;
+
+repository.save(person);
+
+Optional<Person> result = repository.findById(id);
+
+boolean exists = repository.findById(id).isPresent();
+
+repository.deleteById(id);
+```
+
+Verified with integration tests against DynamoDB, Hazelcast, Infinispan, Memcached, Redis and Valkey, using Jakarta Data
+1.0.1 and Eclipse JNoSQL 1.2.0:
+
+| `BasicRepository` method        | Behavior                                                         |
+|---------------------------------|------------------------------------------------------------------|
+| `save(entity)`                  | ✅ Inserts, or updates when the identifier already exists         |
+| `saveAll(entities)`             | ✅ Saves each entity by identifier                                |
+| `findById(id)`                  | ✅ Returns an `Optional`, empty when the key does not exist       |
+| `deleteById(id)`                | ✅ Removes the entry; an unknown key is a no-op                   |
+| `delete(entity)`                | ✅ Removes the entry using the entity identifier                  |
+| `deleteAll(entities)`           | ✅ Removes the entry of each given entity                         |
+| `findAll()`                     | ❌ Throws `UnsupportedOperationException`                         |
+| `findAll(PageRequest, Order)`   | ❌ Throws `UnsupportedOperationException`                         |
+
+Jakarta Data 1.0.1 `BasicRepository` does not declare `existsById`; use `findById(id).isPresent()`.
+
+#### Limitations
+
+- Key-value access is centered on entity identifiers.
+- Extending `BasicRepository` does not guarantee that every inherited operation is implemented by every key-value
+  provider.
+- Arbitrary derived queries against non-key attributes are outside the documented key-value repository capabilities;
+  do not assume Jakarta Data's general query capabilities.
+- Unsupported inherited operations retain their existing failure behavior (`UnsupportedOperationException`).
+- DynamoDB exposes more than one database type, so inject the repository with `@Database(DatabaseType.KEY_VALUE)`.
+
+See also [Jakarta NoSQL](https://jakarta.ee/specifications/nosql/) and [Eclipse JNoSQL](https://www.jnosql.org/).
+
 ### DynamoDB
 
 <img src="https://user-images.githubusercontent.com/6509926/70553550-f033b980-1b40-11ea-9192-759b3b1053b3.png" align="center" width="25%" height="25%"/>
@@ -753,7 +807,7 @@ complete list of configuration properties.
 [Infinispan](https://infinispan.org/) supports the JNoSQL **Key-Value** API through
 `org.eclipse.jnosql.databases:jnosql-infinispan`. The extension provides CDI injection of
 `BucketManager`, `BucketManagerFactory`, and Jakarta NoSQL `Template`, including POJO and record mapping.
-Jakarta Data repositories are not supported by this Key-Value integration.
+Only key-based `BasicRepository` operations are supported; see [Jakarta Data BasicRepository Support for Key-Value Databases](#jakarta-data-basicrepository-support-for-key-value-databases).
 
 ```xml
 <dependency>
@@ -870,8 +924,8 @@ The driver's default object serialization requires stored entities to implement 
 The extension adapts the client's deserialization class lookup to Quarkus's application class loader;
 the driver's serialization format is unchanged.
 Use key-based store, retrieve, and delete operations; do not assume durable persistence,
-queries, ordering, secondary indexes, or transactions. Jakarta Data repositories are not provided
-by this extension.
+queries, ordering, secondary indexes, or transactions. Only key-based `BasicRepository` operations
+are supported; see [Jakarta Data BasicRepository Support for Key-Value Databases](#jakarta-data-basicrepository-support-for-key-value-databases).
 
 Native compilation and entity CRUD through `Template` and `BucketManager` have been verified
 with Mandrel 25.0.4.1 in a Linux container. The extension includes spymemcached's optional
@@ -975,8 +1029,8 @@ implemented by multiple graph database providers.
 > The Quarkus JNoSQL TinkerPop extension integrates Eclipse JNoSQL with Apache TinkerPop through CDI. Applications provide
 > their own `Graph` implementation, allowing the same integration to work with different TinkerPop-compatible databases.
 
-See also [Eclipse JNoSQL](https://www.jnosql.org/) and
-[issue #453](https://github.com/quarkiverse/quarkus-jnosql/issues/453).
+More details: [Apache TinkerPop documentation](https://tinkerpop.apache.org/docs/current/reference/) and
+[Eclipse JNoSQL](https://www.jnosql.org/).
 
 Add the extension:
 
@@ -1055,6 +1109,18 @@ public interface PersonRepository extends TinkerPopRepository<Person, String> {
 }
 ```
 
+#### Jakarta Data repositories
+
+Jakarta Data repositories are also supported and use the same application-owned `Graph`:
+
+```java
+@Repository
+public interface PersonDataRepository extends BasicRepository<Person, String> {
+
+    List<Person> findByName(String name);
+}
+```
+
 #### Validation and limitations
 
 - The integration is tested against a single real database, **ArangoDB** (`arangodb:3.12.13` via Testcontainers, with
@@ -1064,10 +1130,11 @@ public interface PersonRepository extends TinkerPopRepository<Person, String> {
 - With the ArangoDB provider, `TinkerpopTemplate.insert` and `TinkerPopRepository.save` fail because the JNoSQL driver
   writes the `_id` property, which that provider reserves. The tests therefore create vertices through the application's
   `Graph` and read them back through JNoSQL. This is a driver/provider interaction, not a limitation of the extension.
-- Jakarta Data `@Repository` interfaces generated by the JNoSQL lite processor for graph databases are not supported:
-  they require a `SemiStructuredTemplate`, which the driver's `TinkerpopTemplate` bean does not provide.
-- Native compilation has not been validated; the extension registers the repository proxies and reflection it needs, but
-  native support also depends on the chosen provider.
+- Jakarta Data `@Repository` interfaces are verified against ArangoDB through the application's `Graph`: derived queries such
+  as `findByName` work. Id-based operations (`findById`, `deleteById`, `save`) rely on the `_id` property written by the
+  JNoSQL driver, which the ArangoDB provider reserves, so they are not covered by the tests with that provider.
+- Native compilation depends on the chosen TinkerPop provider: the extension registers the repository proxies and
+  reflection it needs, but the provider itself must also support native image.
 
 ## Time Series Databases
 

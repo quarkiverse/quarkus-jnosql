@@ -7,7 +7,9 @@ import org.eclipse.jnosql.databases.tinkerpop.mapping.TinkerPopRepository;
 import org.jboss.jandex.ClassInfo;
 import org.jboss.jandex.DotName;
 
+import io.quarkiverse.jnosql.tinkerpop.runtime.GraphDatabaseManagerProducer;
 import io.quarkiverse.jnosql.tinkerpop.runtime.TinkerpopRepositoryCreator;
+import io.quarkus.arc.deployment.AdditionalBeanBuildItem;
 import io.quarkus.arc.deployment.BeanDiscoveryFinishedBuildItem;
 import io.quarkus.arc.deployment.ExcludedTypeBuildItem;
 import io.quarkus.arc.deployment.SyntheticBeanBuildItem;
@@ -46,6 +48,18 @@ class Processor {
     void excludeDriverGraphSupplier(BuildProducer<ExcludedTypeBuildItem> excludedTypes) {
         excludedTypes.produce(
                 new ExcludedTypeBuildItem("org.eclipse.jnosql.databases.tinkerpop.mapping.configuration.GraphSupplier"));
+    }
+
+    /**
+     * The driver's {@code GraphManagerSupplier} builds a manager from MicroProfile settings and a provider SPI.
+     * Jakarta Data repositories use the application-owned Graph instead, so it is replaced.
+     */
+    @BuildStep
+    void useApplicationGraphForRepositories(BuildProducer<ExcludedTypeBuildItem> excludedTypes,
+            BuildProducer<AdditionalBeanBuildItem> beans) {
+        excludedTypes.produce(
+                new ExcludedTypeBuildItem("org.eclipse.jnosql.mapping.graph.configuration.GraphManagerSupplier"));
+        beans.produce(AdditionalBeanBuildItem.unremovableOf(GraphDatabaseManagerProducer.class));
     }
 
     /**
