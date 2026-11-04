@@ -1029,6 +1029,83 @@ default contact point at build time. No Cassandra-specific native configuration 
 [#_key_value_databases]
 == Key-Value Databases
 
+[#_basic_repository_key_value]
+=== Jakarta Data BasicRepository Support for Key-Value Databases
+
+Eclipse JNoSQL supports basic https://jakarta.ee/specifications/data/[Jakarta Data] repository operations for key-value databases.
+A repository interface can simply extend `BasicRepository` without declaring any additional method:
+
+[source,java]
+----
+import jakarta.data.repository.BasicRepository;
+import jakarta.data.repository.Repository;
+
+@Repository
+public interface PersonRepository
+        extends BasicRepository<Person, String> {
+}
+----
+
+The inherited methods are available through CDI:
+
+[source,java]
+----
+@Inject
+PersonRepository repository;
+
+repository.save(person);
+
+Optional<Person> result = repository.findById(id);
+
+boolean exists = repository.findById(id).isPresent();
+
+repository.deleteById(id);
+----
+
+The behavior below was verified with integration tests against DynamoDB, Hazelcast, Infinispan, Memcached, Redis and Valkey, using Jakarta Data 1.0.1 and Eclipse JNoSQL 1.2.0.
+
+[cols="40,60", options="header"]
+|===
+| `BasicRepository` method
+| Behavior
+
+| `save(entity)`
+| ✅ Inserts the entity, or updates it when the identifier already exists.
+
+| `saveAll(entities)`
+| ✅ Saves each entity by identifier.
+
+| `findById(id)`
+| ✅ Returns an `Optional`, empty when the key does not exist.
+
+| `deleteById(id)`
+| ✅ Removes the entry; deleting an unknown key is a no-op.
+
+| `delete(entity)`
+| ✅ Removes the entry using the entity identifier.
+
+| `deleteAll(entities)`
+| ✅ Removes the entry of each given entity.
+
+| `findAll()`
+| ❌ Throws `UnsupportedOperationException`.
+
+| `findAll(PageRequest, Order)`
+| ❌ Throws `UnsupportedOperationException`.
+|===
+
+Jakarta Data 1.0.1 `BasicRepository` does not declare `existsById`; to check whether a key exists, use `findById(id).isPresent()`.
+
+==== Limitations
+
+* Key-value access is centered on entity identifiers.
+* Extending `BasicRepository` does not guarantee that every inherited operation is implemented by every key-value provider.
+* Arbitrary derived queries against non-key attributes are outside the documented key-value repository capabilities, and Jakarta Data's general query capabilities should not be assumed for key-value databases.
+* Unsupported inherited operations retain their existing failure behavior (`UnsupportedOperationException`).
+* DynamoDB exposes more than one database type, so injecting the repository requires the `@Database(DatabaseType.KEY_VALUE)` qualifier.
+
+See also the https://jakarta.ee/specifications/nosql/[Jakarta NoSQL] and https://www.jnosql.org/[Eclipse JNoSQL] documentation.
+
 [#_dynamodb]
 === DynamoDB
 
@@ -1037,6 +1114,8 @@ image::https://user-images.githubusercontent.com/6509926/70553550-f033b980-1b40-
 https://aws.amazon.com/dynamodb/[Amazon DynamoDB] is a fully managed, serverless, key-value and document NoSQL database.
 
 Supports *Key-Value*.
+
+See <<#_basic_repository_key_value,Jakarta Data BasicRepository Support for Key-Value Databases>> for the supported repository operations.
 
 To create a Quarkus project with this extension, you can use the Quarkus CLI:
 
@@ -1090,6 +1169,8 @@ https://hazelcast.com/[Hazelcast] is an open source in-memory data grid.
 
 Supports *Key-Value*.
 
+See <<#_basic_repository_key_value,Jakarta Data BasicRepository Support for Key-Value Databases>> for the supported repository operations.
+
 To create a Quarkus project with this extension, you can use the Quarkus CLI:
 
 [source,console]
@@ -1140,6 +1221,8 @@ image::https://www.jnosql.org/img/logos/redis.png[Redis Project,align="left",wid
 https://redis.io/[Redis] is an open source, in-memory data structure store used as a database, cache, and message broker.
 
 Supports *Key-Value*.
+
+See <<#_basic_repository_key_value,Jakarta Data BasicRepository Support for Key-Value Databases>> for the supported repository operations.
 
 The extension uses the Jedis-based JNoSQL Redis driver directly, sharing a single connection pool across the whole application.
 
@@ -1198,7 +1281,9 @@ https://github.com/eclipse-jnosql/jnosql-databases/?tab=readme-ov-file#redis[Mor
 https://infinispan.org/[Infinispan] supports the *Key-Value* API through
 `org.eclipse.jnosql.databases:jnosql-infinispan`.
 The extension provides CDI injection of `BucketManager`, `BucketManagerFactory`, and Jakarta NoSQL `Template`,
-including POJO and record mapping. Jakarta Data repositories are not supported by this Key-Value integration.
+including POJO and record mapping.
+
+See <<#_basic_repository_key_value,Jakarta Data BasicRepository Support for Key-Value Databases>> for the supported repository operations.
 
 [source,console]
 ----
@@ -1341,7 +1426,7 @@ The extension adapts the client's deserialization class lookup to Quarkus's appl
 the driver's serialization format is unchanged.
 Use key-based store, retrieve, and delete operations; do not assume durable persistence,
 queries, ordering, secondary indexes, or transactions.
-Jakarta Data repositories are not provided by this extension.
+Only key-based `BasicRepository` operations are supported; see <<#_basic_repository_key_value,Jakarta Data BasicRepository Support for Key-Value Databases>>.
 
 Native compilation and entity CRUD through `Template` and `BucketManager` have been verified
 with Mandrel 25.0.4.1 in a Linux container. The extension includes spymemcached's optional
@@ -1368,6 +1453,8 @@ For entity mapping, <<#_enabling_the_jnosql_mapping_lite_annotation_processor,en
 https://valkey.io/[Valkey] is an open source, in-memory data structure store used as a database, cache, and message broker. It is wire-compatible with Redis.
 
 Supports *Key-Value*.
+
+See <<#_basic_repository_key_value,Jakarta Data BasicRepository Support for Key-Value Databases>> for the supported repository operations.
 
 The extension uses the JNoSQL Valkey driver directly, sharing a single connection pool across the whole application.
 
