@@ -97,12 +97,12 @@ The Quarkus JNoSQL extension supports a variety of NoSQL databases, grouped by d
 
 | Database Vendor             | Supports Jakarta Data | Provides Codestart | Supports Native Compilation |
 |-----------------------------|-----------------------|--------------------|-----------------------------|
-| [DynamoDB](#dynamodb)       | ❌                     | ✅                  | ✅                           |
-| [Hazelcast](#hazelcast)     | ❌                     | ✅                  | ✅                           |
-| [Redis](#redis)             | ❌                     | ✅                  | ✅                           |
-| [Infinispan](#infinispan)   | ❌                     | ✅                  | Not verified                 |
-| [Memcached](#memcached)     | ❌                     | ✅                  | CRUD verified               |
-| [Valkey](#valkey)           | ❌                     | ✅                  | ✅                           |
+| [DynamoDB](#dynamodb)       | ✅                     | ✅                  | ✅                           |
+| [Hazelcast](#hazelcast)     | ✅                     | ✅                  | ✅                           |
+| [Redis](#redis)             | ✅                     | ✅                  | ✅                           |
+| [Infinispan](#infinispan)   | ✅                     | ✅                  | Not verified                 |
+| [Memcached](#memcached)     | ✅                     | ✅                  | CRUD verified               |
+| [Valkey](#valkey)           | ✅                     | ✅                  | ✅                           |
 
 ### Graph
 
