@@ -108,32 +108,32 @@ The Quarkus JNoSQL extension supports several NoSQL database models. The databas
 | Supports Native Compilation
 
 | <<_dynamodb, DynamoDB>>
-| ❌
+| ✅
 | ✅
 | ✅
 
 | <<_hazelcast, Hazelcast>>
-| ❌
+| ✅
 | ✅
 | ✅
 
 | <<_redis, Redis>>
-| ❌
+| ✅
 | ✅
 | ✅
 
 | <<_infinispan, Infinispan>>
-| ❌
+| ✅
 | ✅
 | Not verified
 
 | <<_memcached, Memcached>>
-| ❌
+| ✅
 | ✅
 | ✅
 
 | <<_valkey, Valkey>>
-| ❌
+| ✅
 | ✅
 | ✅
 |===
