@@ -1,0 +1,23 @@
+name: quarkus-jnosql-milvus-codestart
+ref: quarkus-jnosql-milvus
+type: code
+tags:
+  - extension-codestart
+  - maven-only
+metadata:
+  title: Quarkus JNoSQL Milvus Codestart
+  description: Create your first Vector NoSQL entity with Quarkus and JNoSQL Milvus.
+  related-guide-section: https://docs.quarkiverse.io/quarkus-jnosql/dev/
+language:
+  base:
+    data:
+      database-name: "articles"
+    test-dependencies:
+      - groupId: org.testcontainers
+        artifactId: testcontainers-milvus
+        version: ${testcontainers.version}
+        scope: test
+      - groupId: org.assertj
+        artifactId: assertj-core
+        version: ${assertj.version}
+        scope: test
