@@ -1,0 +1,23 @@
+name: quarkus-jnosql-weaviate-codestart
+ref: quarkus-jnosql-weaviate
+type: code
+tags:
+  - extension-codestart
+  - maven-only
+metadata:
+  title: Quarkus JNoSQL Weaviate Codestart
+  description: Create your first Vector NoSQL entity with Quarkus and JNoSQL Weaviate.
+  related-guide-section: https://docs.quarkiverse.io/quarkus-jnosql/dev/
+language:
+  base:
+    data:
+      database-name: "articles"
+    test-dependencies:
+      - groupId: org.testcontainers
+        artifactId: testcontainers-weaviate
+        version: ${testcontainers.version}
+        scope: test
+      - groupId: org.assertj
+        artifactId: assertj-core
+        version: ${assertj.version}
+        scope: test

@@ -1,0 +1,23 @@
+name: quarkus-jnosql-qdrant-codestart
+ref: quarkus-jnosql-qdrant
+type: code
+tags:
+  - extension-codestart
+  - maven-only
+metadata:
+  title: Quarkus JNoSQL Qdrant Codestart
+  description: Create your first Vector NoSQL entity with Quarkus and JNoSQL Qdrant.
+  related-guide-section: https://docs.quarkiverse.io/quarkus-jnosql/dev/
+language:
+  base:
+    data:
+      database-name: "articles"
+    test-dependencies:
+      - groupId: org.testcontainers
+        artifactId: testcontainers-qdrant
+        version: ${testcontainers.version}
+        scope: test
+      - groupId: org.assertj
+        artifactId: assertj-core
+        version: ${assertj.version}
+        scope: test

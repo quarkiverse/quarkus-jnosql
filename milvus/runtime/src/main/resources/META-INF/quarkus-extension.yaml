@@ -13,3 +13,8 @@ metadata:
     - "jnosql."
     - "jnosql.vector."
     - "jnosql.milvus."
+  codestart:
+    name: "quarkus-jnosql-milvus-codestart"
+    languages:
+      - "java"
+    artifact: "io.quarkiverse.jnosql:quarkus-jnosql-milvus:codestarts:jar:${project.version}"

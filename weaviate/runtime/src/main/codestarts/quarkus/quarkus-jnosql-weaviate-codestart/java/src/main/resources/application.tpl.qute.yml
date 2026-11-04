@@ -1,0 +1,8 @@
+jnosql:
+  vector:
+    database: "{database-name}"
+    provider: "org.eclipse.jnosql.databases.weaviate.communication.WeaviateConfiguration"
+  weaviate:
+    collection:
+      distance: "COSINE"
+    timeout: 10000
