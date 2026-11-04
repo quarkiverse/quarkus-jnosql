@@ -194,17 +194,17 @@ The Quarkus JNoSQL extension supports several NoSQL database models. The databas
 
 | <<_qdrant, Qdrant>>
 | ✅
-| ❌
+| ✅
 | Not verified
 
 | <<_milvus, Milvus>>
 | ✅
-| ❌
+| ✅
 | Not verified
 
 | <<_weaviate, Weaviate>>
 | ✅
-| ❌
+| ✅
 | Not verified
 |===
 
@@ -317,6 +317,23 @@ Here are the Quarkus JNoSQL extensions that currently provide codestarts, groupe
 
 | <<_apache_tinkerpop, Apache TinkerPop>>
 |`quarkus create app --extensions=jnosql-tinkerpop`
+|===
+
+=== Vector
+
+[cols="20,80", options="header"]
+|===
+| Database Vendor
+| Command
+
+| <<_qdrant, Qdrant>>
+|`quarkus create app --extensions=jnosql-qdrant`
+
+| <<_milvus, Milvus>>
+|`quarkus create app --extensions=jnosql-milvus`
+
+| <<_weaviate, Weaviate>>
+|`quarkus create app --extensions=jnosql-weaviate`
 |===
 
 === Multi-model
@@ -1919,7 +1936,7 @@ ArticleRepository repository;
 
 The integration tests verify `save` (insert and update), `findById`, `deleteById` and a derived `findByCategory` query against each database. See the https://github.com/eclipse-jnosql/jnosql[JNoSQL] and https://jakarta.ee/specifications/data/[Jakarta Data] documentation for the repository API. With more than one Vector provider on the classpath, the provider must be chosen with `jnosql.vector.provider`.
 
-Only `DenseVector` is exercised by the integration tests of these extensions (other representations depend on each driver). There is no codestart, and native compilation has not been verified.
+Only `DenseVector` is exercised by the integration tests of these extensions (other representations depend on each driver). Native compilation has not been verified. Each extension provides a codestart (`quarkus create app --extensions=jnosql-qdrant`, `jnosql-milvus` or `jnosql-weaviate`) with an `Article` entity, an `ArticleRepository` and a test that starts the database with Testcontainers.
 ====
 
 [#_qdrant]
