@@ -123,9 +123,9 @@ The Quarkus JNoSQL extension supports a variety of NoSQL databases, grouped by d
 
 | Database Vendor         | Supports Jakarta Data | Provides Codestart | Supports Native Compilation |
 |-------------------------|-----------------------|--------------------|-----------------------------|
-| [Qdrant](#qdrant)       | ✅                     | ❌                  | Not verified                |
-| [Milvus](#milvus)       | ✅                     | ❌                  | Not verified                |
-| [Weaviate](#weaviate)   | ✅                     | ❌                  | Not verified                |
+| [Qdrant](#qdrant)       | ✅                     | ✅                  | Not verified                |
+| [Milvus](#milvus)       | ✅                     | ✅                  | Not verified                |
+| [Weaviate](#weaviate)   | ✅                     | ✅                  | Not verified                |
 
 ### Multi-model
 
@@ -191,6 +191,14 @@ Here are the available Quarkus JNoSQL Extensions that you can use with the `quar
 | [InfluxDB](#influxdb)       | `quarkus create app --extensions=jnosql-influxdb`      |
 | [Apache IoTDB](#apache-iotdb) | `quarkus create app --extensions=jnosql-iotdb`       |
 | [QuestDB](#questdb)         | `quarkus create app --extensions=jnosql-questdb`       |
+
+### Vector
+
+| Database Vendor         | Command                                                |
+|-------------------------|--------------------------------------------------------|
+| [Qdrant](#qdrant)       | `quarkus create app --extensions=jnosql-qdrant`        |
+| [Milvus](#milvus)       | `quarkus create app --extensions=jnosql-milvus`        |
+| [Weaviate](#weaviate)   | `quarkus create app --extensions=jnosql-weaviate`      |
 
 ### Multi-model
 
@@ -1297,7 +1305,9 @@ against each database. See the [JNoSQL](https://github.com/eclipse-jnosql/jnosql
 Vector provider on the classpath, the provider must be chosen with `jnosql.vector.provider`.
 
 Limitations: only `DenseVector` is exercised by the integration tests of these extensions (other representations depend
-on each driver), there is no codestart, and native compilation has not been verified.
+on each driver) and native compilation has not been verified. Each extension provides a codestart
+(`quarkus create app --extensions=jnosql-qdrant`, `jnosql-milvus` or `jnosql-weaviate`) with an `Article` entity, an
+`ArticleRepository` and a test that starts the database with Testcontainers.
 
 ### Qdrant
 
