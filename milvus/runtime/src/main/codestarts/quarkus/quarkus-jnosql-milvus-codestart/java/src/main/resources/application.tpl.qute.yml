@@ -1,0 +1,10 @@
+jnosql:
+  vector:
+    database: "{database-name}"
+    provider: "org.eclipse.jnosql.databases.milvus.communication.MilvusConfiguration"
+  milvus:
+    collection:
+      metric: "COSINE"
+      vector:
+        size: 4
+    timeout: 10000
