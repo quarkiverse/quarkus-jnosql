@@ -13,3 +13,8 @@ metadata:
     - "jnosql."
     - "jnosql.vector."
     - "jnosql.qdrant."
+  codestart:
+    name: "quarkus-jnosql-qdrant-codestart"
+    languages:
+      - "java"
+    artifact: "io.quarkiverse.jnosql:quarkus-jnosql-qdrant:codestarts:jar:${project.version}"
