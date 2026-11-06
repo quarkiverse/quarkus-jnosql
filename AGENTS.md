@@ -46,23 +46,25 @@ The list of modules is authoritative in the root `pom.xml` (`<modules>`).
 
 ## Agent workflow
 
-When asked to implement a new database integration:
+When asked to implement or modify a database integration, follow these steps in order. They are mandatory.
 
 1. **Identify the database model** (key-value, document, column, graph, time series, vector).
 2. **Read [`development-guides/common.md`](development-guides/common.md).**
-3. **Read the model-specific guide** (see [Documentation routing](#documentation-routing)). If it does not exist yet,
-   rely on `common.md` and step 4.
-4. **Inspect existing extensions of the same model** and copy their structure (modules, `Processor`, producers,
-   `quarkus-extension.yaml`, integration tests, codestart).
-5. **Inspect dependencies and existing Eclipse JNoSQL support**: confirm the driver artifact and its configuration
-   classes exist for the `jnosql.version` in the root `pom.xml`. Check the Quarkus extension for the client library
+3. **Read [`development-guides/testing.md`](development-guides/testing.md).** Read it BEFORE generating any test; it defines
+   naming, structure, assertions and the test infrastructure to use.
+4. **Read the model-specific guide** (see [Documentation routing](#documentation-routing)).
+5. **Inspect the selected reference implementation** and existing extensions of the same model (modules, `Processor`,
+   producers, `quarkus-extension.yaml`, integration tests, codestart). Also confirm the Eclipse JNoSQL driver artifact and
+   its configuration classes exist for the `jnosql.version` in the root `pom.xml`, and check the Quarkus client extension
    (for example `quarkus-mongodb-client`) if one exists.
-6. **Define the implementation plan** (modules, dependencies, beans to register, beans to exclude, native-image needs,
-   tests, codestart) before writing code. Share it when the task is ambiguous.
+6. **Define the implementation plan** (modules, dependencies, beans to register or exclude, native-image needs, tests,
+   codestart) before writing code. Share it when the task is ambiguous.
 7. **Implement** following established repository patterns.
-8. **Add integration tests** that run against a real database (container or Quarkus Dev Services).
-9. **Validate**: build, run tests, check formatting (see `common.md`, section Testing).
-10. **Commit** using Conventional Commits.
+8. **Create tests** following `development-guides/testing.md`, running against a real database (container or Quarkus Dev
+   Services).
+9. **Execute the applicable validation commands** (see `common.md`, section Testing).
+10. **Report test results and remaining limitations** (unsupported operations, untested paths, native-image status), and
+    commit using Conventional Commits.
 
 ## Engineering rules
 
@@ -95,12 +97,10 @@ When asked to implement a new database integration:
 | Guide | Status |
 |---|---|
 | [`development-guides/common.md`](development-guides/common.md) | Available: shared guide for all extensions |
-| [`development-guides/key-value.md`](development-guides/key-value.md) | Planned |
-| [`development-guides/document.md`](development-guides/document.md) | Planned |
-| [`development-guides/column.md`](development-guides/column.md) | Planned |
-| [`development-guides/graph.md`](development-guides/graph.md) | Planned |
-| [`development-guides/time-series.md`](development-guides/time-series.md) | Planned |
-| [`development-guides/vector.md`](development-guides/vector.md) | Planned |
-
-Planned guides do not exist yet; do not assume their content. Until they are added, use the existing extensions of the
-same model as the reference.
+| [`development-guides/testing.md`](development-guides/testing.md) | Available: shared testing guidelines; read before writing tests |
+| [`development-guides/key-value.md`](development-guides/key-value.md) | Available: reference Redis |
+| [`development-guides/document.md`](development-guides/document.md) | Available: reference MongoDB |
+| [`development-guides/column.md`](development-guides/column.md) | Available: reference Cassandra |
+| [`development-guides/graph.md`](development-guides/graph.md) | Available: reference Apache TinkerPop |
+| [`development-guides/time-series.md`](development-guides/time-series.md) | Available: reference InfluxDB |
+| [`development-guides/vector.md`](development-guides/vector.md) | Available: reference Qdrant |
