@@ -360,38 +360,25 @@ cover that.
 
 ## 5. Testing
 
-### 5.1 Unit tests
+Test structure, naming, assertions and test infrastructure are defined in [`testing.md`](testing.md). This section only
+covers where tests belong in an extension and which commands run them. The split of responsibilities:
 
-Plain JUnit tests for logic that does not need Arc. Use sparingly: most of this code is wiring, which only integration tests
-prove.
+- The model guides ([`key-value.md`](key-value.md), [`document.md`](document.md), [`column.md`](column.md),
+  [`graph.md`](graph.md), [`time-series.md`](time-series.md), [`vector.md`](vector.md)) define **what** must be tested for
+  that model.
+- [`testing.md`](testing.md) defines **how** the tests are structured and written.
 
-### 5.2 Quarkus extension (deployment) tests
+### 5.1 Where tests belong
 
-`QuarkusUnitTest` (`io.quarkus.test.QuarkusUnitTest`) starts a minimal application at build/test time and validates
-extension behavior. Examples:
-[`VectorExtensionTest`](../vector/deployment/src/test/java/io/quarkiverse/jnosql/vector/deployment/VectorExtensionTest.java)
-(beans resolve without ambiguity, resources are closed on shutdown, with a fake provider and no database) and
-[`MissingGraphTest`](../tinkerpop/deployment/src/test/java/io/quarkiverse/jnosql/tinkerpop/deployment/MissingGraphTest.java)
-(build failure message, a negative scenario).
+| Location | Test kind | Why there |
+|---|---|---|
+| `<db>/runtime/src/test` | Unit tests (rare) | Only for logic that does not need Arc; most runtime code is wiring |
+| `<db>/deployment/src/test` | `QuarkusUnitTest` extension tests | The deployment module owns build steps, so bootstrap, bean discovery and build-time failures are verified here without a database ([`VectorExtensionTest`](../vector/deployment/src/test/java/io/quarkiverse/jnosql/vector/deployment/VectorExtensionTest.java), [`MissingGraphTest`](../tinkerpop/deployment/src/test/java/io/quarkiverse/jnosql/tinkerpop/deployment/MissingGraphTest.java)) |
+| `<db>/integration-tests` | `@QuarkusTest` against a real database, and `*IT` (`@QuarkusIntegrationTest`) subclasses | Mocks cannot prove driver, mapping and CDI integration; the `*IT` classes run the packaged or native artifact |
+| `<db>/integration-tests` (`CodestartTest`) | Codestart snapshot tests | See [5.4](#54-codestart-tests) |
 
-### 5.3 Integration tests against a real database
-
-Located in `<db>/integration-tests`. Pattern:
-
-- `src/main/java/.../it`: entity (`Person`), repository (`People`), and a REST resource
-  (`JNoSQLResource`) exposing Jakarta NoSQL template and Jakarta Data repository paths.
-- `src/test/java/.../it/JNoSQLResourceTest`: `@QuarkusTest` calling the endpoints with RestAssured (MongoDB's is
-  parameterized over `/using-jakarta-nosql`, `/using-jakarta-nosql-record`, `/using-jakarta-data`,
-  `/using-jakarta-data-record`).
-- `JNoSQLResourceIT`: `@QuarkusIntegrationTest` subclass, runs against the built artifact.
-- Database provisioning, choose in this order:
-  1. Quarkus Dev Services when the Quarkus client extension provides it (MongoDB: only `jnosql.document.database=test`
-     in `application.properties`).
-  2. A `QuarkusTestResourceLifecycleManager` that starts a Testcontainers container and returns the driver properties, for
-     example [`QdrantTestResource`](../qdrant/integration-tests/src/test/java/io/quarkiverse/jnosql/qdrant/it/QdrantTestResource.java)
-     and `RedisTestResource`, attached with `@QuarkusTestResource`.
-  3. Initialization scripts when the schema is needed (`cassandra/integration-tests/src/test/resources/init_script.cql`).
-- Failing tests that use mocks to simulate the database are not acceptable replacements.
+Database provisioning (Dev Services, `QuarkusTestResourceLifecycleManager` with Testcontainers, init scripts) is described
+in [`testing.md`](testing.md#7-database-integration-testing).
 
 ### 5.4 Codestart tests
 
@@ -407,16 +394,11 @@ The integration-test POMs define a `native-image` profile (activated by `-Dnativ
 CI runs `mvn -B install -Dnative -Dquarkus.native.container-build -Dnative.surefire.skip` (`.github/workflows/build.yml`).
 Native verification is run where the driver supports native image; if it does not, document it instead of hiding it.
 
-### 5.6 Negative scenarios and compatibility checks
+### 5.6 Compatibility checks
 
-- Missing or blank database configuration should produce a clear error (see `AbstractDatabaseManagerProducer`,
-  `QuarkusVectorManagerProducer`).
-- Resources are closed on shutdown (`VectorExtensionTest`).
-- Missing application-owned prerequisites fail at build with an actionable message (`MissingGraphTest`).
-- Compatibility: build with the `quarkus.version` and `jnosql.version` of the root `pom.xml`; `quarkus-snapshot.yaml` runs the
-  build against Quarkus snapshots. Check that adding the module does not change other extensions' behavior (a full reactor
-  build).
-- Do not assume other databases of the same model support the same operations: test the operations you document.
+Build with the `quarkus.version` and `jnosql.version` of the root `pom.xml`; `quarkus-snapshot.yaml` runs the build against
+Quarkus snapshots. Confirm with a full reactor build that adding the module does not change other extensions. Negative
+scenarios and unsupported operations are covered in [`testing.md`](testing.md#7-database-integration-testing).
 
 ### 5.7 Commands
 
@@ -491,6 +473,7 @@ Notes:
 - [ ] Negative scenarios covered; `QuarkusUnitTest` used for build-time behavior when relevant.
 - [ ] Codestart test and snapshots updated when a codestart exists.
 - [ ] Native build verified, or the limitation documented.
+- [ ] Tests satisfy the checklist in [`testing.md`](testing.md#10-definition-of-done).
 
 ### Documentation
 - [ ] Extension described in the user documentation (`docs/modules/ROOT/pages`) following the existing pages when a
