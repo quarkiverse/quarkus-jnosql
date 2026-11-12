@@ -12,6 +12,7 @@ and this project adheres to https://semver.org/spec/v2.0.0.html[Semantic Version
 
 - Ship a `quarkus-skill.md` in every extension's deployment module so AI coding agents receive extension-specific patterns, testing guidelines and common pitfalls through the Quarkus Agent MCP extension skills
 - Fill in the `description` field of `quarkus-extension.yaml` where it was missing so composed extension skills carry the extension description
+- Document that at least one `@Entity` class is required when using the `mapping-lite-processor`: it only emits `EntitiesMetadata` and the CDI beans built on it when entities exist, otherwise injection fails with `UnsatisfiedResolutionException`
 
 == [3.4.10] - 2025-09-07
 
