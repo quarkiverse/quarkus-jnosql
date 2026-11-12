@@ -1,5 +1,5 @@
 name: JNoSQL Document Solr
-#description: Do something useful.
+description: "Jakarta NoSQL document access to Apache Solr"
 metadata:
   keywords:
     - "jnosql"

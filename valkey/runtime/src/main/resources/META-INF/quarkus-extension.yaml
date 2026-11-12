@@ -1,5 +1,5 @@
 name: JNoSQL Valkey
-#description: Do something useful.
+description: "Jakarta NoSQL key-value access to Valkey"
 metadata:
   keywords:
     - "jnosql"

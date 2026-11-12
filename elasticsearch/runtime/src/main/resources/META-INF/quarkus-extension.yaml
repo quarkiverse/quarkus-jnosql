@@ -1,5 +1,5 @@
 name: JNoSQL Elasticsearch
-#description: Do something useful.
+description: "Jakarta NoSQL document access to Elasticsearch"
 metadata:
   keywords:
     - "jnosql"

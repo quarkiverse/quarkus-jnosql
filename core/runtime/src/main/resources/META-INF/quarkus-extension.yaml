@@ -1,5 +1,5 @@
 name: JNoSQL Core
-#description: Do something useful.
+description: "Jakarta NoSQL and Jakarta Data integration core: entity metadata, templates, repositories and CDI wiring"
 metadata:
   keywords:
     - "jnosql"

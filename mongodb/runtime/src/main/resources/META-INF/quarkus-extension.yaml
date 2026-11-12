@@ -1,5 +1,5 @@
 name: JNoSQL MongoDB
-#description: Do something useful.
+description: "Jakarta NoSQL document access to MongoDB"
 metadata:
   keywords:
     - "jnosql"

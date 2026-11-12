@@ -1,4 +1,5 @@
 name: JNoSQL Vector
+description: "Shared Jakarta NoSQL vector support (VectorTemplate, VectorManager) for vector database extensions"
 metadata:
   keywords:
     - "jnosql"

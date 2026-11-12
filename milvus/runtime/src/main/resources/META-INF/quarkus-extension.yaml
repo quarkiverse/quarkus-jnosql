@@ -1,4 +1,5 @@
 name: JNoSQL Milvus
+description: "Jakarta NoSQL vector access to Milvus"
 metadata:
   keywords:
     - "jnosql"

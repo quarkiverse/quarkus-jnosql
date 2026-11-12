@@ -1,5 +1,5 @@
 name: JNoSQL Hazelcast
-#description: Do something useful.
+description: "Jakarta NoSQL key-value access to Hazelcast"
 metadata:
   keywords:
     - "jnosql"

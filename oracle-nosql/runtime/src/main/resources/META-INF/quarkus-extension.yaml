@@ -1,5 +1,5 @@
 name: JNoSQL Oracle NoSQL
-#description: Do something useful.
+description: "Jakarta NoSQL document and key-value access to Oracle NoSQL"
 metadata:
   keywords:
     - "jnosql"

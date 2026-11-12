@@ -1,5 +1,5 @@
 name: JNoSQL Redis
-#description: Do something useful.
+description: "Jakarta NoSQL key-value access to Redis"
 metadata:
   keywords:
     - "jnosql"

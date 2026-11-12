@@ -1,5 +1,5 @@
 name: JNoSQL Cassandra
-#description: Do something useful.
+description: "Jakarta NoSQL column access to Apache Cassandra"
 metadata:
   keywords:
     - "jnosql"

@@ -1,4 +1,5 @@
 name: JNoSQL Qdrant
+description: "Jakarta NoSQL vector access to Qdrant"
 metadata:
   keywords:
     - "jnosql"

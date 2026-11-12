@@ -536,6 +536,11 @@ public record TestEntity (@Id String id, @Column String testField) {
 
 More information about *Jakarta NoSQL Annotations* can be found in the https://jakarta.ee/specifications/nosql/1.0/jakarta-nosql-1.0#_annotations[Jakarta NoSQL Specification].
 
+[IMPORTANT]
+====
+When using the JNoSQL Lite annotation processor, at least one `@Entity` class is required in the application. The processor generates the entity metadata (`EntitiesMetadata`) and the CDI beans that depend on it only when it finds entities. If the application declares no entity, the extension produces no bean and injecting a template or repository fails with an `UnsatisfiedResolutionException` ("Unsatisfied dependency for type org.eclipse.jnosql.mapping.metadata.EntitiesMetadata").
+====
+
 ==== Embeddable Fields and Embeddable classes
 
 Jakarta NoSQL supports *Embeddable Fields* as well. An embeddable field is a field whose type is an *embeddable class*. Embeddable classes must be annotated with `@jakarta.nosql.Embeddable` annotation.

@@ -1,4 +1,5 @@
 name: JNoSQL InfluxDB
+description: "Jakarta NoSQL time-series access to InfluxDB"
 metadata:
   keywords:
     - "jnosql"

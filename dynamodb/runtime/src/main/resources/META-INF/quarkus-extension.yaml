@@ -1,5 +1,5 @@
 name: JNoSQL DynamoDB
-#description: Do something useful.
+description: "Jakarta NoSQL key-value access to Amazon DynamoDB"
 metadata:
   keywords:
     - "jnosql"

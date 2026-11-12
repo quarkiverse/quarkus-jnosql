@@ -1,4 +1,5 @@
 name: JNoSQL Weaviate
+description: "Jakarta NoSQL vector access to Weaviate"
 metadata:
   keywords:
     - "jnosql"

@@ -1,5 +1,5 @@
 name: JNoSQL Neo4j
-#description: Do something useful.
+description: "Jakarta NoSQL graph access to Neo4j"
 metadata:
   keywords:
     - "jnosql"

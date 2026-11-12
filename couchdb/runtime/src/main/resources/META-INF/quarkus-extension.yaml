@@ -1,5 +1,5 @@
 name: JNoSQL CouchDB
-#description: Do something useful.
+description: "Jakarta NoSQL document access to CouchDB"
 metadata:
   keywords:
     - "jnosql"

@@ -1,5 +1,5 @@
 name: JNoSQL ArangoDB
-#description: Do something useful.
+description: "Jakarta NoSQL document and key-value access to ArangoDB"
 metadata:
   keywords:
     - "jnosql"
