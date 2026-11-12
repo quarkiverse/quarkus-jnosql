@@ -20,7 +20,7 @@ import org.eclipse.jnosql.mapping.vector.VectorTemplate;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.RegisterExtension;
 
-import io.quarkus.test.QuarkusUnitTest;
+import io.quarkus.test.QuarkusExtensionTest;
 
 class VectorExtensionTest {
 
@@ -36,7 +36,7 @@ class VectorExtensionTest {
     }
 
     @RegisterExtension
-    static final QuarkusUnitTest CONFIG = new QuarkusUnitTest()
+    static final QuarkusExtensionTest CONFIG = new QuarkusExtensionTest()
             .withApplicationRoot(jar -> jar.addClasses(FakeConfiguration.class, EntitiesMetadataStub.class))
             .overrideConfigKey("jnosql.vector.database", "articles")
             .overrideConfigKey("jnosql.vector.provider", FakeConfiguration.class.getName())
