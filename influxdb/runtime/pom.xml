@@ -31,7 +31,18 @@
                     <groupId>org.eclipse.jnosql.mapping</groupId>
                     <artifactId>jnosql-mapping-reflection</artifactId>
                 </exclusion>
+                <!-- the Arrow Netty allocation manager relies on Netty 4.1 internals and fails with Netty 4.2 -->
+                <exclusion>
+                    <groupId>org.apache.arrow</groupId>
+                    <artifactId>arrow-memory-netty</artifactId>
+                </exclusion>
             </exclusions>
+        </dependency>
+        <!-- so Arrow uses its Unsafe allocation manager instead -->
+        <dependency>
+            <groupId>org.apache.arrow</groupId>
+            <artifactId>arrow-memory-unsafe</artifactId>
+            <version>19.0.0</version>
         </dependency>
         <dependency>
             <groupId>org.eclipse.jnosql.lite</groupId>
