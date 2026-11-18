@@ -13,6 +13,7 @@ and this project adheres to https://semver.org/spec/v2.0.0.html[Semantic Version
 - Ship a `quarkus-skill.md` in every extension's deployment module so AI coding agents receive extension-specific patterns, testing guidelines and common pitfalls through the Quarkus Agent MCP extension skills
 - Fill in the `description` field of `quarkus-extension.yaml` where it was missing so composed extension skills carry the extension description
 - Document that at least one `@Entity` class is required when using the `mapping-lite-processor`: it only emits `EntitiesMetadata` and the CDI beans built on it when entities exist, otherwise injection fails with `UnsatisfiedResolutionException`
+- Make every extension skill self-sufficient for AI agents: inline the essential shared conventions (entity mapping, Lite processor, CDI injection rules) and add a "Default usage" section with a minimal working example per database, since `quarkus-jnosql-core` and `quarkus-jnosql-vector` are transitive dependencies that the Agent MCP only scans when `AGENT_MCP_SKILLS_INCLUDE_TRANSITIVE=true` is set
 
 == [3.4.10] - 2025-09-07
 

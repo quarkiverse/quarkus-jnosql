@@ -11,6 +11,11 @@
 - The processor is usually pulled in transitively by the extension, but declaring it explicitly is required when the build uses explicit processor configuration.
 - On Gradle, also exclude `org.eclipse.jnosql.mapping:jnosql-mapping-reflection` — both metadata implementations become CDI beans and injection fails with `AmbiguousResolutionException`.
 
+### JNoSQL Lite staleness
+
+- `UnsatisfiedResolutionException: Unsatisfied dependency for type org.eclipse.jnosql.mapping.metadata.EntitiesMetadata` also fires when the `mapping-lite-processor` output is stale or missing — entity/repository metadata is generated at compile time only. Fix: stop dev mode, then do a full clean build and restart so the annotation processors re-run (`mvn clean`, `./gradlew clean`, or the IDE equivalent); a hot reload is not enough.
+- Related symptom: `UnsupportedOperationException: Eclipse JNoSQL Lite does not support reflection, including the use of constructors` inside dev-mode test runs means the rebuilt test augmentation lost the generated `*EntityMetaData`/`*ConstructorMetadata` — a fresh test run that forces full recompilation (`mvn clean test`, `./gradlew clean test`, or a clean IDE test run) is the reliable verification in that case.
+
 ### Templates
 
 - Inject `jakarta.nosql.Template` (or the model-specific `DocumentTemplate`, `ColumnTemplate`, `KeyValueTemplate`, `GraphTemplate`, `TimeSeriesTemplate`, `VectorTemplate`) with `@Inject`.
@@ -22,6 +27,24 @@
 - Declare `@Repository` interfaces extending `org.eclipse.jnosql.mapping.NoSQLRepository<Entity, IdType>` for derived queries and `jakarta.data.repository.BasicRepository` where only key-based CRUD is supported (key-value databases).
 - Inject the repository interface directly — Eclipse JNoSQL generates the implementation at build time through the Lite processor.
 - Do NOT write repository implementation classes; the generated proxy is registered automatically.
+
+### Default usage
+
+```java
+@Entity
+public record Person(@Id String id, @Column String name) {}
+
+// DatabaseType depends on the model: DOCUMENT, KEY_VALUE, COLUMN,
+// GRAPH, TIME_SERIES or VECTOR — qualify every injection point
+@Inject @Database(DatabaseType.DOCUMENT) DocumentTemplate template;
+template.insert(person);
+template.find(Person.class, person.id());   // Optional<Person>
+
+// repository — NoSQLRepository for derived queries,
+// BasicRepository where only key-based CRUD is supported
+@Repository
+public interface PersonRepository extends NoSQLRepository<Person, String> {}
+```
 
 ### Configuration
 

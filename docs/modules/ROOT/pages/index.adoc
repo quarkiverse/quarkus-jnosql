@@ -44,6 +44,18 @@ Replace `[DATABASE]` with the specific database you want to use. See the support
 *Recommended Quarkus JNoSQL Extension version:* `{project-version}` or higher
 ====
 
+[NOTE]
+====
+Every Quarkus JNoSQL extension ships a `quarkus-skill.md` file that AI coding agents pick up through the
+https://github.com/quarkusio/quarkus-agent-mcp[Quarkus Agent MCP] `quarkus_skills` tool. The skills cover entity
+mapping, configuration, data access, testing and common pitfalls for each database.
+
+The shared `quarkus-jnosql-core` skill is a transitive dependency of every database extension, so the Agent MCP only
+discovers it when transitive skill scanning is enabled — set `AGENT_MCP_SKILLS_INCLUDE_TRANSITIVE=true` in the Agent
+MCP environment (or `agent-mcp.skills.include-transitive=true`). Each database skill inlines the essential shared
+conventions, so it remains useful even without that setting.
+====
+
 === Supported Databases
 
 The Quarkus JNoSQL extension supports several NoSQL database models. The databases are grouped by their primary data model to make it easier to find the right extension for each use case.

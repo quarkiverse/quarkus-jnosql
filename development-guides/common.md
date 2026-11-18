@@ -129,6 +129,20 @@ Variations to be aware of:
 - The Maven module directories `*-parent/` at the root (for example `document-parent/`) hold only stale `target/`
   directories and are not tracked by Git. Do not use them as a reference.
 
+### Agent skills (`quarkus-skill.md`)
+
+Every extension ships `META-INF/quarkus-skill.md` in its **deployment** module. The Quarkus Agent MCP composes it into
+a skill that coding agents load through `quarkus_skills` before writing code.
+
+- Keep each skill **self-sufficient**: `quarkus-jnosql-core` (and `quarkus-jnosql-vector` for the vector databases) are
+  transitive dependencies, and the Agent MCP only scans direct dependencies unless
+  `AGENT_MCP_SKILLS_INCLUDE_TRANSITIVE=true` is set. Inline the essential shared conventions (the "Shared essentials"
+  section) instead of relying on the pointer alone, and prefer concrete code examples over prose — mirror the
+  codestarts and integration tests of the same model.
+- Fill in `description` in `quarkus-extension.yaml` (runtime module): it becomes the skill's frontmatter description.
+- When adding a new extension, create its `quarkus-skill.md` following the structure of the reference extension of the
+  same model, and update the "Shared essentials"/"Default usage" sections if the shared conventions change.
+
 ## 3. Creating a database extension
 
 Not every step applies to every extension. Steps marked **Required** are needed by all; others depend on the model and on what the driver or the underlying Quarkus extension already provides.
