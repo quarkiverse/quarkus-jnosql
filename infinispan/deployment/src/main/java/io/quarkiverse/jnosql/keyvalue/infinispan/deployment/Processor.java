@@ -69,8 +69,9 @@ class Processor {
     NativeImageResourcePatternsBuildItem registerInfinispanResources() {
         // The XML parser loads default stacks even for local caches; marshallers load bundled schemas.
         return NativeImageResourcePatternsBuildItem.builder()
-                .includePattern("org/infinispan/configuration/default-jgroups-.*\\.xml")
-                .includePattern("org/infinispan/.*\\.proto")
+                .includeGlob("org/infinispan/configuration/default-jgroups-*.xml")
+                .includeGlob("org/infinispan/*.proto")
+                .includeGlob("org/infinispan/**/*.proto")
                 .build();
     }
 

@@ -11,6 +11,7 @@ import io.quarkus.arc.deployment.ExcludedTypeBuildItem;
 import io.quarkus.deployment.annotations.BuildProducer;
 import io.quarkus.deployment.annotations.BuildStep;
 import io.quarkus.deployment.builditem.FeatureBuildItem;
+import io.quarkus.deployment.builditem.nativeimage.ReflectiveClassBuildItem;
 import io.quarkus.deployment.builditem.nativeimage.RuntimeInitializedClassBuildItem;
 import io.quarkus.deployment.builditem.nativeimage.ServiceProviderBuildItem;
 
@@ -39,7 +40,8 @@ class Processor {
 
     @BuildStep
     void configureNativeImage(BuildProducer<ServiceProviderBuildItem> services,
-            BuildProducer<RuntimeInitializedClassBuildItem> runtimeInitializedClasses) {
+            BuildProducer<RuntimeInitializedClassBuildItem> runtimeInitializedClasses,
+            BuildProducer<ReflectiveClassBuildItem> reflectiveClasses) {
         ServiceProviderRegister.registerService(services,
                 LoadBalancerProvider.class,
                 NameResolverProvider.class);
@@ -47,7 +49,12 @@ class Processor {
                 new RuntimeInitializedClassBuildItem("io.grpc.netty.Utils$ByteBufAllocatorPreferHeapHolder"));
         runtimeInitializedClasses.produce(
                 new RuntimeInitializedClassBuildItem("io.grpc.netty.Utils$ByteBufAllocatorPreferDirectHolder"));
+        // Arrow loads its allocation manager by name and reads its FACTORY field
         runtimeInitializedClasses.produce(
-                new RuntimeInitializedClassBuildItem("org.apache.arrow.memory.netty.NettyAllocationManager"));
+                new RuntimeInitializedClassBuildItem("org.apache.arrow.memory.unsafe.UnsafeAllocationManager"));
+        reflectiveClasses.produce(ReflectiveClassBuildItem.builder("org.apache.arrow.memory.unsafe.UnsafeAllocationManager")
+                .fields()
+                .reason(getClass().getName())
+                .build());
     }
 }
