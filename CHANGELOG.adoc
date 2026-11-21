@@ -8,6 +8,8 @@ and this project adheres to https://semver.org/spec/v2.0.0.html[Semantic Version
 
 == [Unreleased]
 
+== [4.0.0] - 2026-11-21
+
 === Changed
 
 - Bump `quarkus.version` from 3.40.1.1 to 4.0.0 and `quarkus-amazon-services-bom.version` to 4.0.0.CR1
