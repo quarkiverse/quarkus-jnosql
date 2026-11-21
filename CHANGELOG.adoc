@@ -8,6 +8,15 @@ and this project adheres to https://semver.org/spec/v2.0.0.html[Semantic Version
 
 == [Unreleased]
 
+=== Changed
+
+- Bump `quarkus.version` from 3.40.1.1 to 4.0.0 and `quarkus-amazon-services-bom.version` to 4.0.0.CR1
+- Target Java 21 (`maven.compiler.release` from 17 to 21); the extensions now require a Java 21 runtime
+- Replace the removed `QuarkusUnitTest` with `QuarkusExtensionTest` and switch the test dependencies from the `quarkus-junit5*` artifacts to `quarkus-junit*`
+- Register the Infinispan native resources with globs because `NativeImageResourcePatternsBuildItem.Builder#includePattern()` was removed in Quarkus 4
+- Use the Arrow `UnsafeAllocationManager` for InfluxDB because the Arrow Netty allocation manager relies on Netty 4.1 internals and fails with the Netty 4.2 shipped with Quarkus 4
+- Update outdated GitHub Actions
+
 == [3.8.1] - 2026-11-21
 
 === Added
