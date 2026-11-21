@@ -4,7 +4,7 @@
     <parent>
         <groupId>io.quarkiverse.jnosql</groupId>
         <artifactId>quarkus-jnosql-tinkerpop-parent</artifactId>
-        <version>4.0.0</version>
+        <version>4.0.1-SNAPSHOT</version>
     </parent>
     <artifactId>quarkus-jnosql-tinkerpop</artifactId>
     <name>Quarkus JNoSQL - Apache TinkerPop - Runtime</name>
