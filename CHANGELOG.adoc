@@ -8,6 +8,8 @@ and this project adheres to https://semver.org/spec/v2.0.0.html[Semantic Version
 
 == [Unreleased]
 
+== [3.8.1] - 2026-11-21
+
 === Added
 
 - Ship a `quarkus-skill.md` in every extension's deployment module so AI coding agents receive extension-specific patterns, testing guidelines and common pitfalls through the Quarkus Agent MCP extension skills
