@@ -14,7 +14,7 @@
 
     <properties>
         <!-- Keep in sync with the gRPC version used by the Qdrant client. -->
-        <grpc.version>1.85.1</grpc.version>
+        <grpc.version>1.86.0</grpc.version>
     </properties>
 
     <modules>
